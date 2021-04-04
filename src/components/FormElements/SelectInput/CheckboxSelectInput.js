@@ -12,6 +12,7 @@ const CheckboxSelectInput = ({
   value,
   placeholder,
   selectAll,
+  valid,
 }) => {
 
   const [values, setValues] = useState(value)
@@ -22,6 +23,7 @@ const CheckboxSelectInput = ({
 
   const labelStyles = [styles.label]
   if (focus) { labelStyles.push(styles.focus) }
+  if (valid == false) { labelStyles.push(styles.invalid) }
   let displayValue = value ? `共 ${value.length} 人分` : placeholder
   if (selectAll) { displayValue = '所有人分' }
 

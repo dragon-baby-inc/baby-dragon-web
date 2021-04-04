@@ -1,25 +1,44 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import Toggle from '../FormElements/FormTypeToggle/Toggle'
 import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
+import CheckboxSelectInput from '../FormElements/SelectInput/CheckboxSelectInput'
 import { Context } from '../../contexts/PaymentContext'
+import Button from '../FormElements/Button/Button'
 
 const styles = {
   labelStyle: {
     marginBottom: '12px',
+  },
+  container: {
+    height: '100%',
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'space-between'
   }
 }
 
-const PaidBackPaymentForm = () => {
+const form = {
+  amount: ['name', 'amount', 'payer', 'owers'],
+  evenly: ['name', 'amount', 'payer', 'owers'],
+}
+
+const NewPaymentForm = ({ users }) => {
   const {
     state,
     setName,
     setAmount,
     setPayer,
+    setOwers,
     setAllocationType,
-    setShowRadioSelect
+    setShowRadioSelect,
+    setShowCheckboxSelect,
+    validateForm,
   } = useContext(Context)
-  console.log(state)
+
+  useEffect(() => {
+    setOwers(users)
+  }, [users])
 
   const handleToggleChanged = (e) => {
     if (e.target.checked) {
@@ -31,38 +50,66 @@ const PaidBackPaymentForm = () => {
   const checked = state.allocation_type === 'evenly' ? false : true
 
   const handlePayerSelectClicked = () => {
-    let payer_id = state.payer ? state.payer.id : null
+    let payer_id = state.payer.value ? state.payer.id : null
     setShowRadioSelect(setPayer, payer_id)
   }
 
+  const handleOwersSelectClicked = () => {
+    let owers = state.owers.value ? state.owers.value.map(el => el.id) : users.map(el => el.id)
+    setShowCheckboxSelect(setOwers, owers)
+  }
+
+  const handleSubmit = () => {
+    validateForm(state, form[state.allocation_type])
+  }
+
   return(
-    <div>
-      <TextInput
-        placeholder={'輸入名稱'}
-        name={'名稱'}
-        labelStyle={styles.labelStyle}
-        changed={setName}
-        value={state.name}
-        type='text'
-      />
-      <TextInput
-        labelStyle={styles.labelStyle}
-        placeholder={'輸入金額'}
-        name={'金額'}
-        changed={setAmount}
-        value={state.amount}
-        type='number'
-      />
-      <RadioSelectInput
-        placeholder={'預設自己'}
-        name={'還款者'}
-        changed={setPayer}
-        clicked={handlePayerSelectClicked}
-        value={state.payer ? state.payer.displayName : null}
-        type='number'
-      />
+    <div style={styles.container}>
+      <div style={styles.form}>
+        <Toggle changed={handleToggleChanged} checked={checked}/>
+        <TextInput
+          placeholder={'輸入名稱'}
+          name={'名稱'}
+          labelStyle={styles.labelStyle}
+          changed={setName}
+          value={state.name.value}
+          valid={state.name.valid}
+          invalidFeedback="*不可為空白，12字內"
+          type='text'
+        />
+        <TextInput
+          labelStyle={styles.labelStyle}
+          placeholder={'輸入金額'}
+          name={'金額'}
+          changed={setAmount}
+          value={state.amount.value}
+          valid={state.amount.valid}
+          invalidFeedback="*不可為空白"
+          type='number'
+        />
+        <RadioSelectInput
+          placeholder={'預設自己'}
+          name={'付款者'}
+          clicked={handlePayerSelectClicked}
+          labelStyle={styles.labelStyle}
+          value={state.payer.value ? state.payer.value.displayName : null}
+          valid={state.payer.valid}
+          type='number'
+        />
+        <CheckboxSelectInput
+          placeholder={'所有人分'}
+          name={'分款者'}
+          changed={setPayer}
+          clicked={handleOwersSelectClicked}
+          selectAll={state.owers.value ? state.owers.value.length == users.length : false }
+          value={state.owers ? state.owers.value : null}
+          valid={state.owers.valid}
+          type='number'
+        />
+      </div>
+      <Button clicked={handleSubmit}>確認</Button>
     </div>
   )
 }
 
-export default PaidBackPaymentForm
+export default NewPaymentForm

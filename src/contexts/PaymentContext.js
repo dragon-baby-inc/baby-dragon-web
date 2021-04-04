@@ -1,17 +1,22 @@
 import createDataContext from './CreateDataContext'
+import Validator from '../utilities/Validator'
 
 const paymentReducer = (state, action) => {
   switch (action.type) {
     case 'set_name':
-      return { ...state, name: action.payload }
+      let nameValid = action.payload.length > 0
+      return { ...state, name: { value: action.payload, valid: nameValid } }
     case 'set_amount':
-      return { ...state, amount: action.payload }
+      let amountValid = action.payload.length > 0
+      return { ...state, amount: { value:action.payload, valid: amountValid  } }
     case 'set_paid_back':
       return { ...state, paid_back: action.payload }
     case 'set_payer':
-      return { ...state, payer: action.payload }
+      let payerValid = action.payload ? true : false
+      return { ...state, payer: { value: action.payload, valid: payerValid } }
     case 'set_owers':
-      return { ...state, owers: action.payload }
+      let owersValid = action.payload.length > 0
+      return { ...state, owers: { value: action.payload, valid: owersValid } }
     case 'set_hidden':
       return { ...state,
         showCheckboxSelect: false,
@@ -34,6 +39,8 @@ const paymentReducer = (state, action) => {
         radioSelectAction: action.payload.action,
         radioSelectObjectId: action.payload.id,
       }
+    case 'validate_form':
+      return { ...state, ...action.payload };
     default:
       return state;
   }
@@ -79,6 +86,33 @@ const setHidden = dispatch => () => {
   dispatch({ type: 'set_hidden' })
 }
 
+const validations = {
+  name: ['isString', 'isNotEmpty'],
+  amount: ['isNotEmpty'],
+  payer: ['isNotEmpty'],
+  owers: ['isNotEmpty', 'atLeastOne']
+}
+
+const validateForm = dispatch => (state, formKeys) => {
+  let validator = new Validator();
+  let newState = {}
+  let formValid = true
+
+  formKeys.forEach(key => {
+    let isKeyValid = true
+    validations[key].forEach(valFunc => {
+      if (!validator[valFunc](state[key].value)) {
+        isKeyValid = false
+        formValid = false
+      }
+      newState[key] = { value: state[key].value, valid: isKeyValid }
+    })
+  })
+  newState['formValid'] = false
+  console.log(newState)
+  dispatch({ type: 'validate_form', payload: newState })
+}
+
 export const { Context, Provider } = createDataContext(
   paymentReducer,
   {
@@ -90,12 +124,16 @@ export const { Context, Provider } = createDataContext(
     setHidden,
     setAllocationType,
     setShowCheckboxSelect,
-    setShowRadioSelect
+    setShowRadioSelect,
+    validateForm,
   },
   {
-    name: null,
-    amount: null,
+    name: { value: null, valid: null },
+    amount: { value: null, valid: null },
+    payer: { value: null, valid: null },
+    owers: { value: null, valid: null },
     paid_back: false,
+    formValid: false,
     allocation_type: 'evenly',
   }
 )

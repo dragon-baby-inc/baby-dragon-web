@@ -38,7 +38,7 @@ const PaymentSwipeableView = (props) => {
         <NewPaymentForm users={props.users}/>
       </div>
       <div style={Object.assign({}, styles.slide)}>
-        <PaidBackPaymentForm />
+        <PaidBackPaymentForm users={props.users}/>
       </div>
     </SwipeableViews>
   );
