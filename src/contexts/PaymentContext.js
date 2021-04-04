@@ -10,13 +10,23 @@ const paymentReducer = (state, action) => {
       return { ...state, paid_back: action.payload }
     case 'set_payer':
       return { ...state, payer: action.payload }
+    case 'set_owers':
+      return { ...state, owers: action.payload }
     case 'set_hidden':
       return { ...state,
+        showCheckboxSelect: false,
         showRadioSelect: false,
         showBackdrop: false,
       }
     case 'set_allocation_type':
       return { ...state, allocation_type: action.payload }
+    case 'set_show_checkbox_select':
+      return { ...state,
+        showCheckboxSelect: true,
+        showBackdrop: true,
+        checkboxSelectAction: action.payload.action,
+        checkboxSelectObjectIds: action.payload.ids,
+      }
     case 'set_show_radio_select':
       return { ...state,
         showRadioSelect: true,
@@ -45,12 +55,25 @@ const setPayer = dispatch => (payer) => {
   dispatch({ type: 'set_hidden' })
 }
 
+const setOwers = dispatch => (owers) => {
+  dispatch({ type: 'set_owers', payload: owers })
+}
+
 const setAllocationType = dispatch => (type) => {
   dispatch({ type: 'set_allocation_type', payload: type })
 }
 
 const setShowRadioSelect = dispatch => (action, id) => {
-  dispatch({ type: 'set_show_radio_select', payload: { action, id } })
+  dispatch({
+    type: 'set_show_radio_select',
+    payload: { action, id }
+  })
+}
+
+const setShowCheckboxSelect = dispatch => (action, ids) => {
+  dispatch({
+    type: 'set_show_checkbox_select', payload: { action, ids }
+  })
 }
 const setHidden = dispatch => () => {
   dispatch({ type: 'set_hidden' })
@@ -63,14 +86,16 @@ export const { Context, Provider } = createDataContext(
     setAmount,
     setPaidBack,
     setPayer,
+    setOwers,
     setHidden,
     setAllocationType,
+    setShowCheckboxSelect,
     setShowRadioSelect
   },
   {
     name: null,
     amount: null,
     paid_back: false,
-    allocation_type: 'evenly'
+    allocation_type: 'evenly',
   }
 )

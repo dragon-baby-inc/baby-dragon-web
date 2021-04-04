@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import PaymentSwipeableView from '../components/PaymentSwipeableView/PaymentSwipeableView'
 import { themeColors } from '../constants/globalColors'
 import DotGroup from '../components/FormElements/DotGroup/DotGroup'
 import RadioSelectMenu from '../components/FormElements/SelectMenu/RadioSelectMenu'
+import CheckboxSelectMenu from '../components/FormElements/SelectMenu/CheckboxSelectMenu'
 import Backdrop from '../components/Backdrop/Backdrop'
 import { Context } from '../contexts/PaymentContext'
 import useUsers from '../hooks/useUsers'
@@ -30,7 +31,7 @@ const styles = {
 const titles = ['加入帳款', '加入還款']
 
 const PaymentCreationPage = () => {
-  const { state, setHidden } = useContext(Context)
+  const { state, setHidden, setOwers } = useContext(Context)
   const [users, err] = useUsers()
   const [index, useIndex] = useState(0)
 
@@ -40,7 +41,17 @@ const PaymentCreationPage = () => {
       <DotGroup dotSize={2} index={index}/>
       <PaymentSwipeableView
         changed={useIndex}
+        users={users}
       />
+      {
+        state.showCheckboxSelect ?
+          <CheckboxSelectMenu
+            labelType="user"
+            objects={users}
+            selected_object_ids={state.checkboxSelectObjectIds}
+            changed={state.checkboxSelectAction}
+          /> : null
+      }
       {
         state.showRadioSelect ?
           <RadioSelectMenu
@@ -48,7 +59,6 @@ const PaymentCreationPage = () => {
             objects={users}
             selected_object_id={state.radioSelectObjectId}
             changed={state.radioSelectAction}
-            elementKey={state.radioSelectAction}
           /> :
           null
       }

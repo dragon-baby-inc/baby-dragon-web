@@ -1,6 +1,6 @@
 import React from "react"
 import styles from './RadioSelectMenu.module.scss'
-import UserRadioLabel from '../../FormElements/UserRadioLabel/UserRadioLabel'
+import UserRadioLabel from '../../FormElements/UserLabel/UserRadioLabel'
 import SearchInput from '../../FormElements/SearchInput/SearchInput'
 
 const components = {

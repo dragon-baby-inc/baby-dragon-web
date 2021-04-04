@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import NewPaymentForm from '../Forms/NewPaymentForm'
+import PaidBackPaymentForm from '../Forms/PaidBackPaymentForm'
 import './PaymentSwipeableView.scss'
 import { Context } from '../../contexts/PaymentContext'
 
@@ -34,10 +35,10 @@ const PaymentSwipeableView = (props) => {
       onChangeIndex={handleIndexChanged}
     >
       <div style={Object.assign({}, styles.slide)}>
-        <NewPaymentForm />
+        <NewPaymentForm users={props.users}/>
       </div>
       <div style={Object.assign({}, styles.slide)}>
-        <NewPaymentForm />
+        <PaidBackPaymentForm />
       </div>
     </SwipeableViews>
   );

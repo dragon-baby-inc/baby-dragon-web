@@ -4,15 +4,17 @@ import { themeColors } from '../../../constants/globalColors'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/fontawesome-free-solid'
 
-const TextInput = ({
+const CheckboxSelectInput = ({
   name,
   labelStyle,
   changed,
   clicked,
   value,
   placeholder,
+  selectAll,
 }) => {
 
+  const [values, setValues] = useState(value)
   const [focus, setFocus] = useState(false)
   const handleClick = (e) => {
     clicked()
@@ -20,10 +22,8 @@ const TextInput = ({
 
   const labelStyles = [styles.label]
   if (focus) { labelStyles.push(styles.focus) }
-  let displayValue = value ? value : placeholder
-  if (displayValue.length > 12) {
-    displayValue = `${value.slice(0, 12)}...`
-  }
+  let displayValue = value ? `共 ${value.length} 人分` : placeholder
+  if (selectAll) { displayValue = '所有人分' }
 
   return(
     <label
@@ -42,4 +42,4 @@ const TextInput = ({
   )
 }
 
-export default TextInput
+export default CheckboxSelectInput
