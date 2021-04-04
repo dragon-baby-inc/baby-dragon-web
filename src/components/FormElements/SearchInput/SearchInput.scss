@@ -1,0 +1,73 @@
+@import "../../../styleSheets/globalColors.scss";
+
+input {
+  -webkit-border-radius: 0;
+}
+
+.search-group {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  vertical-align: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #eee;
+  margin: 10px 3%;
+  background-color: #eee;
+  padding: 4px 2%;
+  border-radius: 20px;
+  color: $gray600;
+
+  input.search {
+    background-color: #eee;
+    flex-grow: 2;
+    border: none;
+  }
+
+  input.search::placeholder {
+    color: $gray600;
+  }
+
+  input.search:focus {
+    box-shadow: none;
+    border: none !important;
+    outline: 0 none;
+  }
+
+  label {
+    display: flex;
+    flex-grow: 1;
+    text-align: left;
+    margin-bottom: 0px;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+}
+.search {
+  padding: 0px 10px;
+  border: none;
+  font-size: 14px;
+  line-height: 40px;
+}
+.fa-times {
+  potision: relative;
+  color: $gray600;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding-left: 10px;
+  padding-right: 0px;
+  font-size: 20px;
+}
+.fa-times:hover {
+  position: relative;
+  color: #333;
+}
+.fa-search {
+  position: relative;
+  color: #ccc;
+}
+.search:focus {
+  outline: none;
+}
+

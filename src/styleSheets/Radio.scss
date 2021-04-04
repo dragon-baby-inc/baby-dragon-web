@@ -1,0 +1,39 @@
+@import "./globalColors.scss";
+
+.group-menu-label.group-menu-radio-label {
+  cursor: pointer;
+}
+
+.group-menu-radio-label {
+  .checkmark {
+    background-color: #eee;
+    border-radius: 50%;
+  }
+}
+
+/* On mouse-over, add a grey background color */
+.group-menu-radio-label:hover input ~ .checkmark {
+  background-color: #eee;
+}
+
+/* When the radio button is checked, add a blue background */
+.group-menu-radio-label input:checked ~ .checkmark {
+  background-color: $green900;
+}
+
+
+/* Show the indicator (dot/circle) when checked */
+.group-menu-radio-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.group-menu-radio-label .checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+

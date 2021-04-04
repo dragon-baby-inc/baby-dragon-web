@@ -1,0 +1,20 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.dotGroup {
+  height: 24px;
+  display: flex;
+  justify-content: center
+}
+
+.dot {
+  margin: 0px 2px;
+  width: 4px;
+  height: 4px;
+  background-color: $gold500;
+  border-radius: 10px;
+  transition: .2s;
+}
+
+.active {
+  width: 12px;
+}
