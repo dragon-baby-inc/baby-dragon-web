@@ -2,9 +2,18 @@
 
 .container {
   position: absolute;
+  bottom: 0;
   height: 50vh;
   width: 100%;
-  bottom: 0;
+  overflow: hidden;
   background-color: #fff;
   z-index: 100;
+  overflow: hidden;
+}
+
+.labels {
+  position:relative;
+  width: 100%;
+  height: calc(50vh - 79px);
+  overflow: auto;
 }

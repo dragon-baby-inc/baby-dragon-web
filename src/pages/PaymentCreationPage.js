@@ -5,6 +5,7 @@ import DotGroup from '../components/FormElements/DotGroup/DotGroup'
 import RadioSelectMenu from '../components/FormElements/SelectMenu/RadioSelectMenu'
 import Backdrop from '../components/Backdrop/Backdrop'
 import { Context } from '../contexts/PaymentContext'
+import useUsers from '../hooks/useUsers'
 
 const styles = {
   bg: {
@@ -29,19 +30,29 @@ const styles = {
 const titles = ['加入帳款', '加入還款']
 
 const PaymentCreationPage = () => {
-  const { state } = useContext(Context)
+  const { state, setHidden } = useContext(Context)
+  const [users, err] = useUsers()
   const [index, useIndex] = useState(0)
-  const title = titles[index]
 
   return(
     <div style={styles.bg}>
-      <div style={styles.header}>{title}</div>
+      <div style={styles.header}>{titles[index]}</div>
       <DotGroup dotSize={2} index={index}/>
       <PaymentSwipeableView
         changed={useIndex}
       />
-      <RadioSelectMenu />
-      <Backdrop />
+      {
+        state.showRadioSelect ?
+          <RadioSelectMenu
+            labelType="user"
+            objects={users}
+            selected_object_id={state.radioSelectObjectId}
+            changed={state.radioSelectAction}
+            elementKey={state.radioSelectAction}
+          /> :
+          null
+      }
+      { state.showBackdrop ? <Backdrop clicked={setHidden}/> : null}
     </div>
   )
 }
