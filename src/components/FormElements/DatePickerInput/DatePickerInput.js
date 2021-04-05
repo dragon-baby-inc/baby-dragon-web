@@ -38,7 +38,7 @@ const DatePickerInputText = ({
       className={labelStyles.join(' ')} style={labelStyle} >
       <span className={styles.name}>{name}</span>
       <div className={styles.value} >
-        <Moment calendar={calendar} local locale="zh-tw">{moment(value, 'YYYY-MM-DD')}</Moment>
+        <Moment calendar={calendar} local locale="zh-tw">{value}</Moment>
       </div>
       <input
         value={value ? value : moment().format('YYYY-MM-DD')}
