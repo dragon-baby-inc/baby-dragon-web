@@ -9,7 +9,7 @@ const useUsers =  (callback) => {
         { id: 1, displayName: 'Yen Jung Chen' },
         { id: 2, displayName: 'Ting En Wei' },
         { id: 3, displayName: 'Some very long nammmm' },
-        { id: 4, displayName: 'test4' },
+        { id: 'U4fb1cd3edb7c2552e2a25f286f5c102d', displayName: 'test4' },
         { id: 5, displayName: 'test5' },
         { id: 6, displayName: 'test6' },
       ]

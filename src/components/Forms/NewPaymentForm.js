@@ -5,6 +5,7 @@ import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
 import CheckboxSelectInput from '../FormElements/SelectInput/CheckboxSelectInput'
 import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
 import { Context } from '../../contexts/PaymentContext'
+import { Context as AuthContext } from '../../contexts/AuthContext'
 import Button from '../FormElements/Button/Button'
 
 const styles = {
@@ -37,13 +38,17 @@ const NewPaymentForm = ({ users }) => {
     setShowCheckboxSelect,
     validateForm,
   } = useContext(Context)
+  const { state: authState } = useContext(AuthContext)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setOwers(users)
   }, [users])
 
-  console.log(state)
+  let payerValue = state.payer.value
+  if (state.payer.value && state.payer.value.id === authState.userLineIdToken) {
+    payerValue =  '預設自己'
+  }
 
   const handleToggleChanged = (e) => {
     if (e.target.checked) {
@@ -97,7 +102,7 @@ const NewPaymentForm = ({ users }) => {
           name={'付款者'}
           clicked={handlePayerSelectClicked}
           labelStyle={styles.labelStyle}
-          value={state.payer.value ? state.payer.value.displayName : null}
+          value={payerValue}
           valid={state.payer.valid}
           type='number'
         />

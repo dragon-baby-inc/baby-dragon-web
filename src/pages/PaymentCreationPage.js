@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import PaymentSwipeableView from '../components/PaymentSwipeableView/PaymentSwipeableView'
 import DotGroup from '../components/FormElements/DotGroup/DotGroup'
 import RadioSelectMenu from '../components/FormElements/SelectMenu/RadioSelectMenu'
@@ -6,6 +6,8 @@ import CheckboxSelectMenu from '../components/FormElements/SelectMenu/CheckboxSe
 import Backdrop from '../components/Backdrop/Backdrop'
 import { Context } from '../contexts/PaymentContext'
 import useUsers from '../hooks/useUsers'
+import { Context as AuthContext } from '../contexts/AuthContext'
+import { useParams } from 'react-router-dom';
 
 const styles = {
   bg: {
@@ -27,11 +29,17 @@ const styles = {
 }
 
 const titles = ['加入帳款', '加入還款']
-
-const PaymentCreationPage = () => {
-  const { state, setHidden } = useContext(Context)
+const PaymentCreationPage = (props) =>
+{ const { state, setHidden, setPayer } = useContext(Context)
+  const { state: authState } = useContext(AuthContext)
   const [users] = useUsers()
   const [index, useIndex] = useState(0)
+  const { group_id } = useParams();
+
+  useEffect(() => {
+    let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+    if (payer) { setPayer(payer) }
+  }, [users, authState])
 
   return(
     <div style={styles.bg}>

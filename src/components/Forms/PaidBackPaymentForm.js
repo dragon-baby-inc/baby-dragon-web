@@ -3,6 +3,7 @@ import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
 import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
 import { Context } from '../../contexts/PaymentContext'
+import { Context as AuthContext } from '../../contexts/AuthContext'
 import Button from '../FormElements/Button/Button'
 
 const styles = {
@@ -18,6 +19,7 @@ const styles = {
 }
 
 const NewPaymentForm = ({ users }) => {
+  const { state: authState } = useContext(AuthContext)
   const {
     state,
     setName,
@@ -28,6 +30,11 @@ const NewPaymentForm = ({ users }) => {
     setShowRadioSelect,
     validateForm,
   } = useContext(Context)
+
+  let payerValue = state.payer.value
+  if (state.payer.value && state.payer.value.id === authState.userLineIdToken) {
+    payerValue =  '預設自己'
+  }
 
   const handlePayerSelectClicked = () => {
     let payer_id = state.payer.value ? state.payer.value.id : null
@@ -71,7 +78,7 @@ const NewPaymentForm = ({ users }) => {
           name={'付款者'}
           clicked={handlePayerSelectClicked}
           labelStyle={styles.labelStyle}
-          value={state.payer.value ? state.payer.value.displayName : null}
+          value={payerValue}
           valid={state.payer.valid}
         />
         <RadioSelectInput

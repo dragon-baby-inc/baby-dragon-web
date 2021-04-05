@@ -18,6 +18,7 @@ const TextInput = ({
     clicked()
   }
 
+  console.log(valid)
   const labelStyles = [styles.label]
   if (valid === false) { labelStyles.push(styles.invalid) }
   let displayValue = value ? value : placeholder
