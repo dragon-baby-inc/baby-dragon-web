@@ -11,13 +11,12 @@
 }
 
 .label {
+  -webkit-tap-highlight-color: transparent;
   position: relative;
-  overflow: hidden;
   width: 100%;
   height: 44px;
   display: flex;
-  background-color: #ffffff;
-  text-align: center;
+  background-color: #ffffff; text-align: center;
   border-radius: 16px;
   border: 1px solid #eee;
   font-size: 14px;
@@ -40,7 +39,8 @@
   right: 16px;
 }
 
-.input {
+.value {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,13 +48,31 @@
   font-size: 14px;
   text-align: center;
   font-weight: 500;
+  box-sizing: border-box;
   color: $gray900;
 }
 
-input, input:focus {
-  border: none;
-  outline: none;
-}
+.input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+ }
+
+ .input::-webkit-calendar-picker-indicator {
+   color: white;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   cursor: pointer;
+ }
 
 .input:disabled {
   background-color: transparent;
@@ -62,8 +80,4 @@ input, input:focus {
 
 .input::placeholder {
   color: $gray900;
-}
-
-.react-datepicker-popper {
-  z-index: 200;
 }

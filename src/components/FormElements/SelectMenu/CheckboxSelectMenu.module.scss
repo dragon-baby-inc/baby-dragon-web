@@ -9,6 +9,12 @@
   background-color: #fff;
   z-index: 100;
   overflow: hidden;
+  transform: translateY(100%);
+  transition: .2s;
+}
+
+.container.mount {
+  transform: translateY(0%)
 }
 
 .labels {

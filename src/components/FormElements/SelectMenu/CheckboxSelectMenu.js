@@ -8,8 +8,10 @@ const components = {
 }
 
 const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }) => {
+  const [mount, setMount] = useState(false)
   const [selectedObjects, setSelectedObjects] = useState([])
   useEffect(() => {
+    setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
   }, [])
 
@@ -34,8 +36,11 @@ const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }
       checked={selectedObjects.map(el => el.id).includes(object.id)}
     />
   })
+
+  const containerStyles = [styles.container]
+  if (mount) { containerStyles.push(styles.mount) }
   return(
-    <div className={styles.container}>
+    <div className={containerStyles.join(' ')}>
       <SearchInput />
       <div className={styles.labels}>
         {objectLabels}

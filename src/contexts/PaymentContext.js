@@ -1,5 +1,6 @@
 import createDataContext from './CreateDataContext'
 import Validator from '../utilities/Validator'
+import moment from 'moment/min/moment-with-locales';
 
 const paymentReducer = (state, action) => {
   switch (action.type) {
@@ -9,6 +10,9 @@ const paymentReducer = (state, action) => {
     case 'set_amount':
       let amountValid = action.payload.length > 0
       return { ...state, amount: { value:action.payload, valid: amountValid  } }
+    case 'set_creation_date':
+      let dateValid = action.payload ? true : false
+      return { ...state, creation_date: { value:action.payload, valid: dateValid  } }
     case 'set_paid_back':
       return { ...state, paid_back: action.payload }
     case 'set_payer':
@@ -19,12 +23,20 @@ const paymentReducer = (state, action) => {
       return { ...state, owers: { value: action.payload, valid: owersValid } }
     case 'set_hidden':
       return { ...state,
+        showDatePicker: false,
         showCheckboxSelect: false,
         showRadioSelect: false,
         showBackdrop: false,
       }
     case 'set_allocation_type':
       return { ...state, allocation_type: action.payload }
+    case 'set_show_date_picker':
+      return { ...state,
+        showDatePicker: true,
+        showBackdrop: true,
+        datePickerAction: action.payload.action,
+        datePickerDate: action.payload.ids,
+      }
     case 'set_show_checkbox_select':
       return { ...state,
         showCheckboxSelect: true,
@@ -66,6 +78,10 @@ const setOwers = dispatch => (owers) => {
   dispatch({ type: 'set_owers', payload: owers })
 }
 
+const setCreationDate = dispatch => (date) => {
+  dispatch({ type: 'set_creation_date', payload: date })
+}
+
 const setAllocationType = dispatch => (type) => {
   dispatch({ type: 'set_allocation_type', payload: type })
 }
@@ -80,6 +96,12 @@ const setShowRadioSelect = dispatch => (action, id) => {
 const setShowCheckboxSelect = dispatch => (action, ids) => {
   dispatch({
     type: 'set_show_checkbox_select', payload: { action, ids }
+  })
+}
+
+const setShowDatePicker = dispatch => (action, date) => {
+  dispatch({
+    type: 'set_show_date_picker', payload: { action, date }
   })
 }
 const setHidden = dispatch => () => {
@@ -122,16 +144,19 @@ export const { Context, Provider } = createDataContext(
     setPayer,
     setOwers,
     setHidden,
+    setCreationDate,
     setAllocationType,
     setShowCheckboxSelect,
     setShowRadioSelect,
     validateForm,
+    setShowDatePicker,
   },
   {
     name: { value: null, valid: null },
     amount: { value: null, valid: null },
     payer: { value: null, valid: null },
     owers: { value: null, valid: null },
+    creation_date: { value: null, valid: null },
     paid_back: false,
     formValid: false,
     allocation_type: 'evenly',

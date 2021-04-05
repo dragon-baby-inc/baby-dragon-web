@@ -3,6 +3,7 @@ import Toggle from '../FormElements/FormTypeToggle/Toggle'
 import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
 import CheckboxSelectInput from '../FormElements/SelectInput/CheckboxSelectInput'
+import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
 import { Context } from '../../contexts/PaymentContext'
 import Button from '../FormElements/Button/Button'
 
@@ -30,8 +31,10 @@ const NewPaymentForm = ({ users }) => {
     setAmount,
     setPayer,
     setOwers,
+    setCreationDate,
     setAllocationType,
     setShowRadioSelect,
+    setShowDatePicker,
     setShowCheckboxSelect,
     validateForm,
   } = useContext(Context)
@@ -39,6 +42,8 @@ const NewPaymentForm = ({ users }) => {
   useEffect(() => {
     setOwers(users)
   }, [users])
+
+  console.log(state)
 
   const handleToggleChanged = (e) => {
     if (e.target.checked) {
@@ -99,6 +104,7 @@ const NewPaymentForm = ({ users }) => {
         <CheckboxSelectInput
           placeholder={'所有人分'}
           name={'分款者'}
+          labelStyle={styles.labelStyle}
           changed={setPayer}
           clicked={handleOwersSelectClicked}
           selectAll={state.owers.value ? state.owers.value.length == users.length : false }
@@ -106,6 +112,15 @@ const NewPaymentForm = ({ users }) => {
           valid={state.owers.valid}
           type='number'
         />
+        <DatePickerInput
+          placeholder={'今日'}
+          name={'日期'}
+          labelStyle={styles.labelStyle}
+          value={state.creation_date.value}
+          changed={setCreationDate}
+          type='number'
+        />
+
       </div>
       <Button clicked={handleSubmit}>確認</Button>
     </div>
