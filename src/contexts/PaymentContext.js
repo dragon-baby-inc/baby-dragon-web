@@ -128,7 +128,8 @@ const validations = {
   amount: ['isNotEmpty'],
   payer: ['isNotEmpty'],
   ower: ['isNotEmpty'],
-  owers: ['isNotEmpty', 'atLeastOne']
+  owers: ['isNotEmpty', 'atLeastOne'],
+  creation_date: ['isNotEmpty']
 }
 
 const validateForm = dispatch => (state, formKeys) => {

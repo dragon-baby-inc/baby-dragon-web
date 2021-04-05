@@ -21,8 +21,8 @@ const styles = {
 }
 
 const form = {
-  amount: ['name', 'amount', 'payer', 'owers'],
-  evenly: ['name', 'amount', 'payer', 'owers'],
+  amount: ['name', 'amount', 'payer', 'creation_date'],
+  evenly: ['name', 'amount', 'payer', 'owers', 'creation_date'],
 }
 
 const NewPaymentForm = ({ users }) => {
@@ -75,59 +75,66 @@ const NewPaymentForm = ({ users }) => {
     validateForm(state, form[state.allocation_type])
   }
 
+  const components = {
+    name: <TextInput
+      placeholder={'輸入名稱'}
+      name={'名稱'}
+      labelStyle={styles.labelStyle}
+      changed={setName}
+      value={state.name.value}
+      valid={state.name.valid}
+      invalidFeedback="*不可為空白，12字內"
+      type='text'
+    />,
+    amount: <TextInput
+      labelStyle={styles.labelStyle}
+      placeholder={'輸入金額'}
+      name={'金額'}
+      changed={setAmount}
+      value={state.amount.value}
+      valid={state.amount.valid}
+      invalidFeedback="*不可為空白"
+      type='number'
+    />,
+    payer: <RadioSelectInput
+      placeholder={'選取付款者'}
+      name={'付款者'}
+      clicked={handlePayerSelectClicked}
+      labelStyle={styles.labelStyle}
+      value={payerValue}
+      valid={state.payer.valid}
+      type='number'
+    />,
+    owers: <CheckboxSelectInput
+      placeholder={'所有人分'}
+      name={'分款者'}
+      labelStyle={styles.labelStyle}
+      changed={setPayer}
+      clicked={handleOwersSelectClicked}
+      selectAll={state.owers.value ? state.owers.value.length === users.length : false }
+      value={state.owers ? state.owers.value : null}
+      valid={state.owers.valid}
+      type='number'
+    />,
+    creation_date: <DatePickerInput
+      placeholder={'今日'}
+      name={'日期'}
+      labelStyle={styles.labelStyle}
+      value={state.creation_date.value}
+      changed={setCreationDate}
+      type='number'
+    />
+  }
+
+  const displayComponents = form[state.allocation_type].map(componentName => {
+    return components[componentName]
+  })
+
   return(
     <div style={styles.container}>
       <div style={styles.form}>
         <Toggle changed={handleToggleChanged} checked={checked}/>
-        <TextInput
-          placeholder={'輸入名稱'}
-          name={'名稱'}
-          labelStyle={styles.labelStyle}
-          changed={setName}
-          value={state.name.value}
-          valid={state.name.valid}
-          invalidFeedback="*不可為空白，12字內"
-          type='text'
-        />
-        <TextInput
-          labelStyle={styles.labelStyle}
-          placeholder={'輸入金額'}
-          name={'金額'}
-          changed={setAmount}
-          value={state.amount.value}
-          valid={state.amount.valid}
-          invalidFeedback="*不可為空白"
-          type='number'
-        />
-        <RadioSelectInput
-          placeholder={'選取付款者'}
-          name={'付款者'}
-          clicked={handlePayerSelectClicked}
-          labelStyle={styles.labelStyle}
-          value={payerValue}
-          valid={state.payer.valid}
-          type='number'
-        />
-        <CheckboxSelectInput
-          placeholder={'所有人分'}
-          name={'分款者'}
-          labelStyle={styles.labelStyle}
-          changed={setPayer}
-          clicked={handleOwersSelectClicked}
-          selectAll={state.owers.value ? state.owers.value.length === users.length : false }
-          value={state.owers ? state.owers.value : null}
-          valid={state.owers.valid}
-          type='number'
-        />
-        <DatePickerInput
-          placeholder={'今日'}
-          name={'日期'}
-          labelStyle={styles.labelStyle}
-          value={state.creation_date.value}
-          changed={setCreationDate}
-          type='number'
-        />
-
+        {displayComponents}
       </div>
       <Button clicked={handleSubmit}>確認</Button>
     </div>
