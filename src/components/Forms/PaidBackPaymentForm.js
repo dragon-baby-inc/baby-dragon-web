@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from "react"
-import Toggle from '../FormElements/FormTypeToggle/Toggle'
 import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
-import CheckboxSelectInput from '../FormElements/SelectInput/CheckboxSelectInput'
+import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
 import { Context } from '../../contexts/PaymentContext'
 import Button from '../FormElements/Button/Button'
 
@@ -18,55 +17,36 @@ const styles = {
   }
 }
 
-const form = {
-  amount: ['name', 'amount', 'payer', 'owers'],
-  evenly: ['name', 'amount', 'payer', 'owers'],
-}
-
 const NewPaymentForm = ({ users }) => {
   const {
     state,
     setName,
     setAmount,
     setPayer,
-    setOwers,
-    setAllocationType,
+    setOwer,
+    setCreationDate,
     setShowRadioSelect,
     setShowCheckboxSelect,
     validateForm,
   } = useContext(Context)
 
-  useEffect(() => {
-    setOwers(users)
-  }, [users])
-
-  const handleToggleChanged = (e) => {
-    if (e.target.checked) {
-      setAllocationType('amount')
-    } else {
-      setAllocationType('evenly')
-    }
-  }
-  const checked = state.allocation_type === 'evenly' ? false : true
-
   const handlePayerSelectClicked = () => {
-    let payer_id = state.payer.value ? state.payer.id : null
+    let payer_id = state.payer.value ? state.payer.value.id : null
     setShowRadioSelect(setPayer, payer_id)
   }
 
-  const handleOwersSelectClicked = () => {
-    let owers = state.owers.value ? state.owers.value.map(el => el.id) : users.map(el => el.id)
-    setShowCheckboxSelect(setOwers, owers)
+  const handleOwerSelectClicked = () => {
+    let ower_id = state.ower.value ? state.ower.value.id : null
+    setShowRadioSelect(setOwer, ower_id)
   }
 
   const handleSubmit = () => {
-    validateForm(state, form[state.allocation_type])
+    validateForm(state,  ['name', 'amount', 'payer', 'ower'])
   }
 
   return(
     <div style={styles.container}>
       <div style={styles.form}>
-        <Toggle changed={handleToggleChanged} checked={checked}/>
         <TextInput
           placeholder={'輸入名稱'}
           name={'名稱'}
@@ -94,18 +74,23 @@ const NewPaymentForm = ({ users }) => {
           labelStyle={styles.labelStyle}
           value={state.payer.value ? state.payer.value.displayName : null}
           valid={state.payer.valid}
-          type='number'
         />
-        <CheckboxSelectInput
-          placeholder={'所有人分'}
-          name={'分款者'}
-          changed={setPayer}
-          clicked={handleOwersSelectClicked}
-          selectAll={state.owers.value ? state.owers.value.length == users.length : false }
-          value={state.owers ? state.owers.value : null}
-          valid={state.owers.valid}
-          type='number'
+        <RadioSelectInput
+          placeholder={'選取收款者'}
+          name={'收款者'}
+          clicked={handleOwerSelectClicked}
+          labelStyle={styles.labelStyle}
+          value={state.ower.value ? state.ower.value.displayName : null}
+          valid={state.ower.valid}
         />
+        <DatePickerInput
+          placeholder={'今日'}
+          name={'日期'}
+          labelStyle={styles.labelStyle}
+          value={state.creation_date.value}
+          changed={setCreationDate}
+        />
+
       </div>
       <Button clicked={handleSubmit}>確認</Button>
     </div>

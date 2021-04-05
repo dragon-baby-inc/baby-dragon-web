@@ -38,7 +38,7 @@ const DatePickerInputText = ({
 
   const labelStyles = [styles.label]
   if (focus) { labelStyles.push(styles.focus) }
-  if (valid == false) { labelStyles.push(styles.invalid) }
+  if (valid === false) { labelStyles.push(styles.invalid) }
   let displayValue = value ? value : moment().format()
 
   const handleChange = (e) => {

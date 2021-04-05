@@ -12,7 +12,7 @@ const TextInput = ({
   invalidFeedback
 }) => {
   let labelClasses = [styles.label]
-  if (valid == false) { labelClasses.push(styles.invalid) }
+  if (valid === false) { labelClasses.push(styles.invalid) }
   return(
     <div style={labelStyle}>
       <label className={labelClasses.join(' ')} >
@@ -25,7 +25,7 @@ const TextInput = ({
           type={type} />
       </label>
       {
-        (valid == false) ?  <div className={styles.invalidFeedback}>{invalidFeedback}</div> : null
+        (valid === false) ?  <div className={styles.invalidFeedback}>{invalidFeedback}</div> : null
       }
     </div>
   )

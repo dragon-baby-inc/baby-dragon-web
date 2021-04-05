@@ -23,8 +23,8 @@ const TextInput = ({
   if (focus) { labelStyles.push(styles.focus) }
   if (valid == false) { labelStyles.push(styles.invalid) }
   let displayValue = value ? value : placeholder
-  if (displayValue.length > 12) {
-    displayValue = `${value.slice(0, 12)}...`
+  if (displayValue.length > 14) {
+    displayValue = `${value.slice(0, 14)}...`
   }
 
   return(

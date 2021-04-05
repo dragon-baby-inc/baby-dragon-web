@@ -34,7 +34,6 @@ const NewPaymentForm = ({ users }) => {
     setCreationDate,
     setAllocationType,
     setShowRadioSelect,
-    setShowDatePicker,
     setShowCheckboxSelect,
     validateForm,
   } = useContext(Context)

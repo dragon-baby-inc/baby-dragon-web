@@ -18,9 +18,9 @@ const userRadioLabel = (props) => {
       </div>
       <div className='group-menu-image-block'>
         {user.imageURL ?
-        <img className='group-menu-userimage' src={user.imageURL}/>
+        <img className='group-menu-userimage' src={user.imageURL} alt='user_image'/>
         :
-        <img className='group-menu-userimage' src='https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png'/>
+        <img className='group-menu-userimage' src='https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png' alt='user_image'/>
         }
       </div>
       <div className='col-8 group-menu-username'>

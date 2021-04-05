@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default (callback) => {
+const useUsers =  (callback) => {
   const [err, setErr] = useState(null);
   const [users, setUsers] = useState([]);
   const getUsers = async () => {
@@ -25,3 +25,5 @@ export default (callback) => {
 
   return [users, err];
 }
+
+export default useUsers;

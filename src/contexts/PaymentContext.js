@@ -18,6 +18,9 @@ const paymentReducer = (state, action) => {
     case 'set_payer':
       let payerValid = action.payload ? true : false
       return { ...state, payer: { value: action.payload, valid: payerValid } }
+    case 'set_ower':
+      let valid = action.payload ? true : false
+      return { ...state, ower: { value: action.payload, valid: valid } }
     case 'set_owers':
       let owersValid = action.payload.length > 0
       return { ...state, owers: { value: action.payload, valid: owersValid } }
@@ -74,6 +77,11 @@ const setPayer = dispatch => (payer) => {
   dispatch({ type: 'set_hidden' })
 }
 
+const setOwer = dispatch => (ower) => {
+  dispatch({ type: 'set_ower', payload: ower })
+  dispatch({ type: 'set_hidden' })
+}
+
 const setOwers = dispatch => (owers) => {
   dispatch({ type: 'set_owers', payload: owers })
 }
@@ -112,6 +120,7 @@ const validations = {
   name: ['isString', 'isNotEmpty'],
   amount: ['isNotEmpty'],
   payer: ['isNotEmpty'],
+  ower: ['isNotEmpty'],
   owers: ['isNotEmpty', 'atLeastOne']
 }
 
@@ -130,7 +139,7 @@ const validateForm = dispatch => (state, formKeys) => {
       newState[key] = { value: state[key].value, valid: isKeyValid }
     })
   })
-  newState['formValid'] = false
+  newState['formValid'] = formValid
   console.log(newState)
   dispatch({ type: 'validate_form', payload: newState })
 }
@@ -143,6 +152,7 @@ export const { Context, Provider } = createDataContext(
     setPaidBack,
     setPayer,
     setOwers,
+    setOwer,
     setHidden,
     setCreationDate,
     setAllocationType,
@@ -155,6 +165,7 @@ export const { Context, Provider } = createDataContext(
     name: { value: null, valid: null },
     amount: { value: null, valid: null },
     payer: { value: null, valid: null },
+    ower: { value: null, valid: null },
     owers: { value: null, valid: null },
     creation_date: { value: null, valid: null },
     paid_back: false,
