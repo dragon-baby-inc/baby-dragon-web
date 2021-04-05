@@ -39,7 +39,6 @@ const NewPaymentForm = ({ users }) => {
     validateForm,
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
-  console.log(state)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -101,7 +100,7 @@ const NewPaymentForm = ({ users }) => {
           type='number'
         />
         <RadioSelectInput
-          placeholder={'預設自己'}
+          placeholder={'選取付款者'}
           name={'付款者'}
           clicked={handlePayerSelectClicked}
           labelStyle={styles.labelStyle}

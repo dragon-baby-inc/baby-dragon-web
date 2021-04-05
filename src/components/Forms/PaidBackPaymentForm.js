@@ -76,7 +76,7 @@ const NewPaymentForm = ({ users }) => {
           type='number'
         />
         <RadioSelectInput
-          placeholder={'預設自己'}
+          placeholder={'選取付款者'}
           name={'付款者'}
           clicked={handlePayerSelectClicked}
           labelStyle={styles.labelStyle}

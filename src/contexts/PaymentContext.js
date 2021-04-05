@@ -15,11 +15,19 @@ const paymentReducer = (state, action) => {
     case 'set_paid_back':
       return { ...state, paid_back: action.payload }
     case 'set_payer':
-      let payerValid = action.payload ? true : false
-      return { ...state, payer: { value: action.payload, valid: payerValid } }
+      var valid = action.payload ? true : false
+      if (state.ower.value === action.payload) {
+        return { ...state, payer: { value: action.payload, valid: valid }, ower: { value: null, valid: null  } }
+      } else {
+        return { ...state, payer: { value: action.payload, valid: valid } }
+      }
     case 'set_ower':
-      let valid = action.payload ? true : false
-      return { ...state, ower: { value: action.payload, valid: valid } }
+      var valid = action.payload ? true : false
+      if (state.payer.value === action.payload) {
+        return { ...state, ower: { value: action.payload, valid: valid }, payer: { value: null, valid: false  } }
+      } else {
+        return { ...state, ower: { value: action.payload, valid: valid } }
+      }
     case 'set_owers':
       let owersValid = action.payload.length > 0
       return { ...state, owers: { value: action.payload, valid: owersValid } }
