@@ -34,6 +34,8 @@ const NewPaymentForm = ({ users }) => {
   let payerValue = state.payer.value
   if (state.payer.value && state.payer.value.id === authState.userLineIdToken) {
     payerValue =  '預設自己'
+  } else {
+    payerValue = payerValue ? payerValue.displayName : null
   }
 
   const handlePayerSelectClicked = () => {

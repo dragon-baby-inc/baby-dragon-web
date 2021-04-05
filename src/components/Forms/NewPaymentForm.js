@@ -39,6 +39,7 @@ const NewPaymentForm = ({ users }) => {
     validateForm,
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
+  console.log(state)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -48,6 +49,8 @@ const NewPaymentForm = ({ users }) => {
   let payerValue = state.payer.value
   if (state.payer.value && state.payer.value.id === authState.userLineIdToken) {
     payerValue =  '預設自己'
+  } else {
+    payerValue = payerValue ? payerValue.displayName : null
   }
 
   const handleToggleChanged = (e) => {
