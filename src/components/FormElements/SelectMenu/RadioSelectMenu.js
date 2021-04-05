@@ -9,6 +9,7 @@ const components = {
 
 const RadioSelectMenu = ({ objects, labelType, selected_object_id, changed }) => {
   const [mount, setMount] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
   const [displayObjects, setDisplayObjects] = useState(objects)
 
   let handleChange = (e) => {
@@ -27,10 +28,12 @@ const RadioSelectMenu = ({ objects, labelType, selected_object_id, changed }) =>
     })
 
     setDisplayObjects(display_objects)
+    setSearchValue(e.target.value)
   }
 
   const handleFilterReset = (e) => {
     setDisplayObjects(objects)
+    setSearchValue('')
   }
 
   const LabelComponent = components[labelType]
@@ -48,7 +51,7 @@ const RadioSelectMenu = ({ objects, labelType, selected_object_id, changed }) =>
 
   return(
     <div className={containerStyles.join(' ')}>
-      <SearchInput filtered={handleFilter}/>
+      <SearchInput reset={handleFilterReset} filtered={handleFilter} value={searchValue}/>
       <div className={styles.labels}>
         {objectLabels}
       </div>

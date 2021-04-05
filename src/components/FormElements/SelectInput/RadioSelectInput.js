@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styles from './SelectInput.module.scss'
 import { themeColors } from '../../../constants/globalColors'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,14 +14,12 @@ const TextInput = ({
   valid,
 }) => {
 
-  const [focus, setFocus] = useState(false)
   const handleClick = (e) => {
     clicked()
   }
 
   const labelStyles = [styles.label]
-  if (focus) { labelStyles.push(styles.focus) }
-  if (valid == false) { labelStyles.push(styles.invalid) }
+  if (valid === false) { labelStyles.push(styles.invalid) }
   let displayValue = value ? value : placeholder
   if (displayValue.length > 14) {
     displayValue = `${value.slice(0, 14)}...`

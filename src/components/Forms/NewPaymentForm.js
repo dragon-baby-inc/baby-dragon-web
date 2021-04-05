@@ -38,6 +38,7 @@ const NewPaymentForm = ({ users }) => {
     validateForm,
   } = useContext(Context)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setOwers(users)
   }, [users])
@@ -106,7 +107,7 @@ const NewPaymentForm = ({ users }) => {
           labelStyle={styles.labelStyle}
           changed={setPayer}
           clicked={handleOwersSelectClicked}
-          selectAll={state.owers.value ? state.owers.value.length == users.length : false }
+          selectAll={state.owers.value ? state.owers.value.length === users.length : false }
           value={state.owers ? state.owers.value : null}
           valid={state.owers.valid}
           type='number'

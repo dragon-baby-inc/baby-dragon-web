@@ -6,8 +6,8 @@ const Toggle = ({ changed, checked }) => {
     <label className={styles.switch}>
       <input type="checkbox" onChange={changed} checked={checked}/>
       <span className={styles.slider}></span>
-      <h3 className={[styles.labelName, styles.auto].join(' ')}></h3>
-      <h3 className={[styles.labelName, styles.self].join(' ')}></h3>
+      <p className={[styles.labelName, styles.auto].join(' ')}></p>
+      <p className={[styles.labelName, styles.self].join(' ')}></p>
     </label>
   )
 }

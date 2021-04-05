@@ -10,19 +10,20 @@ const components = {
 const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }) => {
   const [mount, setMount] = useState(false)
   const [displayObjects, setDisplayObjects] = useState(objects)
+  const [searchValue, setSearchValue] = useState('')
   const [selectedObjects, setSelectedObjects] = useState([])
 
   useEffect(() => {
     setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
-  }, [])
+  }, [objects, selected_object_ids])
 
   let handleChange = (e) => {
     let selected_objects = selectedObjects
     if (e.target.checked) {
-      selected_objects.push(...objects.filter(object => object.id == e.target.value))
+      selected_objects.push(...objects.filter(object => String(object.id) === String(e.target.value)))
     } else {
-      selected_objects = selected_objects.filter(object => object.id != e.target.value)
+      selected_objects = selected_objects.filter(object => String(object.id) !== String(e.target.value))
     }
 
     setSelectedObjects(selected_objects)
@@ -36,10 +37,12 @@ const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }
     })
 
     setDisplayObjects(display_objects)
+    setSearchValue(e.target.value)
   }
 
   const handleFilterReset = (e) => {
     setDisplayObjects(objects)
+    setSearchValue('')
   }
 
   const LabelComponent = components[labelType]
@@ -56,7 +59,7 @@ const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }
   if (mount) { containerStyles.push(styles.mount) }
   return(
     <div className={containerStyles.join(' ')}>
-      <SearchInput filtered={handleFilter}/>
+      <SearchInput reset={handleFilterReset} filtered={handleFilter} value={searchValue}/>
       <div className={styles.labels}>
         {objectLabels}
       </div>

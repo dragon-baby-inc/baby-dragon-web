@@ -1,6 +1,5 @@
 import createDataContext from './CreateDataContext'
 import Validator from '../utilities/Validator'
-import moment from 'moment/min/moment-with-locales';
 
 const paymentReducer = (state, action) => {
   switch (action.type) {
@@ -162,8 +161,8 @@ export const { Context, Provider } = createDataContext(
     setShowDatePicker,
   },
   {
-    name: { value: null, valid: null },
-    amount: { value: null, valid: null },
+    name: { value: '', valid: null },
+    amount: { value: '', valid: null },
     payer: { value: null, valid: null },
     ower: { value: null, valid: null },
     owers: { value: null, valid: null },

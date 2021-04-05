@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
 import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
@@ -26,7 +26,6 @@ const NewPaymentForm = ({ users }) => {
     setOwer,
     setCreationDate,
     setShowRadioSelect,
-    setShowCheckboxSelect,
     validateForm,
   } = useContext(Context)
 

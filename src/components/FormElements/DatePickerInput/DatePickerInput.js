@@ -1,23 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import styles from './DatePickerInput.module.scss'
-import { themeColors } from '../../../constants/globalColors'
-import DayPickerInput from 'react-day-picker/DayPickerInput';
 import '../DatePickerMenu/DatePickerStyle.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/fontawesome-free-solid'
 import moment from 'moment/min/moment-with-locales';
 import Moment from 'react-moment';
 import 'moment/locale/zh-tw';
-
-const DatePickerOverlay = ({ classNames, selectedDay, children, ...props  }) => {
-  return (
-    <div style={{ position: "absolute", bottom: '-5px', marginLeft: -100 }} {...props} >
-      <div className={classNames.overlay}>
-        {children}
-      </div>
-    </div>
-  );
-}
 
 const DatePickerInputText = ({
   name,
@@ -28,18 +14,12 @@ const DatePickerInputText = ({
   valid,
 }) => {
 
-  const [focus, setFocus] = useState(false)
-  const [selectedDay, setSelectedDay] = useState(new Date());
-  console.log(moment().format())
-
   useEffect(() => {
-    if (!value) { changed(moment().format()) }
-  }, [])
+    if (!value) { changed(moment().format('YYYY-MM-DD')) }
+  }, [value, changed])
 
   const labelStyles = [styles.label]
-  if (focus) { labelStyles.push(styles.focus) }
   if (valid === false) { labelStyles.push(styles.invalid) }
-  let displayValue = value ? value : moment().format()
 
   const handleChange = (e) => {
     changed(e.target.value)
@@ -58,10 +38,10 @@ const DatePickerInputText = ({
       className={labelStyles.join(' ')} style={labelStyle} >
       <span className={styles.name}>{name}</span>
       <div className={styles.value} >
-        <Moment calendar={calendar} local locale="zh-tw">{value}</Moment>
+        <Moment calendar={calendar} local locale="zh-tw">{moment(value, 'YYYY-MM-DD')}</Moment>
       </div>
       <input
-        value={value}
+        value={value ? value : moment().format('YYYY-MM-DD')}
         placeholder={placeholder}
         onChange={handleChange}
         className={styles.input}

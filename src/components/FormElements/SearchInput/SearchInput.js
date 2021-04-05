@@ -14,7 +14,7 @@ const SearchInput = (props) => {
         </div>
         <input type="text" className='search' placeholder='利用名稱搜尋' onChange={props.filtered} value={props.value}/>
       </label>
-      <div className='px-2 fa-times-block'>
+      <div className='px-2 fa-times-block' onClick={props.reset}>
         <FontAwesomeIcon icon={faTimes}/>
       </div>
     </div>
