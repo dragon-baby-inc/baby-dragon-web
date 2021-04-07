@@ -12,6 +12,10 @@ const styles = {
   labelStyle: {
     marginBottom: '12px',
   },
+  form: {
+    height: '100%',
+    flexGrow: 1
+  },
   container: {
     height: '100%',
     display: 'flex',
@@ -37,6 +41,7 @@ const NewPaymentForm = ({ users }) => {
     setShowRadioSelect,
     setShowCheckboxSelect,
     validateForm,
+    createPayment,
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
 
@@ -72,7 +77,7 @@ const NewPaymentForm = ({ users }) => {
   }
 
   const handleSubmit = () => {
-    validateForm(state, form[state.allocation_type])
+    if (validateForm(state, form[state.allocation_type])) { createPayment(state) }
   }
 
   const components = {

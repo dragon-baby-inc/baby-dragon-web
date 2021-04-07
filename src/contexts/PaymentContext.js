@@ -1,8 +1,11 @@
 import createDataContext from './CreateDataContext'
 import Validator from '../utilities/Validator'
+import axios from '../api/dragonBabyApi'
 
 const paymentReducer = (state, action) => {
   switch (action.type) {
+    case 'set_accounting_book_details':
+      return { ...state, accounting_book_details: action.payload }
     case 'set_name':
       let nameValid = action.payload.length > 0
       return { ...state, name: { value: action.payload, valid: nameValid } }
@@ -132,6 +135,10 @@ const validations = {
   creation_date: ['isNotEmpty']
 }
 
+const setAccountingBookDetails = dispatch => (details) => {
+  dispatch({ type: 'set_accounting_book_details', payload: details })
+}
+
 const validateForm = dispatch => (state, formKeys) => {
   let validator = new Validator();
   let newState = {}
@@ -148,8 +155,33 @@ const validateForm = dispatch => (state, formKeys) => {
     })
   })
   newState['formValid'] = formValid
-  console.log(newState)
   dispatch({ type: 'validate_form', payload: newState })
+  return formValid
+}
+
+const createPayment = dispatch => (state) => {
+  let params = {
+    description: state.name.value,
+    amount: state.amount.value,
+    payer_id: state.payer.value.id,
+    allocation_type: state.allocation_type,
+    paid_back: state.paid_back,
+  }
+
+  if (state.allocation_type == 'amount') {
+    params['owers'] = []
+  } else {
+    params['ower_ids'] = state.owers.value.map(o => o.id)
+  }
+  console.log(params)
+  let details = state.accounting_book_details
+
+//   axios.post(`api/v1/groups/${details.group_id}/accounting_books/${details.id}/payments`, { payment: params })
+//     .then(function (response) {
+//       console.log(response)
+//     })
+//     .catch(function (error) {
+//     })
 }
 
 export const { Context, Provider } = createDataContext(
@@ -168,8 +200,11 @@ export const { Context, Provider } = createDataContext(
     setShowRadioSelect,
     validateForm,
     setShowDatePicker,
+    setAccountingBookDetails,
+    createPayment,
   },
   {
+    accounting_book_details: null,
     name: { value: '', valid: null },
     amount: { value: '', valid: null },
     payer: { value: null, valid: null },

@@ -10,6 +10,10 @@ const styles = {
   labelStyle: {
     marginBottom: '12px',
   },
+  form: {
+    flexGrow: 1,
+    height: '100%'
+  },
   container: {
     height: '100%',
     display: 'flex',
