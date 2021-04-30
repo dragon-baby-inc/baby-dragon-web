@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import { Context } from '../contexts/PaymentContext'
 import { Context as AuthContext } from '../contexts/AuthContext'
 import useAccountingBook from '../hooks/useAccountingBook'
+import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
 import usePayments from '../hooks/usePayments'
 import PaymentCheckboxLabel from '../components/FormElements/PaymentLabel/paymentCheckboxLabel'
 import AccountingBookSummaryBoard from '../components/AccountingBookSummaryBoard/AccountingBookSummaryBoard'
@@ -31,6 +32,7 @@ const PaymentsPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
   const { state: authState } = useContext(AuthContext)
   const [users, accountingBookDetails] = useAccountingBook()
+  const [summary] = useAccountingBookSummary()
   const [payments] = usePayments()
 
   let currentDate = null
