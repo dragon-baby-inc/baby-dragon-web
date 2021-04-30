@@ -1,11 +1,10 @@
 @import "../../../styleSheets/globalColors.scss";
 
 .bg {
-  padding: 0px 15px;
   width: 100%;
   display: flex;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
   height: 60px;
@@ -23,8 +22,7 @@
   a {
     color: $gray900;
     font-weight: 500;
-    margin: 5px;
-    padding: 10px;
+    margin: 12px;
     background-color: transparent;
 
     span {

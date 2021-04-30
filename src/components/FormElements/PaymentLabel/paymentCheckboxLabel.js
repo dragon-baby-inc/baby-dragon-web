@@ -19,14 +19,17 @@ const PaymentCheckboxLabel = (props) => {
   const [ collapseHeight , setcollapseHeight ] = useState(0)
   const [ collapseOpen , setCollapseOpen ] = useState(false)
   let object = props.object
-  let message = object.ower_and_payer_message
   let formatString = new FormatString();
+  let message = formatString.sliceToLength(object.ower_and_payer_message, 32, '...')
   let activeClass = collapseOpen ? 'active' : ''
+  let amount = object.amount
 
   const calendar = {
     sameDay: '[今日]',
     lastDay: '[昨日]',
-    sameElse: 'M-DD',
+    sameElse: 'M/DD',
+    nextWeek: 'M/DD',
+    lastWeek: 'M/DD',
   }
 
   const handleLabelOnCheck = (e) => {
@@ -37,20 +40,11 @@ const PaymentCheckboxLabel = (props) => {
     }
   }
 
-  if (formatString.halfLength(message) > 32) {
-    message = `${message.slice(0, 32)}...`
-  }
-
-  let amount = object.amount
-  if (formatString.halfLength(amount.toString()) > 7) {
-    amount = `${object.amount.toString().slice(0, 7)}...`
-  }
-
   const allocations = object.allocations.map(allo => {
     return(
       <div key={allo.id} className='allocation'>
         <div className='allocationInner'>
-          <span> {allo.ower_display_name} </span> <span>{props.currency_symbol}{allo.amount}</span>
+          <span className='name'> { allo.ower_display_name } </span> <span>{props.currency_symbol}{allo.amount}</span>
         </div>
       </div>
   )
@@ -128,10 +122,12 @@ const PaymentCheckboxLabel = (props) => {
         <div className='payment collapse'>
           <div className='allocation title'>
             <span> {object.ower_and_payer_message} </span>
-            <span> {props.currency_symbol}{object.amount} </span>
           </div>
           <div className='allocations'>
             {allocations}
+          </div>
+          <div className='allocation amount'>
+            <span> 總計 {props.currency_symbol}{object.amount} </span>
           </div>
         </div>
       </Collapse>

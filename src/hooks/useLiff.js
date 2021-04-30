@@ -9,7 +9,7 @@ const useLiff =  (callback) => {
       .then(() => {
           setIsLoggedIn(true)
         if (!liff.getAccessToken()) {
-//           liff.login({ redirectUri: window.location })
+          liff.login({ redirectUri: window.location })
         } else {
           setIsLoggedIn(true)
           callback(liff.getDecodedIDToken().sub)

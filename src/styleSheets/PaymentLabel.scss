@@ -20,14 +20,16 @@ label.group-menu-label.group-menu-payment {
   overflow: hidden;
   transition: .3s;
   margin: 8px 12px;
-  padding-right: 23px;
+  padding-left:  20px;
+  padding-right: 20px;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
   border: 1px solid #eee;
 
   .group-menu-date {
     font-weight: 400;
-    width: 52px;
+    font-size: 12px;
+    width: 38px;
   }
 
   .group-menu-date.active {
@@ -46,8 +48,8 @@ label.group-menu-label.group-menu-payment {
     transform: translate(0px, 0px);
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
     }
   }
 
@@ -83,12 +85,14 @@ label.group-menu-label.group-menu-payment {
     }
     .message {
       font-weight: 300;
-      font-size: 12px;
+      font-size: 10px;
     }
   }
   .group-menu-amount {
     text-align: right;
     width: 70px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .group-menu-amount.active {
@@ -128,7 +132,7 @@ label.group-menu-label.group-menu-payment {
 
   button {
     background-color: $gold500;
-    width: 30px;
+    width: 35px;
     padding: 5px 0px;
     background: none;
     background-color: transparent;
@@ -194,10 +198,6 @@ label.group-menu-label.group-menu-payment {
     }
   }
 
-  .allocation.title {
-    padding: 3px 10px;
-  }
-
   .allocation {
     display: flex;
     justify-content: space-between;
@@ -209,4 +209,13 @@ label.group-menu-label.group-menu-payment {
     }
   }
 
+  .allocation.title {
+    padding: 3px 10px;
+  }
+
+  .allocation.amount {
+    justify-content: flex-end;
+    padding: 5px 10px;
+    font-weight: 500px;
+  }
 }
