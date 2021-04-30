@@ -14,4 +14,5 @@ export const themeColors = {
   gray400:  '#ececec',
   gray300:  '#f2f2f2',
   gray100:  '#f6f6f6',
+  white:    '#FFFFFF',
 }

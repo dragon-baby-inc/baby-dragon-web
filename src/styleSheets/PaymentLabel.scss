@@ -1,0 +1,127 @@
+@import "../styleSheets/globalColors.scss";
+
+label.group-menu-label.group-menu-payment:focus-within  {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+}
+
+label.group-menu-label.group-menu-payment {
+  overflow: hidden;
+  transition: .3s; margin: 8px 8px;
+  padding-right: 23px;
+  border-radius: 16px;
+  border: 1px solid #eee;
+
+  .group-menu-image-block.active {
+    transform: translate(-10px, 0px);
+  }
+
+  .group-menu-image-block {
+    transition: .3s;
+    transform: translate(0px, 0px);
+  }
+
+  .group-menu-payment-block.active {
+    transform: translate(-10px, 0px);
+  }
+
+  .group-menu-payment-block {
+    transition: .3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .group-menu-checkbox {
+    padding-right: 10px;
+  }
+
+  .group-menu-username {
+    border: none;
+    display: flex;
+    flex-flow: column nowrap;
+    line-height: 1rem;
+    justify-content: center;
+    padding: 0px 13px;
+    text-align: left;
+    flex-grow: 1;
+
+    .description {
+      font-weight: 500;
+    }
+    .message {
+      font-weight: 300;
+      font-size: 12px;
+    }
+  }
+  .group-menu-amount {
+    text-align: right;
+    width: 70px;
+
+  }
+
+  .group-menu-username.disabled {
+    border-bottom: 1px solid transparent;
+  }
+
+  .group-menu-username.select-all {
+    position: relative;
+  }
+
+  .group-menu-username.select-all > div {
+    position: relative;
+    bottom: 4px;
+  }
+
+  .btn-group.active {
+    background-color: $gold500;
+    transform: translate(0px, 0px);
+  }
+
+  .btn-group {
+    height: 70px;
+    line-height: 70px;
+    margin-right: -24px;
+    margin-left: 24px;
+    transition: .3s;
+    transform: translate(80px, 0px);
+  }
+
+  button {
+    width: 30px;
+    padding: 5px 0px;
+    background: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    .fa-edit {
+      color: $gold900;
+    }
+  }
+
+  button:active,
+  button:hover,
+  button:focus {
+    outline: none;
+    background: none;
+    background-color: none;
+     -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  button:active .fa-edit {
+    color: $gold700;
+  }
+}
+
+.payment.collapse {
+  position: relative;
+  font-size: 13px;
+  color: $gray900;
+  margin: 0px 20px 10px;
+  padding: 10px 10px;
+  border-left: 1px solid $gray400;
+  border-bottom: 1px solid $gray400;
+  border-bottom-left-radius: 10px;
+}

@@ -22,7 +22,7 @@ const styles = {
   }
 }
 
-const NewPaymentForm = ({ users }) => {
+const NewPaymentForm = ({ users, afterSubmit }) => {
   const { state: authState } = useContext(AuthContext)
   const {
     state,
@@ -30,6 +30,7 @@ const NewPaymentForm = ({ users }) => {
     setAmount,
     setPayer,
     setOwer,
+    createPayment,
     setCreationDate,
     setShowRadioSelect,
     validateForm,
@@ -53,18 +54,21 @@ const NewPaymentForm = ({ users }) => {
   }
 
   const handleSubmit = () => {
-    validateForm(state,  ['name', 'amount', 'payer', 'ower'])
+    if (validateForm(state,  ['amount', 'payer', 'ower'])) {
+      createPayment(state, afterSubmit)
+    }
   }
 
   return(
     <div style={styles.container}>
       <div style={styles.form}>
         <TextInput
+          disabled={true}
           placeholder={'輸入名稱'}
           name={'名稱'}
           labelStyle={styles.labelStyle}
           changed={setName}
-          value={state.name.value}
+          value='還款'
           valid={state.name.valid}
           invalidFeedback="*不可為空白，12字內"
           type='text'

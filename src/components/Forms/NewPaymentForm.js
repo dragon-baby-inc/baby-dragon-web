@@ -29,7 +29,7 @@ const form = {
   evenly: ['name', 'amount', 'payer', 'owers', 'creation_date'],
 }
 
-const NewPaymentForm = ({ users }) => {
+const NewPaymentForm = ({ users, afterSubmit }) => {
   const {
     state,
     setName,
@@ -44,6 +44,7 @@ const NewPaymentForm = ({ users }) => {
     createPayment,
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
+  console.log(state)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -77,7 +78,7 @@ const NewPaymentForm = ({ users }) => {
   }
 
   const handleSubmit = () => {
-    if (validateForm(state, form[state.allocation_type])) { createPayment(state) }
+    if (validateForm(state, form[state.allocation_type])) { createPayment(state, afterSubmit) }
   }
 
   const components = {

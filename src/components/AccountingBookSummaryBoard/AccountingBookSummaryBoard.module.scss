@@ -1,0 +1,58 @@
+@import "../../styleSheets/globalColors.scss";
+
+.bg {
+  height: 50px;
+  margin-bottom: 10px;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.03);
+  text-align: center;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.h1 {
+  color: $gold900;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.date {
+  padding-top: 10px;
+  color: $gold900;
+  font-size: 14px;
+}
+
+.icons {
+  display: flex;
+
+
+  a {
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+
+    span {
+      display: inline-block;
+      padding-left: 10px;
+    }
+  }
+
+  .fa {
+    font-size: 13px;
+  }
+
+  .icon:active {
+    background-color: transparent;
+  }
+
+  .icon:focus {
+    background-color: transparent;
+  }
+}
+
+a.hover,
+a.active {
+  color: white;
+}
