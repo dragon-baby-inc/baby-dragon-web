@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import PaymentCreationPage from './pages/PaymentCreationPage'
-import PaymentsPage from './pages/PaymentsPage'
+import NavigationPage from './pages/NavigationPage'
 import { Provider as PaymentProvider } from './contexts/PaymentContext'
 import { Context as AuthContext } from './contexts/AuthContext'
 import useLiff from './hooks/useLiff'
@@ -18,8 +18,8 @@ const App = () => {
             <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
               <PaymentCreationPage />
             </Route>
-            <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments">
-              <PaymentsPage />
+            <Route path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id">
+              <NavigationPage />
             </Route>
           </PaymentProvider>
         </Switch>

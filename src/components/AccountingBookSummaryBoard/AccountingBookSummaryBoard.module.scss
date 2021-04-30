@@ -1,10 +1,9 @@
 @import "../../styleSheets/globalColors.scss";
 
 .bg {
-  height: 50px;
   text-align: center;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 }
@@ -16,41 +15,3 @@
   padding-bottom: 10px;
 }
 
-.date {
-  padding-top: 10px;
-  color: $white;
-  font-size: 14px;
-}
-
-.icons {
-  display: flex;
-
-  a {
-    color: #FFFFFF;
-    margin: 5px;
-    padding: 10px;
-    background-color: transparent;
-
-    span {
-      display: inline-block;
-      padding-left: 10px;
-    }
-  }
-
-  .fa {
-    font-size: 13px;
-  }
-
-  .icon:active {
-    background-color: transparent;
-  }
-
-  .icon:focus {
-    background-color: transparent;
-  }
-}
-
-a.hover,
-a.active {
-  color: white;
-}

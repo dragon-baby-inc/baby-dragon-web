@@ -1,0 +1,97 @@
+@import "../../../styleSheets/globalColors.scss";
+
+label.group-menu-label.group-menu-ower-label:focus-within  {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+}
+
+label.group-menu-label.group-menu-ower-label {
+  font-weight: 400;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  transition: .3s;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+
+  .group-menu-checkbox {
+    padding-right: 10px;
+  }
+
+  .group-menu-username {
+    overflow: hidden;
+    border: none;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    text-align: left;
+    padding: 0;
+    flex-shrink: 1;
+    font-size: 13px;
+    height: 25px;
+  }
+
+  .group-menu-amount {
+    text-align: right;
+    flex-grow: 1;
+  }
+
+  .group-menu-username.disabled {
+    border-bottom: 1px solid transparent;
+  }
+
+  .group-menu-username.select-all {
+    position: relative;
+  }
+
+  .group-menu-username.select-all > div {
+    position: relative;
+    bottom: 4px;
+  }
+}
+
+.payment.collapse {
+  background-color: #fff;
+  position: relative;
+  font-size: 13px;
+  color: $gray900;
+  margin: 0px 20px 10px;
+  padding: 10px 10px 5px;
+  border-left: 1px solid $gray400;
+  border-bottom: 1px solid $gray400;
+  border-bottom-left-radius: 10px;
+
+  .allocations {
+    margin-left: 10px;
+    border-left: 1px solid $gray400;
+
+    .allocationInner {
+      display: flex;
+      padding: 0px 10px;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .allocation::before {
+      content: '';
+      padding-right: 2px;
+      background-color: #eee;
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      width: 12px;
+      height: 1px;
+      border-bottom: 1px solid $gray400;
+    }
+  }
+
+  .allocation.title {
+    padding: 3px 10px;
+  }
+
+  .allocation {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0px;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styles from './IconsList.module.scss'
+import { NavLink } from 'react-router-dom';
 import { themeColors } from '../../../constants/globalColors'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/fontawesome-free-solid'
@@ -16,18 +17,24 @@ const IconsList = (props) => {
             進階搜尋
           </span>
         </a>
-        <a className={styles.icon}>
+        <NavLink
+          className={styles.icon}
+          to={`/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/payments`}
+        >
           <FontAwesomeIcon icon={faClipboard} color={themeColors.gray900}/>
           <span>
-            編輯歷史
+            帳款列表
           </span>
-        </a>
-        <a className={styles.icon}>
+        </NavLink>
+        <NavLink
+          className={styles.icon}
+          to={`/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/summary`}
+        >
           <FontAwesomeIcon icon={faClipboard} color={themeColors.gray900}/>
           <span>
             分帳建議
           </span>
-        </a>
+        </NavLink>
         <a
           className={styles.icon}
           href={`/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/payments/new`}

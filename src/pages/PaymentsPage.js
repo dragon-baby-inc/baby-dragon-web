@@ -16,6 +16,11 @@ const styles = {
     height: '100vh',
     overflow: 'hidden',
   },
+  h1: {
+    padding: '12px',
+    textAlign: 'center',
+    fontSize: '1.5rem',
+  },
   payments: {
     paddingTop: '8px',
     overflow: 'auto',
@@ -55,11 +60,12 @@ const PaymentsPage = (props) => {
 
   return(
     <div style={styles.bg}>
-      <AccountingBookSummaryBoard {...accountingBookDetails}/>
+      <div style={styles.h1}>
+        {accountingBookDetails.name}
+      </div>
       <div style={styles.payments}>
         {paymentLabels}
       </div>
-      <IconsList {...accountingBookDetails}/>
     </div>
   )
 }
