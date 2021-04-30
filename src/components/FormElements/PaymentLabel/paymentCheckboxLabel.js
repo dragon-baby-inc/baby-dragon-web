@@ -7,15 +7,27 @@ import FormatString from "../../../utilities/FormatString"
 import { themeColors } from '../../../constants/globalColors'
 import Button from '../Button/Button'
 
+import Moment from 'react-moment';
+import moment from 'moment/min/moment-with-locales';
+import 'moment/locale/zh-tw';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
+import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
 const PaymentCheckboxLabel = (props) => {
+  const [ collapseHeight , setcollapseHeight ] = useState(0)
   const [ collapseOpen , setCollapseOpen ] = useState(false)
   let object = props.object
   let message = object.ower_and_payer_message
   let formatString = new FormatString();
   let activeClass = collapseOpen ? 'active' : ''
+
+  const calendar = {
+    sameDay: '[今日]',
+    lastDay: '[昨日]',
+    sameElse: 'M-DD',
+  }
 
   const handleLabelOnCheck = (e) => {
     if (e.target.checked) {
@@ -29,17 +41,27 @@ const PaymentCheckboxLabel = (props) => {
     message = `${message.slice(0, 32)}...`
   }
 
+  let amount = object.amount
+  if (formatString.halfLength(amount.toString()) > 7) {
+    amount = `${object.amount.toString().slice(0, 7)}...`
+  }
+
   const allocations = object.allocations.map(allo => {
     return(
-      <div className='allocation'>
-        <span> {allo.ower_display_name} </span> 需負擔 {allo.amount}
+      <div key={allo.id} className='allocation'>
+        <div className='allocationInner'>
+          <span> {allo.ower_display_name} </span> <span>{props.currency_symbol}{allo.amount}</span>
+        </div>
       </div>
   )
   })
 
   return (
     <>
-      <label className='group-menu-label group-menu-checkbox-label group-menu-payment'>
+      <label className={`group-menu-label group-menu-checkbox-label group-menu-payment ${activeClass}`}>
+        <div className={`group-menu-date ${activeClass}`}>
+          <Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
+        </div>
         {
           props.editMode ?
             <div className='group-menu-checkbox'>
@@ -77,8 +99,8 @@ const PaymentCheckboxLabel = (props) => {
               { object.payer_display_name }
             </div>
           </div>
-          <div className='col-4 group-menu-amount'>
-            { object.amount }
+          <div className={`col-4 group-menu-amount ${activeClass}`}>
+            { amount }
           </div>
         </div>
         {
@@ -87,21 +109,30 @@ const PaymentCheckboxLabel = (props) => {
               <Button className='icon'>
                 <FontAwesomeIcon icon={faEdit}/>
               </Button>
+              <Button className='icon'>
+                <FontAwesomeIcon icon={faTrash}/>
+              </Button>
             </div>
             :
             <div className='btn-group'>
               <Button className='icon'>
                 <FontAwesomeIcon icon={faEdit}/>
               </Button>
+              <Button className='icon'>
+                <FontAwesomeIcon icon={faTrash}/>
+              </Button>
             </div>
         }
       </label>
-      <Collapse isOpened={collapseOpen}>
+      <Collapse isOpened={collapseOpen} style={{ maxHeight: collapseOpen ? collapseHeight : 0 }}>
         <div className='payment collapse'>
-          <div className='allocation'>
+          <div className='allocation title'>
             <span> {object.ower_and_payer_message} </span>
+            <span> {props.currency_symbol}{object.amount} </span>
           </div>
-          {allocations}
+          <div className='allocations'>
+            {allocations}
+          </div>
         </div>
       </Collapse>
     </>
