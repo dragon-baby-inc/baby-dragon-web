@@ -29,6 +29,14 @@ const PaymentCheckboxLabel = (props) => {
     message = `${message.slice(0, 32)}...`
   }
 
+  const allocations = object.allocations.map(allo => {
+    return(
+      <div className='allocation'>
+        <span> {allo.ower_display_name} </span> 需負擔 {allo.amount}
+      </div>
+  )
+  })
+
   return (
     <>
       <label className='group-menu-label group-menu-checkbox-label group-menu-payment'>
@@ -90,7 +98,10 @@ const PaymentCheckboxLabel = (props) => {
       </label>
       <Collapse isOpened={collapseOpen}>
         <div className='payment collapse'>
-          {object.ower_and_payer_message}
+          <div className='allocation'>
+            <span> {object.ower_and_payer_message} </span>
+          </div>
+          {allocations}
         </div>
       </Collapse>
     </>

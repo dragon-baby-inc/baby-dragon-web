@@ -10,14 +10,19 @@ const TextInput = ({
   type,
   valid,
   invalidFeedback,
-  disabled
+  disabled,
+  hideLabel
 }) => {
   let labelClasses = [styles.label]
   if (valid === false) { labelClasses.push(styles.invalid) }
   return(
     <div style={labelStyle}>
       <label className={labelClasses.join(' ')} >
-        <div className={styles.name}>{name}</div>
+        {
+          hideLabel ?
+            null:
+            <div className={styles.name}>{name}</div>
+        }
         <input
           disabled={disabled}
           value={value}

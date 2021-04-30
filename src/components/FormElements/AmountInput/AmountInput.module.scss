@@ -1,0 +1,70 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.label:focus-within  {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  margin: 8px 0px;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .innerRight {
+    flex-grow: 1;
+    padding-left: 10px;
+  }
+}
+
+.label {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  flex-flow: row;
+  text-align: center;
+  border-radius: 16px;
+  border: 1px solid #eee;
+  font-size: 16px;
+  transition: .2s;
+}
+
+.label.invalid {
+  border: 1px solid rgb(214 92 92);
+  border-radius: 16px;
+  box-shadow: 0 0 0 2px rgba(214, 92, 92, 0.2);
+}
+
+.name {
+  padding-left: 10px;
+  padding-bottom: 5px;
+  font-weight: 900;
+  font-size: 13px;
+  color: $gold900;
+}
+
+.input {
+  border-radius: 16px;
+  font-size: 13px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+
+input, input:focus {
+  border: none;
+  outline: none;
+}
+
+input::placeholder {
+  color: $gray500;
+}
+
+.invalidFeedback {
+  font-weight: 500;
+  padding: 8px 0px 4px;
+  text-align: right;
+  color: red;
+  font-size: 12px;
+}
