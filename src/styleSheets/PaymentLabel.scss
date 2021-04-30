@@ -4,12 +4,38 @@ label.group-menu-label.group-menu-payment:focus-within  {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
+label.group-menu-label.group-menu-payment.active::before {
+  content: '';
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $gold900;
+}
+
 label.group-menu-label.group-menu-payment {
+  background-color: #fff;
+  position: relative;
   overflow: hidden;
-  transition: .3s; margin: 8px 8px;
+  transition: .3s;
+  margin: 8px 12px;
   padding-right: 23px;
-  border-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
   border: 1px solid #eee;
+
+  .group-menu-date {
+    font-weight: 400;
+    width: 52px;
+  }
+
+  .group-menu-date.active {
+    display: none;
+    transform: translate(-10px, 0px);
+    font-weight: 400;
+    width: 52px;
+  }
 
   .group-menu-image-block.active {
     transform: translate(-10px, 0px);
@@ -18,6 +44,11 @@ label.group-menu-label.group-menu-payment {
   .group-menu-image-block {
     transition: .3s;
     transform: translate(0px, 0px);
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .group-menu-payment-block.active {
@@ -45,6 +76,7 @@ label.group-menu-label.group-menu-payment {
     padding: 0px 13px;
     text-align: left;
     flex-grow: 1;
+    flex-shrink: 1;
 
     .description {
       font-weight: 500;
@@ -57,8 +89,12 @@ label.group-menu-label.group-menu-payment {
   .group-menu-amount {
     text-align: right;
     width: 70px;
-
   }
+
+  .group-menu-amount.active {
+    display: none;
+  }
+
 
   .group-menu-username.disabled {
     border-bottom: 1px solid transparent;
@@ -74,20 +110,24 @@ label.group-menu-label.group-menu-payment {
   }
 
   .btn-group.active {
-    background-color: $gold500;
+    background-color: #fff;
     transform: translate(0px, 0px);
   }
 
   .btn-group {
-    height: 70px;
+    right: 0;
+    position: absolute;
+    width: 100px;
+    height: 50px;
     line-height: 70px;
-    margin-right: -24px;
-    margin-left: 24px;
     transition: .3s;
-    transform: translate(80px, 0px);
+    transform: translate(100px, 0px);
+    display: flex;
+    justify-content: center;
   }
 
   button {
+    background-color: $gold500;
     width: 30px;
     padding: 5px 0px;
     background: none;
@@ -96,6 +136,9 @@ label.group-menu-label.group-menu-payment {
     outline: none;
 
     .fa-edit {
+      color: $gold900;
+    }
+    .fa-trash {
       color: $gold900;
     }
   }
@@ -110,12 +153,14 @@ label.group-menu-label.group-menu-payment {
     -moz-appearance: none;
   }
 
+  button:active .fa-trash,
   button:active .fa-edit {
     color: $gold700;
   }
 }
 
 .payment.collapse {
+  background-color: #fff;
   position: relative;
   font-size: 13px;
   color: $gray900;
@@ -125,11 +170,43 @@ label.group-menu-label.group-menu-payment {
   border-bottom: 1px solid $gray400;
   border-bottom-left-radius: 10px;
 
+  .allocations {
+    margin-left: 10px;
+    border-left: 1px solid $gray400;
+
+    .allocationInner {
+      display: flex;
+      padding: 0px 10px;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .allocation::before {
+      content: '';
+      padding-right: 2px;
+      background-color: #eee;
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      width: 12px;
+      height: 1px;
+      border-bottom: 1px solid $gray400;
+    }
+  }
+
+  .allocation.title {
+    padding: 3px 10px;
+  }
+
   .allocation {
+    display: flex;
+    justify-content: space-between;
     padding: 3px 0px;
+
     span {
       font-weight: 450;
       color: $gold900;
     }
   }
+
 }

@@ -4,6 +4,7 @@ import { Context as AuthContext } from '../contexts/AuthContext'
 import useAccountingBook from '../hooks/useAccountingBook'
 import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
 import usePayments from '../hooks/usePayments'
+import FloatIcon from '../components/FormElements/FloatIcon/FloatIcon'
 import PaymentCheckboxLabel from '../components/FormElements/PaymentLabel/paymentCheckboxLabel'
 import AccountingBookSummaryBoard from '../components/AccountingBookSummaryBoard/AccountingBookSummaryBoard'
 import IconsList from '../components/FormElements/IconsList/IconsList'
@@ -19,11 +20,15 @@ const styles = {
     paddingTop: '8px',
     overflow: 'auto',
     height: 'calc(100vh - 60px - 60px)',
+    paddingBottom: '100px',
   },
   dateSeparator: {
     fontSize: '12px',
     textAlign: 'center',
-    color: themeColors.gold900,
+  },
+  addPayment: {
+    right: '10px',
+    bottom: '75px',
   }
 }
 
@@ -42,9 +47,9 @@ const PaymentsPage = (props) => {
     if (payment.created_at != currentDate) {
       currentDate = payment.created_at
       paymentLabels.push( <div style={styles.dateSeparator}>{currentDate}</div>)
-      paymentLabels.push(<PaymentCheckboxLabel key={payment.id} object={payment} editMode={editMode}/>)
+      paymentLabels.push(<PaymentCheckboxLabel {...accountingBookDetails} key={payment.id} object={payment} editMode={editMode}/>)
     } else {
-      paymentLabels.push(<PaymentCheckboxLabel key={payment.id} object={payment} editMode={editMode}/>)
+      paymentLabels.push(<PaymentCheckboxLabel {...accountingBookDetails} key={payment.id} object={payment} editMode={editMode}/>)
     }
   })
 
@@ -59,4 +64,5 @@ const PaymentsPage = (props) => {
   )
 }
 
+//         <FloatIcon style={styles.addPayment} {...accountingBookDetails}/>
 export default PaymentsPage

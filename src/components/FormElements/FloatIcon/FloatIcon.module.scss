@@ -1,0 +1,19 @@
+@import "../../../styleSheets/globalColors.scss";
+
+a.add {
+  background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  z-index: 100;
+}
+
+.add:hover {
+  background: linear-gradient(90deg, rgba(7,105,77,1) 0%, rgba(21,111,82,100) 100%);
+}

@@ -2,8 +2,6 @@
 
 .bg {
   height: 50px;
-  margin-bottom: 10px;
-  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.03);
   text-align: center;
   display: flex;
   flex-flow: row;
@@ -15,17 +13,17 @@
   color: $gold900;
   font-weight: 500;
   font-size: 1.5rem;
+  padding-bottom: 10px;
 }
 
 .date {
   padding-top: 10px;
-  color: $gold900;
+  color: $white;
   font-size: 14px;
 }
 
 .icons {
   display: flex;
-
 
   a {
     color: #FFFFFF;
