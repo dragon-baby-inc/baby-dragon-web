@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import PaymentSwipeableView from '../components/PaymentSwipeableView/PaymentSwipeableView'
 import DotGroup from '../components/FormElements/DotGroup/DotGroup'
 import RadioSelectMenu from '../components/FormElements/SelectMenu/RadioSelectMenu'
+import PopUpForm from '../components/FormElements/PopUpForm/PopUpForm'
 import CheckboxSelectMenu from '../components/FormElements/SelectMenu/CheckboxSelectMenu'
 import Backdrop from '../components/Backdrop/Backdrop'
 import { Context } from '../contexts/PaymentContext'
@@ -85,9 +86,19 @@ const PaymentCreationPage = (props) => {
         state.showRadioSelect ?
           <RadioSelectMenu
             labelType="user"
-            objects={users}
+            objects={state.owers.value}
             selected_object_id={state.radioSelectObjectId}
             changed={state.radioSelectAction}
+          /> :
+          null
+      }
+      {
+        state.showPopUpForm ?
+          <PopUpForm
+            labelType="user"
+            objects={users}
+            selected_objects={state.popUpObjects}
+            changed={state.popUpAction}
           /> :
           null
       }

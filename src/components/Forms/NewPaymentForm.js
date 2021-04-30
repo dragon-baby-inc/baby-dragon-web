@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import Toggle from '../FormElements/FormTypeToggle/Toggle'
+import PopUpInput from '../FormElements/PopUpInput/PopUpInput'
 import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
 import CheckboxSelectInput from '../FormElements/SelectInput/CheckboxSelectInput'
@@ -25,8 +26,13 @@ const styles = {
 }
 
 const form = {
-  amount: ['name', 'amount', 'payer', 'creation_date'],
   evenly: ['name', 'amount', 'payer', 'owers', 'creation_date'],
+  amount: ['name', 'fixedAmount', 'payer','manualOwers', 'creation_date'],
+}
+
+const formValidation = {
+  evenly: ['name', 'amount', 'payer', 'owers', 'creation_date'],
+  amount: ['name', 'payer','manualOwers', 'creation_date'],
 }
 
 const NewPaymentForm = ({ users, afterSubmit }) => {
@@ -36,15 +42,16 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
     setAmount,
     setPayer,
     setOwers,
+    setManualOwers,
     setCreationDate,
     setAllocationType,
     setShowRadioSelect,
     setShowCheckboxSelect,
+    setShowPopUpForm,
     validateForm,
     createPayment,
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
-  console.log(state)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -77,8 +84,12 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
     setShowCheckboxSelect(setOwers, owers)
   }
 
+  const handleManualOwersSelectClicked = () => {
+    setShowPopUpForm(setManualOwers, state.manualOwers.value)
+  }
+
   const handleSubmit = () => {
-    if (validateForm(state, form[state.allocation_type])) { createPayment(state, afterSubmit) }
+    if (validateForm(state, formValidation[state.allocation_type])) { createPayment(state, afterSubmit) }
   }
 
   const components = {
@@ -102,6 +113,17 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
       invalidFeedback="*不可為空白"
       type='number'
     />,
+    fixedAmount: <TextInput
+      labelStyle={styles.labelStyle}
+      placeholder={'輸入金額'}
+      name={'金額'}
+      changed={setAmount}
+      value={state.fixedAmount.value}
+      valid={state.fixedAmount.valid}
+      invalidFeedback="*不可為空白"
+      type='number'
+      disabled={true}
+    />,
     payer: <RadioSelectInput
       placeholder={'選取付款者'}
       name={'付款者'}
@@ -120,6 +142,16 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
       selectAll={state.owers.value ? state.owers.value.length === users.length : false }
       value={state.owers ? state.owers.value : null}
       valid={state.owers.valid}
+      type='number'
+    />,
+    manualOwers: <PopUpInput
+      placeholder={'編輯分款'}
+      name={'分款者'}
+      labelStyle={styles.labelStyle}
+      changed={setPayer}
+      clicked={handleManualOwersSelectClicked}
+      value={state.manualOwers ? state.manualOwers.value : null}
+      valid={state.manualOwers.valid}
       type='number'
     />,
     creation_date: <DatePickerInput

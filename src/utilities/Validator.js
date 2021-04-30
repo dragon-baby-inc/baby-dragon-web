@@ -36,6 +36,20 @@ class Validator {
     })
     return valid
   }
+  atLeastOneValue(value) {
+    if (!value) { return false }
+    let objects = value.filter(object => object.amount > 0)
+    let amount = objects.reduce((prev, object) => {
+      if (parseFloat(object.amount) > 0) {
+        return prev + parseFloat(object.amount)
+      }
+    }, 0)
+    console.log('validation')
+    console.log(amount)
+
+    if (amount > 0) { return true }
+    return false
+  }
 }
 
 

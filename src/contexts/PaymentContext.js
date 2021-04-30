@@ -34,12 +34,20 @@ const paymentReducer = (state, action) => {
     case 'set_owers':
       let owersValid = action.payload.length > 0
       return { ...state, owers: { value: action.payload, valid: owersValid } }
+    case 'set_manual_owers':
+      let objects = action.payload.filter(object => object.amount > 0)
+      let amount = objects.reduce((prev, object) => {
+        if (parseFloat(object.amount) > 0) { return prev + parseFloat(object.amount) }
+      }, 0)
+      valid = amount > 0
+      return { ...state, fixedAmount: { value: amount, valid: valid }, manualOwers: { value: action.payload, valid: valid } }
     case 'set_hidden':
       return { ...state,
         showDatePicker: false,
         showCheckboxSelect: false,
         showRadioSelect: false,
         showBackdrop: false,
+        showPopUpForm: false,
       }
     case 'set_allocation_type':
       return { ...state, allocation_type: action.payload }
@@ -56,6 +64,13 @@ const paymentReducer = (state, action) => {
         showBackdrop: true,
         checkboxSelectAction: action.payload.action,
         checkboxSelectObjectIds: action.payload.ids,
+      }
+    case 'set_show_pop_up_form':
+      return { ...state,
+        showPopUpForm: true,
+        showBackdrop: true,
+        popUpAction: action.payload.action,
+        popUpObjects: action.payload.objects,
       }
     case 'set_show_radio_select':
       return { ...state,
@@ -96,6 +111,10 @@ const setOwers = dispatch => (owers) => {
   dispatch({ type: 'set_owers', payload: owers })
 }
 
+const setManualOwers = dispatch => (owers) => {
+  dispatch({ type: 'set_manual_owers', payload: owers })
+}
+
 const setCreationDate = dispatch => (date) => {
   dispatch({ type: 'set_creation_date', payload: date })
 }
@@ -117,6 +136,12 @@ const setShowCheckboxSelect = dispatch => (action, ids) => {
   })
 }
 
+const setShowPopUpForm = dispatch => (action, objects) => {
+  dispatch({
+    type: 'set_show_pop_up_form', payload: { action, objects }
+  })
+}
+
 const setShowDatePicker = dispatch => (action, date) => {
   dispatch({
     type: 'set_show_date_picker', payload: { action, date }
@@ -132,6 +157,7 @@ const validations = {
   payer: ['isNotEmpty'],
   ower: ['isNotEmpty'],
   owers: ['isNotEmpty', 'atLeastOne'],
+  manualOwers: ['atLeastOneValue'],
   creation_date: ['isNotEmpty']
 }
 
@@ -165,6 +191,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
     amount: state.amount.value,
     payer_id: state.payer.value.id,
     allocation_type: state.allocation_type,
+    created_at: state.creation_date.value,
     paid_back: state.paid_back,
   }
 
@@ -173,12 +200,15 @@ const createPayment = dispatch => (state, afterSubmit) => {
     params['description'] = '還款'
   } else {
     if (state.allocation_type == 'amount') {
-      params['owers'] = []
+      params['owers'] = state.manualOwers.value.filter(o => o.amount > 0).map(o => {
+        return { ower_id: o.id, amount: o.amount }
+      })
     } else {
       params['ower_ids'] = state.owers.value.map(o => o.id)
     }
   }
 
+  console.log(params)
   let details = state.accounting_book_details
 
   axios.post(`api/v1/groups/${details.group_id}/accounting_books/${details.id}/payments`, { payment: params })
@@ -197,12 +227,14 @@ export const { Context, Provider } = createDataContext(
     setPaidBack,
     setPayer,
     setOwers,
+    setManualOwers,
     setOwer,
     setHidden,
     setCreationDate,
     setAllocationType,
     setShowCheckboxSelect,
     setShowRadioSelect,
+    setShowPopUpForm,
     validateForm,
     setShowDatePicker,
     setAccountingBookDetails,
@@ -212,9 +244,11 @@ export const { Context, Provider } = createDataContext(
     accounting_book_details: null,
     name: { value: '', valid: null },
     amount: { value: '', valid: null },
+    fixedAmount: { value: 0, valid: null },
     payer: { value: null, valid: null },
     ower: { value: null, valid: null },
     owers: { value: null, valid: null },
+    manualOwers: { value: null, valid: null },
     creation_date: { value: null, valid: null },
     paid_back: false,
     formValid: false,
