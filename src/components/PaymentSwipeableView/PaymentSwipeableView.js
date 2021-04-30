@@ -35,10 +35,10 @@ const PaymentSwipeableView = (props) => {
       onChangeIndex={handleIndexChanged}
     >
       <div style={Object.assign({}, styles.slide)}>
-        <NewPaymentForm users={props.users}/>
+        <NewPaymentForm users={props.users} afterSubmit={props.afterSubmit}/>
       </div>
       <div style={Object.assign({}, styles.slide)}>
-        <PaidBackPaymentForm users={props.users}/>
+        <PaidBackPaymentForm users={props.users} afterSubmit={props.afterSubmit}/>
       </div>
     </SwipeableViews>
   );

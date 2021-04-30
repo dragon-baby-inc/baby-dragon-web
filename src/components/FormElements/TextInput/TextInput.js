@@ -9,7 +9,8 @@ const TextInput = ({
   placeholder,
   type,
   valid,
-  invalidFeedback
+  invalidFeedback,
+  disabled
 }) => {
   let labelClasses = [styles.label]
   if (valid === false) { labelClasses.push(styles.invalid) }
@@ -18,6 +19,7 @@ const TextInput = ({
       <label className={labelClasses.join(' ')} >
         <div className={styles.name}>{name}</div>
         <input
+          disabled={disabled}
           value={value}
           placeholder={placeholder}
           onChange={e => { changed(e.target.value) }}

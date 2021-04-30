@@ -159,7 +159,7 @@ const validateForm = dispatch => (state, formKeys) => {
   return formValid
 }
 
-const createPayment = dispatch => (state) => {
+const createPayment = dispatch => (state, afterSubmit) => {
   let params = {
     description: state.name.value,
     amount: state.amount.value,
@@ -168,20 +168,25 @@ const createPayment = dispatch => (state) => {
     paid_back: state.paid_back,
   }
 
-  if (state.allocation_type == 'amount') {
-    params['owers'] = []
+  if (state.paid_back) {
+    params['ower_ids'] = [state.ower.value.id]
+    params['description'] = '還款'
   } else {
-    params['ower_ids'] = state.owers.value.map(o => o.id)
+    if (state.allocation_type == 'amount') {
+      params['owers'] = []
+    } else {
+      params['ower_ids'] = state.owers.value.map(o => o.id)
+    }
   }
-  console.log(params)
+
   let details = state.accounting_book_details
 
-//   axios.post(`api/v1/groups/${details.group_id}/accounting_books/${details.id}/payments`, { payment: params })
-//     .then(function (response) {
-//       console.log(response)
-//     })
-//     .catch(function (error) {
-//     })
+  axios.post(`api/v1/groups/${details.group_id}/accounting_books/${details.id}/payments`, { payment: params })
+    .then(function (response) {
+      afterSubmit()
+    })
+    .catch(function (error) {
+    })
 }
 
 export const { Context, Provider } = createDataContext(

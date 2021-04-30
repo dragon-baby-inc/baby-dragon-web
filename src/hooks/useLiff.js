@@ -7,8 +7,9 @@ const useLiff =  (callback) => {
   useEffect(() => {
     liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
       .then(() => {
+          setIsLoggedIn(true)
         if (!liff.getAccessToken()) {
-          liff.login({ redirectUri: window.location })
+//           liff.login({ redirectUri: window.location })
         } else {
           setIsLoggedIn(true)
           callback(liff.getDecodedIDToken().sub)
