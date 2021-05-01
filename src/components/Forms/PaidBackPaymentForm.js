@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useState, useContext } from "react"
 import TextInput from '../FormElements/TextInput/TextInput'
 import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
 import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
@@ -23,6 +23,7 @@ const styles = {
 }
 
 const NewPaymentForm = ({ users, afterSubmit }) => {
+  const [disableSubmit, setDisableSubmit] = useState(false)
   const { state: authState } = useContext(AuthContext)
   const {
     state,
@@ -55,6 +56,7 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
 
   const handleSubmit = () => {
     if (validateForm(state,  ['amount', 'payer', 'ower'])) {
+      setDisableSubmit(true)
       createPayment(state, afterSubmit)
     }
   }
@@ -108,7 +110,7 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
         />
 
       </div>
-      <Button clicked={handleSubmit}>確認</Button>
+      <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
     </div>
   )
 }

@@ -46,7 +46,6 @@ const PaymentsPage = (props) => {
 
   const handleSmallChange = (small) => {
     setSmall(small)
-    console.log(small)
   }
 
   return(

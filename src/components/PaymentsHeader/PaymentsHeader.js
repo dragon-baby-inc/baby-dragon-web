@@ -32,9 +32,6 @@ function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange }
 
   return(
     <div className={classes.join(' ')}>
-      <a className={iconClasses.join(' ')}>
-        <FontAwesomeIcon icon={faBars} color={themeColors.gray400}/>
-      </a>
       <div className={innerBlockClasses.join(" ")}>
         <FontAwesomeIcon className={styles.bookIcon} icon={faBookOpen} color={themeColors.gray400}/>
         <div>

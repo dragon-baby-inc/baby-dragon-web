@@ -5,7 +5,9 @@ import "../../../styleSheets/PaymentLabel.scss";
 import { Collapse } from 'react-collapse';
 import FormatString from "../../../utilities/FormatString"
 import { themeColors } from '../../../constants/globalColors'
+import { useParams } from 'react-router-dom';
 import Button from '../Button/Button'
+import { useHistory } from "react-router-dom";
 
 import Moment from 'react-moment';
 import moment from 'moment/min/moment-with-locales';
@@ -18,6 +20,8 @@ import { faTrash } from '@fortawesome/fontawesome-free-solid'
 const PaymentCheckboxLabel = (props) => {
   const [ collapseHeight , setcollapseHeight ] = useState(0)
   const [ collapseOpen , setCollapseOpen ] = useState(false)
+  const { group_id, accounting_book_id } = useParams();
+  const history = useHistory();
   let object = props.object
   let formatString = new FormatString();
   let message = formatString.sliceToLength(object.ower_and_payer_message, 32, '...')
@@ -49,6 +53,13 @@ const PaymentCheckboxLabel = (props) => {
       </div>
   )
   })
+
+  const handleEditClick = () => {
+    history.push(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${object.id}/edit`)
+  }
+
+  const handleDeleteClick = () => {
+  }
 
   return (
     <>
@@ -101,19 +112,19 @@ const PaymentCheckboxLabel = (props) => {
           collapseOpen ?
             <div className='btn-group active'>
               <Button className='icon'>
-                <FontAwesomeIcon icon={faEdit}/>
-              </Button>
-              <Button className='icon'>
                 <FontAwesomeIcon icon={faTrash}/>
+              </Button>
+              <Button clicked={handleEditClick} className='icon'>
+                <FontAwesomeIcon icon={faEdit}/>
               </Button>
             </div>
             :
             <div className='btn-group'>
               <Button className='icon'>
-                <FontAwesomeIcon icon={faEdit}/>
+                <FontAwesomeIcon icon={faTrash}/>
               </Button>
               <Button className='icon'>
-                <FontAwesomeIcon icon={faTrash}/>
+                <FontAwesomeIcon icon={faEdit}/>
               </Button>
             </div>
         }
