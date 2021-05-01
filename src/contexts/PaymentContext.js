@@ -6,17 +6,24 @@ const paymentReducer = (state, action) => {
   switch (action.type) {
     case 'set_accounting_book_details':
       return { ...state, accounting_book_details: action.payload }
+    case 'set_id':
+      return { ...state, id: action.payload }
     case 'set_name':
       let nameValid = action.payload.length > 0
       return { ...state, name: { value: action.payload, valid: nameValid } }
+    case 'set_fixed_amount':
+      let fixedAmountValid = action.payload > 0
+      return { ...state, amount: { value:action.payload, valid: fixedAmountValid  } }
     case 'set_amount':
-      let amountValid = action.payload.length > 0
+      let amountValid = action.payload > 0
       return { ...state, amount: { value:action.payload, valid: amountValid  } }
     case 'set_creation_date':
       let dateValid = action.payload ? true : false
       return { ...state, creation_date: { value:action.payload, valid: dateValid  } }
     case 'set_paid_back':
       return { ...state, paid_back: action.payload }
+    case 'set_builder':
+        return { ...state, builder: action.payload }
     case 'set_payer':
       var valid = action.payload ? true : false
       if (state.ower.value === action.payload) {
@@ -86,6 +93,9 @@ const paymentReducer = (state, action) => {
   }
 }
 
+const setId = dispatch => (id) => {
+  dispatch({ type: 'set_id', payload: id })
+}
 const setName = dispatch => (name) => {
   dispatch({ type: 'set_name', payload: name })
 }
@@ -102,6 +112,10 @@ const setPayer = dispatch => (payer) => {
   dispatch({ type: 'set_hidden' })
 }
 
+const setBuilder = dispatch => (builder) => {
+  dispatch({ type: 'set_builder', payload: builder })
+}
+
 const setOwer = dispatch => (ower) => {
   dispatch({ type: 'set_ower', payload: ower })
   dispatch({ type: 'set_hidden' })
@@ -109,6 +123,10 @@ const setOwer = dispatch => (ower) => {
 
 const setOwers = dispatch => (owers) => {
   dispatch({ type: 'set_owers', payload: owers })
+}
+
+const setFixedAmount = dispatch => (amount) => {
+  dispatch({ type: 'set_fixed_amount', payload: amount })
 }
 
 const setManualOwers = dispatch => (owers) => {
@@ -186,13 +204,17 @@ const validateForm = dispatch => (state, formKeys) => {
 }
 
 const createPayment = dispatch => (state, afterSubmit) => {
+  var moment = require('moment-timezone');
   let params = {
+    id: state.id,
     description: state.name.value,
     amount: state.amount.value,
     payer_id: state.payer.value.id,
     allocation_type: state.allocation_type,
     created_at: state.creation_date.value,
     paid_back: state.paid_back,
+    timezone: moment.tz.guess(),
+    builder_id: state.builder.id
   }
 
   if (state.paid_back) {
@@ -200,6 +222,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
     params['description'] = '還款'
   } else {
     if (state.allocation_type == 'amount') {
+      params['amount'] = state.fixedAmount.value
       params['owers'] = state.manualOwers.value.filter(o => o.amount > 0).map(o => {
         return { ower_id: o.id, amount: o.amount }
       })
@@ -208,7 +231,6 @@ const createPayment = dispatch => (state, afterSubmit) => {
     }
   }
 
-  console.log(params)
   let details = state.accounting_book_details
 
   axios.post(`api/v1/groups/${details.group_id}/accounting_books/${details.id}/payments`, { payment: params })
@@ -222,13 +244,16 @@ const createPayment = dispatch => (state, afterSubmit) => {
 export const { Context, Provider } = createDataContext(
   paymentReducer,
   {
+    setId,
     setName,
     setAmount,
     setPaidBack,
     setPayer,
     setOwers,
+    setFixedAmount,
     setManualOwers,
     setOwer,
+    setBuilder,
     setHidden,
     setCreationDate,
     setAllocationType,
@@ -241,13 +266,15 @@ export const { Context, Provider } = createDataContext(
     createPayment,
   },
   {
+    id: null,
+    builder: null,
     accounting_book_details: null,
     name: { value: '', valid: null },
     amount: { value: '', valid: null },
     fixedAmount: { value: 0, valid: null },
     payer: { value: null, valid: null },
     ower: { value: null, valid: null },
-    owers: { value: null, valid: null },
+    owers: { value: null, valid: true },
     manualOwers: { value: null, valid: null },
     creation_date: { value: null, valid: null },
     paid_back: false,

@@ -7,9 +7,11 @@ const useAccountingBook =  (callback) => {
   const [err, setErr] = useState(null);
   const [accountingBook, setAccountingBook] = useState([]);
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getAccountingBook = async () => {
-    axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}`)
+    setLoading(true)
+    await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}`)
       .then(function (response) {
         let users = response.data.users.map(u => {
           return {
@@ -24,13 +26,14 @@ const useAccountingBook =  (callback) => {
       .catch(function (error) {
         setErr(error);
       })
+    setLoading(false)
   }
 
   useEffect(() => {
     getAccountingBook();
   }, [])
 
-  return [users, accountingBook, err];
+  return [users, accountingBook, loading, err];
 }
 
 export default useAccountingBook;

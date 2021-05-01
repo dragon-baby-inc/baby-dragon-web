@@ -11,7 +11,6 @@ const RadioSelectMenu = ({ objects, labelType, selected_object_id, changed }) =>
   const [mount, setMount] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [displayObjects, setDisplayObjects] = useState(objects)
-
   let handleChange = (e) => {
     let object = objects.filter(el => String(el.id) === e.target.value)[0]
     changed(object)

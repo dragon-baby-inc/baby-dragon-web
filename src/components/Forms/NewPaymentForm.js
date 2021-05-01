@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import Toggle from '../FormElements/FormTypeToggle/Toggle'
 import PopUpInput from '../FormElements/PopUpInput/PopUpInput'
 import TextInput from '../FormElements/TextInput/TextInput'
@@ -35,7 +35,7 @@ const formValidation = {
   amount: ['name', 'payer','manualOwers', 'creation_date'],
 }
 
-const NewPaymentForm = ({ users, afterSubmit }) => {
+const NewPaymentForm = ({ loading, users, afterSubmit }) => {
   const {
     state,
     setName,
@@ -52,11 +52,7 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
     createPayment,
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setOwers(users)
-  }, [users])
+  const [disableSubmit, setDisableSubmit] = useState(false)
 
   let payerValue = state.payer.value
   if (state.payer.value && state.payer.value.id === authState.userLineIdToken) {
@@ -89,7 +85,10 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
   }
 
   const handleSubmit = () => {
-    if (validateForm(state, formValidation[state.allocation_type])) { createPayment(state, afterSubmit) }
+    if (validateForm(state, formValidation[state.allocation_type])) {
+      setDisableSubmit(true)
+      createPayment(state, afterSubmit)
+    }
   }
 
   const components = {
@@ -174,7 +173,7 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
         <Toggle changed={handleToggleChanged} checked={checked}/>
         {displayComponents}
       </div>
-      <Button clicked={handleSubmit}>確認</Button>
+      <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
     </div>
   )
 }

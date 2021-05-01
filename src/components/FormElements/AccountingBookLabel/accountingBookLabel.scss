@@ -4,6 +4,11 @@ label.group-menu-label.group-menu-accounting-book:focus-within  {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
+label.group-menu-label.group-menu-accounting-book:hover,
+label.group-menu-label.group-menu-accounting-book:active {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+}
+
 label.group-menu-label.group-menu-accounting-book::before {
   content: '';
   width: 10px;
