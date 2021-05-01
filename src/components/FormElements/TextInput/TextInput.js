@@ -15,6 +15,7 @@ const TextInput = ({
 }) => {
   let labelClasses = [styles.label]
   if (valid === false) { labelClasses.push(styles.invalid) }
+  if (disabled) { labelClasses.push(styles.disabled) }
   return(
     <div style={labelStyle}>
       <label className={labelClasses.join(' ')} >

@@ -32,6 +32,10 @@
     }
   }
 
+  a.disabled {
+    pointer-events: none;
+  }
+
   a:hover,
   a:active {
     color: $green700;
