@@ -45,11 +45,13 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
   }
 
   const handlePayerSelectClicked = () => {
+    if (state.disableForm) { return }
     let payer_id = state.payer.value ? state.payer.value.id : null
     setShowRadioSelect(setPayer, payer_id)
   }
 
   const handleOwerSelectClicked = () => {
+    if (state.disableForm) { return }
     let ower_id = state.ower.value ? state.ower.value.id : null
     setShowRadioSelect(setOwer, ower_id)
   }
@@ -64,53 +66,57 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
   return(
     <div style={styles.container}>
       <div style={styles.form}>
-        <TextInput
-          disabled={true}
-          placeholder={'輸入名稱'}
-          name={'名稱'}
-          labelStyle={styles.labelStyle}
-          changed={setName}
-          value='還款'
-          valid={state.name.valid}
-          invalidFeedback="*不可為空白，12字內"
-          type='text'
-        />
-        <TextInput
-          labelStyle={styles.labelStyle}
-          placeholder={'輸入金額'}
-          name={'金額'}
-          changed={setAmount}
-          value={state.amount.value}
-          valid={state.amount.valid}
-          invalidFeedback="*不可為空白"
-          type='number'
-        />
-        <RadioSelectInput
-          placeholder={'選取付款者'}
-          name={'付款者'}
-          clicked={handlePayerSelectClicked}
-          labelStyle={styles.labelStyle}
-          value={payerValue}
-          valid={state.payer.valid}
-        />
-        <RadioSelectInput
-          placeholder={'選取收款者'}
-          name={'收款者'}
-          clicked={handleOwerSelectClicked}
-          labelStyle={styles.labelStyle}
-          value={state.ower.value ? state.ower.value.displayName : null}
-          valid={state.ower.valid}
-        />
-        <DatePickerInput
-          placeholder={'今日'}
-          name={'日期'}
-          labelStyle={styles.labelStyle}
-          value={state.creation_date.value}
-          changed={setCreationDate}
-        />
+        <fieldset disabled={state.disableForm ? 'disabled' : null}>
+          <TextInput
+            disabled={true}
+            placeholder={'輸入名稱'}
+            name={'名稱'}
+            labelStyle={styles.labelStyle}
+            changed={setName}
+            value='還款'
+            valid={state.name.valid}
+            invalidFeedback="*不可為空白，12字內"
+            type='text'
+          />
+          <TextInput
+            labelStyle={styles.labelStyle}
+            placeholder={'輸入金額'}
+            name={'金額'}
+            changed={setAmount}
+            value={state.amount.value}
+            valid={state.amount.valid}
+            invalidFeedback="*不可為空白"
+            type='number'
+          />
+          <RadioSelectInput
+            placeholder={'選取付款者'}
+            name={'付款者'}
+            clicked={handlePayerSelectClicked}
+            labelStyle={styles.labelStyle}
+            value={payerValue}
+            valid={state.payer.valid}
+          />
+          <RadioSelectInput
+            placeholder={'選取收款者'}
+            name={'收款者'}
+            clicked={handleOwerSelectClicked}
+            labelStyle={styles.labelStyle}
+            value={state.ower.value ? state.ower.value.displayName : null}
+            valid={state.ower.valid}
+          />
+          <DatePickerInput
+            placeholder={'今日'}
+            name={'日期'}
+            labelStyle={styles.labelStyle}
+            value={state.creation_date.value}
+            changed={setCreationDate}
+          />
 
+        </fieldset>
       </div>
-      <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
+      <fieldset disabled={state.disableForm ? 'disabled' : null}>
+        <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
+      </fieldset>
     </div>
   )
 }
