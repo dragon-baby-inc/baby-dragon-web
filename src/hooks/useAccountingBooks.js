@@ -2,18 +2,19 @@ import { useState, useEffect } from 'react';
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
-const useAccountingBookSummary =  () => {
-  const { group_id, accounting_book_id } = useParams();
+const useAccountingBooks =  (callback) => {
+  const { group_id } = useParams();
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [summary, setSummary] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [group, setGroup] = useState([]);
 
   const getAccountingBook = async () => {
     setLoading(true)
-    await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/summary`)
+    await axios.get(`api/v1/groups/${group_id}/accounting_books`)
       .then(function (response) {
-        console.log(response.data)
-        setSummary(response.data.transactions)
+        setBooks(response.data.accounting_books)
+        setGroup(response.data.group)
       })
       .catch(function (error) {
         setErr(error);
@@ -25,7 +26,7 @@ const useAccountingBookSummary =  () => {
     getAccountingBook();
   }, [])
 
-  return [summary, loading, err];
+  return [books, group, loading, err];
 }
 
-export default useAccountingBookSummary;
+export default useAccountingBooks;

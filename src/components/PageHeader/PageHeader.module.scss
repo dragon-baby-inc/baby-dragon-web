@@ -1,0 +1,15 @@
+@import "../../styleSheets/globalColors.scss";
+
+.header {
+  min-height: 40px;
+  transition: .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: $green900;
+}
+
+.small {
+  min-height: 40px;
+}
