@@ -71,16 +71,19 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
   const checked = state.allocation_type === 'evenly' ? false : true
 
   const handlePayerSelectClicked = () => {
+    if (state.disableForm) { return }
     let payer_id = state.payer.value ? state.payer.value.id : null
     setShowRadioSelect(setPayer, payer_id)
   }
 
   const handleOwersSelectClicked = () => {
+    if (state.disableForm) { return }
     let owers = state.owers.value ? state.owers.value.map(el => el.id) : users.map(el => el.id)
     setShowCheckboxSelect(setOwers, owers)
   }
 
   const handleManualOwersSelectClicked = () => {
+    if (state.disableForm) { return }
     setShowPopUpForm(setManualOwers, state.manualOwers.value)
   }
 
@@ -169,11 +172,15 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
 
   return(
     <div style={styles.container}>
-      <div style={styles.form}>
-        <Toggle changed={handleToggleChanged} checked={checked}/>
-        {displayComponents}
-      </div>
-      <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
+        <div style={styles.form}>
+          <fieldset disabled={state.disableForm ? 'disabled' : null}>
+            <Toggle changed={handleToggleChanged} checked={checked}/>
+            {displayComponents}
+          </fieldset>
+        </div>
+      <fieldset disabled={state.disableForm ? 'disabled' : null}>
+        <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
+      </fieldset>
     </div>
   )
 }

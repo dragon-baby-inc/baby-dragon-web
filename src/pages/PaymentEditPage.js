@@ -60,6 +60,7 @@ const PaymentCreationPage = (props) => {
     setAmount,
     setPaidBack,
     setBuilder,
+    setDisableForm,
     setId
 
   } = useContext(Context)
@@ -104,6 +105,7 @@ const PaymentCreationPage = (props) => {
         setAllocationType(payment.allocation_type)
       }
       setAccountingBookDetails(accountingBookDetails)
+      setDisableForm(false)
     }
   }, [authState, loading, paymentLoading])
 

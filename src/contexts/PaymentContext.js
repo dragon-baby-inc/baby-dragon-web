@@ -79,6 +79,8 @@ const paymentReducer = (state, action) => {
         popUpAction: action.payload.action,
         popUpObjects: action.payload.objects,
       }
+    case 'set_disable_form':
+      return { ...state, disableForm: action.payload.boolean }
     case 'set_show_radio_select':
       return { ...state,
         showRadioSelect: true,
@@ -157,6 +159,12 @@ const setShowCheckboxSelect = dispatch => (action, ids) => {
 const setShowPopUpForm = dispatch => (action, objects) => {
   dispatch({
     type: 'set_show_pop_up_form', payload: { action, objects }
+  })
+}
+
+const setDisableForm = dispatch => (action, boolean) => {
+  dispatch({
+    type: 'set_disable_form', payload: { action, boolean }
   })
 }
 
@@ -260,6 +268,7 @@ export const { Context, Provider } = createDataContext(
     setShowCheckboxSelect,
     setShowRadioSelect,
     setShowPopUpForm,
+    setDisableForm,
     validateForm,
     setShowDatePicker,
     setAccountingBookDetails,
@@ -280,5 +289,6 @@ export const { Context, Provider } = createDataContext(
     paid_back: false,
     formValid: false,
     allocation_type: 'evenly',
+    disableForm: true,
   }
 )

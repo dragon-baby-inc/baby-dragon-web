@@ -44,7 +44,7 @@ const styles = {
 const titles = ['加入帳款', '加入還款']
 const PaymentCreationPage = (props) => {
   const history = useHistory();
-  const { state, setBuilder, setHidden, setPayer, setAccountingBookDetails, setOwers } = useContext(Context)
+  const { state, setDisableForm, setBuilder, setHidden, setPayer, setAccountingBookDetails, setOwers } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const [index, useIndex] = useState(0)
@@ -58,6 +58,7 @@ const PaymentCreationPage = (props) => {
 
       setAccountingBookDetails(accountingBookDetails)
       setOwers(users)
+      setDisableForm(false)
     }
   }, [users, authState, accountingBookDetails, loading])
 
