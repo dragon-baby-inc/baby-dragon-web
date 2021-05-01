@@ -78,3 +78,6 @@ a {
 input[disabled] {
   background-color: transparent;
 }
+html {
+  height: -webkit-fill-available;
+}

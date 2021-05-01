@@ -1,15 +1,32 @@
 @import "../../styleSheets/globalColors.scss";
 
 .header {
-  min-height: 40px;
-  transition: .3s;
+  min-height: 58px;
+  height: 58px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: $green900;
+  background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
 }
 
-.small {
-  min-height: 40px;
+.innerBlock {
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  color: black;
+
+  .icon {
+    transition: .3s;
+    font-size: 20px;
+    margin-right: 20px;
+    padding-bottom: 0px;
+  }
+  .name {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: left;
+    padding: 0;
+  }
 }

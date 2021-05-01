@@ -17,12 +17,12 @@
   width: 100%;
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: space-around;
 
   a {
     color: $gray900;
     font-weight: 500;
-    margin: 12px;
+    flex-grow: 1;
     background-color: transparent;
 
     span {
@@ -34,11 +34,6 @@
 
   a.disabled {
     pointer-events: none;
-  }
-
-  a:hover,
-  a:active {
-    color: $green700;
   }
 
   .fa {
@@ -53,16 +48,28 @@
     align-items: center;
   }
 
-  .icon:active {
-    background-color: transparent;
+  a.icon:active {
+    color: white;
+    background-color: $green700;
+
+    .fa {
+      color: white;
+    }
   }
 
-  .icon:focus {
-    background-color: transparent;
-  }
 }
 
 a.hover,
 a.active {
   color: white;
 }
+
+.icon.activeStyle {
+  color: white;
+  background-color: $green700;
+}
+.fa.activeStyle {
+  color: white;
+}
+
+

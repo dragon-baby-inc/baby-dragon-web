@@ -70,11 +70,11 @@ const UserSummaryLabel = (props) => {
             </div>
         </div>
       </label>
-      <Collapse isOpened={collapseOpen}>
+      <div>
         <div className='user-summary collapse'>
           <UserSummaryCollapse objects={object.debts} accountingBookDetails={props.accountingBookDetails}/>
         </div>
-      </Collapse>
+      </div>
     </>
   )
 };

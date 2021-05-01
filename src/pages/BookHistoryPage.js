@@ -7,6 +7,7 @@ import Loading from '../components/Loading/Loading'
 import PageHeader from '../components/PageHeader/PageHeader'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
 import { themeColors } from '../constants/globalColors'
+import EmptyResult from '../components/EmptyResult/EmptyResult'
 
 const styles = {
   bg: {
@@ -23,7 +24,7 @@ const styles = {
   }
 }
 
-const AccountingBookSummaryPage = ({
+const BookHistoryPage = ({
   users,
   accountingBookDetails
 }) => {
@@ -36,15 +37,15 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-      <PageHeader title={'分帳建議'} faIcon={faUsers} color={themeColors.gray400}/>
+      <PageHeader title={'編輯歷史'} faIcon={faUsers} color={themeColors.gray400}/>
       {
         loading ?
           <Loading />
           :
-         <div style={styles.summary}ref={setRef}> {objects} </div>
+          <EmptyResult message='目前沒有任何歷史紀錄喔'/>
       }
     </div>
   )
 }
 
-export default AccountingBookSummaryPage
+export default BookHistoryPage

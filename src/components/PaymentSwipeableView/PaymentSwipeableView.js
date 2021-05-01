@@ -7,15 +7,20 @@ import { Context } from '../../contexts/PaymentContext'
 
 const styles = {
   root: {
+    margin: 0,
     padding: '0 15px',
-    flexGrow: 1,
+    height: 'calc(100% - 66px)',
+    overflow: 'hidden',
   },
   slideContainer: {
+    margin: 0,
     padding: '0 5px',
     height: '100%',
   },
   slide: {
-    padding: 20,
+    margin: 0,
+    padding: '20px',
+    overflow: 'hidden',
     height: '100%',
     backgroundColor: '#FFFFFF',
     borderTopRightRadius: '34px',

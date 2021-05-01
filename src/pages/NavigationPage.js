@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react"
 import IconsList from '../components/FormElements/IconsList/IconsList'
 import useAccountingBook from '../hooks/useAccountingBook'
+import BookHistoryPage from './BookHistoryPage'
 import PaymentsPage from './PaymentsPage'
 import PaymentEditPage from './PaymentEditPage'
 import AccountingBookSummaryPage from './AccountingBookSummaryPage'
@@ -27,6 +28,10 @@ const NavigationPage = (props) => {
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/summary">
         <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
+        <IconsList {...accountingBookDetails}/>
+      </Route>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/log_messages">
+        <BookHistoryPage users={users} accountingBookDetails={accountingBookDetails}/>
         <IconsList {...accountingBookDetails}/>
       </Route>
     </Switch>

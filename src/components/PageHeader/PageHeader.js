@@ -1,28 +1,25 @@
 import React, { useState, useEffect} from "react"
 import styles from './PageHeader.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function PageHeader({
   children,
-  scrollInfo,
-  smallElement,
-  bigElement
+  faIcon,
+  color,
+  title
 }){
 
-  const [small, setSmall] = useState(false)
-
-  if (scrollInfo) {
-    if (scrollInfo.y.value > 50 && !small) {
-      setSmall(true)
-    } else if (scrollInfo.y.value <= 50 && small){
-      setSmall(false)
-    }
-  }
-
   let classes = [styles.header]
-  if (small) { classes.push(styles.small) }
-
   return(
     <div className={classes.join(' ')}>
+      <div className={styles.innerBlock}>
+        <FontAwesomeIcon className={styles.icon} icon={faIcon} color={color}/>
+        <div>
+          <div className={styles.name}>
+            {title}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

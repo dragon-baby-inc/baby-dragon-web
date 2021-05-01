@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { themeColors } from '../../constants/globalColors'
 import { faBars } from '@fortawesome/fontawesome-free-solid'
 import { faBookOpen } from '@fortawesome/fontawesome-free-solid'
+import TopLeftIcon from '../IconLinks/TopLeftIcon'
 
 function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange }){
   const [small, setSmall] = useState(false)
@@ -32,6 +33,7 @@ function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange }
 
   return(
     <div className={classes.join(' ')}>
+      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faArrowLeft'/>
       <div className={innerBlockClasses.join(" ")}>
         <FontAwesomeIcon className={styles.bookIcon} icon={faBookOpen} color={themeColors.gray400}/>
         <div>

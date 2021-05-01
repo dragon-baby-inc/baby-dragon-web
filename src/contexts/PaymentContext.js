@@ -6,6 +6,8 @@ const paymentReducer = (state, action) => {
   switch (action.type) {
     case 'set_accounting_book_details':
       return { ...state, accounting_book_details: action.payload }
+    case 'reset_form':
+      return { ...initialState }
     case 'set_id':
       return { ...state, id: action.payload }
     case 'set_name':
@@ -191,6 +193,10 @@ const setAccountingBookDetails = dispatch => (details) => {
   dispatch({ type: 'set_accounting_book_details', payload: details })
 }
 
+const resetForm = dispatch => () => {
+  dispatch({ type: 'reset_form' })
+}
+
 const validateForm = dispatch => (state, formKeys) => {
   let validator = new Validator();
   let newState = {}
@@ -249,6 +255,24 @@ const createPayment = dispatch => (state, afterSubmit) => {
     })
 }
 
+let initialState = {
+  id: null,
+  builder: null,
+  accounting_book_details: null,
+  name: { value: '', valid: null },
+  amount: { value: '', valid: null },
+  fixedAmount: { value: 0, valid: null },
+  payer: { value: null, valid: null },
+  ower: { value: null, valid: null },
+  owers: { value: null, valid: true },
+  manualOwers: { value: null, valid: null },
+  creation_date: { value: null, valid: null },
+  paid_back: false,
+  formValid: false,
+  allocation_type: 'evenly',
+  disableForm: true,
+}
+
 export const { Context, Provider } = createDataContext(
   paymentReducer,
   {
@@ -272,23 +296,7 @@ export const { Context, Provider } = createDataContext(
     validateForm,
     setShowDatePicker,
     setAccountingBookDetails,
+    resetForm,
     createPayment,
-  },
-  {
-    id: null,
-    builder: null,
-    accounting_book_details: null,
-    name: { value: '', valid: null },
-    amount: { value: '', valid: null },
-    fixedAmount: { value: 0, valid: null },
-    payer: { value: null, valid: null },
-    ower: { value: null, valid: null },
-    owers: { value: null, valid: true },
-    manualOwers: { value: null, valid: null },
-    creation_date: { value: null, valid: null },
-    paid_back: false,
-    formValid: false,
-    allocation_type: 'evenly',
-    disableForm: true,
-  }
+  }, initialState
 )
