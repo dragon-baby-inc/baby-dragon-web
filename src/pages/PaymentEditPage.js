@@ -61,13 +61,18 @@ const PaymentCreationPage = (props) => {
     setPaidBack,
     setBuilder,
     setDisableForm,
-    setId
+    setId,
+    resetForm
 
   } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const [payment, paymentLoading] = usePayment()
   const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    return resetForm
+  }, [])
 
   useEffect(() => {
     if (!loading && !paymentLoading) {

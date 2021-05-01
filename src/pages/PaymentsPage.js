@@ -13,6 +13,12 @@ import useScrollInfo from 'react-element-scroll-hook';
 import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
 import Loading from '../components/Loading/Loading'
 import EmptyResult from '../components/EmptyResult/EmptyResult'
+import FilterPaymentForm from '../components/Forms/FilterForm/FilterPaymentForm'
+import Backdrop from '../components/Backdrop/Backdrop'
+import FloatingIcon from '../components/IconLinks/FloatingIcon/FloatingIcon'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/fontawesome-free-solid'
+import PaymentCreateFloatingIcon from '../components/IconLinks/PaymentCreateFloatingIcon'
 
 const PaymentsPage = (props) => {
   const { state, setPayer } = useContext(Context)
@@ -21,16 +27,18 @@ const PaymentsPage = (props) => {
   const [ small, setSmall ] = useState(false)
   const [users, accountingBookDetails] = useAccountingBook()
   const [summary] = useAccountingBookSummary()
-  const [payments, paymentLoading] = usePayments()
+  const [filter, setFilter] = useState('')
+  const [payments, paymentLoading] = usePayments('')
   const [scrollInfo, setRef] = useScrollInfo();
 
   let currentDate = null
   let paymentLabels = []
 
   let paymentStyle =  {
-    paddingTop: small ? '40px' : '20px',
+    background: '#FFFFFF',
+    marginTop: small ? '58px' : '20px',
     overflow: 'auto',
-    height: 'calc(100vh - 40px - 60px)',
+    height: 'calc(100vh - 58px - 60px)',
     paddingBottom: '100px',
   }
 
@@ -49,22 +57,26 @@ const PaymentsPage = (props) => {
   }
 
   return(
-    <div style={styles.bg}>
-      <PaymentsHeader scrollInfo={scrollInfo} accountingBookDetails={accountingBookDetails} handleSmallChange={handleSmallChange}/>
-      {
-        paymentLoading ?
-          <div style={paymentStyle}>
-            <Loading />
-          </div>
-          :
-          <div style={paymentStyle} ref={setRef}>
-            {
-              payments.length > 0 ?
-                paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
-            }
-          </div>
-      }
-    </div>
+    <>
+      <div style={styles.bg}>
+        <PaymentsHeader scrollInfo={scrollInfo} accountingBookDetails={accountingBookDetails} handleSmallChange={handleSmallChange}/>
+
+        {
+          paymentLoading ?
+            <div style={paymentStyle}>
+              <Loading />
+            </div>
+            :
+            <div style={paymentStyle} ref={setRef}>
+              {
+                payments.length > 0 ?
+                  paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
+              }
+            </div>
+        }
+      </div>
+      <PaymentCreateFloatingIcon scrollInfo={scrollInfo} accountingBookDetails={accountingBookDetails}/>
+    </>
   )
 }
 
@@ -73,6 +85,8 @@ const styles = {
     width: '100vw',
     height: '100vh',
     overflow: 'hidden',
+    maxHeight: '-webkit-fill-available',
+    position: 'relative',
   },
   h1: {
     padding: '12px',
@@ -83,12 +97,7 @@ const styles = {
     fontSize: '12px',
     textAlign: 'center',
   },
-  addPayment: {
-    right: '10px',
-    bottom: '75px',
-  }
 }
 
 
-//         <FloatIcon style={styles.addPayment} {...accountingBookDetails}/>
 export default PaymentsPage

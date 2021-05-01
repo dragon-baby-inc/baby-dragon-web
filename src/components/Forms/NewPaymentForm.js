@@ -22,7 +22,7 @@ const styles = {
     display: 'flex',
     flexFlow: 'column',
     justifyContent: 'space-between'
-  }
+  },
 }
 
 const form = {
@@ -62,6 +62,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
   }
 
   const handleToggleChanged = (e) => {
+    if (state.disableForm) { return }
     if (e.target.checked) {
       setAllocationType('amount')
     } else {
@@ -96,6 +97,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
 
   const components = {
     name: <TextInput
+      disabled={state.disableForm}
       placeholder={'輸入名稱'}
       name={'名稱'}
       labelStyle={styles.labelStyle}
@@ -106,6 +108,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='text'
     />,
     amount: <TextInput
+      disabled={state.disableForm}
       labelStyle={styles.labelStyle}
       placeholder={'輸入金額'}
       name={'金額'}
@@ -116,6 +119,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='number'
     />,
     fixedAmount: <TextInput
+      disabled={state.disableForm}
       labelStyle={styles.labelStyle}
       placeholder={'輸入金額'}
       name={'金額'}
@@ -173,14 +177,10 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
   return(
     <div style={styles.container}>
         <div style={styles.form}>
-          <fieldset disabled={state.disableForm ? 'disabled' : null}>
             <Toggle changed={handleToggleChanged} checked={checked}/>
             {displayComponents}
-          </fieldset>
         </div>
-      <fieldset disabled={state.disableForm ? 'disabled' : null}>
-        <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
-      </fieldset>
+      <Button disabled={disableSubmit && state.disableForm} clicked={handleSubmit}>確認</Button>
     </div>
   )
 }

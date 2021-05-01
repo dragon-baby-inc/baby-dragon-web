@@ -4,7 +4,7 @@ label.group-menu-label.group-menu-summary:focus-within  {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
-label.group-menu-label.group-menu-summary.active::before {
+label.group-menu-label.group-menu-summary::before {
   content: '';
   width: 10px;
   height: 100%;

@@ -66,7 +66,6 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
   return(
     <div style={styles.container}>
       <div style={styles.form}>
-        <fieldset disabled={state.disableForm ? 'disabled' : null}>
           <TextInput
             disabled={true}
             placeholder={'輸入名稱'}
@@ -79,6 +78,7 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
             type='text'
           />
           <TextInput
+            disabled={state.disableForm}
             labelStyle={styles.labelStyle}
             placeholder={'輸入金額'}
             name={'金額'}
@@ -112,11 +112,8 @@ const NewPaymentForm = ({ users, afterSubmit }) => {
             changed={setCreationDate}
           />
 
-        </fieldset>
       </div>
-      <fieldset disabled={state.disableForm ? 'disabled' : null}>
-        <Button disabled={disableSubmit} clicked={handleSubmit}>確認</Button>
-      </fieldset>
+      <Button disabled={disableSubmit && state.disableForm} clicked={handleSubmit}>確認</Button>
     </div>
   )
 }

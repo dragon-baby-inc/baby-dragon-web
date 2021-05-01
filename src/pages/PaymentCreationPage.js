@@ -12,13 +12,14 @@ import useUsers from '../hooks/useUsers'
 import useAccountingBook from '../hooks/useAccountingBook'
 import { Context as AuthContext } from '../contexts/AuthContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
+import ArrowLeft from '../components/IconLinks/ArrowLeft/ArrowLeft'
 
 const styles = {
   bg: {
     background: `linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)`,
     width: '100vw',
     height: '100vh',
+    maxHeight: '-webkit-fill-available',
     overflow: 'hidden',
     display: 'flex',
     flexFlow: 'column',
@@ -44,10 +45,14 @@ const styles = {
 const titles = ['加入帳款', '加入還款']
 const PaymentCreationPage = (props) => {
   const history = useHistory();
-  const { state, setDisableForm, setBuilder, setHidden, setPayer, setAccountingBookDetails, setOwers } = useContext(Context)
+  const { state, resetForm, setDisableForm, setBuilder, setHidden, setPayer, setAccountingBookDetails, setOwers } = useContext(Context)
   const { state: authState } = useContext(AuthContext)
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const [index, useIndex] = useState(0)
+
+  useEffect(() => {
+    return resetForm
+  }, [])
 
   useEffect(() => {
     if (!loading) {
@@ -68,11 +73,7 @@ const PaymentCreationPage = (props) => {
 
   return(
     <div style={styles.bg}>
-      <Link
-        style={styles.back}
-        to={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`}>
-        <FontAwesomeIcon icon={faArrowLeft} color='white'/>
-      </Link>
+      <ArrowLeft link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`} color='white'/>
       <div style={styles.header}>{titles[index]}</div>
       <DotGroup dotSize={2} index={index}/>
       <PaymentSwipeableView
