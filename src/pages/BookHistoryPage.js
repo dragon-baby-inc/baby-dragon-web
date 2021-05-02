@@ -29,7 +29,6 @@ const BookHistoryPage = ({
   accountingBookDetails
 }) => {
   const [summary, loading] = useAccountingBookSummary()
-  const [scrollInfo, setRef] = useScrollInfo();
 
   let objects = summary.map(object => {
     return <UserSummaryLabel key={object.payer_id} object={object} accountingBookDetails={accountingBookDetails}></UserSummaryLabel>
