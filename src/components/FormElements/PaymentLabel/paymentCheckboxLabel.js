@@ -15,7 +15,6 @@ import 'moment/locale/zh-tw';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
-import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
 const PaymentCheckboxLabel = (props) => {
   const [ collapseHeight , setcollapseHeight ] = useState(0)
@@ -64,9 +63,15 @@ const PaymentCheckboxLabel = (props) => {
   return (
     <>
       <label className={`group-menu-label group-menu-checkbox-label group-menu-payment ${activeClass}`}>
-        <div className={`group-menu-date ${activeClass}`}>
-          <Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
-        </div>
+        {
+          props.editMode ?
+            null
+            :
+            <div className={`group-menu-date ${activeClass}`}>
+              <Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
+            </div>
+
+        }
         {
           props.editMode ?
             <div className='group-menu-checkbox'>
@@ -111,18 +116,12 @@ const PaymentCheckboxLabel = (props) => {
         {
           collapseOpen ?
             <div className='btn-group active'>
-              <Button className='icon'>
-                <FontAwesomeIcon icon={faTrash}/>
-              </Button>
               <Button clicked={handleEditClick} className='icon'>
                 <FontAwesomeIcon icon={faEdit}/>
               </Button>
             </div>
             :
             <div className='btn-group'>
-              <Button className='icon'>
-                <FontAwesomeIcon icon={faTrash}/>
-              </Button>
               <Button className='icon'>
                 <FontAwesomeIcon icon={faEdit}/>
               </Button>

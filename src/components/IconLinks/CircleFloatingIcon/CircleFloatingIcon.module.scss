@@ -1,27 +1,18 @@
 .floatingIcon {
   position: absolute;
-  right: 30px;
-  bottom: 80px;
   z-index: 10;
 }
 
-.addPaymentIcon {
+.Icon {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 50px;
   height: 50px;
-  background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
   transition: .05s;
-}
-
-.addPaymentIcon.active {
 }
 
 .avatar {
   border-radius: 50%;
-}
-
-.avatar.active {
 }

@@ -11,7 +11,6 @@ import { Context } from '../contexts/PaymentContext'
 import useUsers from '../hooks/useUsers'
 import useAccountingBook from '../hooks/useAccountingBook'
 import { Context as AuthContext } from '../contexts/AuthContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ArrowLeft from '../components/IconLinks/ArrowLeft/ArrowLeft'
 
 const styles = {
