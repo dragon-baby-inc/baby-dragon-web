@@ -1,14 +1,16 @@
 import React, {useState} from "react"
-import { NavLink } from 'react-router-dom';
 import styles from './FloatingIcon.module.scss'
 
-function FloatingIcon({ containerStyle, children, link, avatarStyle }){
+function FloatingIcon({
+  containerStyle,
+  containerInlineStyle,
+  children,
+  avatarStyle
+}){
   return(
-    <div className={containerStyle}>
+    <div className={containerStyle} style={containerInlineStyle}>
       <div className={[avatarStyle, styles.avatar].join(' ')}>
-        <NavLink to={link}>
-          {children}
-        </NavLink>
+        {children}
       </div>
     </div>
   )

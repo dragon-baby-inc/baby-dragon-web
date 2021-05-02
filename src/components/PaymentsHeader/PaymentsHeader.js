@@ -1,21 +1,16 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import PageHeader from '../PageHeader/PageHeader'
 import styles from './PaymentsHeader.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { themeColors } from '../../constants/globalColors'
-import { faBars } from '@fortawesome/fontawesome-free-solid'
-import { faBookOpen } from '@fortawesome/fontawesome-free-solid'
 import TopLeftIcon from '../IconLinks/TopLeftIcon'
+import TopRightIcon from '../IconLinks/TopRightIcon'
+import FontAwesomeIcon from '../../utilities/FontAwesomeIcon'
 
-function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange }){
-  const [small, setSmall] = useState(false)
-
+function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange, small }){
   if (scrollInfo) {
     if (scrollInfo.y.value > 50 && !small) {
-      setSmall(true)
       handleSmallChange(true)
     } else if (scrollInfo.y.value == 0 && small){
-      setSmall(false)
       handleSmallChange(false)
     }
   }
@@ -34,8 +29,9 @@ function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange }
   return(
     <div className={classes.join(' ')}>
       <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faArrowLeft'/>
+      <TopRightIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faBars'/>
       <div className={innerBlockClasses.join(" ")}>
-        <FontAwesomeIcon className={styles.bookIcon} icon={faBookOpen} color={themeColors.gray400}/>
+        <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gray400}/>
         <div>
           <div className={nameClasses.join(' ')}>
             {accountingBookDetails.name}

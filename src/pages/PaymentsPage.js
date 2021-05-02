@@ -18,7 +18,8 @@ import Backdrop from '../components/Backdrop/Backdrop'
 import FloatingIcon from '../components/IconLinks/FloatingIcon/FloatingIcon'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/fontawesome-free-solid'
-import PaymentCreateFloatingIcon from '../components/IconLinks/PaymentCreateFloatingIcon'
+import CircleFloatingIcon from '../components/IconLinks/CircleFloatingIcon/CircleFloatingIcon'
+import useHistory from '../hooks/useHistory'
 
 const PaymentsPage = (props) => {
   const { state, setPayer } = useContext(Context)
@@ -30,6 +31,7 @@ const PaymentsPage = (props) => {
   const [filter, setFilter] = useState('')
   const [payments, paymentLoading] = usePayments('')
   const [scrollInfo, setRef] = useScrollInfo();
+  const [navigate] = useHistory();
 
   let currentDate = null
   let paymentLabels = []
@@ -56,10 +58,13 @@ const PaymentsPage = (props) => {
     setSmall(small)
   }
 
+  const activeEditMode = () => { setEditMode(true); setSmall(true) }
+  const deactiveEditMode = () => { setEditMode(false); setSmall(false) }
+
   return(
     <>
       <div style={styles.bg}>
-        <PaymentsHeader scrollInfo={scrollInfo} accountingBookDetails={accountingBookDetails} handleSmallChange={handleSmallChange}/>
+        <PaymentsHeader scrollInfo={scrollInfo} small={small} accountingBookDetails={accountingBookDetails} handleSmallChange={handleSmallChange}/>
 
         {
           paymentLoading ?
@@ -75,7 +80,37 @@ const PaymentsPage = (props) => {
             </div>
         }
       </div>
-      <PaymentCreateFloatingIcon scrollInfo={scrollInfo} accountingBookDetails={accountingBookDetails}/>
+      {
+        editMode ?
+          <>
+            <CircleFloatingIcon
+              clicked={deactiveEditMode}
+              faIcon='faTimes'
+              faColor={themeColors.gray600}
+              iconInlineStyle={{background: 'none', opacity: '0.95', backgroundColor: '#ffffff'}}
+              containerInlineStyle={{ right: '90px', bottom: '80px'}}/>
+            <CircleFloatingIcon
+              faIcon='faTrash'
+              faColor={themeColors.white}
+              iconInlineStyle={{background: 'none', backgroundColor: 'red'}}
+              containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
+          </>
+          :
+          <>
+            <CircleFloatingIcon
+              clicked={navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`)}
+              iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
+              faIcon='faPlus'
+              faColor={themeColors.white}
+              containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
+            <CircleFloatingIcon
+              clicked={activeEditMode}
+              iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
+              faIcon='faEdit'
+              faColor={themeColors.white}
+              containerInlineStyle={{ right: '90px', bottom: '80px'}}/>
+          </>
+      }
     </>
   )
 }
