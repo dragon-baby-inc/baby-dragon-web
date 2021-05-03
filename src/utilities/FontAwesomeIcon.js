@@ -5,6 +5,8 @@ import {
   faEdit,
   faPlus,
   faTrash,
+  faFilter,
+  faSearch
 } from '@fortawesome/fontawesome-free-solid'
 
 const icons = {
@@ -12,7 +14,9 @@ const icons = {
   faTimes: faTimes,
   faEdit: faEdit,
   faPlus: faPlus,
-  faTrash: faTrash
+  faTrash: faTrash,
+  faFilter: faFilter,
+  faSearch: faSearch
 }
 
 const Icon = (props) => {

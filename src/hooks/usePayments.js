@@ -12,7 +12,6 @@ const usePayments =  (query) => {
     setLoading(true)
     await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments${query}`)
       .then(function (response) {
-        console.log(response.data.payments)
         setPayments(response.data.payments)
       })
       .catch(function (error) {
@@ -25,7 +24,7 @@ const usePayments =  (query) => {
     getPayments();
   }, [])
 
-  return [payments, loading, err];
+  return [payments, loading, getPayments, err];
 }
 
 export default usePayments;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/PaymentLabel.scss";
@@ -7,6 +7,7 @@ import FormatString from "../../../utilities/FormatString"
 import { themeColors } from '../../../constants/globalColors'
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button'
+import Checkbox from  '../Inputs/Checkbox'
 import { useHistory } from "react-router-dom";
 
 import Moment from 'react-moment';
@@ -17,14 +18,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
 
 const PaymentCheckboxLabel = (props) => {
-  const [ collapseHeight , setcollapseHeight ] = useState(0)
   const [ collapseOpen , setCollapseOpen ] = useState(false)
   const { group_id, accounting_book_id } = useParams();
   const history = useHistory();
+  const open = collapseOpen && !props.editMode
+  const [ isChecked, setIsChecked ] = useState(props.checked)
+
+  useEffect(() => {
+    setIsChecked(props.selectedPaymentIds.includes(object.id.toString()))
+  }, [props.selectedPaymentIds])
+
   let object = props.object
   let formatString = new FormatString();
   let message = formatString.sliceToLength(object.ower_and_payer_message, 32, '...')
-  let activeClass = collapseOpen ? 'active' : ''
+  let activeClass = open ? 'active' : ''
   let amount = object.amount
 
   const calendar = {
@@ -50,14 +57,16 @@ const PaymentCheckboxLabel = (props) => {
           <span className='name'> { allo.ower_display_name } </span> <span>{props.currency_symbol}{allo.amount}</span>
         </div>
       </div>
-  )
+    )
   })
 
   const handleEditClick = () => {
     history.push(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${object.id}/edit`)
   }
 
-  const handleDeleteClick = () => {
+  const handleCheckboxChaned = (e) => {
+    setIsChecked(e.target.checked)
+    props.changed(e)
   }
 
   return (
@@ -74,18 +83,9 @@ const PaymentCheckboxLabel = (props) => {
         }
         {
           props.editMode ?
-            <div className='group-menu-checkbox'>
-              <input
-                checked={props.checked}
-                onChange={props.changed}
-                type="checkbox"
-                value={ object.id }
-              />
-              <span className="checkmark"></span>
-            </div>:
+            <Checkbox checked={isChecked} value={object.id.toString()} changed={handleCheckboxChaned}/>:
             <div className='group-menu-radio'>
               <input
-                checked={props.checked}
                 onChange={handleLabelOnCheck}
                 type="checkbox"
                 value={ object.id }
@@ -114,7 +114,7 @@ const PaymentCheckboxLabel = (props) => {
           </div>
         </div>
         {
-          collapseOpen ?
+          open ?
             <div className='btn-group active'>
               <Button clicked={handleEditClick} className='icon'>
                 <FontAwesomeIcon icon={faEdit}/>
@@ -128,7 +128,7 @@ const PaymentCheckboxLabel = (props) => {
             </div>
         }
       </label>
-      <Collapse isOpened={collapseOpen} style={{ maxHeight: collapseOpen ? collapseHeight : 0 }}>
+      <Collapse isOpened={open}>
         <div className='payment collapse'>
           <div className='allocation title'>
             <span> {object.ower_and_payer_message} </span>

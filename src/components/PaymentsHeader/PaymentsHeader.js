@@ -5,9 +5,32 @@ import { themeColors } from '../../constants/globalColors'
 import TopLeftIcon from '../IconLinks/TopLeftIcon'
 import TopRightIcon from '../IconLinks/TopRightIcon'
 import FontAwesomeIcon from '../../utilities/FontAwesomeIcon'
+import Checkbox from '../FormElements/Inputs/Checkbox'
 
-function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange, small }){
-  if (scrollInfo) {
+const inlineStyles = {
+  topLeft: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    color: 'white',
+    textDecoration: "none",
+    padding: '20px',
+  }
+}
+
+
+function PaymentsHeader({
+  selectAll,
+  handleSelectAllClick,
+  editMode,
+  scrollInfo,
+  accountingBookDetails,
+  handleSmallChange,
+  small
+}){
+  const [isSelectAll, setIsSelectAll] = useState(selectAll)
+
+  if (scrollInfo && !editMode) {
     if (scrollInfo.y.value > 50 && !small) {
       handleSmallChange(true)
     } else if (scrollInfo.y.value == 0 && small){
@@ -28,7 +51,14 @@ function PaymentsHeader({ scrollInfo, accountingBookDetails, handleSmallChange, 
 
   return(
     <div className={classes.join(' ')}>
-      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faArrowLeft'/>
+      {
+        editMode ?
+          <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
+            { selectAll ? "取消" : "全選" }
+          </div>
+          :
+          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faArrowLeft'/>
+      }
       <TopRightIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faBars'/>
       <div className={innerBlockClasses.join(" ")}>
         <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gray400}/>
