@@ -7,7 +7,7 @@ const Hook =  () => {
     history.push(url)
   }
 
-  return [navigate];
+  return { navigate };
 }
 
 export default Hook;

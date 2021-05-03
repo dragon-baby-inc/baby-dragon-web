@@ -20,18 +20,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/fontawesome-free-solid'
 import CircleFloatingIcon from '../components/IconLinks/CircleFloatingIcon/CircleFloatingIcon'
 import useHistory from '../hooks/useHistory'
+import { useParams } from 'react-router-dom';
+import axios from '../api/dragonBabyApi'
 
 const PaymentsPage = (props) => {
   const { state, setPayer } = useContext(Context)
   const [ editMode, setEditMode ] = useState(false)
+  const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
   const { state: authState } = useContext(AuthContext)
   const [ small, setSmall ] = useState(false)
   const [users, accountingBookDetails] = useAccountingBook()
   const [summary] = useAccountingBookSummary()
   const [filter, setFilter] = useState('')
-  const [payments, paymentLoading] = usePayments('')
+  const [payments, paymentLoading, getPayments] = usePayments('')
   const [scrollInfo, setRef] = useScrollInfo();
-  const [navigate] = useHistory();
+  const { navigate } = useHistory();
+  const { group_id, accounting_book_id } = useParams();
+  const [selectAll, setSelectAll] = useState(false)
 
   let currentDate = null
   let paymentLabels = []
@@ -39,19 +44,40 @@ const PaymentsPage = (props) => {
   let paymentStyle =  {
     background: '#FFFFFF',
     marginTop: small ? '58px' : '20px',
+    paddingTop: small ? '10px' : '0px',
     overflow: 'auto',
     height: 'calc(100vh - 58px - 60px)',
-    paddingBottom: '100px',
+    paddingBottom: '150px',
+  }
+
+  const handlePaymentChecked = (e) => {
+    let paymentIds = selectedPaymentIds
+    let value = e.target.value.toString()
+
+    if (e.target.checked && !paymentIds.includes(value)) {
+      paymentIds.push(e.target.value.toString())
+    } else {
+      paymentIds = paymentIds.filter(p => p !== value)
+    }
+    setSelectedPaymentIds(paymentIds)
   }
 
   payments.forEach(payment => {
+    let checked = selectedPaymentIds.includes(payment.id.toString())
     if (payment.created_at != currentDate) {
       currentDate = payment.created_at
-      paymentLabels.push( <div style={styles.dateSeparator}>{currentDate}</div>)
-      paymentLabels.push(<PaymentCheckboxLabel {...accountingBookDetails} key={payment.id} object={payment} editMode={editMode}/>)
-    } else {
-      paymentLabels.push(<PaymentCheckboxLabel {...accountingBookDetails} key={payment.id} object={payment} editMode={editMode}/>)
+      paymentLabels.push( <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
     }
+
+    paymentLabels.push(
+      <PaymentCheckboxLabel
+        selectedPaymentIds={selectedPaymentIds}
+        changed={handlePaymentChecked}
+        key={payment.id}
+        object={payment}
+        editMode={editMode}
+        {...accountingBookDetails}
+      />)
   })
 
   const handleSmallChange = (small) => {
@@ -59,12 +85,47 @@ const PaymentsPage = (props) => {
   }
 
   const activeEditMode = () => { setEditMode(true); setSmall(true) }
-  const deactiveEditMode = () => { setEditMode(false); setSmall(false) }
+  const deactiveEditMode = () => { setEditMode(false); setSmall(false);  }
+
+  const handleDeletePayment = () => {
+    console.log(selectedPaymentIds)
+    return
+    if (selectedPaymentIds.length === 0) { return }
+    if (window.confirm(`確認刪除 ${selectedPaymentIds.length} 筆帳款?`)) {
+      axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
+        payment_ids: selectedPaymentIds
+      }).then(function (response) {
+        getPayments()
+        deactiveEditMode()
+      })
+        .catch(function (error) {
+          console.log(error)
+          alert('刪除失敗')
+        })
+    }
+  }
+
+  const handleSelectAllClick = (e) => {
+    setSelectAll(!selectAll)
+    if (!selectAll === true) {
+      setSelectedPaymentIds(payments.map(p => p.id.toString()))
+    } else {
+      setSelectedPaymentIds([])
+    }
+  }
 
   return(
     <>
       <div style={styles.bg}>
-        <PaymentsHeader scrollInfo={scrollInfo} small={small} accountingBookDetails={accountingBookDetails} handleSmallChange={handleSmallChange}/>
+        <PaymentsHeader
+          selectAll={selectAll}
+          handleSelectAllClick={handleSelectAllClick}
+          editMode={editMode}
+          scrollInfo={scrollInfo}
+          small={small}
+          accountingBookDetails={accountingBookDetails}
+          handleSmallChange={handleSmallChange}
+        />
 
         {
           paymentLoading ?
@@ -88,17 +149,18 @@ const PaymentsPage = (props) => {
               faIcon='faTimes'
               faColor={themeColors.gray600}
               iconInlineStyle={{background: 'none', opacity: '0.95', backgroundColor: '#ffffff'}}
-              containerInlineStyle={{ right: '90px', bottom: '80px'}}/>
+              containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
             <CircleFloatingIcon
               faIcon='faTrash'
               faColor={themeColors.white}
+              clicked={handleDeletePayment}
               iconInlineStyle={{background: 'none', backgroundColor: 'red'}}
               containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
           </>
           :
           <>
             <CircleFloatingIcon
-              clicked={navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`)}
+              clicked={() => navigate(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/new`)}
               iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
               faIcon='faPlus'
               faColor={themeColors.white}
@@ -108,7 +170,7 @@ const PaymentsPage = (props) => {
               iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
               faIcon='faEdit'
               faColor={themeColors.white}
-              containerInlineStyle={{ right: '90px', bottom: '80px'}}/>
+              containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
           </>
       }
     </>
