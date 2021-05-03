@@ -31,7 +31,7 @@ function PaymentsHeader({
   const [isSelectAll, setIsSelectAll] = useState(selectAll)
 
   if (scrollInfo && !editMode) {
-    if (scrollInfo.y.value > 50 && !small) {
+    if (scrollInfo.y.value > 20 && !small) {
       handleSmallChange(true)
     } else if (scrollInfo.y.value == 0 && small){
       handleSmallChange(false)
@@ -54,24 +54,25 @@ function PaymentsHeader({
       {
         editMode ?
           <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
-            { selectAll ? "取消" : "全選" }
+            { selectAll ?
+              <FontAwesomeIcon color={themeColors.gold900} faIcon='faCheckDouble'/>
+              :
+              <FontAwesomeIcon color={themeColors.gold900} faIcon='faCheckDouble'/>
+            }
           </div>
           :
-          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faArrowLeft'/>
+          null
       }
       <TopRightIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faBars'/>
       <div className={innerBlockClasses.join(" ")}>
-        <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gray400}/>
-        <div>
+        <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gold900}/>
+        <div className={styles.textBlock}>
           <div className={nameClasses.join(' ')}>
             {accountingBookDetails.name}
           </div>
           <div className={styles.details}>
             <div className={styles.user_count}>
               群組人數：{accountingBookDetails.users_size} 人
-            </div>
-            <div className={styles.user_count}>
-              建立日期：{accountingBookDetails.created_at}
             </div>
           </div>
         </div>

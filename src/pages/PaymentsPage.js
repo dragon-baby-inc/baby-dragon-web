@@ -43,12 +43,13 @@ const PaymentsPage = (props) => {
 
   let paymentStyle =  {
     background: '#FFFFFF',
-    marginTop: small ? '58px' : '20px',
-    paddingTop: small ? '10px' : '0px',
     overflow: 'auto',
+    marginTop: small ? '56px' : '150px',
     height: 'calc(100vh - 58px - 60px)',
     paddingBottom: '150px',
   }
+//     marginTop: small ? '58px' : '20px',
+//     paddingTop: small ? '10px' : '0px',
 
   const handlePaymentChecked = (e) => {
     let paymentIds = selectedPaymentIds
@@ -192,6 +193,7 @@ const styles = {
   dateSeparator: {
     fontSize: '12px',
     textAlign: 'center',
+    padding: '5px',
   },
 }
 
