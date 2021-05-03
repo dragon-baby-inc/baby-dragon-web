@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
-import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
+import useLogMessages from '../hooks/useLogMessages'
 import UserSummaryLabel from '../components/FormElements/UserSummaryLabel/userSummaryLabel'
 import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
 import useScrollInfo from 'react-element-scroll-hook';
@@ -16,11 +16,18 @@ const styles = {
     maxHeight: '-webkit-fill-available',
     overflow: 'hidden',
   },
-  summary: {
-    paddingTop: '10px',
+  logMessages: {
+    padding: '20px',
     paddingBottom: '200px',
     overflow: 'auto',
     height: 'calc(100vh - 40px - 60px)',
+  },
+  label: {
+    padding: '10px 10px',
+    lineHeight: '1.5rem',
+    borderBottom: '1px solid #eeeeee',
+    fontSize: '15px',
+    color: themeColors.gold900,
   }
 }
 
@@ -28,10 +35,19 @@ const BookHistoryPage = ({
   users,
   accountingBookDetails
 }) => {
-  const [summary, loading] = useAccountingBookSummary()
+  const [logMessages, loading] = useLogMessages()
 
-  let objects = summary.map(object => {
-    return <UserSummaryLabel key={object.payer_id} object={object} accountingBookDetails={accountingBookDetails}></UserSummaryLabel>
+
+  let currentDate = null
+  let objects = []
+  logMessages.forEach(object => {
+    if (object.created_at != currentDate) {
+      currentDate = object.created_at
+      objects.push( <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
+    }
+
+    objects.push(<div style={styles.label}>{object.user_name}  {object.content}</div>)
+
   })
 
   return(
@@ -41,7 +57,11 @@ const BookHistoryPage = ({
         loading ?
           <Loading />
           :
-          <EmptyResult message='目前沒有任何歷史紀錄喔'/>
+          <div style={styles.logMessages}>
+            {
+              objects.length > 0 ? objects : <EmptyResult message='目前沒有任何歷史紀錄喔'/>
+            }
+          </div>
       }
     </div>
   )

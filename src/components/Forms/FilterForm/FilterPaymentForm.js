@@ -19,16 +19,18 @@ const FilterPaymentForm = ({
 
   return(
     <div className={styles.container}>
-      <TextInput
-        disabled={false}
-        placeholder={'輸入關鍵字'}
-        changed={handleInputChange}
-        name={'名稱'}
-        labelStyle={styles.labelStyle}
-        valid={true}
-        invalidFeedback="*不可為空白，12字內"
-        type='text'
-      />
+      <form>
+        <TextInput
+          disabled={false}
+          placeholder={'輸入關鍵字'}
+          changed={handleInputChange}
+          name={'名稱'}
+          labelStyle={styles.labelStyle}
+          valid={true}
+          invalidFeedback="*不可為空白，12字內"
+          type='text'
+        />
+      </form>
     </div>
   )
 }
