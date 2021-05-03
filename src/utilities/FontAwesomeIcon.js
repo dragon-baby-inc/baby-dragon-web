@@ -6,8 +6,12 @@ import {
   faPlus,
   faTrash,
   faFilter,
-  faSearch
+  faSearch,
+  faCheck,
 } from '@fortawesome/fontawesome-free-solid'
+import {
+  faCheckDouble
+} from '@fortawesome/free-solid-svg-icons'
 
 const icons = {
   faBookOpen: faBookOpen,
@@ -16,7 +20,9 @@ const icons = {
   faPlus: faPlus,
   faTrash: faTrash,
   faFilter: faFilter,
-  faSearch: faSearch
+  faSearch: faSearch,
+  faCheck: faCheck,
+  faCheckDouble: faCheckDouble
 }
 
 const Icon = (props) => {

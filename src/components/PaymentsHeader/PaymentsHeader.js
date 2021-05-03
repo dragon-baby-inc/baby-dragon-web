@@ -54,10 +54,14 @@ function PaymentsHeader({
       {
         editMode ?
           <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
-            { selectAll ? "取消" : "全選" }
+            { selectAll ?
+            <FontAwesomeIcon color='white' faIcon='faCheckDouble'/>
+            :
+            <FontAwesomeIcon color='white' faIcon='faCheckDouble'/>
+            }
           </div>
           :
-          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faArrowLeft'/>
+          null
       }
       <TopRightIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faBars'/>
       <div className={innerBlockClasses.join(" ")}>
