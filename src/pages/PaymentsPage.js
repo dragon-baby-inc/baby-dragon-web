@@ -88,12 +88,11 @@ const PaymentsPage = (props) => {
   const deactiveEditMode = () => { setEditMode(false); setSmall(false);  }
 
   const handleDeletePayment = () => {
-    console.log(selectedPaymentIds)
-    return
     if (selectedPaymentIds.length === 0) { return }
     if (window.confirm(`確認刪除 ${selectedPaymentIds.length} 筆帳款?`)) {
       axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
-        payment_ids: selectedPaymentIds
+        payment_ids: selectedPaymentIds,
+        builder_id: authState.userLineIdToken
       }).then(function (response) {
         getPayments()
         deactiveEditMode()
