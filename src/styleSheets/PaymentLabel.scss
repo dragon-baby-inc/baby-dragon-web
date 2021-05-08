@@ -15,16 +15,16 @@ label.group-menu-label.group-menu-payment.active::before {
 }
 
 label.group-menu-label.group-menu-payment {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
   background-color: #fff;
   position: relative;
   overflow: hidden;
   transition: .3s;
-  margin: 8px 12px;
+  margin: 4px 12px;
   padding-left:  20px;
   padding-right: 20px;
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
   border: 1px solid #eee;
+  height: 70px;
 
   .group-menu-date {
     font-weight: 400;

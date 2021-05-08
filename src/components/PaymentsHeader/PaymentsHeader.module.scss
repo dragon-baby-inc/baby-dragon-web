@@ -1,28 +1,85 @@
 @import "../../styleSheets/globalColors.scss";
 
 .header {
+  position: absolute;
+  z-index: 100;
   height: 200px;
   transition: .4s;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-flow: column;
+  align-items: flex-start;
   text-align: center;
   background-color: transparent;
-  background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
 }
 
 .header.small {
+  background: linear-gradient(to bottom,  rgba(255, 255, 255, 1) 0%,  rgba(233, 233, 233, 0) 90%, rgba(233, 233, 233, 0) 100%);
   height: 58px;
   position: absolute;
   top: 0;
   width: 100vw;
+  align-items: center;
   z-index: 100;
+  padding-left: 0px;
+
+  .searchBox {
+    display: none;
+  }
+
+  .innerBlock {
+    flex-flow: row;
+    color: $gold900;
+    padding-left: 0px;
+
+    .bookIcon {
+      transition: .3s;
+      font-size: 20px;
+      margin-right: 20px;
+      padding-bottom: 0px;
+    }
+    .name {
+      font-weight: 500;
+      font-size: 1rem;
+      text-align: left;
+      padding: 0;
+    }
+
+    .details {
+      .user_count {
+        display: none;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.searchBox {
+  width: calc(90% - 20px);
+  margin: 20px 10px 0px;
+  padding: 0px 10px;
+  height: 30px;
+  background-color: #eeeeee;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+
+  .searchIcon {
+    font-size: 20px;
+  }
+
 }
 
 .innerBlock {
+  padding-left: 40px;
   text-align: left;
   display: flex;
   align-items: center;
+
+  .textBlock {
+    display: flex;
+    flex-flow: column;
+  }
 
   .bookIcon {
     margin-right: 24px;
@@ -30,8 +87,8 @@
   }
 
   .name {
-    padding-bottom: 10px;
-    color: $gray400;
+    padding-bottom: 5px;
+    color: $gold900;
     font-size: 1.5rem;
   }
   .details {
@@ -43,37 +100,11 @@
     }
 
     .user_count {
-      color: #eee;
+      color: $gold900;
     }
   }
 
 }
-
-.innerBlock.small {
-  flex-flow: row;
-  color: black;
-
-  .bookIcon {
-    transition: .3s;
-    font-size: 20px;
-    margin-right: 20px;
-    padding-bottom: 0px;
-  }
-  .name {
-    font-weight: 500;
-    font-size: 1rem;
-    text-align: left;
-    padding: 0;
-  }
-
-  .details {
-    .user_count {
-      display: none;
-      font-size: 0.8rem;
-    }
-  }
-}
-
 
 .barsIcon {
   transition: .3s;
