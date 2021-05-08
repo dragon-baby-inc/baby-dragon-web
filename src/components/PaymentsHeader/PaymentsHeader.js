@@ -77,8 +77,6 @@ function PaymentsHeader({
           </div>
         </div>
       </div>
-      <div className={styles.searchBox}>
-      </div>
     </div>
   )
 }

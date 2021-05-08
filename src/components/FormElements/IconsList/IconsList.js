@@ -45,7 +45,7 @@ const IconsList = (props) => {
   let disabledClass = disabled ? styles.disabled : ''
   let iconLinks = links.map(link => {
     return (
-      <NavLink exact to={link.href} activeClassName={styles.activeStyle} className={[disabledClass, styles.icon].join(' ')} >
+      <NavLink key={link.text} exact to={link.href} activeClassName={styles.activeStyle} className={[disabledClass, styles.icon].join(' ')} >
         {link.children}
         <FontAwesomeIcon icon={link.faIcon}/>
         <span> {link.text} </span>

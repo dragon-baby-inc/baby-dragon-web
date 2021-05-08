@@ -46,7 +46,7 @@ const BookHistoryPage = ({
       objects.push( <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
     }
 
-    objects.push(<div style={styles.label}>{object.user_name}  {object.content}</div>)
+    objects.push(<div key={object.id} style={styles.label}>{object.user_name}  {object.content}</div>)
 
   })
 
