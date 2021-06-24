@@ -7,23 +7,25 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
+  background: #fff;
 }
 
 .innerBlock {
   display: flex;
   align-items: center;
   flex-flow: row;
-  color: black;
+  color: $gold900;
 
   .icon {
     transition: .3s;
+    color: $gold900;
     font-size: 20px;
     margin-right: 20px;
     padding-bottom: 0px;
   }
   .name {
     color: white;
+    color: $gold900;
     font-weight: 500;
     font-size: 1rem;
     text-align: left;
