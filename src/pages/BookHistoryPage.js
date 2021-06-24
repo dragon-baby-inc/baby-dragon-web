@@ -28,6 +28,9 @@ const styles = {
     borderBottom: '1px solid #eeeeee',
     fontSize: '15px',
     color: themeColors.gold900,
+  },
+  dateSeparator: {
+    padding: '12px 0px 0px',
   }
 }
 

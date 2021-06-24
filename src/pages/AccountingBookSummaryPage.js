@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
 import UserSummaryLabel from '../components/FormElements/UserSummaryLabel/userSummaryLabel'
 import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
+import EmptyResult from '../components/EmptyResult/EmptyResult'
 import useScrollInfo from 'react-element-scroll-hook';
 import Loading from '../components/Loading/Loading'
 import PageHeader from '../components/PageHeader/PageHeader'
@@ -41,7 +42,13 @@ const AccountingBookSummaryPage = ({
         loading ?
           <Loading />
           :
-         <div style={styles.summary}ref={setRef}> {objects} </div>
+         <div style={styles.summary} ref={setRef}>
+           {
+             objects.length > 0 ?
+               objects : <EmptyResult message='目前沒有任何款項喔'/>
+
+           }
+          </div>
       }
     </div>
   )
