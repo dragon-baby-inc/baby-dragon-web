@@ -11,6 +11,7 @@ import useLiff from './hooks/useLiff'
 const App = () => {
   const { setLogin } = useContext(AuthContext)
   const [isLoggedIn] = useLiff(setLogin)
+  console.log('App load')
 
   return (
     <>
