@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'https://dragon-baby-api.jp.ngrok.io/',
+  baseURL: process.env.BACKEND_URI,
   headers: { 'Content-Type': 'application/json' }
 })
