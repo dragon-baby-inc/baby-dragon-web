@@ -76,9 +76,10 @@ const PaymentCheckboxLabel = (props) => {
           props.editMode ?
             null
             :
-            <div className={`group-menu-date ${activeClass}`}>
-              <Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
-            </div>
+            null
+//             <div className={`group-menu-date ${activeClass}`}>
+//               <Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
+//             </div>
 
         }
         {
@@ -106,7 +107,7 @@ const PaymentCheckboxLabel = (props) => {
               { object.description }
             </div>
             <div className='message'>
-              { object.payer_display_name }
+              { object.ower_and_payer_message }
             </div>
           </div>
           <div className={`col-4 group-menu-amount ${activeClass}`}>
@@ -130,9 +131,14 @@ const PaymentCheckboxLabel = (props) => {
       </label>
       <Collapse isOpened={open}>
         <div className='payment collapse'>
-          <div className='allocation title'>
-            <span> {object.ower_and_payer_message} </span>
-          </div>
+          {
+            true ?
+              null
+              :
+                <div className='allocation title'>
+                  <span> {object.ower_and_payer_message} </span>
+                </div>
+          }
           <div className='allocations'>
             {allocations}
           </div>

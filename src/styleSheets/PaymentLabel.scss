@@ -1,7 +1,7 @@
 @import "../styleSheets/globalColors.scss";
 
 label.group-menu-label.group-menu-payment:focus-within  {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
 }
 
 label.group-menu-label.group-menu-payment.active::before {
@@ -15,16 +15,17 @@ label.group-menu-label.group-menu-payment.active::before {
 }
 
 label.group-menu-label.group-menu-payment {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
   background-color: #fff;
   position: relative;
   overflow: hidden;
   transition: .3s;
-  margin: 4px 12px;
+  margin: 4px 10px;
   padding-left:  20px;
   padding-right: 20px;
   border: 1px solid #eee;
   height: 70px;
+  border-radius: 5px;
 
   .group-menu-date {
     font-weight: 400;
@@ -174,10 +175,12 @@ label.group-menu-label.group-menu-payment {
   border-left: 1px solid $gray400;
   border-bottom: 1px solid $gray400;
   border-bottom-left-radius: 10px;
+  border: none;
 
   .allocations {
     margin-left: 10px;
     border-left: 1px solid $gray400;
+    border: none;
 
     .allocationInner {
       display: flex;

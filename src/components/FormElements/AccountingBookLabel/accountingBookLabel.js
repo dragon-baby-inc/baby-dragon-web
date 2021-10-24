@@ -13,6 +13,7 @@ import moment from 'moment/min/moment-with-locales';
 import 'moment/locale/zh-tw';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import MyFontAwesomeIcon from '../../../utilities/FontAwesomeIcon'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
 import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
@@ -67,6 +68,7 @@ const AccountingBookLabel = (props) => {
             </div>
         }
         <div className={`group-menu-payment-block ${activeClass}`}>
+          <MyFontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faIcon='faBookOpen' color={themeColors.gold900}/>
           <div className='group-menu-username'>
             <div className='description'>
               { object.name }
@@ -81,6 +83,7 @@ const AccountingBookLabel = (props) => {
             </div> :
               null
           }
+          <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gold900}/>
         </div>
       </label>
       <Collapse isOpened={false}>
@@ -90,7 +93,7 @@ const AccountingBookLabel = (props) => {
               <FontAwesomeIcon icon={faTrash}/> 刪除
             </Button>
             <Button className='icon' btnClass='icon switch'>
-              <FontAwesomeIcon icon={faEdit}/> 切換為預設
+              <FontAwesomeIcon icon={faEdit}/> 設為預設
             </Button>
             <Button className='icon' btnClass='icon' clicked={() => { history.push(`accounting_books/${object.uuid}/payments`) }}>
               <FontAwesomeIcon icon={faEdit}/> 看帳

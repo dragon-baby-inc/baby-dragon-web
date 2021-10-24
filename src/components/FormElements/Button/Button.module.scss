@@ -23,3 +23,7 @@ button:active {
   outline: none;
   background: linear-gradient(90deg, rgba(150,99,28,1) 0%, rgba(210,175,133,1) 100%);
 }
+
+.green {
+  background: $green700;
+}

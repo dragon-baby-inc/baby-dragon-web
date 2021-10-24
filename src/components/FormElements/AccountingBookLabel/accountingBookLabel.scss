@@ -18,19 +18,21 @@ label.group-menu-label.group-menu-accounting-book::before {
   left: 0;
 }
 
+label.group-menu-label.group-menu-accounting-book:first-child {
+  border-top: 1px solid #eee;
+}
+
 label.group-menu-label.group-menu-accounting-book {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
   background-color: #fff;
   position: relative;
   overflow: hidden;
   transition: .3s;
-  margin: 8px 24px;
   padding-left:  20px;
   padding-right: 20px;
-  border: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   padding-top: 10px;
   padding-bottom: 10px;
-  height: 100px;
+  height: 80px;
 
   .group-menu-date {
     font-weight: 400;

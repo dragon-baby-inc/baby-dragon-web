@@ -6,6 +6,8 @@ import TopLeftIcon from '../IconLinks/TopLeftIcon'
 import TopRightIcon from '../IconLinks/TopRightIcon'
 import FontAwesomeIcon from '../../utilities/FontAwesomeIcon'
 import Checkbox from '../FormElements/Inputs/Checkbox'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 const inlineStyles = {
   topLeft: {
@@ -63,16 +65,18 @@ function PaymentsHeader({
           :
           null
       }
-      <TopRightIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='white' faIcon='faBars'/>
+      <TopRightIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faBars'/>
       <div className={innerBlockClasses.join(" ")}>
         <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gold900}/>
         <div className={styles.textBlock}>
-          <div className={nameClasses.join(' ')}>
-            {accountingBookDetails.name}
-          </div>
-          <div className={styles.details}>
-            <div className={styles.user_count}>
-              群組人數：{accountingBookDetails.users_size} 人
+          <div>
+            <div className={nameClasses.join(' ')}>
+              {accountingBookDetails.name}
+            </div>
+            <div className={styles.details}>
+              <div className={styles.user_count}>
+                群組人數：{accountingBookDetails.users_size} 人
+              </div>
             </div>
           </div>
         </div>

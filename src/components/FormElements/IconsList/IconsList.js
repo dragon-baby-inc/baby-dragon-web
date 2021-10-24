@@ -15,7 +15,7 @@ const IconsList = (props) => {
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books`,
       faIcon: faBook,
-      text: '切換帳本'
+      text: '帳本列表'
     },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/payments`,

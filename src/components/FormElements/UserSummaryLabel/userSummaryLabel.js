@@ -30,6 +30,7 @@ const UserSummaryLabel = (props) => {
 
   return (
     <>
+      <div className={`modal`}>
       <label className={`group-menu-label group-menu-checkbox-label group-menu-summary ${activeClass}`}>
         {
           props.editMode ?
@@ -74,6 +75,7 @@ const UserSummaryLabel = (props) => {
         <div className='user-summary collapse'>
           <UserSummaryCollapse objects={object.debts} accountingBookDetails={props.accountingBookDetails}/>
         </div>
+      </div>
       </div>
     </>
   )

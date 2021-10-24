@@ -8,6 +8,10 @@ import {
   faFilter,
   faSearch,
   faCheck,
+  faArrowLeft,
+  faArrowRight,
+  faChevronRight,
+  faCog,
 } from '@fortawesome/fontawesome-free-solid'
 import {
   faCheckDouble
@@ -22,7 +26,11 @@ const icons = {
   faFilter: faFilter,
   faSearch: faSearch,
   faCheck: faCheck,
-  faCheckDouble: faCheckDouble
+  faCheckDouble: faCheckDouble,
+  faArrowLeft: faArrowLeft,
+  faArrowRight: faArrowRight,
+  faChevronRight: faChevronRight,
+  faCog: faCog
 }
 
 const Icon = (props) => {

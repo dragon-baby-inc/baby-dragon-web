@@ -194,6 +194,7 @@ const styles = {
     fontSize: '12px',
     textAlign: 'center',
     padding: '5px',
+    color: themeColors.gray600,
   },
 }
 

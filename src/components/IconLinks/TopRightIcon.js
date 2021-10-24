@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { themeColors } from '../../constants/globalColors'
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
 import { faBars } from '@fortawesome/fontawesome-free-solid'
+import { faCog } from '@fortawesome/fontawesome-free-solid'
 
 const icons = {
   faArrowLeft: faArrowLeft,
   faBars: faBars,
+  faCog: faCog
 }
 
 const styles = {

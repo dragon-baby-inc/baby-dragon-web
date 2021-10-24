@@ -1,27 +1,27 @@
 @import "../styleSheets/globalColors.scss";
 
-label.group-menu-label.group-menu-summary:focus-within  {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
-}
+// label.group-menu-label.group-menu-summary:focus-within  {
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+// }
 
-label.group-menu-label.group-menu-summary::before {
-  content: '';
-  width: 10px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: $gold900;
-}
+// label.group-menu-label.group-menu-summary::before {
+//   content: '';
+//   width: 10px;
+//   height: 100%;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   background-color: $gold900;
+// }
 
 label.group-menu-label.group-menu-summary {
   background-color: #fff;
   position: relative;
   overflow: hidden;
   transition: .3s;
-  margin: 8px 12px;
+  margin: 0px 12px;
   padding-right: 23px;
-  border: 1px solid #eee;
+//   border: 1px solid #eee;
   height: 70px;
 
   .group-menu-date {
@@ -81,13 +81,20 @@ label.group-menu-label.group-menu-summary {
   }
 }
 
+.modal {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  margin: 20px;
+  border-radius: 5px;
+}
+
 .user-summary.collapse {
   background-color: #fff;
   position: relative;
   font-size: 13px;
   color: $gray900;
   margin: 0px 20px 10px;
-  border-left: 1px solid $gray400;
-  border-bottom: 1px solid $gray400;
-  border-bottom-left-radius: 10px;
+//   border-left: 1px solid $gray400;
+//   border-bottom: 1px solid $gray400;
+//   border-bottom-left-radius: 10px;
 }

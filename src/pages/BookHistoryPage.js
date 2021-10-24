@@ -8,6 +8,8 @@ import PageHeader from '../components/PageHeader/PageHeader'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
 import { themeColors } from '../constants/globalColors'
 import EmptyResult from '../components/EmptyResult/EmptyResult'
+import Moment from 'react-moment';
+import moment from 'moment/min/moment-with-locales';
 
 const styles = {
   bg: {
@@ -22,15 +24,33 @@ const styles = {
     overflow: 'auto',
     height: 'calc(100vh - 40px - 60px)',
   },
+  createdAt: {
+    minWidth: '52px',
+    padding: '0px 4px'
+  },
+  text: {
+    flexShrink: "1"
+  },
+  userName: {
+    fontSize: '12px',
+    paddingLeft: '5px',
+    color: themeColors.gold500,
+    display: "inline-block"
+  },
   label: {
+    display: "flex",
+    alignItems: "center",
     padding: '10px 10px',
     lineHeight: '1.5rem',
     borderBottom: '1px solid #eeeeee',
-    fontSize: '15px',
+    fontSize: '14px',
     color: themeColors.gold900,
   },
   dateSeparator: {
-    padding: '12px 0px 0px',
+    fontSize: '12px',
+    padding: '10px 0px 10px',
+    textAlign: 'center',
+    color: themeColors.gray600,
   }
 }
 
@@ -40,17 +60,33 @@ const BookHistoryPage = ({
 }) => {
   const [logMessages, loading] = useLogMessages()
 
+  const calendar = {
+    sameDay: '[今日]',
+    lastDay: '[昨日]',
+    sameElse: 'M/DD',
+    nextWeek: 'M/DD',
+    lastWeek: 'M/DD',
+  }
+
 
   let currentDate = null
   let objects = []
   logMessages.forEach(object => {
     if (object.created_at != currentDate) {
       currentDate = object.created_at
-      objects.push( <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
+      objects.push(
+        <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
     }
-
-    objects.push(<div key={object.id} style={styles.label}>{object.user_name}  {object.content}</div>)
-
+    objects.push(
+      <div key={object.id} style={styles.label}>
+        <div style={styles.text}>
+          {object.content}
+          <span style={styles.userName}>
+            - {object.user_name}
+          </span>
+        </div>
+      </div>
+    )
   })
 
   return(
