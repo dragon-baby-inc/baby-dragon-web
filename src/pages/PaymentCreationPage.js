@@ -117,3 +117,4 @@ const PaymentCreationPage = (props) => {
 }
 
 export default PaymentCreationPage
+// https://3fa9ccb43ede.ngrok.io/liff_entry/groups/43b08acb-2b05-4366-8479-2268897f33c6/accounting_books/0a3a9b65-0475-4b68-8bcb-00e88bfe3022/payments/new
