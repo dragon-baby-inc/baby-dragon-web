@@ -21,14 +21,27 @@
   border-radius: 5px;
   margin: auto;
   width: 95vw;
-  max-height: calc(160px);
+  max-height: calc(188px);
   background-color: #fff;
+  overflow-x: hidden;
+}
+
+.text {
+  font-size: 13px;
+  padding: 4px 4px;
+}
+
+.input {
+  padding-top: 6px;
+  padding-bottom: 6px;
+
 }
 
 .btn {
   background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
   margin: 5px 0px;
   background: $green700;
+  padding: 10px 0px;
   border-radius: 12px;
 }
 
