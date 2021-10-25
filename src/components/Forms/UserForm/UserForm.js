@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import { useParams } from 'react-router-dom';
-import styles from './AccountingBookForm.module.scss'
+import styles from './UserForm.module.scss'
 import TextInput from '../../FormElements/TextInput/TextInput'
 import Button from '../../FormElements/Button/Button'
 import useHistory from '../../../hooks/useHistory'
 import axios from '../../../api/dragonBabyApi'
 
-const AccountingBookForm = ({
+const UserForm = ({
   group,
   changed
 }) => {
@@ -30,29 +30,38 @@ const AccountingBookForm = ({
       return
     }
 
-    axios.post(`api/v1/groups/${group_id}/accounting_books`, { accounting_book: { name: name } })
+    axios.post(`api/v1/groups/${group_id}/users`, { name: name })
       .then((res) => {
-        history.navigate(`/liff_entry/groups/${group_id}/accounting_books/${res.data.accounting_book.id}/payments`)
+        window.location.reload();
       })
   }
 
   return(
     <form className={styles.form}>
-      <TextInput
-        disabled={false}
-        placeholder={'輸入名稱'}
-        changed={handleInputChange}
-        name={'名稱'}
-        labelStyle={styles.labelStyle}
-        valid={valid}
-        invalidFeedback="*不可為空白，12字內"
-        type='text'
-        value={name}
-      />
+      <div className={styles.text}>
+        群組內的成員會被自動偵測
+      </div>
+      <div className={styles.text}>
+        只有不加入群組的成員才需要手動建立喔
+      </div>
+
+      <div className={styles.input}>
+        <TextInput
+          disabled={false}
+          placeholder={'虛擬使用者'}
+          changed={handleInputChange}
+          name={'名字'}
+          labelStyle={styles.labelStyle}
+          valid={valid}
+          invalidFeedback="*不可為空白，12字內"
+          type='text'
+          value={name}
+        />
+      </div>
 
       <Button btnClass={styles.btn} clicked={handleSubmit}>送出</Button>
     </form>
   )
 }
 
-export default AccountingBookForm
+export default UserForm

@@ -7,7 +7,7 @@ const components = {
   user: UserCheckboxLabel,
 }
 
-const AccountingBookUserMenu = ({ objects, labelType, selected_object_ids, changed }) => {
+const AccountingBookUserMenu = ({ editMode, setEditMode, objects, labelType, selected_object_ids, changed }) => {
   const [mount, setMount] = useState(false)
   const [displayObjects, setDisplayObjects] = useState(objects)
   const [selectAll, setSelectAll] = useState(true)
@@ -17,7 +17,7 @@ const AccountingBookUserMenu = ({ objects, labelType, selected_object_ids, chang
   useEffect(() => {
     setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
-  }, [objects, selected_object_ids])
+  }, [objects, selected_object_ids, editMode])
 
   let handleChange = (e) => {
     let selected_objects = selectedObjects
@@ -68,23 +68,24 @@ const AccountingBookUserMenu = ({ objects, labelType, selected_object_ids, chang
     }
   }
 
+  const selectAllLabel = <label className='group-menu-label group-menu-checkbox-label'>
+    <div className='group-menu-radio'>
+      <input
+        checked={selectAll}
+        onChange={handleSelectAll}
+        type="checkbox"
+      />
+      <span className="checkmark"></span>
+    </div>
+    <div className='col-8 group-menu-username'>
+      全選
+    </div>
+  </label>
+
   const containerStyles = [styles.container]
   if (mount) { containerStyles.push(styles.mount) }
   return(
-    <div className={containerStyles.join(' ')}>
-      <label className='group-menu-label group-menu-checkbox-label'>
-        <div className='group-menu-radio'>
-          <input
-            checked={selectAll}
-            onChange={handleSelectAll}
-            type="checkbox"
-          />
-          <span className="checkmark"></span>
-        </div>
-        <div className='col-8 group-menu-username'>
-          全選
-        </div>
-      </label>
+      <div className={containerStyles.join(' ')}>
 
       <div className={styles.labels}>
         {objectLabels}

@@ -15,9 +15,11 @@ const useAccountingBook =  (callback) => {
       .then(function (response) {
         let users = response.data.users.map(u => {
           return {
-            displayName: u.display_name,
             id: u.line_id,
-            imageURL: u.image_url
+            displayName: u.display_name,
+            imageURL: u.image_url,
+            fromLine: u.from_line,
+            coverCost: u.cover_cost
           }
         })
         setUsers(users)

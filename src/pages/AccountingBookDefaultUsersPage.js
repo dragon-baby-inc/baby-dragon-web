@@ -29,7 +29,7 @@ const AccountingBookUsersPage = (props) => {
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    setSelectObjectIds([])
+    setSelectObjectIds(users.filter((u) => u.coverCost).map((u) => u.id))
   }, [users])
 
   const [timer, setTimer] = useState(null)
@@ -50,14 +50,13 @@ const AccountingBookUsersPage = (props) => {
   return(
     <>
       <div style={styles.bg}>
-        <PageHeader title={editMode ? '編輯分帳名單' : '編輯使用者'} color={themeColors.gray400}/>
-        <TopRightIcon clicked={() => {setShowForm(true)}} color={themeColors.gold700} faIcon='faPlus'/>
+        <PageHeader title={editMode ? '編輯分帳名單' : '分帳名單'} color={themeColors.gray400}/>
         <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color='black' faIcon='faArrowLeft'/>
         {
           loading ?
             null :
             <AccountingBookUserMenu
-              editMode={false}
+              editMode={editMode}
               setEditMode={setEditMode}
               labelType="user"
               objects={users}

@@ -8,6 +8,11 @@ label.group-menu-label {
     height: 48px;
     border-bottom: 1px solid #eee;
     flex-grow: 1;
+
+    .from-line {
+      color: gray;
+      font-size: 10px;
+    }
   }
 
   .group-menu-radio {

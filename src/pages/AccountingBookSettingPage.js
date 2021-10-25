@@ -117,6 +117,22 @@ const AccountingBookSettingPage = (props) => {
                   />
               }
             </label>
+            <div>
+              <label style={styles.label} onClick={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/default_users`) }}>
+                <span style={styles.description}>
+                  設定分帳名單
+                </span>
+                <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+              </label>
+            </div>
+            <div>
+              <label style={styles.label} onClick={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/users`) }}>
+                <span style={styles.description}>
+                  編輯使用者
+                </span>
+                <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+              </label>
+            </div>
             <label style={styles.label}>
               <span style={styles.description}>
                 Line 預設帳本
@@ -135,7 +151,7 @@ const AccountingBookSettingPage = (props) => {
             </label>
             <label style={styles.label}>
               <span style={styles.description}>
-                自動偵測群組帳款指令
+                Line 自動偵測帳款指令
               </span>
               {
                 loading ?
@@ -163,14 +179,6 @@ const AccountingBookSettingPage = (props) => {
                     name="lineNotification"
                   />
               }
-            </label>
-          </div>
-          <div>
-            <label style={styles.label} onClick={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/users`) }}>
-              <span style={styles.description}>
-                預設分帳名單
-              </span>
-              <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
             </label>
           </div>
           <div style={styles.label}>
