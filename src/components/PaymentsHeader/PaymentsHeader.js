@@ -70,13 +70,13 @@ function PaymentsHeader({
       <TopRightIcon style={{ right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color='black' faIcon='faPlus'/>
       {
         editMode ?
-          <TopRightIcon clicked={deactiveEditMode} style={{ right: 38 }} color='gray' faIcon='faTimes'/>
+          <TopRightIcon clicked={deactiveEditMode} style={{ right: 50 }} color='gray' faIcon='faTimes'/>
           :
           <TopRightIcon clicked={activeEditMode} style={{ right: 38 }} color='black' faIcon='faTrash'/>
       }
       { small ?
           null :
-      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
+          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
       }
       <div className={innerBlockClasses.join(" ")}>
         {

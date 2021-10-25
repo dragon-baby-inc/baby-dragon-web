@@ -11,13 +11,14 @@ const TextInput = ({
   valid,
   invalidFeedback,
   disabled,
-  hideLabel
+  hideLabel,
+  invalidFeedbackStyle
 }) => {
   let labelClasses = [styles.label]
   if (valid === false) { labelClasses.push(styles.invalid) }
   if (disabled) { labelClasses.push(styles.disabled) }
   return(
-    <div style={labelStyle}>
+    <div style={labelStyle} className={styles.container}>
       <label className={labelClasses.join(' ')} >
         {
           hideLabel ?
@@ -33,7 +34,7 @@ const TextInput = ({
           type={type} />
       </label>
       {
-        (valid === false) ?  <div className={styles.invalidFeedback}>{invalidFeedback}</div> : null
+        (valid === false) ?  <div style={invalidFeedbackStyle} className={styles.invalidFeedback}>{invalidFeedback}</div> : null
       }
     </div>
   )

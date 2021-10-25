@@ -2,12 +2,13 @@
 
 .container {
   width: 100%;
-  overflow: hidden;
   background-color: #fff;
-  z-index: 100;
   transform: translateY(100%);
   transform: translateY(0%);
+  height: calc(100vh - 58px - 60px);
+  max-height: calc(100vh - 58px - 60px);
   transition: .2s;
+  padding-bottom: 50px;
 }
 
 .container.mount {
@@ -17,7 +18,8 @@
 .labels {
   position:relative;
   width: 100%;
-  height: calc(100vh - 79px);
+  height: calc(100vh - 58px - 60px);
   overflow: auto;
   font-weight: 300;
+  padding: 0px 0px 80px;
 }

@@ -45,19 +45,17 @@ const UserForm = ({
         只有不加入群組的成員才需要手動建立喔
       </div>
 
-      <div className={styles.input}>
-        <TextInput
-          disabled={false}
-          placeholder={'虛擬使用者'}
-          changed={handleInputChange}
-          name={'名字'}
-          labelStyle={styles.labelStyle}
-          valid={valid}
-          invalidFeedback="*不可為空白，12字內"
-          type='text'
-          value={name}
-        />
-      </div>
+      <TextInput
+        disabled={false}
+        placeholder={'虛擬使用者'}
+        changed={handleInputChange}
+        name={'名字'}
+        labelStyle={valid == false ? { width: '100%', padding: '10px 0px 0px' } : { width: '100%', padding: '10px 0px 10px' }}
+        valid={valid}
+        invalidFeedback="*不可為空白，12字內"
+        type='text'
+        value={name}
+      />
 
       <Button btnClass={styles.btn} clicked={handleSubmit}>送出</Button>
     </form>

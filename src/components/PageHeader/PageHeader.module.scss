@@ -1,13 +1,14 @@
 @import "../../styleSheets/globalColors.scss";
 
 .header {
+  width: 100%;
   min-height: 58px;
   height: 58px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #fff;
+  background: #ffffff;
 }
 
 .innerBlock {

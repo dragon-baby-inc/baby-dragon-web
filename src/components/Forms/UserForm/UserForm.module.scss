@@ -21,21 +21,19 @@
   border-radius: 5px;
   margin: auto;
   width: 95vw;
-  max-height: calc(228px);
+  max-height: calc(218px);
   background-color: #fff;
   overflow-x: hidden;
 }
 
 .btn {
   background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
-  margin: 5px 0px;
   background: $green700;
   border-radius: 12px;
 }
 
 .btn:active {
   background: $green500;
-  padding: 10px 0px;
 }
 
 .text {

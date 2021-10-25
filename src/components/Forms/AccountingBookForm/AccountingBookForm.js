@@ -42,19 +42,18 @@ const AccountingBookForm = ({
         請幫新帳本取名
       </div>
 
-      <div className={styles.input}>
-        <TextInput
-          disabled={false}
-          placeholder={'輸入名稱'}
-          changed={handleInputChange}
-          name={'名稱'}
-          labelStyle={styles.labelStyle}
-          valid={valid}
-          invalidFeedback="*不可為空白，12字內"
-          type='text'
-          value={name}
-        />
-      </div>
+      <TextInput
+        disabled={false}
+        placeholder={'輸入名稱'}
+        changed={handleInputChange}
+        name={'名稱'}
+        labelClass={styles.input}
+        valid={valid}
+        labelStyle={valid == false ? { width: '100%', padding: '10px 0px 0px' } : { width: '100%', padding: '10px 0px 10px' } }
+        invalidFeedback="*不可為空白，12字內"
+        type='text'
+        value={name}
+      />
 
       <Button btnClass={styles.btn} clicked={handleSubmit}>送出</Button>
     </form>

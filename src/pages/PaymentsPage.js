@@ -185,7 +185,7 @@ const PaymentsPage = (props) => {
 const styles = {
   bg: {
     width: '100vw',
-    height: '100vh',
+    height: 'calc(100vh - 60px)',
     overflow: 'hidden',
     maxHeight: '-webkit-fill-available',
     position: 'relative',
