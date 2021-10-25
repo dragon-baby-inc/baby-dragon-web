@@ -28,7 +28,9 @@ function AccountingBooksHeader({ scrollInfo, group }){
   }
 
   return(
-    <PageHeader title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+    <>
+      <PageHeader title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+    </>
   )
 }
 

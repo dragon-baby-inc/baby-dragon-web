@@ -8,6 +8,8 @@ import Loading from '../components/Loading/Loading'
 import PageHeader from '../components/PageHeader/PageHeader'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
 import { themeColors } from '../constants/globalColors'
+import CircleFloatingIcon from '../components/IconLinks/CircleFloatingIcon/CircleFloatingIcon'
+import TopRightIcon from '../components/IconLinks/TopRightIcon'
 
 const styles = {
   bg: {
@@ -47,7 +49,8 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-    <PageHeader title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+      <TopRightIcon link={`/liff_entry/groups/${group.id}/accounting_books/new`} color={themeColors.gold700} faIcon='faPlus'/>
+      <PageHeader title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
       {
         loading ?
           <div style={styles.loading}>

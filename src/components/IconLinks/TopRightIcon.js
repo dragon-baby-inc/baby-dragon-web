@@ -5,11 +5,13 @@ import { themeColors } from '../../constants/globalColors'
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
 import { faBars } from '@fortawesome/fontawesome-free-solid'
 import { faCog } from '@fortawesome/fontawesome-free-solid'
+import { faPlus } from '@fortawesome/fontawesome-free-solid'
 
 const icons = {
   faArrowLeft: faArrowLeft,
   faBars: faBars,
-  faCog: faCog
+  faCog: faCog,
+  faPlus: faPlus
 }
 
 const styles = {

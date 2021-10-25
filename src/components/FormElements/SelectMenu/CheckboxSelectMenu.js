@@ -10,6 +10,7 @@ const components = {
 const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }) => {
   const [mount, setMount] = useState(false)
   const [displayObjects, setDisplayObjects] = useState(objects)
+  const [selectAll, setSelectAll] = useState(true)
   const [searchValue, setSearchValue] = useState('')
   const [selectedObjects, setSelectedObjects] = useState([])
 
@@ -55,16 +56,42 @@ const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }
     />
   })
 
+  const handleSelectAll = (e) => {
+    setSelectAll(e.target.checked)
+
+    if (e.target.checked) {
+      setSelectedObjects(objects)
+      changed(objects)
+    } else {
+      setSelectedObjects([])
+      changed([])
+    }
+  }
+
   const containerStyles = [styles.container]
   if (mount) { containerStyles.push(styles.mount) }
   return(
     <div className={containerStyles.join(' ')}>
       <SearchInput reset={handleFilterReset} filtered={handleFilter} value={searchValue}/>
+      <label className='group-menu-label group-menu-checkbox-label'>
+        <div className='group-menu-radio'>
+          <input
+            checked={selectAll}
+            onChange={handleSelectAll}
+            type="checkbox"
+          />
+          <span className="checkmark"></span>
+        </div>
+        <div className='col-8 group-menu-username'>
+          全選
+        </div>
+      </label>
+
       <div className={styles.labels}>
         {objectLabels}
       </div>
     </div>
-    )
+  )
 }
 
 export default CheckboxSelectMenu

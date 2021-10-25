@@ -192,6 +192,7 @@ const styles = {
     justifyContent: 'space-between'
   },
   alertLabelDisable: {
+    cursor: 'not-allowed',
     padding: '10px 0px',
     color: 'gray',
     fontSize: "15px",
@@ -199,6 +200,7 @@ const styles = {
     flexGrow: 1,
   },
   alertLabel: {
+    cursor: 'pointer',
     color: "#F9676A",
     padding: '10px 0px',
     flexGrow: 1,
@@ -210,6 +212,7 @@ const styles = {
     fontSize: "15px"
   },
   label: {
+    cursor: 'pointer',
     width: "100%",
     display: "flex",
     alignItems: "center",
