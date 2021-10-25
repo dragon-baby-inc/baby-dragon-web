@@ -5,6 +5,7 @@ import useAccountingBook from '../hooks/useAccountingBook'
 import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
 import FloatIcon from '../components/FormElements/FloatIcon/FloatIcon'
 import { themeColors } from '../constants/globalColors'
+import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
 import useScrollInfo from 'react-element-scroll-hook';
 import AccountingBookSettingsHeader from '../components/AccountingBookSettingsHeader/AccountingBookSettingsHeader'
 import Loading from '../components/Loading/Loading'
@@ -43,7 +44,6 @@ const AccountingBookSettingPage = (props) => {
     return axios.patch(`api/v1/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}`, { accounting_book: params })
   }
 
-    console.log(lockDeletion)
   const handleAccountingBookDeletion = (e) => {
     if (lockDeletion) { return }
 
@@ -100,70 +100,71 @@ const AccountingBookSettingPage = (props) => {
     <>
       <div style={styles.bg}>
         <AccountingBookSettingsHeader></AccountingBookSettingsHeader>
+        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
         <div style={styles.settings}>
-        <div>
-          <label style={styles.label}>
-            <span style={styles.description}>
-              帳本名稱
-            </span>
-            {
-              loading ?
-                null :
-                <input
-                  style={styles.textInput}
-                  type="text" value={state.name.value}
-                  onChange={(e) => handlInputChange(e.target.value, { name: e.target.value }, setName)}
-                />
-            }
-          </label>
-          <label style={styles.label}>
-            <span style={styles.description}>
-              Line 預設帳本
-            </span>
-            {
-              loading ?
-                null :
-                <Toggle
-                  disabled={state.current.value == true}
-                  defaultChecked={state.current.value}
-                  checked={state.current.value}
-                  changed={(e) => handleSetAsCurrent(e.target.checked)}
-                  name="current"
-                />
-            }
-          </label>
-          <label style={styles.label}>
-            <span style={styles.description}>
-              自動偵測群組帳款指令
-            </span>
-            {
-              loading ?
-                null :
-                <Toggle
-                  defaultChecked={state.autoDetectPayment.value}
-                  checked={state.autoDetectPayment.value}
-                  changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
-                  description="自動偵測群組帳款指令"
-                  name="autoDetectPayment"
-                />
-            }
-          </label>
-          <label style={styles.label}>
-            <span style={styles.description}>
-              傳送確認訊息到 Line 群組
-            </span>
-            {
-              loading ?
-                null :
-                <Toggle
-                  defaultChecked={state.lineNotification.value}
-                  checked={state.lineNotification.value}
-                  changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
-                  name="lineNotification"
-                />
-            }
-          </label>
-        </div>
+          <div>
+            <label style={styles.label}>
+              <span style={styles.description}>
+                帳本名稱
+              </span>
+              {
+                loading ?
+                  null :
+                  <input
+                    style={styles.textInput}
+                    type="text" value={state.name.value}
+                    onChange={(e) => handlInputChange(e.target.value, { name: e.target.value }, setName)}
+                  />
+              }
+            </label>
+            <label style={styles.label}>
+              <span style={styles.description}>
+                Line 預設帳本
+              </span>
+              {
+                loading ?
+                  null :
+                  <Toggle
+                    disabled={state.current.value == true}
+                    defaultChecked={state.current.value}
+                    checked={state.current.value}
+                    changed={(e) => handleSetAsCurrent(e.target.checked)}
+                    name="current"
+                  />
+              }
+            </label>
+            <label style={styles.label}>
+              <span style={styles.description}>
+                自動偵測群組帳款指令
+              </span>
+              {
+                loading ?
+                  null :
+                  <Toggle
+                    defaultChecked={state.autoDetectPayment.value}
+                    checked={state.autoDetectPayment.value}
+                    changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
+                    description="自動偵測群組帳款指令"
+                    name="autoDetectPayment"
+                  />
+              }
+            </label>
+            <label style={styles.label}>
+              <span style={styles.description}>
+                傳送確認訊息到 Line 群組
+              </span>
+              {
+                loading ?
+                  null :
+                  <Toggle
+                    defaultChecked={state.lineNotification.value}
+                    checked={state.lineNotification.value}
+                    changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
+                    name="lineNotification"
+                  />
+              }
+            </label>
+          </div>
           <div>
             <label style={styles.label}>
               <span style={styles.description}>
@@ -174,20 +175,20 @@ const AccountingBookSettingPage = (props) => {
           </div>
           <div style={styles.label}>
             <div disabled={lockDeletion} onClick={handleAccountingBookDeletion} style={lockDeletion ? styles.alertLabelDisable : styles.alertLabel}>
-            永久刪除此本帳本
+              永久刪除此本帳本
+            </div>
+            <Toggle
+              defaultChecked={!lockDeletion}
+              checked={!lockDeletion}
+              changed={(e) => setLockDeletion(!e.target.checked)}
+              icons={ {
+                checked: <MyFontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLockOpen' color="white"/> ,
+                unchecked: <MyFontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLock' color="white"/> ,
+              } }
+              name="current"
+            />
           </div>
-          <Toggle
-            defaultChecked={!lockDeletion}
-            checked={!lockDeletion}
-            changed={(e) => setLockDeletion(!e.target.checked)}
-            icons={ {
-              checked: <MyFontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLockOpen' color="white"/> ,
-              unchecked: <MyFontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLock' color="white"/> ,
-             } }
-            name="current"
-          />
         </div>
-          </div>
       </div>
     </>
   )

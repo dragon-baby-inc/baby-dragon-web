@@ -6,6 +6,7 @@ import useScrollInfo from 'react-element-scroll-hook';
 import Loading from '../components/Loading/Loading'
 import PageHeader from '../components/PageHeader/PageHeader'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
+import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
 import { themeColors } from '../constants/globalColors'
 import EmptyResult from '../components/EmptyResult/EmptyResult'
 import Moment from 'react-moment';
@@ -92,6 +93,7 @@ const BookHistoryPage = ({
   return(
     <div style={styles.bg}>
       <PageHeader title={'編輯歷史'} color={themeColors.gray400}/>
+      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
       {
         loading ?
           <Loading />

@@ -2,10 +2,11 @@ import React, {useState} from "react"
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { themeColors } from '../../constants/globalColors'
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
+import { faArrowLeft, faHome } from '@fortawesome/fontawesome-free-solid'
 
 const icons = {
   faArrowLeft: faArrowLeft,
+  faHome: faHome
 }
 
 const styles = {

@@ -28,14 +28,14 @@ const IconsList = (props) => {
       text: '分帳建議'
     },
     {
-      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/settings`,
-      faIcon: faBook,
-      text: '帳本設定'
-    },
-    {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/log_messages`,
       faIcon: faHistory,
       text: '編輯歷史'
+    },
+    {
+      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/settings`,
+      faIcon: faBook,
+      text: '帳本設定'
     },
 
   ]

@@ -76,7 +76,7 @@ function PaymentsHeader({
       }
       { small ?
           null :
-      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faArrowLeft'/>
+      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
       }
       <div className={innerBlockClasses.join(" ")}>
         {

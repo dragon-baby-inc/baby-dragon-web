@@ -12,7 +12,6 @@ const useAccountingBookSummary =  () => {
     setLoading(true)
     await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/summary`)
       .then(function (response) {
-        console.log(response.data)
         setSummary(response.data.transactions)
       })
       .catch(function (error) {

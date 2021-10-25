@@ -5,6 +5,7 @@ import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
 import EmptyResult from '../components/EmptyResult/EmptyResult'
 import useScrollInfo from 'react-element-scroll-hook';
 import Loading from '../components/Loading/Loading'
+import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
 import PageHeader from '../components/PageHeader/PageHeader'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
 import { themeColors } from '../constants/globalColors'
@@ -38,6 +39,7 @@ const AccountingBookSummaryPage = ({
   return(
     <div style={styles.bg}>
       <PageHeader title={'分帳建議'} color={themeColors.gray400}/>
+      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
       {
         loading ?
           <Loading />
