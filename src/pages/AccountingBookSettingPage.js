@@ -166,7 +166,7 @@ const AccountingBookSettingPage = (props) => {
             </label>
           </div>
           <div>
-            <label style={styles.label}>
+            <label style={styles.label} onClick={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/users`) }}>
               <span style={styles.description}>
                 預設分帳名單
               </span>

@@ -1,0 +1,23 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.container {
+  width: 100%;
+  overflow: hidden;
+  background-color: #fff;
+  z-index: 100;
+  transform: translateY(100%);
+  transform: translateY(0%);
+  transition: .2s;
+}
+
+.container.mount {
+  transform: translateY(0%);
+}
+
+.labels {
+  position:relative;
+  width: 100%;
+  height: calc(100vh - 79px);
+  overflow: auto;
+  font-weight: 300;
+}
