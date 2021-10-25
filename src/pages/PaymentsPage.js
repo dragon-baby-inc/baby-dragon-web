@@ -118,6 +118,9 @@ const PaymentsPage = (props) => {
     <>
       <div style={styles.bg}>
         <PaymentsHeader
+          deactiveEditMode={deactiveEditMode}
+          editMode={editMode}
+          activeEditMode={activeEditMode}
           selectAll={selectAll}
           handleSelectAllClick={handleSelectAllClick}
           editMode={editMode}
@@ -145,12 +148,6 @@ const PaymentsPage = (props) => {
         editMode ?
           <>
             <CircleFloatingIcon
-              clicked={deactiveEditMode}
-              faIcon='faTimes'
-              faColor={themeColors.gray600}
-              iconInlineStyle={{background: 'none', opacity: '0.95', backgroundColor: '#ffffff'}}
-              containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
-            <CircleFloatingIcon
               faIcon='faTrash'
               faColor={themeColors.white}
               clicked={handleDeletePayment}
@@ -159,23 +156,31 @@ const PaymentsPage = (props) => {
           </>
           :
           <>
-            <CircleFloatingIcon
-              clicked={() => navigate(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/new`)}
-              iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
-              faIcon='faPlus'
-              faColor={themeColors.white}
-              containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
-            <CircleFloatingIcon
-              clicked={activeEditMode}
-              iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
-              faIcon='faEdit'
-              faColor={themeColors.white}
-              containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
+            null
           </>
       }
     </>
   )
 }
+
+// <CircleFloatingIcon
+//   clicked={deactiveEditMode}
+//   faIcon='faTimes'
+//   faColor={themeColors.gray600}
+//   iconInlineStyle={{background: 'none', opacity: '0.95', backgroundColor: '#ffffff'}}
+//   containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
+//     <CircleFloatingIcon
+//       clicked={() => navigate(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/new`)}
+//       iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
+//       faIcon='faPlus'
+//       faColor={themeColors.white}
+//       containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
+//         <CircleFloatingIcon
+//           clicked={activeEditMode}
+//           iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
+//           faIcon='faEdit'
+//           faColor={themeColors.white}
+//           containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
 
 const styles = {
   bg: {

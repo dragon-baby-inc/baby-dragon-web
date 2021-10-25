@@ -28,7 +28,7 @@ function AccountingBookSettingsHeader({ scrollInfo, group }){
   }
 
   return(
-    <PageHeader title={'帳本設定'} faIcon={faUsers} color={themeColors.gray400}/>
+    <PageHeader title={'帳本設定'} color={themeColors.gray400}/>
   )
 }
 

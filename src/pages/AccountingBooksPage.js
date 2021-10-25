@@ -5,11 +5,12 @@ import AccountingBookLabel from '../components/FormElements/AccountingBookLabel/
 import AccountingBooksHeader from '../components/AccountingBooksHeader/AccountingBooksHeader'
 import useScrollInfo from 'react-element-scroll-hook';
 import Loading from '../components/Loading/Loading'
-import PageHeader from '../components/PageHeader/PageHeader'
+import PageHeader from '../components/AccountingBooksHeader/AccountingBooksHeader'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
 import { themeColors } from '../constants/globalColors'
 import CircleFloatingIcon from '../components/IconLinks/CircleFloatingIcon/CircleFloatingIcon'
-import TopRightIcon from '../components/IconLinks/TopRightIcon'
+import AccountingBookForm from '../components/Forms/AccountingBookForm/AccountingBookForm'
+import Backdrop from '../components/Backdrop/Backdrop'
 
 const styles = {
   bg: {
@@ -42,6 +43,7 @@ const AccountingBookSummaryPage = ({
 }) => {
   const [books, group, loading] = useAccountingBooks()
   const [scrollInfo, setRef] = useScrollInfo();
+  const [showForm, setShowForm] = useState(false)
 
   const objects = books.map(book => {
     return <AccountingBookLabel key={book.uuid} object={book}/>
@@ -49,8 +51,16 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-      <TopRightIcon link={`/liff_entry/groups/${group.id}/accounting_books/new`} color={themeColors.gold700} faIcon='faPlus'/>
-      <PageHeader title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+      <PageHeader setShowForm={setShowForm} group={group} title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+      {
+        showForm ?
+          <>
+            <AccountingBookForm />
+            <Backdrop icon="faTimes" clicked={() => setShowForm(false)}/>
+          </>
+          : null
+      }
+
       {
         loading ?
           <div style={styles.loading}>

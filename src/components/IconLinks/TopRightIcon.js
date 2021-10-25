@@ -5,13 +5,17 @@ import { themeColors } from '../../constants/globalColors'
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
 import { faBars } from '@fortawesome/fontawesome-free-solid'
 import { faCog } from '@fortawesome/fontawesome-free-solid'
-import { faPlus } from '@fortawesome/fontawesome-free-solid'
+import { faEdit } from '@fortawesome/fontawesome-free-solid'
+import { faTrash, faPlus, faTimes } from '@fortawesome/fontawesome-free-solid'
 
 const icons = {
   faArrowLeft: faArrowLeft,
   faBars: faBars,
   faCog: faCog,
-  faPlus: faPlus
+  faPlus: faPlus,
+  faEdit: faEdit,
+  faTimes: faTimes,
+  faTrash: faTrash
 }
 
 const styles = {
@@ -25,14 +29,24 @@ const styles = {
   }
 }
 
-function ArrowLeft({ link, color, faIcon }){
+function ArrowLeft({ clicked, link, color, faIcon, style }){
+  let addtionalStyle = {}
+  if (style) { addtionalStyle = style }
   return(
-      <NavLink
-        style={styles.back}
-        to={link}>
-        <FontAwesomeIcon icon={icons[faIcon]} color={color}/>
-      </NavLink>
-    )
+    <>
+      {
+        link ?
+          <NavLink
+            style={{ ...styles.back,  ...addtionalStyle}}
+            to={link}>
+            <FontAwesomeIcon icon={icons[faIcon]} color={color}/>
+          </NavLink> :
+          <div onClick={clicked} style={{ ...styles.back,  ...addtionalStyle}} >
+            <FontAwesomeIcon icon={icons[faIcon]} color={color}/>
+          </div>
+      }
+    </>
+  )
 }
 
 export default ArrowLeft

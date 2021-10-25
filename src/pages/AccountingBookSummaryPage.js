@@ -37,7 +37,7 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-      <PageHeader title={'分帳建議'} faIcon={faUsers} color={themeColors.gray400}/>
+      <PageHeader title={'分帳建議'} color={themeColors.gray400}/>
       {
         loading ?
           <Loading />

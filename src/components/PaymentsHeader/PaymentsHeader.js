@@ -22,6 +22,8 @@ const inlineStyles = {
 
 
 function PaymentsHeader({
+  deactiveEditMode,
+  activeEditMode,
   selectAll,
   handleSelectAllClick,
   editMode,
@@ -65,12 +67,22 @@ function PaymentsHeader({
           :
           null
       }
+      <TopRightIcon style={{ right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color='black' faIcon='faPlus'/>
+      {
+        editMode ?
+          <TopRightIcon clicked={deactiveEditMode} style={{ right: 38 }} color='gray' faIcon='faTimes'/>
+          :
+          <TopRightIcon clicked={activeEditMode} style={{ right: 38 }} color='black' faIcon='faTrash'/>
+      }
       { small ?
           null :
       <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faArrowLeft'/>
       }
       <div className={innerBlockClasses.join(" ")}>
-        <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gold900}/>
+        {
+          small ?
+            null : <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gold900}/>
+        }
         <div className={styles.textBlock}>
           <div>
             <div className={nameClasses.join(' ')}>

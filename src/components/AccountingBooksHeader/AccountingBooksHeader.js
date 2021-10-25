@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { themeColors } from '../../constants/globalColors'
 import { faUsers } from '@fortawesome/fontawesome-free-solid'
 import PageHeader from '../../components/PageHeader/PageHeader'
+import TopRightIcon from '../../components/IconLinks/TopRightIcon'
 
-function AccountingBooksHeader({ scrollInfo, group }){
+function AccountingBooksHeader({ scrollInfo, group, setShowForm }){
   const [small, setSmall] = useState(false)
 
   if (scrollInfo) {
@@ -29,7 +30,8 @@ function AccountingBooksHeader({ scrollInfo, group }){
 
   return(
     <>
-      <PageHeader title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+      <PageHeader title={'所有帳本'} color={themeColors.gray400}/>
+      <TopRightIcon clicked={() => setShowForm(true)} color={themeColors.gold700} faIcon='faPlus'/>
     </>
   )
 }

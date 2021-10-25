@@ -13,7 +13,10 @@ function PageHeader({
   return(
     <div className={classes.join(' ')}>
       <div className={styles.innerBlock}>
-        <FontAwesomeIcon className={styles.icon} icon={faIcon} color={color}/>
+        {
+          faIcon ?
+            <FontAwesomeIcon className={styles.icon} icon={faIcon} color={color}/> : null
+        }
         <div>
           <div className={styles.name}>
             {title}

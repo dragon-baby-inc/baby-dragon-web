@@ -164,8 +164,16 @@ const AccountingBookSettingPage = (props) => {
             }
           </label>
         </div>
-        <div style={styles.label}>
-          <div disabled={lockDeletion} onClick={handleAccountingBookDeletion} style={lockDeletion ? styles.alertLabelDisable : styles.alertLabel}>
+          <div>
+            <label style={styles.label}>
+              <span style={styles.description}>
+                預設分帳名單
+              </span>
+              <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+            </label>
+          </div>
+          <div style={styles.label}>
+            <div disabled={lockDeletion} onClick={handleAccountingBookDeletion} style={lockDeletion ? styles.alertLabelDisable : styles.alertLabel}>
             永久刪除此本帳本
           </div>
           <Toggle
@@ -193,7 +201,8 @@ const styles = {
   },
   alertLabelDisable: {
     cursor: 'not-allowed',
-    padding: '10px 0px',
+    padding: '6px 0px',
+    margin: '0px 0px',
     color: 'gray',
     fontSize: "15px",
     fontWeight: 500,
@@ -202,7 +211,8 @@ const styles = {
   alertLabel: {
     cursor: 'pointer',
     color: "#F9676A",
-    padding: '10px 0px',
+    margin: '0px 0px',
+    padding: '6px 0px',
     flexGrow: 1,
     fontSize: "15px",
     fontWeight: 500
@@ -212,6 +222,7 @@ const styles = {
     fontSize: "15px"
   },
   label: {
+    minHeight: '55px',
     cursor: 'pointer',
     width: "100%",
     display: "flex",

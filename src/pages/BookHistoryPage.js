@@ -91,7 +91,7 @@ const BookHistoryPage = ({
 
   return(
     <div style={styles.bg}>
-      <PageHeader title={'編輯歷史'} faIcon={faUsers} color={themeColors.gray400}/>
+      <PageHeader title={'編輯歷史'} color={themeColors.gray400}/>
       {
         loading ?
           <Loading />
