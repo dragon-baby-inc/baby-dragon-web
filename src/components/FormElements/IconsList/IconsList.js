@@ -12,11 +12,11 @@ import { faBook } from '@fortawesome/fontawesome-free-solid'
 const IconsList = (props) => {
   const [disabled, setDisabled] = useState(true)
   const links = [
-    {
-      href: `/liff_entry/groups/${props.group_id}/accounting_books`,
-      faIcon: faBook,
-      text: '帳本列表'
-    },
+//     {
+//       href: `/liff_entry/groups/${props.group_id}/accounting_books`,
+//       faIcon: faBook,
+//       text: '帳本列表'
+//     },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/payments`,
       faIcon: faList,
@@ -26,6 +26,11 @@ const IconsList = (props) => {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/summary`,
       faIcon: faClipboard,
       text: '分帳建議'
+    },
+    {
+      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/settings`,
+      faIcon: faBook,
+      text: '帳本設定'
     },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/log_messages`,

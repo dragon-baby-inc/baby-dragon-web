@@ -12,6 +12,8 @@ import {
   faArrowRight,
   faChevronRight,
   faCog,
+  faLock,
+  faLockOpen
 } from '@fortawesome/fontawesome-free-solid'
 import {
   faCheckDouble
@@ -30,7 +32,9 @@ const icons = {
   faArrowLeft: faArrowLeft,
   faArrowRight: faArrowRight,
   faChevronRight: faChevronRight,
-  faCog: faCog
+  faCog: faCog,
+  faLock: faLock,
+  faLockOpen: faLockOpen
 }
 
 const Icon = (props) => {

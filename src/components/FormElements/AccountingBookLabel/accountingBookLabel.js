@@ -68,7 +68,11 @@ const AccountingBookLabel = (props) => {
             </div>
         }
         <div className={`group-menu-payment-block ${activeClass}`}>
-          <MyFontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faIcon='faBookOpen' color={themeColors.gold900}/>
+          { object.current ?
+            <MyFontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faIcon='faBookOpen' color={themeColors.gold900}/>
+            :
+            <MyFontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faIcon='faBookOpen' color={themeColors.gray400}/>
+          }
           <div className='group-menu-username'>
             <div className='description'>
               { object.name }
@@ -78,12 +82,14 @@ const AccountingBookLabel = (props) => {
             </div>
           </div>
           { object.current ?
-            <div className={`col-4 group-menu-amount ${activeClass}`}>
-              預設帳本
-            </div> :
-              null
+            <>
+              <div className={`col-4 group-menu-amount ${activeClass}`}>
+                預設帳本
+              </div>
+            </>
+            : null
           }
-          <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gold900}/>
+          <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
         </div>
       </label>
       <Collapse isOpened={false}>
@@ -95,9 +101,6 @@ const AccountingBookLabel = (props) => {
             <Button className='icon' btnClass='icon switch'>
               <FontAwesomeIcon icon={faEdit}/> 設為預設
             </Button>
-            <Button className='icon' btnClass='icon' clicked={() => { history.push(`accounting_books/${object.uuid}/payments`) }}>
-              <FontAwesomeIcon icon={faEdit}/> 看帳
-            </Button>
           </div>
         </div>
       </Collapse>
@@ -105,4 +108,7 @@ const AccountingBookLabel = (props) => {
   )
 };
 
+//             <Button className='icon' btnClass='icon' clicked={() => { history.push(`accounting_books/${object.uuid}/payments`) }}>
+//               <FontAwesomeIcon icon={faEdit}/> 看帳
+//             </Button>
 export default AccountingBookLabel;

@@ -1,9 +1,9 @@
 import React from "react"
 import styles from './Button.module.scss'
 
-function Button({ children, disabled, clicked, btnClass}){
+function Button({ style, children, disabled, clicked, btnClass}){
   return(
-    <button disabled={disabled} onClick={clicked} className={[styles.button, btnClass].join(' ')}>{children}</button>
+    <button style={style} disabled={disabled} onClick={clicked} className={[styles.button, btnClass].join(' ')}>{children}</button>
     )
 }
 

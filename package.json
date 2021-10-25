@@ -28,6 +28,7 @@
     "react-scripts": "4.0.3",
     "react-spinners": "^0.10.6",
     "react-swipeable-views": "^0.13.9",
+    "react-toggle": "^4.1.2",
     "react-use": "^17.2.4",
     "sass": "^1.32.8",
     "web-vitals": "^1.0.1"
