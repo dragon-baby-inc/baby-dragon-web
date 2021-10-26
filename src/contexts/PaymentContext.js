@@ -252,6 +252,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
       afterSubmit()
     })
     .catch(function (error) {
+      afterSubmit()
     })
 }
 

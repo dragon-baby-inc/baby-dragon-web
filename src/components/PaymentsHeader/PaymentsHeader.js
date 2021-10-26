@@ -59,24 +59,24 @@ function PaymentsHeader({
         editMode ?
           <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
             { selectAll ?
-              <FontAwesomeIcon color={themeColors.gold900} faIcon='faCheckDouble'/>
+              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faIcon='faCheckDouble'/>
               :
-              <FontAwesomeIcon color={themeColors.gold900} faIcon='faCheckDouble'/>
+              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faIcon='faCheckDouble'/>
             }
           </div>
           :
           null
       }
-      <TopRightIcon style={{ right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color='black' faIcon='faPlus'/>
+      <TopRightIcon style={{ fontSize: '20px', right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color={themeColors.gold900} faIcon='faPlus'/>
       {
         editMode ?
-          <TopRightIcon clicked={deactiveEditMode} style={{ right: 50 }} color='gray' faIcon='faTimes'/>
+          <TopRightIcon clicked={deactiveEditMode} style={{ fontSize: '20px', right: 40 }} color='gray' faIcon='faTimes'/>
           :
-          <TopRightIcon clicked={activeEditMode} style={{ right: 38 }} color='black' faIcon='faTrash'/>
+          <TopRightIcon clicked={activeEditMode} style={{ fontSize: '18px', right: 40, top: 1 }} color={themeColors.gold900} faIcon='faTrash'/>
       }
       { small ?
           null :
-          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
+          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
       }
       <div className={innerBlockClasses.join(" ")}>
         {

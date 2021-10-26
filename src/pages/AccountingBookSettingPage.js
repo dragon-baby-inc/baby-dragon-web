@@ -100,7 +100,7 @@ const AccountingBookSettingPage = (props) => {
     <>
       <div style={styles.bg}>
         <AccountingBookSettingsHeader></AccountingBookSettingsHeader>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
+        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
         <div style={styles.settings}>
           <div>
             <label style={styles.label}>

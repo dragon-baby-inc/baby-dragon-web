@@ -51,8 +51,8 @@ const AccountingBookUsersPage = (props) => {
     <>
       <div style={styles.bg}>
         <PageHeader title={editMode ? '編輯分帳名單' : '編輯使用者'} color={themeColors.gray400}/>
-        <TopRightIcon clicked={() => {setShowForm(true)}} color={themeColors.gold700} faIcon='faPlus'/>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color='black' faIcon='faArrowLeft'/>
+        <TopRightIcon clicked={() => {setShowForm(true)}} color={themeColors.gold900} faIcon='faPlus' style={{right: 2, fontSize: '20px'}}/>
+        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color={themeColors.gold900} faIcon='faArrowLeft' style={{fontSize: '20px'}}/>
         {
           loading ?
             null :

@@ -31,7 +31,7 @@ function AccountingBooksHeader({ scrollInfo, group, setShowForm }){
   return(
     <>
       <PageHeader title={'所有帳本'} color={themeColors.gray400}/>
-      <TopRightIcon clicked={() => setShowForm(true)} color={themeColors.gold700} faIcon='faPlus'/>
+      <TopRightIcon clicked={() => setShowForm(true)} color={themeColors.gold900} faIcon='faPlus' style={{fontSize: '20px', right: 2}}/>
     </>
   )
 }

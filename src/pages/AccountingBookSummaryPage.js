@@ -39,7 +39,7 @@ const AccountingBookSummaryPage = ({
   return(
     <div style={styles.bg}>
       <PageHeader title={'分帳建議'} color={themeColors.gray400}/>
-      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
+        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
       {
         loading ?
           <Loading />

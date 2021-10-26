@@ -25,7 +25,7 @@ const styles = {
     top: 0,
     color: 'white',
     textDecoration: "none",
-    padding: '20px',
+    padding: '18px 20px 22px',
   }
 }
 

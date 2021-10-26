@@ -16,18 +16,21 @@ const styles = {
     top: 0,
     color: 'white',
     textDecoration: "none",
-    padding: '20px',
+    fontSize: '20px',
+    padding: '18px 20px 22px',
   }
 }
 
-function ArrowLeft({ link, color, faIcon }){
+function TopLeftIcon({ link, color, faIcon, style }){
+  let addtionalStyle = {}
+  if (style) { addtionalStyle = style }
   return(
       <NavLink
-        style={styles.back}
+        style={{ ...styles.back,  ...addtionalStyle}}
         to={link}>
         <FontAwesomeIcon icon={icons[faIcon]} color={color}/>
       </NavLink>
     )
 }
 
-export default ArrowLeft
+export default TopLeftIcon

@@ -13,6 +13,15 @@ import Moment from 'react-moment';
 import moment from 'moment/min/moment-with-locales';
 
 const styles = {
+  category: {
+    padding: '0px 0px',
+    paddingRight: "8px",
+    marginRight: "8px",
+    borderRight: '1px solid #eeeeee',
+    minWidth: '40px',
+    lineHeight: '1.2rem',
+    width: '40px'
+  },
   bg: {
     width: '100vw',
     height: '100vh',
@@ -80,6 +89,9 @@ const BookHistoryPage = ({
     }
     objects.push(
       <div key={object.id} style={styles.label}>
+        <div style={styles.category}>
+          {object.display_category}
+        </div>
         <div style={styles.text}>
           {object.content}
           <span style={styles.userName}>
@@ -93,7 +105,7 @@ const BookHistoryPage = ({
   return(
     <div style={styles.bg}>
       <PageHeader title={'編輯歷史'} color={themeColors.gray400}/>
-      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color='black' faIcon='faHome'/>
+      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
       {
         loading ?
           <Loading />
