@@ -61,7 +61,7 @@ const PaymentCreationPage = (props) => {
 //       if (!payer) { alert('未授權') }
 
       setAccountingBookDetails(accountingBookDetails)
-      setOwers(users)
+      setOwers(users.filter((u) => u.coverCost))
       setDisableForm(false)
     }
   }, [users, authState, accountingBookDetails, loading])
