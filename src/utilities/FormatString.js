@@ -1,7 +1,7 @@
 class FormatString {
-  sliceToLength(string, maxLength, sub) {
+  static sliceToLength(string, maxLength, sub) {
     let str = string.toString()
-    if (this.halfLength(str) > maxLength) {
+    if (FormatString.halfLength(str) > maxLength) {
 
       let realLength = 0
       let currentLength = 0
@@ -26,7 +26,8 @@ class FormatString {
       return str
     }
   };
-  halfLength(value) {
+
+  static halfLength(value) {
     if (!value) { return 0 }
     let length = 0
     for (let c of value) {
@@ -37,6 +38,10 @@ class FormatString {
       }
     }
     return length;
+  }
+
+  sliceToLength(string, maxLength, sub) {
+    return FormatString.sliceToLength(string, maxLength, sub)
   }
 }
 

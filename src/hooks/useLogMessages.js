@@ -12,7 +12,6 @@ const useLogMessages =  (query) => {
     setLoading(true)
     await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/log_messages`)
       .then(function (response) {
-        console.log(response.data)
         setlogMessages(response.data.log_messages)
       })
       .catch(function (error) {

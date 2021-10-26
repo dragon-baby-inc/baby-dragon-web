@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react"
 import useAccountingBook from '../hooks/useAccountingBook'
-import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
+import useUsers from '../hooks/useUsers'
 import { themeColors } from '../constants/globalColors'
+import menuStyles from '../components/FormElements/SelectMenu/AccountingBookUserMenu.module.scss'
 import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
 import PageHeader from '../components/PageHeader/PageHeader'
 import Loading from '../components/Loading/Loading'
@@ -17,11 +18,11 @@ import Button from '../components/FormElements/Button/Button'
 import AccountingBookUserMenu from '../components/FormElements/SelectMenu/AccountingBookUserMenu'
 import TopRightIcon from '../components/IconLinks/TopRightIcon'
 import UserForm from '../components/Forms/UserForm/UserForm'
+import UserLabel from '../components/FormElements/UserLabel/UserLabel'
 
-const AccountingBookUsersPage = (props) => {
+const GroupUsersPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
-  const [users, accountingBookDetails, loading] = useAccountingBook()
-  const [summary] = useAccountingBookSummary()
+  const [users, setUsers, loading] = useUsers()
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams();
   const [lockDeletion, setLockDeletion] = useState(true)
@@ -29,22 +30,29 @@ const AccountingBookUsersPage = (props) => {
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    setSelectObjectIds([])
   }, [users])
 
-  const [timer, setTimer] = useState(null)
-  const handleCoverCostUser = (objects) => {
-    setSelectObjectIds(objects.map(obj => obj.id))
-
-    clearTimeout(timer)
-
-    let updateTimer = setTimeout(() => {
-      axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/users`, { accounting_book_user_ids: objects.map(obj => obj.id) })
-        .catch((res) => {
-          window.location.reload();
+  const handleDeleteUser = (id) => {
+    if (id) {
+      axios.delete(`api/v1/groups/${group_id}/users/${id}`)
+        .then(res => {
+          window.location.reload()
         })
-    }, 1200)
-    setTimer(updateTimer)
+        .catch((res) => {
+        })
+    }
+  }
+
+  let objectLabels= []
+  if (users) {
+    objectLabels = users.map(object => {
+      return <UserLabel
+        handleDeleteUser={handleDeleteUser}
+        hideInput={true}
+        key={object.id}
+        object={object}
+      />
+    })
   }
 
   return(
@@ -52,18 +60,13 @@ const AccountingBookUsersPage = (props) => {
       <div style={styles.bg}>
         <PageHeader title={editMode ? '編輯分帳名單' : '編輯使用者'} color={themeColors.gray400}/>
         <TopRightIcon clicked={() => {setShowForm(true)}} color={themeColors.gold900} faIcon='faPlus' style={{right: 2, fontSize: '20px'}}/>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color={themeColors.gold900} faIcon='faArrowLeft' style={{fontSize: '20px'}}/>
+        <TopLeftIcon link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/settings`} color={themeColors.gold900} faIcon='faArrowLeft' style={{fontSize: '20px'}}/>
         {
           loading ?
             null :
-            <AccountingBookUserMenu
-              editMode={false}
-              setEditMode={setEditMode}
-              labelType="user"
-              objects={users}
-              selected_object_ids={selectObjectIds}
-              changed={handleCoverCostUser}
-            />
+            <div className={menuStyles.labels}>
+              {objectLabels}
+            </div>
         }
       {
         showForm ?
@@ -78,12 +81,6 @@ const AccountingBookUsersPage = (props) => {
   )
 }
 
-  // {
-  //   editMode ?
-  //     <TopRightIcon clicked={() => {setEditMode(false)}} style={{ right: 38 }} color={themeColors.gold700} faIcon='faTimes'/>
-  //     :
-  //     <TopRightIcon clicked={() => {setEditMode(true)}} style={{ right: 38 }} color={themeColors.gold700} faIcon='faEdit'/>
-  // }
 const styles = {
   textInput: {
     textAlign: "right",
@@ -122,4 +119,4 @@ const styles = {
   },
 }
 
-export default AccountingBookUsersPage
+export default GroupUsersPage
