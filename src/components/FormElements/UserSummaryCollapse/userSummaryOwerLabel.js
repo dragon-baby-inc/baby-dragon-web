@@ -22,7 +22,7 @@ const UserSummaryOwerLabel = (props) => {
   let name = object.ower_display_name
   let accountingBookDetails = props.accountingBookDetails
 
-  if (formatString.halfLength(name) > 9) {
+  if (FormatString.halfLength(name) > 9) {
     name = `${name.slice(0, 9)}...`
   }
 

@@ -14,7 +14,7 @@ import { Context as AuthContext } from '../contexts/AuthContext'
 import ArrowLeft from '../components/IconLinks/ArrowLeft/ArrowLeft'
 
 const styles = {
-  bg: {
+  bg:  {
     background: `linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)`,
     width: '100vw',
     height: '100vh',
