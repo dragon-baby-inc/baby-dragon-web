@@ -87,7 +87,7 @@ const CheckboxSelectMenu = ({ objects, labelType, selected_object_ids, changed }
         </div>
       </label>
 
-      <div className={styles.labels}>
+      <div className={styles.checkboxLabels}>
         {objectLabels}
       </div>
     </div>

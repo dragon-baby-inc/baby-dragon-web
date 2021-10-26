@@ -20,6 +20,14 @@
 .labels {
   position:relative;
   width: 100%;
-  height: calc(100vh - 79px);
+  height: calc(100vh - 66px - 41px - 38px);
   overflow: auto;
+}
+
+.checkboxLabels {
+  position:relative;
+  width: 100%;
+  height: calc(100vh - 66px - 41px - 48px - 32px);
+  overflow: auto;
+
 }
