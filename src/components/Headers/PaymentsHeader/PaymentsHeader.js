@@ -52,29 +52,29 @@ function PaymentsHeader({
         editMode ?
           <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
             { selectAll ?
-              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faIcon='faCheckDouble'/>
+              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faicon='faCheckDouble'/>
               :
-              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faIcon='faCheckDouble'/>
+              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faicon='faCheckDouble'/>
             }
           </div>
           :
           null
       }
-      <TopRightIcon style={{ fontSize: '20px', right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color={themeColors.gold900} faIcon='faPlus'/>
+      <TopRightIcon style={{ fontSize: '20px', right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color={themeColors.gold900} faicon='faPlus'/>
       {
         editMode ?
-          <TopRightIcon clicked={deactiveEditMode} style={{ fontSize: '20px', right: 40 }} color='gray' faIcon='faTimes'/>
+          <TopRightIcon clicked={deactiveEditMode} style={{ fontSize: '20px', right: 40 }} color='gray' faicon='faTimes'/>
           :
-          <TopRightIcon clicked={activeEditMode} style={{ fontSize: '18px', right: 40, top: 1 }} color={themeColors.gold900} faIcon='faTrash'/>
+          <TopRightIcon clicked={activeEditMode} style={{ fontSize: '18px', right: 40, top: 1 }} color={themeColors.gold900} faicon='faTrash'/>
       }
       { small ?
           null :
-          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
+          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faicon='faHome' style={{fontSize: '20px'}}/>
       }
       <div className={innerBlockClasses.join(" ")}>
         {
           small ?
-            null : <FontAwesomeIcon className={styles.bookIcon} faIcon='faBookOpen' color={themeColors.gold900}/>
+            null : <FontAwesomeIcon className={styles.bookIcon} faicon='faBookOpen' color={themeColors.gold900}/>
         }
         <div className={styles.textBlock}>
           <div>

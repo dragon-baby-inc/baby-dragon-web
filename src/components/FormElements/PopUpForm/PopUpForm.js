@@ -19,7 +19,6 @@ const PopUpForm = ({
     changed(updatedObjects)
   }
 
-  let labelClasses = [styles.label]
   let inputs = objects.map(object => {
     return <div>
       <AmountInput

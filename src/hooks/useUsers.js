@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 
 const useUsers =  (callback) => {
   const { group_id } = useParams();
-  const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
 
@@ -25,16 +24,17 @@ const useUsers =  (callback) => {
         }))
       })
       .catch(function (error) {
-        setErr(error);
+        console.log(error)
       })
     setLoading(false)
   }
 
   useEffect(() => {
     getUsers();
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
-  return [users, setUsers, loading];
+  return [users, loading];
 }
 
 export default useUsers;

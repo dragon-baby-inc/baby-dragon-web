@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import './accountingBookLabel.scss'
-import { Collapse } from 'react-collapse';
 import { useHistory } from "react-router-dom";
 import { themeColors } from '../../../constants/globalColors'
-import { Button, FontAwesomeIcon } from '../../index'
+import { FontAwesomeIcon } from '../../index'
 import Moment from 'react-moment';
 import 'moment/locale/zh-tw';
 
 const AccountingBookLabel = (props) => {
   const history = useHistory();
-  const [ collapseOpen , setCollapseOpen ] = useState(false)
   let object = props.object
-  let activeClass = collapseOpen ? 'active' : ''
 
   const calendar = {
     sameDay: '[今日]',
@@ -29,7 +26,7 @@ const AccountingBookLabel = (props) => {
 
   return (
     <>
-      <label onClick={handleClicked} className={`group-menu-label group-menu-checkbox-label group-menu-accounting-book ${activeClass}`}>
+      <label onClick={handleClicked} className={`group-menu-label group-menu-checkbox-label group-menu-accounting-book`}>
         {
           props.editMode ?
             <div className='group-menu-checkbox'>
@@ -49,11 +46,11 @@ const AccountingBookLabel = (props) => {
               />
             </div>
         }
-        <div className={`group-menu-payment-block ${activeClass}`}>
+        <div className={`group-menu-payment-block`}>
           { object.current ?
-            <FontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faIcon='faBookOpen' color={themeColors.gold900}/>
+            <FontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faicon='faBookOpen' color={themeColors.gold900}/>
             :
-            <FontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faIcon='faBookOpen' color={themeColors.gray400}/>
+            <FontAwesomeIcon style={{ fontSize: "20px", marginRight: "10px" }} faicon='faBookOpen' color={themeColors.gray400}/>
           }
           <div className='group-menu-username'>
             <div className='description'>
@@ -65,13 +62,13 @@ const AccountingBookLabel = (props) => {
           </div>
           { object.current ?
             <>
-              <div className={`col-4 group-menu-amount ${activeClass}`}>
+              <div className={`col-4 group-menu-amount`}>
                 預設帳本
               </div>
             </>
             : null
           }
-          <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+          <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faicon='faChevronRight' color={themeColors.gray900}/>
         </div>
       </label>
     </>

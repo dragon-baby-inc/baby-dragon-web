@@ -6,6 +6,7 @@ import { useHistory, useAccountingBook } from '../hooks'
 import axios from '../api/dragonBabyApi'
 
 const AccountingBookSettingPage = (props) => {
+  /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const history = useHistory();
   const [lockDeletion, setLockDeletion] = useState(true)
@@ -17,6 +18,7 @@ const AccountingBookSettingPage = (props) => {
     setAutoDetectPayment(accountingBookDetails.use_payment_auto_detection)
     setLineNotification(accountingBookDetails.send_liff_confirm_message)
     setCurrent(accountingBookDetails.current)
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [accountingBookDetails])
 
   const updateAccountingBook = (params) => {
@@ -43,14 +45,13 @@ const AccountingBookSettingPage = (props) => {
     setCurrent(value)
     if (value) {
       axios.post(`api/v1/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/set_as_current`)
-        .then((res) => {
-          console.log(res)
+        .catch((res) => {
+          console.log(res.response)
         })
     }
   }
 
   const handleCurrentChange = (value, params, setState) => {
-    console.log(updateAccountingBook)
     updateAccountingBook(params)
       .then((res) => {
         console.log(res)
@@ -79,7 +80,7 @@ const AccountingBookSettingPage = (props) => {
     <>
       <div style={styles.bg}>
         <AccountingBookSettingsHeader></AccountingBookSettingsHeader>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
+        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faicon='faHome' style={{fontSize: '20px'}}/>
         <div style={styles.settings}>
           <div>
             <label style={styles.label}>
@@ -91,7 +92,8 @@ const AccountingBookSettingPage = (props) => {
                   null :
                   <input
                     style={styles.textInput}
-                    type="text" value={state.name.value}
+                    type="text"
+                    value={state.name.value === undefined ? '' : state.name.value}
                     onChange={(e) => handlInputChange(e.target.value, { name: e.target.value }, setName)}
                   />
               }
@@ -101,7 +103,7 @@ const AccountingBookSettingPage = (props) => {
                 <span style={styles.description}>
                   設定分帳名單
                 </span>
-                <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+                <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faicon='faChevronRight' color={themeColors.gray900}/>
               </label>
             </div>
             <div>
@@ -109,7 +111,7 @@ const AccountingBookSettingPage = (props) => {
                 <span style={styles.description}>
                   編輯使用者
                 </span>
-                <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+                <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faicon='faChevronRight' color={themeColors.gray900}/>
               </label>
             </div>
             <label style={styles.label}>
@@ -121,8 +123,7 @@ const AccountingBookSettingPage = (props) => {
                   null :
                   <Toggle
                     disabled={state.current.value === true}
-                    defaultChecked={state.current.value}
-                    checked={state.current.value}
+                    checked={state.current.value === undefined ? false : state.current.value}
                     changed={(e) => handleSetAsCurrent(e.target.checked)}
                     name="current"
                   />
@@ -136,8 +137,7 @@ const AccountingBookSettingPage = (props) => {
                 loading ?
                   null :
                   <Toggle
-                    defaultChecked={state.autoDetectPayment.value}
-                    checked={state.autoDetectPayment.value}
+                    checked={state.autoDetectPayment.value === undefined ? false : state.autoDetectPayment.value}
                     changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
                     description="自動偵測群組帳款指令"
                     name="autoDetectPayment"
@@ -152,8 +152,7 @@ const AccountingBookSettingPage = (props) => {
                 loading ?
                   null :
                   <Toggle
-                    defaultChecked={state.lineNotification.value}
-                    checked={state.lineNotification.value}
+                    checked={state.lineNotification.value === undefined ? false : state.lineNotification.value}
                     changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
                     name="lineNotification"
                   />
@@ -165,12 +164,11 @@ const AccountingBookSettingPage = (props) => {
               永久刪除此本帳本
             </div>
             <Toggle
-              defaultChecked={!lockDeletion}
               checked={!lockDeletion}
               changed={(e) => setLockDeletion(!e.target.checked)}
               icons={ {
-                checked: <FontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLockOpen' color="white"/> ,
-                unchecked: <FontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLock' color="white"/> ,
+                checked: <FontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faicon='faLockOpen' color="white"/> ,
+                unchecked: <FontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faicon='faLock' color="white"/> ,
               } }
               name="current"
             />

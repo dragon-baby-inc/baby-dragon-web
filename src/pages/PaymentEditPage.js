@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import { Context } from '../contexts/PaymentContext'
 import { Context as AuthContext } from '../contexts/AuthContext'
-import { usePayment, useUsers, useAccountingBook } from '../hooks'
+import { usePayment, useAccountingBook } from '../hooks'
 import {
   DotGroup,
   RadioSelectMenu,
@@ -69,7 +69,8 @@ const PaymentCreationPage = (props) => {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    return resetForm
+    resetForm()
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
   useEffect(() => {
@@ -81,7 +82,7 @@ const PaymentCreationPage = (props) => {
 
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       setBuilder(users[0])
-      //       if (!builder) { alert('未授權') }
+      // if (!builder) { alert('未授權') }
 
       setAmount(parseFloat(payment.amount))
       setName(payment.description)
@@ -89,18 +90,18 @@ const PaymentCreationPage = (props) => {
       setCreationDate(payment.created_at)
 
       if (payment.paid_back) {
-        let ower = users.filter(u => u.id == payment.allocations[0].ower_id)[0]
+        let ower = users.filter(u => u.id === payment.allocations[0].ower_id)[0]
         setOwer(ower)
         setFixedAmount(payment.amount)
       }
 
-      if (payment.allocation_type == 'evenly') {
+      if (payment.allocation_type === 'evenly') {
         let ower_ids = payment.allocations.map(a => a.ower_id)
-        setOwers(users.filter(u => ower_ids.includes(String(u.id))))
+        setOwers(users.filter(u => ower_ids.includes(u.id)))
         setAllocationType(payment.allocation_type)
-      } else if (payment.allocation_type == 'amount'){
+      } else if (payment.allocation_type === 'amount'){
         let owers = users.map(user => {
-          let ower = payment.allocations.filter(a => a.ower_id == user.id)[0]
+          let ower = payment.allocations.filter(a => a.ower_id === user.id)[0]
           if (ower) { user['amount'] = ower.amount }
           return user
         })
@@ -110,7 +111,8 @@ const PaymentCreationPage = (props) => {
       setAccountingBookDetails(accountingBookDetails)
       setDisableForm(false)
     }
-  }, [authState, loading, paymentLoading])
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [users, authState, loading, paymentLoading])
 
   const afterSubmit = () => {
     history.push(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`)

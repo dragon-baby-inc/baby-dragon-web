@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import menuStyles from '../components/FormElements/SelectMenu/AccountingBookUserMenu.module.scss'
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
@@ -14,13 +14,9 @@ import {
 } from '../components'
 
 const GroupUsersPage = (props) => {
-  const [ editMode, setEditMode ] = useState(false)
-  const [users, setUsers, loading] = useUsers()
+  const [users, loading] = useUsers()
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
-
-  useEffect(() => {
-  }, [users])
 
   const handleDeleteUser = (id) => {
     if (id) {
@@ -48,9 +44,9 @@ const GroupUsersPage = (props) => {
   return(
     <>
       <div style={styles.bg}>
-        <PageHeader title={editMode ? '編輯分帳名單' : '編輯使用者'} color={themeColors.gray400}/>
-        <TopRightIcon clicked={() => {setShowForm(true)}} color={themeColors.gold900} faIcon='faPlus' style={{right: 2, fontSize: '20px'}}/>
-        <TopLeftIcon link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/settings`} color={themeColors.gold900} faIcon='faArrowLeft' style={{fontSize: '20px'}}/>
+        <PageHeader title='編輯使用者' color={themeColors.gray400}/>
+        <TopRightIcon clicked={() => {setShowForm(true)}} color={themeColors.gold900} faicon='faPlus' style={{right: 2, fontSize: '20px'}}/>
+        <TopLeftIcon link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/settings`} color={themeColors.gold900} faicon='faArrowLeft' style={{fontSize: '20px'}}/>
         {
           loading ?
             null :

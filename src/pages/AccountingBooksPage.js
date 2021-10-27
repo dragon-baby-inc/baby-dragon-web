@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import useScrollInfo from 'react-element-scroll-hook';
 import { useAccountingBooks } from '../hooks';
 import { themeColors } from '../constants/globalColors'
 import {
   Loading,
   AccountingBookLabel,
-  PageHeader,
+  AccountingBooksHeader,
   AccountingBookForm,
   Backdrop
 } from '../components';
@@ -38,7 +37,6 @@ const AccountingBookSummaryPage = ({
   users,
 }) => {
   const [books, group, loading] = useAccountingBooks()
-  const [scrollInfo, setRef] = useScrollInfo();
   const [showForm, setShowForm] = useState(false)
 
   const objects = books.map(book => {
@@ -47,7 +45,7 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-      <PageHeader setShowForm={setShowForm} group={group} title={'帳本列表'} color={themeColors.gray400}/>
+      <AccountingBooksHeader setShowForm={setShowForm} group={group} title={'帳本列表'} color={themeColors.gray400}/>
       {
         showForm ?
           <>
@@ -61,7 +59,7 @@ const AccountingBookSummaryPage = ({
         loading ?
           <div style={styles.loading}> <Loading /> </div>
           :
-          <div style={styles.books} ref={setRef}> {objects} </div>
+          <div style={styles.books}> {objects} </div>
       }
     </div>
   )

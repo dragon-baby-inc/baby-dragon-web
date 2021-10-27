@@ -40,9 +40,9 @@ export const { Context, Provider } = createDataContext(
     setCurrent,
   },
   {
-    name: { value: null, valid: null },
-    autoDetectPayment: { value: null, valid: null },
-    lineNotification: { value: null, valid: null },
-    current: { value: null, valid: null },
+    name: { value: '', valid: null },
+    autoDetectPayment: { value: true, valid: null },
+    lineNotification: { value: true, valid: null },
+    current: { value: false, valid: null },
   }
 )

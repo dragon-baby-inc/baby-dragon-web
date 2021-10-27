@@ -42,6 +42,8 @@ class Validator {
     let amount = objects.reduce((prev, object) => {
       if (parseFloat(object.amount) > 0) {
         return prev + parseFloat(object.amount)
+      } else {
+        return prev + 0
       }
     }, 0)
     console.log('validation')

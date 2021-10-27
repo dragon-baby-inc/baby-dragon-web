@@ -14,14 +14,14 @@ const styles = {
   }
 }
 
-function TopLeftIcon({ link, color, faIcon, style }){
+function TopLeftIcon({ link, color, faicon, style }){
   let addtionalStyle = {}
   if (style) { addtionalStyle = style }
   return(
     <NavLink
       style={{ ...styles.back,  ...addtionalStyle}}
       to={link}>
-      <FontAwesomeIcon faIcon={faIcon} color={color}/>
+      <FontAwesomeIcon faicon={faicon} color={color}/>
     </NavLink>
   )
 }

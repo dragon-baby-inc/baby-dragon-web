@@ -1,5 +1,4 @@
 import React from "react"
-import useScrollInfo from 'react-element-scroll-hook';
 import { useAccountingBookSummary } from '../hooks'
 import { PageHeader, TopLeftIcon, Loading, EmptyResult, UserSummaryLabel } from '../components'
 import { themeColors } from '../constants'
@@ -24,7 +23,6 @@ const AccountingBookSummaryPage = ({
   accountingBookDetails
 }) => {
   const [summary, loading] = useAccountingBookSummary()
-  const [scrollInfo, setRef] = useScrollInfo();
 
   let objects = summary.map(object => {
     return <UserSummaryLabel key={object.payer_id} object={object} accountingBookDetails={accountingBookDetails}></UserSummaryLabel>
@@ -36,13 +34,13 @@ const AccountingBookSummaryPage = ({
       <TopLeftIcon
         link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
         color={themeColors.gold900}
-        faIcon='faHome'
+        faicon='faHome'
         style={{fontSize: '20px'}}/>
       {
         loading ?
           <Loading />
           :
-          <div style={styles.summary} ref={setRef}>
+          <div style={styles.summary}>
             { objects.length > 0 ?  objects : <EmptyResult message='目前沒有任何款項喔'/> }
           </div>
       }

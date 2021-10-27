@@ -50,7 +50,8 @@ const PaymentCreationPage = (props) => {
   const [index, useIndex] = useState(0)
 
   useEffect(() => {
-    return resetForm
+    resetForm()
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
   useEffect(() => {
@@ -58,12 +59,13 @@ const PaymentCreationPage = (props) => {
       let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       if (payer) { setPayer(payer) }
       setBuilder(users[0])
-      //       if (!payer) { alert('未授權') }
+      // if (!payer) { alert('未授權') }
 
       setAccountingBookDetails(accountingBookDetails)
       setOwers(users.filter((u) => u.coverCost))
       setDisableForm(false)
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [users, authState, accountingBookDetails, loading])
 
   const afterSubmit = () => {

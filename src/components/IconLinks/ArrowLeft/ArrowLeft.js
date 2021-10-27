@@ -18,7 +18,7 @@ function ArrowLeft({ link, color }){
     <NavLink
       style={styles.back}
       to={link}>
-      <FontAwesomeIcon faIcon="faArrowLeft" color={color}/>
+      <FontAwesomeIcon faicon="faArrowLeft" color={color}/>
     </NavLink>
   )
 }

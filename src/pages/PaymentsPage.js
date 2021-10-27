@@ -18,6 +18,7 @@ const PaymentsPage = (props) => {
   const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
   const { state: authState } = useContext(AuthContext)
   const [ small, setSmall ] = useState(false)
+  /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails] = useAccountingBook()
   const [payments, paymentLoading, getPayments] = usePayments('')
   const [scrollInfo, setRef] = useScrollInfo();
@@ -55,7 +56,6 @@ const PaymentsPage = (props) => {
       paymentLabels.push( <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
     }
 
-    console.log(payment.id)
     paymentLabels.push(
       <PaymentCheckboxLabel
         selectedPaymentIds={selectedPaymentIds}
@@ -109,7 +109,6 @@ const PaymentsPage = (props) => {
           activeEditMode={activeEditMode}
           selectAll={selectAll}
           handleSelectAllClick={handleSelectAllClick}
-          editMode={editMode}
           scrollInfo={scrollInfo}
           small={small}
           accountingBookDetails={accountingBookDetails}
@@ -134,7 +133,7 @@ const PaymentsPage = (props) => {
         editMode ?
           <>
             <CircleFloatingIcon
-              faIcon='faTrash'
+              faicon='faTrash'
               faColor={themeColors.white}
               clicked={handleDeletePayment}
               iconInlineStyle={{background: 'none', backgroundColor: 'red'}}

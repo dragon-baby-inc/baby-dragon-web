@@ -3,31 +3,34 @@ import styles from './IconsList.module.scss'
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '../../index'
 
-const IconsList = (props) => {
+const IconsList = ({
+  group_id,
+  id
+}) => {
   const [disabled, setDisabled] = useState(true)
   const links = [
     // {
-    //   href: `/liff_entry/groups/${props.group_id}/accounting_books`,
+    //   href: `/liff_entry/groups/${group_id}/accounting_books`,
     //   faIcon: faBook,
     //   text: '帳本列表'
     // },
     {
-      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/payments`,
+      href: `/liff_entry/groups/${group_id}/accounting_books/${id}/payments`,
       faIcon: 'faList',
       text: '帳款列表'
     },
     {
-      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/summary`,
+      href: `/liff_entry/groups/${group_id}/accounting_books/${id}/summary`,
       faIcon: 'faClipboard',
       text: '分帳建議'
     },
     {
-      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/log_messages`,
+      href: `/liff_entry/groups/${group_id}/accounting_books/${id}/log_messages`,
       faIcon: 'faHistory',
       text: '編輯歷史'
     },
     {
-      href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/settings`,
+      href: `/liff_entry/groups/${group_id}/accounting_books/${id}/settings`,
       faIcon: "faBook",
       text: '帳本設定'
     },
@@ -35,11 +38,11 @@ const IconsList = (props) => {
   ]
 
   useEffect(() => {
-    if (props.group_id) {
+    if (group_id) {
       setDisabled(false)
     }
     // eslint-disable react-hooks/exhaustive-deps
-  }, props.group_id)
+  }, [group_id])
 
 
   let disabledClass = disabled ? styles.disabled : ''
@@ -47,7 +50,7 @@ const IconsList = (props) => {
     return (
       <NavLink key={link.text} exact to={link.href} activeClassName={styles.activeStyle} className={[disabledClass, styles.icon].join(' ')} >
         {link.children}
-        <FontAwesomeIcon faIcon={link.faIcon}/>
+        <FontAwesomeIcon faicon={link.faIcon}/>
         <span> {link.text} </span>
       </NavLink>
     )

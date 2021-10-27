@@ -8,7 +8,7 @@ const components = {
 
 const AccountingBookUserMenu = ({ editMode, setEditMode, objects, labelType, selected_object_ids, changed }) => {
   const [mount, setMount] = useState(false)
-  const [displayObjects, setDisplayObjects] = useState(objects)
+  /* eslint-disable no-unused-vars */
   const [selectAll, setSelectAll] = useState(true)
   const [selectedObjects, setSelectedObjects] = useState([])
 
@@ -30,7 +30,7 @@ const AccountingBookUserMenu = ({ editMode, setEditMode, objects, labelType, sel
   }
 
   const LabelComponent = components[labelType]
-  let objectLabels = displayObjects.map(object => {
+  let objectLabels = objects.map(object => {
     return <LabelComponent
       key={object.id}
       object={object}
@@ -50,20 +50,6 @@ const AccountingBookUserMenu = ({ editMode, setEditMode, objects, labelType, sel
       changed([])
     }
   }
-
-  const selectAllLabel = <label className='group-menu-label group-menu-checkbox-label'>
-    <div className='group-menu-radio'>
-      <input
-        checked={selectAll}
-        onChange={handleSelectAll}
-        type="checkbox"
-      />
-      <span className="checkmark"></span>
-    </div>
-    <div className='col-8 group-menu-username'>
-      全選
-    </div>
-  </label>
 
   const containerStyles = [styles.container]
   if (mount) { containerStyles.push(styles.mount) }

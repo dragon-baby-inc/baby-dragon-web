@@ -13,7 +13,7 @@ const styles = {
   }
 }
 
-function ArrowLeft({ clicked, link, color, faIcon, style }){
+function TopRightIcon({ clicked, link, color, faicon, style }){
   let addtionalStyle = {}
   if (style) { addtionalStyle = style }
   return(
@@ -23,14 +23,14 @@ function ArrowLeft({ clicked, link, color, faIcon, style }){
           <NavLink
             style={{ ...styles.back,  ...addtionalStyle}}
             to={link}>
-            <FontAwesomeIcon faIcon={faIcon} color={color}/>
+            <FontAwesomeIcon faicon={faicon} color={color}/>
           </NavLink> :
           <div onClick={clicked} style={{ ...styles.back,  ...addtionalStyle}} >
-            <FontAwesomeIcon faIcon={faIcon} color={color}/>
+            <FontAwesomeIcon faicon={faicon} color={color}/>
           </div>
       }
     </>
   )
 }
 
-export default ArrowLeft
+export default TopRightIcon

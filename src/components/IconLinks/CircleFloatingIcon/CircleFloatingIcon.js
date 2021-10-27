@@ -10,7 +10,7 @@ function CircleFloatingIcon({
   containerInlineStyle,
   iconInlineStyle,
   faColor,
-  faIcon,
+  faicon
 }){
   const [active, setActive] = useState(true)
 
@@ -36,7 +36,7 @@ function CircleFloatingIcon({
       containerStyle={styles.floatingIcon}
       avatarStyle={avatarClasses.join(' ')} >
       <div style={iconInlineStyle} className={iconClasses.join(' ')} onClick={clicked} >
-        <FontAwesomeIcon faIcon={faIcon} color={faColor}/>
+        <FontAwesomeIcon faicon={faicon} color={faColor}/>
       </div>
     </FloatingIcon >
   )

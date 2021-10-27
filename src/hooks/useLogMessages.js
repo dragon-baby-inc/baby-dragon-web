@@ -22,6 +22,7 @@ const useLogMessages =  (query) => {
 
   useEffect(() => {
     getLogMessages();
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
   return [logMessages, loading, err];

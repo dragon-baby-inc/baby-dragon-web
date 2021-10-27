@@ -90,7 +90,7 @@ const BookHistoryPage = ({
       <TopLeftIcon
         link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
         color={themeColors.gold900}
-        faIcon='faHome'
+        faicon='faHome'
         style={{fontSize: '20px'}}/>
       {
         loading ?

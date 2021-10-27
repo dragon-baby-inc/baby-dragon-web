@@ -22,6 +22,7 @@ const usePayment =  (query_params) => {
 
   useEffect(() => {
     getPayment();
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
   return [payment, loading, err];

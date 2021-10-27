@@ -51,7 +51,7 @@ const icons = {
 
 const Icon = (props) => {
   return(
-    <FontAwesomeIcon icon={icons[props.faIcon]} {...props}/>
+    <FontAwesomeIcon icon={icons[props.faicon]} {...props}/>
   )
 }
 

@@ -3,7 +3,6 @@ import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/PaymentLabel.scss";
 import { Collapse } from 'react-collapse';
-import FormatString from "../../../utilities/FormatString"
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button'
 import Checkbox from  '../Inputs/Checkbox'
@@ -21,11 +20,10 @@ const PaymentCheckboxLabel = (props) => {
 
   useEffect(() => {
     setIsChecked(props.selectedPaymentIds.includes(object.id.toString()))
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [props.selectedPaymentIds])
 
   let object = props.object
-  let formatString = new FormatString();
-  let message = formatString.sliceToLength(object.ower_and_payer_message, 32, '...')
   let activeClass = open ? 'active' : ''
   let amount = object.amount
 
@@ -66,9 +64,6 @@ const PaymentCheckboxLabel = (props) => {
             null
             :
             null
-//             <div className={`group-menu-date ${activeClass}`}>
-//               <Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
-//             </div>
 
         }
         {

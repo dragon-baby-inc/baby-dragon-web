@@ -41,7 +41,7 @@ const AccountingBookUsersPage = (props) => {
     <>
       <div style={styles.bg}>
         <PageHeader title={editMode ? '編輯分帳名單' : '分帳名單'} color={themeColors.gray400}/>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color='black' faIcon='faArrowLeft'/>
+        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color='black' faicon='faArrowLeft'/>
         {
           loading ?
             null :

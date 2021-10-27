@@ -23,6 +23,7 @@ const useAccountingBooks =  (callback) => {
   }
 
   useEffect(() => {
+    /* eslint-disable react-hooks/exhaustive-deps */
     getAccountingBook();
   }, [])
 

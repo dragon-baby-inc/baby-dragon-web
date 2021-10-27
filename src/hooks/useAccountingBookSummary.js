@@ -22,6 +22,7 @@ const useAccountingBookSummary =  () => {
 
   useEffect(() => {
     getAccountingBook();
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
   return [summary, loading, err];

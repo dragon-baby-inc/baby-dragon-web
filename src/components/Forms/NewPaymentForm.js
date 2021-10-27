@@ -99,6 +99,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
 
   const components = {
     name: <TextInput
+      key='name'
       disabled={state.disableForm}
       placeholder={'輸入名稱'}
       name={'名稱'}
@@ -110,6 +111,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='text'
     />,
     amount: <TextInput
+      key='amount'
       disabled={state.disableForm}
       labelStyle={styles.labelStyle}
       placeholder={'輸入金額'}
@@ -121,6 +123,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='number'
     />,
     fixedAmount: <TextInput
+      key='fixedAmount'
       labelStyle={styles.labelStyle}
       placeholder={'輸入金額'}
       name={'金額'}
@@ -132,6 +135,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       disabled={true}
     />,
     payer: <RadioSelectInput
+      key='payer'
       placeholder={'選取付款者'}
       name={'付款者'}
       clicked={handlePayerSelectClicked}
@@ -141,6 +145,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='number'
     />,
     owers: <CheckboxSelectInput
+      key='owers'
       placeholder={'所有人分'}
       name={'分款者'}
       labelStyle={styles.labelStyle}
@@ -152,6 +157,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='number'
     />,
     manualOwers: <PopUpInput
+      key='manualOwers'
       placeholder={'編輯分款'}
       name={'分款者'}
       labelStyle={styles.labelStyle}
@@ -162,6 +168,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='number'
     />,
     creation_date: <DatePickerInput
+      key='creation_date'
       placeholder={'今日'}
       name={'日期'}
       labelStyle={styles.labelStyle}

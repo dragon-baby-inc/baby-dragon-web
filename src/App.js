@@ -11,6 +11,7 @@ import { useLiff } from './hooks'
 
 const App = () => {
   const { setLogin } = useContext(AuthContext)
+  /* eslint-disable no-unused-vars */
   const [isLoggedIn] = useLiff(setLogin)
   console.log('App load')
 
