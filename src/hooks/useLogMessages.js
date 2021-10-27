@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../api/dragonBabyApi'
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const useLogMessages =  (query) => {
   const { group_id, accounting_book_id } = useParams();

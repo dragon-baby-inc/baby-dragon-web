@@ -15,7 +15,7 @@ const useLiff =  (callback) => {
           callback(liff.getDecodedIDToken().sub)
         }
       })
-  }, [])
+  }, [callback])
 
   return [isLoggedIn];
 }

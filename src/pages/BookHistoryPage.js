@@ -1,16 +1,7 @@
-import React, { useState, useContext, useEffect } from "react"
-import useLogMessages from '../hooks/useLogMessages'
-import UserSummaryLabel from '../components/FormElements/UserSummaryLabel/userSummaryLabel'
-import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
-import useScrollInfo from 'react-element-scroll-hook';
-import Loading from '../components/Loading/Loading'
-import PageHeader from '../components/PageHeader/PageHeader'
-import { faUsers } from '@fortawesome/fontawesome-free-solid'
-import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
-import { themeColors } from '../constants/globalColors'
-import EmptyResult from '../components/EmptyResult/EmptyResult'
-import Moment from 'react-moment';
-import moment from 'moment/min/moment-with-locales';
+import React from "react"
+import { useLogMessages } from '../hooks'
+import { PageHeader, Loading, TopLeftIcon, EmptyResult } from '../components'
+import { themeColors } from '../constants'
 
 const styles = {
   category: {
@@ -70,19 +61,10 @@ const BookHistoryPage = ({
 }) => {
   const [logMessages, loading] = useLogMessages()
 
-  const calendar = {
-    sameDay: '[今日]',
-    lastDay: '[昨日]',
-    sameElse: 'M/DD',
-    nextWeek: 'M/DD',
-    lastWeek: 'M/DD',
-  }
-
-
   let currentDate = null
   let objects = []
   logMessages.forEach(object => {
-    if (object.created_at != currentDate) {
+    if (object.created_at !== currentDate) {
       currentDate = object.created_at
       objects.push(
         <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
@@ -105,15 +87,17 @@ const BookHistoryPage = ({
   return(
     <div style={styles.bg}>
       <PageHeader title={'編輯歷史'} color={themeColors.gray400}/>
-      <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
+      <TopLeftIcon
+        link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
+        color={themeColors.gold900}
+        faIcon='faHome'
+        style={{fontSize: '20px'}}/>
       {
         loading ?
           <Loading />
           :
           <div style={styles.logMessages}>
-            {
-              objects.length > 0 ? objects : <EmptyResult message='目前沒有任何歷史紀錄喔'/>
-            }
+            { objects.length > 0 ? objects : <EmptyResult message='目前沒有任何歷史紀錄喔'/> }
           </div>
       }
     </div>

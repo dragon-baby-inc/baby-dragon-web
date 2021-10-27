@@ -49,7 +49,7 @@ const AccountingBookForm = ({
         name={'名稱'}
         labelClass={styles.input}
         valid={valid}
-        labelStyle={valid == false ? { width: '100%', padding: '10px 0px 0px' } : { width: '100%', padding: '10px 0px 10px' } }
+        labelStyle={valid === false ? { width: '100%', padding: '10px 0px 0px' } : { width: '100%', padding: '10px 0px 10px' } }
         invalidFeedback="*不可為空白，12字內"
         type='text'
         value={name}

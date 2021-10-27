@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from "react"
-import { NavLink, Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
-import PaymentSwipeableView from '../components/PaymentSwipeableView/PaymentSwipeableView'
-import DotGroup from '../components/FormElements/DotGroup/DotGroup'
-import RadioSelectMenu from '../components/FormElements/SelectMenu/RadioSelectMenu'
-import PopUpForm from '../components/FormElements/PopUpForm/PopUpForm'
-import CheckboxSelectMenu from '../components/FormElements/SelectMenu/CheckboxSelectMenu'
-import Backdrop from '../components/Backdrop/Backdrop'
 import { Context } from '../contexts/PaymentContext'
-import useUsers from '../hooks/useUsers'
-import useAccountingBook from '../hooks/useAccountingBook'
 import { Context as AuthContext } from '../contexts/AuthContext'
-import ArrowLeft from '../components/IconLinks/ArrowLeft/ArrowLeft'
+import { useAccountingBook } from '../hooks'
+import {
+  DotGroup,
+  RadioSelectMenu,
+  PopUpForm,
+  CheckboxSelectMenu,
+  Backdrop,
+  PaymentSwipeableView,
+  ArrowLeft
+} from '../components'
 
 const styles = {
   bg:  {
@@ -58,7 +58,7 @@ const PaymentCreationPage = (props) => {
       let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       if (payer) { setPayer(payer) }
       setBuilder(users[0])
-//       if (!payer) { alert('未授權') }
+      //       if (!payer) { alert('未授權') }
 
       setAccountingBookDetails(accountingBookDetails)
       setOwers(users.filter((u) => u.coverCost))

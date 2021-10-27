@@ -16,6 +16,10 @@ import {
   faLock,
   faLockOpen,
   faHome,
+  faClipboard,
+  faList,
+  faHistory,
+  faBook,
 } from '@fortawesome/fontawesome-free-solid'
 import {
   faCheckDouble
@@ -38,7 +42,11 @@ const icons = {
   faCog: faCog,
   faLock: faLock,
   faLockOpen: faLockOpen,
-  faHome: faHome
+  faHome: faHome,
+  faClipboard: faClipboard,
+  faList: faList,
+  faHistory: faHistory,
+  faBook: faBook,
 }
 
 const Icon = (props) => {

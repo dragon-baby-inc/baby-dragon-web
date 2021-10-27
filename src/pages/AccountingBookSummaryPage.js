@@ -1,14 +1,8 @@
-import React, { useState, useContext, useEffect } from "react"
-import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
-import UserSummaryLabel from '../components/FormElements/UserSummaryLabel/userSummaryLabel'
-import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
-import EmptyResult from '../components/EmptyResult/EmptyResult'
+import React from "react"
 import useScrollInfo from 'react-element-scroll-hook';
-import Loading from '../components/Loading/Loading'
-import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
-import PageHeader from '../components/PageHeader/PageHeader'
-import { faUsers } from '@fortawesome/fontawesome-free-solid'
-import { themeColors } from '../constants/globalColors'
+import { useAccountingBookSummary } from '../hooks'
+import { PageHeader, TopLeftIcon, Loading, EmptyResult, UserSummaryLabel } from '../components'
+import { themeColors } from '../constants'
 
 const styles = {
   bg: {
@@ -39,17 +33,17 @@ const AccountingBookSummaryPage = ({
   return(
     <div style={styles.bg}>
       <PageHeader title={'分帳建議'} color={themeColors.gray400}/>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faIcon='faHome' style={{fontSize: '20px'}}/>
+      <TopLeftIcon
+        link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
+        color={themeColors.gold900}
+        faIcon='faHome'
+        style={{fontSize: '20px'}}/>
       {
         loading ?
           <Loading />
           :
-         <div style={styles.summary} ref={setRef}>
-           {
-             objects.length > 0 ?
-               objects : <EmptyResult message='目前沒有任何款項喔'/>
-
-           }
+          <div style={styles.summary} ref={setRef}>
+            { objects.length > 0 ?  objects : <EmptyResult message='目前沒有任何款項喔'/> }
           </div>
       }
     </div>

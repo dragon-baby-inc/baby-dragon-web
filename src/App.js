@@ -7,7 +7,7 @@ import { Provider as PaymentProvider } from './contexts/PaymentContext'
 import { Provider as FilterPaymentProvider } from './contexts/FilterPaymentContext'
 import { Provider as AccountingBookProvider } from './contexts/AccountingBookContext'
 import { Context as AuthContext } from './contexts/AuthContext'
-import useLiff from './hooks/useLiff'
+import { useLiff } from './hooks'
 
 const App = () => {
   const { setLogin } = useContext(AuthContext)

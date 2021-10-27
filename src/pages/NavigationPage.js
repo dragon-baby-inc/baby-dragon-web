@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from "react"
-import IconsList from '../components/FormElements/IconsList/IconsList'
+import React from "react"
+import { Switch, Route } from 'react-router-dom';
+import { IconsList } from '../components'
 import useAccountingBook from '../hooks/useAccountingBook'
 import BookHistoryPage from './BookHistoryPage'
 import PaymentsPage from './PaymentsPage'
@@ -8,15 +9,6 @@ import GroupUsersPage from './GroupUsersPage'
 import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
 import PaymentEditPage from './PaymentEditPage'
 import AccountingBookSummaryPage from './AccountingBookSummaryPage'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-const styles = {
-  bg: {
-    width: '100vw',
-    height: '100vh',
-    overflow: 'hidden',
-  },
-}
 
 const NavigationPage = (props) => {
   const [users, accountingBookDetails] = useAccountingBook()

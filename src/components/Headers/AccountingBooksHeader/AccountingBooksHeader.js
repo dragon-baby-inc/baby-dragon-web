@@ -1,10 +1,8 @@
 import React, {useState} from "react"
 import styles from './AccountingBooksHeader.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { themeColors } from '../../constants/globalColors'
-import { faUsers } from '@fortawesome/fontawesome-free-solid'
-import PageHeader from '../../components/PageHeader/PageHeader'
-import TopRightIcon from '../../components/IconLinks/TopRightIcon'
+import { themeColors } from '../../../constants'
+import PageHeader from '../PageHeader/PageHeader'
+import { TopRightIcon } from '../../index'
 
 function AccountingBooksHeader({ scrollInfo, group, setShowForm }){
   const [small, setSmall] = useState(false)
@@ -12,7 +10,7 @@ function AccountingBooksHeader({ scrollInfo, group, setShowForm }){
   if (scrollInfo) {
     if (scrollInfo.y.value > 50 && !small) {
       setSmall(true)
-    } else if (scrollInfo.y.value == 0 && small){
+    } else if (scrollInfo.y.value === 0 && small){
       setSmall(false)
     }
   }

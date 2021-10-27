@@ -1,7 +1,6 @@
 import React from 'react'
 import Toggle from 'react-toggle'
 import './Toggle.css'
-import styles from './Toggle.module.scss'
 
 const CustomToggle = ({
   defaultChecked,

@@ -3,22 +3,12 @@ import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "./userSummaryOwerLabel.scss"
 import { Collapse } from 'react-collapse';
-import { themeColors } from '../../../constants/globalColors'
 import FormatString from "../../../utilities/FormatString"
-
-import Moment from 'react-moment';
-import moment from 'moment/min/moment-with-locales';
-import 'moment/locale/zh-tw';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/fontawesome-free-solid'
-import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
 const UserSummaryOwerLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(true)
   let object = props.object
   let activeClass = collapseOpen ? 'active' : ''
-  let formatString = new FormatString();
   let name = object.ower_display_name
   let accountingBookDetails = props.accountingBookDetails
 

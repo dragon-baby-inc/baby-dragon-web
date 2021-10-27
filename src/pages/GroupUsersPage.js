@@ -1,32 +1,22 @@
-import React, { useState, useContext, useEffect } from "react"
-import useAccountingBook from '../hooks/useAccountingBook'
-import useUsers from '../hooks/useUsers'
-import { themeColors } from '../constants/globalColors'
+import React, { useState, useEffect } from "react"
 import menuStyles from '../components/FormElements/SelectMenu/AccountingBookUserMenu.module.scss'
-import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
-import PageHeader from '../components/PageHeader/PageHeader'
-import Loading from '../components/Loading/Loading'
-import EmptyResult from '../components/EmptyResult/EmptyResult'
-import Backdrop from '../components/Backdrop/Backdrop'
-import MyFontAwesomeIcon from '../utilities/FontAwesomeIcon'
-import useHistory from '../hooks/useHistory'
-import { useParams } from 'react-router-dom';
-import useInput from '../hooks/useInput'
-import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import axios from '../api/dragonBabyApi'
-import Button from '../components/FormElements/Button/Button'
-import AccountingBookUserMenu from '../components/FormElements/SelectMenu/AccountingBookUserMenu'
-import TopRightIcon from '../components/IconLinks/TopRightIcon'
-import UserForm from '../components/Forms/UserForm/UserForm'
-import UserLabel from '../components/FormElements/UserLabel/UserLabel'
+import { useParams } from 'react-router-dom';
+import { themeColors } from '../constants'
+import { useUsers } from '../hooks'
+import {
+  TopLeftIcon,
+  TopRightIcon,
+  PageHeader,
+  UserForm,
+  UserLabel,
+  Backdrop
+} from '../components'
 
 const GroupUsersPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
   const [users, setUsers, loading] = useUsers()
-  const history = useHistory();
   const { group_id, accounting_book_id } = useParams();
-  const [lockDeletion, setLockDeletion] = useState(true)
-  const [selectObjectIds, setSelectObjectIds] = useState([])
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
@@ -68,14 +58,14 @@ const GroupUsersPage = (props) => {
               {objectLabels}
             </div>
         }
-      {
-        showForm ?
-          <>
-            <UserForm />
-            <Backdrop icon="faTimes" clicked={() => setShowForm(false)}/>
-          </>
-          : null
-      }
+        {
+          showForm ?
+            <>
+              <UserForm />
+              <Backdrop icon="faTimes" clicked={() => setShowForm(false)}/>
+            </>
+            : null
+        }
       </div>
     </>
   )

@@ -1,10 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import styles from './AccountingBookSummaryBoard.module.scss'
 import UserSummaryLabel from '../FormElements/UserSummaryLabel/userSummaryLabel'
-import { themeColors } from '../../constants/globalColors'
 
 const AccountingBookSummaryBoard = (props) => {
-  console.log(props.settlements)
   let settlements = []
   let settleGroups = {}
   const objects = []

@@ -12,7 +12,6 @@ const usePayment =  (query_params) => {
     setLoading(true)
     await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${payment_id}`)
       .then(function (response) {
-        console.log(response.data)
         setPayment(response.data)
       })
       .catch(function (error) {

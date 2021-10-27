@@ -1,40 +1,34 @@
 import React, { useState, useEffect } from "react"
 import styles from './IconsList.module.scss'
 import { NavLink } from 'react-router-dom';
-import { themeColors } from '../../../constants/globalColors'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter } from '@fortawesome/fontawesome-free-solid'
-import { faClipboard } from '@fortawesome/fontawesome-free-solid'
-import { faList } from '@fortawesome/fontawesome-free-solid'
-import { faHistory } from '@fortawesome/fontawesome-free-solid'
-import { faBook } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '../../index'
 
 const IconsList = (props) => {
   const [disabled, setDisabled] = useState(true)
   const links = [
-//     {
-//       href: `/liff_entry/groups/${props.group_id}/accounting_books`,
-//       faIcon: faBook,
-//       text: '帳本列表'
-//     },
+    // {
+    //   href: `/liff_entry/groups/${props.group_id}/accounting_books`,
+    //   faIcon: faBook,
+    //   text: '帳本列表'
+    // },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/payments`,
-      faIcon: faList,
+      faIcon: 'faList',
       text: '帳款列表'
     },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/summary`,
-      faIcon: faClipboard,
+      faIcon: 'faClipboard',
       text: '分帳建議'
     },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/log_messages`,
-      faIcon: faHistory,
+      faIcon: 'faHistory',
       text: '編輯歷史'
     },
     {
       href: `/liff_entry/groups/${props.group_id}/accounting_books/${props.id}/settings`,
-      faIcon: faBook,
+      faIcon: "faBook",
       text: '帳本設定'
     },
 
@@ -44,6 +38,7 @@ const IconsList = (props) => {
     if (props.group_id) {
       setDisabled(false)
     }
+    // eslint-disable react-hooks/exhaustive-deps
   }, props.group_id)
 
 
@@ -52,7 +47,7 @@ const IconsList = (props) => {
     return (
       <NavLink key={link.text} exact to={link.href} activeClassName={styles.activeStyle} className={[disabledClass, styles.icon].join(' ')} >
         {link.children}
-        <FontAwesomeIcon icon={link.faIcon}/>
+        <FontAwesomeIcon faIcon={link.faIcon}/>
         <span> {link.text} </span>
       </NavLink>
     )

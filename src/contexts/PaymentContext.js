@@ -3,6 +3,7 @@ import Validator from '../utilities/Validator'
 import axios from '../api/dragonBabyApi'
 
 const paymentReducer = (state, action) => {
+  let valid
   switch (action.type) {
     case 'set_accounting_book_details':
       return { ...state, accounting_book_details: action.payload }
@@ -27,14 +28,14 @@ const paymentReducer = (state, action) => {
     case 'set_builder':
         return { ...state, builder: action.payload }
     case 'set_payer':
-      var valid = action.payload ? true : false
+      valid = action.payload ? true : false
       if (state.ower.value === action.payload) {
         return { ...state, payer: { value: action.payload, valid: valid }, ower: { value: null, valid: null  } }
       } else {
         return { ...state, payer: { value: action.payload, valid: valid } }
       }
     case 'set_ower':
-      var valid = action.payload ? true : false
+      valid = action.payload ? true : false
       if (state.payer.value === action.payload) {
         return { ...state, ower: { value: action.payload, valid: valid }, payer: { value: null, valid: false  } }
       } else {
@@ -47,6 +48,7 @@ const paymentReducer = (state, action) => {
       let objects = action.payload.filter(object => object.amount > 0)
       let amount = objects.reduce((prev, object) => {
         if (parseFloat(object.amount) > 0) { return prev + parseFloat(object.amount) }
+        else { return (prev + 0) }
       }, 0)
       valid = amount > 0
       return { ...state, fixedAmount: { value: amount, valid: valid }, manualOwers: { value: action.payload, valid: valid } }
@@ -235,7 +237,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
     params['ower_ids'] = [state.ower.value.id]
     params['description'] = '還款'
   } else {
-    if (state.allocation_type == 'amount') {
+    if (state.allocation_type === 'amount') {
       params['amount'] = state.fixedAmount.value
       params['owers'] = state.manualOwers.value.filter(o => o.amount > 0).map(o => {
         return { ower_id: o.id, amount: o.amount }

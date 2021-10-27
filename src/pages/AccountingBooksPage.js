@@ -1,16 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import useAccountingBooks from '../hooks/useAccountingBooks';
-import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader';
-import AccountingBookLabel from '../components/FormElements/AccountingBookLabel/accountingBookLabel';
-import AccountingBooksHeader from '../components/AccountingBooksHeader/AccountingBooksHeader'
+import React, { useState } from "react";
 import useScrollInfo from 'react-element-scroll-hook';
-import Loading from '../components/Loading/Loading'
-import PageHeader from '../components/AccountingBooksHeader/AccountingBooksHeader'
-import { faUsers } from '@fortawesome/fontawesome-free-solid'
+import { useAccountingBooks } from '../hooks';
 import { themeColors } from '../constants/globalColors'
-import CircleFloatingIcon from '../components/IconLinks/CircleFloatingIcon/CircleFloatingIcon'
-import AccountingBookForm from '../components/Forms/AccountingBookForm/AccountingBookForm'
-import Backdrop from '../components/Backdrop/Backdrop'
+import {
+  Loading,
+  AccountingBookLabel,
+  PageHeader,
+  AccountingBookForm,
+  Backdrop
+} from '../components';
 
 const styles = {
   bg: {
@@ -21,8 +19,6 @@ const styles = {
     background: `linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)`,
   },
   books: {
-    overflow: 'auto',
-    height: '100%',
     paddingTop: '10px',
     paddingBottom: '100px',
     height: 'calc(100vh - 40px)',
@@ -51,7 +47,7 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-      <PageHeader setShowForm={setShowForm} group={group} title={'帳本列表'} faIcon={faUsers} color={themeColors.gray400}/>
+      <PageHeader setShowForm={setShowForm} group={group} title={'帳本列表'} color={themeColors.gray400}/>
       {
         showForm ?
           <>
@@ -63,13 +59,9 @@ const AccountingBookSummaryPage = ({
 
       {
         loading ?
-          <div style={styles.loading}>
-            <Loading />
-          </div>
+          <div style={styles.loading}> <Loading /> </div>
           :
-          <div style={styles.books} ref={setRef}>
-            {objects}
-          </div>
+          <div style={styles.books} ref={setRef}> {objects} </div>
       }
     </div>
   )

@@ -1,34 +1,13 @@
-import React, { useState, useContext, useEffect, useRef } from "react"
-import { Context } from '../contexts/PaymentContext'
-import { Context as AuthContext } from '../contexts/AuthContext'
-import useAccountingBook from '../hooks/useAccountingBook'
-import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
-import FloatIcon from '../components/FormElements/FloatIcon/FloatIcon'
-import { themeColors } from '../constants/globalColors'
-import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
-import useScrollInfo from 'react-element-scroll-hook';
-import AccountingBookSettingsHeader from '../components/AccountingBookSettingsHeader/AccountingBookSettingsHeader'
-import Loading from '../components/Loading/Loading'
-import EmptyResult from '../components/EmptyResult/EmptyResult'
-import Backdrop from '../components/Backdrop/Backdrop'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import MyFontAwesomeIcon from '../utilities/FontAwesomeIcon'
-import { faPlus } from '@fortawesome/fontawesome-free-solid'
-import useHistory from '../hooks/useHistory'
-import { useParams } from 'react-router-dom';
-import useToggle from '../hooks/useToggle'
-import useInput from '../hooks/useInput'
-import Toggle from '../components/FormElements/Toggle/Toggle'
+import React, { useState, useContext, useEffect } from "react"
+import { themeColors } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
+import { FontAwesomeIcon, Toggle, TopLeftIcon, AccountingBookSettingsHeader } from '../components'
+import { useHistory, useAccountingBook } from '../hooks'
 import axios from '../api/dragonBabyApi'
-import Button from '../components/FormElements/Button/Button'
 
 const AccountingBookSettingPage = (props) => {
-  const [ editMode, setEditMode ] = useState(false)
   const [users, accountingBookDetails, loading] = useAccountingBook()
-  const [summary] = useAccountingBookSummary()
   const history = useHistory();
-  const { group_id, accounting_book_id } = useParams();
   const [lockDeletion, setLockDeletion] = useState(true)
 
   const { state, setCurrent, setName, setAutoDetectPayment, setLineNotification } = useContext(AccountingBookContext)
@@ -50,7 +29,7 @@ const AccountingBookSettingPage = (props) => {
     e.preventDefault()
     let confirm = window.confirm("確定要刪除帳本嗎？此動作無法回覆喔");
 
-    if (confirm == true) {
+    if (confirm === true) {
       axios.delete(`api/v1/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}`)
         .then((res) => {
           history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`)
@@ -122,7 +101,7 @@ const AccountingBookSettingPage = (props) => {
                 <span style={styles.description}>
                   設定分帳名單
                 </span>
-                <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+                <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
               </label>
             </div>
             <div>
@@ -130,7 +109,7 @@ const AccountingBookSettingPage = (props) => {
                 <span style={styles.description}>
                   編輯使用者
                 </span>
-                <MyFontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
+                <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 15px" }} faIcon='faChevronRight' color={themeColors.gray900}/>
               </label>
             </div>
             <label style={styles.label}>
@@ -141,7 +120,7 @@ const AccountingBookSettingPage = (props) => {
                 loading ?
                   null :
                   <Toggle
-                    disabled={state.current.value == true}
+                    disabled={state.current.value === true}
                     defaultChecked={state.current.value}
                     checked={state.current.value}
                     changed={(e) => handleSetAsCurrent(e.target.checked)}
@@ -190,8 +169,8 @@ const AccountingBookSettingPage = (props) => {
               checked={!lockDeletion}
               changed={(e) => setLockDeletion(!e.target.checked)}
               icons={ {
-                checked: <MyFontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLockOpen' color="white"/> ,
-                unchecked: <MyFontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLock' color="white"/> ,
+                checked: <FontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLockOpen' color="white"/> ,
+                unchecked: <FontAwesomeIcon style={{ fontSize: "10px", marginRight: "10px" }} faIcon='faLock' color="white"/> ,
               } }
               name="current"
             />

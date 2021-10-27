@@ -1,22 +1,6 @@
-import React, {useState} from "react"
+import React from "react"
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { themeColors } from '../../constants/globalColors'
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
-import { faBars } from '@fortawesome/fontawesome-free-solid'
-import { faCog } from '@fortawesome/fontawesome-free-solid'
-import { faEdit } from '@fortawesome/fontawesome-free-solid'
-import { faTrash, faPlus, faTimes } from '@fortawesome/fontawesome-free-solid'
-
-const icons = {
-  faArrowLeft: faArrowLeft,
-  faBars: faBars,
-  faCog: faCog,
-  faPlus: faPlus,
-  faEdit: faEdit,
-  faTimes: faTimes,
-  faTrash: faTrash
-}
+import { FontAwesomeIcon } from '../index'
 
 const styles = {
   back: {
@@ -39,10 +23,10 @@ function ArrowLeft({ clicked, link, color, faIcon, style }){
           <NavLink
             style={{ ...styles.back,  ...addtionalStyle}}
             to={link}>
-            <FontAwesomeIcon icon={icons[faIcon]} color={color}/>
+            <FontAwesomeIcon faIcon={faIcon} color={color}/>
           </NavLink> :
           <div onClick={clicked} style={{ ...styles.back,  ...addtionalStyle}} >
-            <FontAwesomeIcon icon={icons[faIcon]} color={color}/>
+            <FontAwesomeIcon faIcon={faIcon} color={color}/>
           </div>
       }
     </>

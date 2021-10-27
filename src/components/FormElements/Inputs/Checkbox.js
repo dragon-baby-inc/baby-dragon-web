@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 

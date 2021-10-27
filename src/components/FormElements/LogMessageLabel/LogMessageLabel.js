@@ -2,18 +2,6 @@ import React, { useState } from 'react';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/userSummaryLabel.scss";
-import { Collapse } from 'react-collapse';
-import { themeColors } from '../../../constants/globalColors'
-import Button from '../Button/Button'
-import UserSummaryCollapse from '../UserSummaryCollapse/userSummaryCollapse'
-
-import Moment from 'react-moment';
-import moment from 'moment/min/moment-with-locales';
-import 'moment/locale/zh-tw';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/fontawesome-free-solid'
-import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
 const UserSummaryLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(true)

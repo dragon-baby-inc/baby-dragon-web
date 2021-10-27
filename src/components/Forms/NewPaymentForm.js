@@ -1,13 +1,15 @@
-import React, { useState, useContext, useEffect } from "react"
-import Toggle from '../FormElements/FormTypeToggle/Toggle'
-import PopUpInput from '../FormElements/PopUpInput/PopUpInput'
-import TextInput from '../FormElements/TextInput/TextInput'
-import RadioSelectInput from '../FormElements/SelectInput/RadioSelectInput'
-import CheckboxSelectInput from '../FormElements/SelectInput/CheckboxSelectInput'
-import DatePickerInput from '../FormElements/DatePickerInput/DatePickerInput'
-import { Context } from '../../contexts/PaymentContext'
+import React, { useState, useContext  } from "react"
+import { Context as PaymentContext } from '../../contexts/PaymentContext'
 import { Context as AuthContext } from '../../contexts/AuthContext'
-import Button from '../FormElements/Button/Button'
+import {
+  FormTypeToggle as Toggle,
+  Button,
+  PopUpInput,
+  TextInput,
+  RadioSelectInput,
+  CheckboxSelectInput,
+  DatePickerInput
+} from '../FormElements'
 
 const styles = {
   labelStyle: {
@@ -50,7 +52,7 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
     setShowPopUpForm,
     validateForm,
     createPayment,
-  } = useContext(Context)
+  } = useContext(PaymentContext)
   const { state: authState } = useContext(AuthContext)
   const [disableSubmit, setDisableSubmit] = useState(false)
 
@@ -119,7 +121,6 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
       type='number'
     />,
     fixedAmount: <TextInput
-      disabled={state.disableForm}
       labelStyle={styles.labelStyle}
       placeholder={'輸入金額'}
       name={'金額'}
@@ -176,10 +177,10 @@ const NewPaymentForm = ({ loading, users, afterSubmit }) => {
 
   return(
     <div style={styles.container}>
-        <div style={styles.form}>
-            <Toggle changed={handleToggleChanged} checked={checked}/>
-            {displayComponents}
-        </div>
+      <div style={styles.form}>
+        <Toggle changed={handleToggleChanged} checked={checked}/>
+        {displayComponents}
+      </div>
       <Button disabled={disableSubmit && state.disableForm} clicked={handleSubmit}>確認</Button>
     </div>
   )

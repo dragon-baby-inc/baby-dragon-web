@@ -1,24 +1,19 @@
 import React, { useState } from "react"
-import { useParams } from 'react-router-dom';
 import styles from './UserForm.module.scss'
-import TextInput from '../../FormElements/TextInput/TextInput'
-import Button from '../../FormElements/Button/Button'
-import useHistory from '../../../hooks/useHistory'
+import { useParams } from 'react-router-dom';
 import axios from '../../../api/dragonBabyApi'
+import { Button, TextInput } from '../../FormElements'
 
 const UserForm = ({
   group,
   changed
 }) => {
-  const history = useHistory();
   const [name, setName] = useState("")
   const [valid, setVaid] = useState(null)
   const { group_id } = useParams();
 
   const handleInputChange = (value) => {
-    if (value.length < 1) {
-      setVaid(false)
-    }
+    if (value.length < 1) { setVaid(false) }
     setName(value)
   }
 
@@ -50,7 +45,7 @@ const UserForm = ({
         placeholder={'虛擬使用者'}
         changed={handleInputChange}
         name={'名字'}
-        labelStyle={valid == false ? { width: '100%', padding: '10px 0px 0px' } : { width: '100%', padding: '10px 0px 10px' }}
+        labelStyle={valid === false ? { width: '100%', padding: '10px 0px 0px' } : { width: '100%', padding: '10px 0px 10px' }}
         valid={valid}
         invalidFeedback="*不可為空白，12字內"
         type='text'

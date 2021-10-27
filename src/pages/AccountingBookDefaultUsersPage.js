@@ -1,30 +1,20 @@
-import React, { useState, useContext, useEffect } from "react"
-import useAccountingBook from '../hooks/useAccountingBook'
-import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
-import { themeColors } from '../constants/globalColors'
-import TopLeftIcon from '../components/IconLinks/TopLeftIcon'
-import PageHeader from '../components/PageHeader/PageHeader'
-import Loading from '../components/Loading/Loading'
-import EmptyResult from '../components/EmptyResult/EmptyResult'
-import Backdrop from '../components/Backdrop/Backdrop'
-import MyFontAwesomeIcon from '../utilities/FontAwesomeIcon'
-import useHistory from '../hooks/useHistory'
+import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
-import useInput from '../hooks/useInput'
-import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import axios from '../api/dragonBabyApi'
-import Button from '../components/FormElements/Button/Button'
-import AccountingBookUserMenu from '../components/FormElements/SelectMenu/AccountingBookUserMenu'
-import TopRightIcon from '../components/IconLinks/TopRightIcon'
-import UserForm from '../components/Forms/UserForm/UserForm'
+import { themeColors } from '../constants'
+import { useAccountingBook } from '../hooks'
+import {
+  TopLeftIcon,
+  PageHeader,
+  Backdrop,
+  UserForm,
+  AccountingBookUserMenu,
+} from '../components'
 
 const AccountingBookUsersPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
   const [users, accountingBookDetails, loading] = useAccountingBook()
-  const [summary] = useAccountingBookSummary()
-  const history = useHistory();
   const { group_id, accounting_book_id } = useParams();
-  const [lockDeletion, setLockDeletion] = useState(true)
   const [selectObjectIds, setSelectObjectIds] = useState([])
   const [showForm, setShowForm] = useState(false)
 
@@ -77,12 +67,6 @@ const AccountingBookUsersPage = (props) => {
   )
 }
 
-  // {
-  //   editMode ?
-  //     <TopRightIcon clicked={() => {setEditMode(false)}} style={{ right: 38 }} color={themeColors.gold700} faIcon='faTimes'/>
-  //     :
-  //     <TopRightIcon clicked={() => {setEditMode(true)}} style={{ right: 38 }} color={themeColors.gold700} faIcon='faEdit'/>
-  // }
 const styles = {
   textInput: {
     textAlign: "right",

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styles from './FloatIcon.module.scss'
 import { themeColors } from '../../../constants/globalColors'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

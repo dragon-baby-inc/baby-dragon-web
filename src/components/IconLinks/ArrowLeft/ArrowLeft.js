@@ -1,8 +1,6 @@
-import React, {useState} from "react"
+import React from "react"
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { themeColors } from '../../../constants/globalColors'
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '../../index'
 
 const styles = {
   back: {
@@ -17,12 +15,12 @@ const styles = {
 
 function ArrowLeft({ link, color }){
   return(
-      <NavLink
-        style={styles.back}
-        to={link}>
-        <FontAwesomeIcon icon={faArrowLeft} color={color}/>
-      </NavLink>
-    )
+    <NavLink
+      style={styles.back}
+      to={link}>
+      <FontAwesomeIcon faIcon="faArrowLeft" color={color}/>
+    </NavLink>
+  )
 }
 
 export default ArrowLeft

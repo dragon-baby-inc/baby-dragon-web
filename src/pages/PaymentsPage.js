@@ -1,40 +1,26 @@
-import React, { useState, useContext, useEffect, useRef } from "react"
-import { Context } from '../contexts/PaymentContext'
-import { Context as AuthContext } from '../contexts/AuthContext'
-import useAccountingBook from '../hooks/useAccountingBook'
-import useAccountingBookSummary from '../hooks/useAccountingBookSummary'
-import usePayments from '../hooks/usePayments'
-import FloatIcon from '../components/FormElements/FloatIcon/FloatIcon'
-import PaymentCheckboxLabel from '../components/FormElements/PaymentLabel/paymentCheckboxLabel'
-import AccountingBookSummaryBoard from '../components/AccountingBookSummaryBoard/AccountingBookSummaryBoard'
-import IconsList from '../components/FormElements/IconsList/IconsList'
-import { themeColors } from '../constants/globalColors'
+import React, { useState, useContext } from "react"
 import useScrollInfo from 'react-element-scroll-hook';
-import PaymentsHeader from '../components/PaymentsHeader/PaymentsHeader'
-import Loading from '../components/Loading/Loading'
-import EmptyResult from '../components/EmptyResult/EmptyResult'
-import FilterPaymentForm from '../components/Forms/FilterForm/FilterPaymentForm'
-import Backdrop from '../components/Backdrop/Backdrop'
-import FloatingIcon from '../components/IconLinks/FloatingIcon/FloatingIcon'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/fontawesome-free-solid'
-import CircleFloatingIcon from '../components/IconLinks/CircleFloatingIcon/CircleFloatingIcon'
-import useHistory from '../hooks/useHistory'
-import { useParams } from 'react-router-dom';
 import axios from '../api/dragonBabyApi'
+import { useParams } from 'react-router-dom';
+import { themeColors } from '../constants'
+import { Context as AuthContext } from '../contexts/AuthContext'
+import { usePayments, useAccountingBook } from '../hooks'
+import {
+  PaymentsHeader,
+  Loading,
+  EmptyResult,
+  CircleFloatingIcon,
+  PaymentCheckboxLabel,
+} from '../components'
 
 const PaymentsPage = (props) => {
-  const { state, setPayer } = useContext(Context)
   const [ editMode, setEditMode ] = useState(false)
   const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
   const { state: authState } = useContext(AuthContext)
   const [ small, setSmall ] = useState(false)
   const [users, accountingBookDetails] = useAccountingBook()
-  const [summary] = useAccountingBookSummary()
-  const [filter, setFilter] = useState('')
   const [payments, paymentLoading, getPayments] = usePayments('')
   const [scrollInfo, setRef] = useScrollInfo();
-  const { navigate } = useHistory();
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
 
@@ -48,8 +34,8 @@ const PaymentsPage = (props) => {
     height: 'calc(100vh - 58px - 60px)',
     paddingBottom: '150px',
   }
-//     marginTop: small ? '58px' : '20px',
-//     paddingTop: small ? '10px' : '0px',
+  //     marginTop: small ? '58px' : '20px',
+  //     paddingTop: small ? '10px' : '0px',
 
   const handlePaymentChecked = (e) => {
     let paymentIds = selectedPaymentIds
@@ -64,12 +50,12 @@ const PaymentsPage = (props) => {
   }
 
   payments.forEach(payment => {
-    let checked = selectedPaymentIds.includes(payment.id.toString())
-    if (payment.created_at != currentDate) {
+    if (payment.created_at !== currentDate) {
       currentDate = payment.created_at
       paymentLabels.push( <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
     }
 
+    console.log(payment.id)
     paymentLabels.push(
       <PaymentCheckboxLabel
         selectedPaymentIds={selectedPaymentIds}
@@ -162,25 +148,6 @@ const PaymentsPage = (props) => {
     </>
   )
 }
-
-// <CircleFloatingIcon
-//   clicked={deactiveEditMode}
-//   faIcon='faTimes'
-//   faColor={themeColors.gray600}
-//   iconInlineStyle={{background: 'none', opacity: '0.95', backgroundColor: '#ffffff'}}
-//   containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
-//     <CircleFloatingIcon
-//       clicked={() => navigate(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/new`)}
-//       iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
-//       faIcon='faPlus'
-//       faColor={themeColors.white}
-//       containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
-//         <CircleFloatingIcon
-//           clicked={activeEditMode}
-//           iconInlineStyle={{background: 'linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)', opacity: '0.95'}}
-//           faIcon='faEdit'
-//           faColor={themeColors.white}
-//           containerInlineStyle={{ right: '100px', bottom: '80px'}}/>
 
 const styles = {
   bg: {

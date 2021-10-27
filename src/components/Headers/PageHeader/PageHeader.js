@@ -1,6 +1,6 @@
-import React, { useState, useEffect} from "react"
+import React from "react"
 import styles from './PageHeader.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '../../index'
 
 function PageHeader({
   children,

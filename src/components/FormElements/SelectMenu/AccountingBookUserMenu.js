@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styles from './AccountingBookUserMenu.module.scss'
 import UserCheckboxLabel from '../../FormElements/UserLabel/UserCheckboxLabel'
-import SearchInput from '../../FormElements/SearchInput/SearchInput'
 
 const components = {
   user: UserCheckboxLabel,
@@ -11,7 +10,6 @@ const AccountingBookUserMenu = ({ editMode, setEditMode, objects, labelType, sel
   const [mount, setMount] = useState(false)
   const [displayObjects, setDisplayObjects] = useState(objects)
   const [selectAll, setSelectAll] = useState(true)
-  const [searchValue, setSearchValue] = useState('')
   const [selectedObjects, setSelectedObjects] = useState([])
 
   useEffect(() => {
@@ -29,21 +27,6 @@ const AccountingBookUserMenu = ({ editMode, setEditMode, objects, labelType, sel
 
     setSelectedObjects(selected_objects)
     changed(selected_objects)
-  }
-
-  const handleFilter = (e) => {
-    let filter = e.target.value.toUpperCase();
-    let display_objects = objects.filter(user => {
-      return user.displayName.toUpperCase().indexOf(filter) > -1
-    })
-
-    setDisplayObjects(display_objects)
-    setSearchValue(e.target.value)
-  }
-
-  const handleFilterReset = (e) => {
-    setDisplayObjects(objects)
-    setSearchValue('')
   }
 
   const LabelComponent = components[labelType]

@@ -1,13 +1,8 @@
-import React, {useState, useEffect} from "react"
-import PageHeader from '../PageHeader/PageHeader'
+import React from "react"
 import styles from './PaymentsHeader.module.scss'
-import { themeColors } from '../../constants/globalColors'
-import TopLeftIcon from '../IconLinks/TopLeftIcon'
-import TopRightIcon from '../IconLinks/TopRightIcon'
-import FontAwesomeIcon from '../../utilities/FontAwesomeIcon'
-import Checkbox from '../FormElements/Inputs/Checkbox'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import { themeColors } from '../../../constants'
+import { TopLeftIcon, TopRightIcon } from '../../index'
+import { FontAwesomeIcon } from '../../index'
 
 const inlineStyles = {
   topLeft: {
@@ -20,7 +15,6 @@ const inlineStyles = {
   }
 }
 
-
 function PaymentsHeader({
   deactiveEditMode,
   activeEditMode,
@@ -32,12 +26,11 @@ function PaymentsHeader({
   handleSmallChange,
   small
 }){
-  const [isSelectAll, setIsSelectAll] = useState(selectAll)
 
   if (scrollInfo && !editMode) {
     if (scrollInfo.y.value > 20 && !small) {
       handleSmallChange(true)
-    } else if (scrollInfo.y.value == 0 && small){
+    } else if (scrollInfo.y.value === 0 && small){
       handleSmallChange(false)
     }
   }

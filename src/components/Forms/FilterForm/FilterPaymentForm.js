@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import styles from './FilterPaymentForm.module.scss'
-import AmountInput from '../../FormElements/AmountInput/AmountInput'
 import TextInput from '../../FormElements/TextInput/TextInput'
 import { Context as FilterContext } from '../../../contexts/FilterPaymentContext'
 

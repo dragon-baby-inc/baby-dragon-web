@@ -1,19 +1,17 @@
 import React, { useState, useContext, useEffect } from "react"
-import { NavLink, Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
-import PaymentSwipeableView from '../components/PaymentSwipeableView/PaymentSwipeableView'
-import DotGroup from '../components/FormElements/DotGroup/DotGroup'
-import RadioSelectMenu from '../components/FormElements/SelectMenu/RadioSelectMenu'
-import PopUpForm from '../components/FormElements/PopUpForm/PopUpForm'
-import CheckboxSelectMenu from '../components/FormElements/SelectMenu/CheckboxSelectMenu'
-import Backdrop from '../components/Backdrop/Backdrop'
 import { Context } from '../contexts/PaymentContext'
-import useUsers from '../hooks/useUsers'
-import useAccountingBook from '../hooks/useAccountingBook'
-import usePayment from '../hooks/usePayment'
 import { Context as AuthContext } from '../contexts/AuthContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid'
+import { usePayment, useUsers, useAccountingBook } from '../hooks'
+import {
+  DotGroup,
+  RadioSelectMenu,
+  PopUpForm,
+  CheckboxSelectMenu,
+  Backdrop,
+  PaymentSwipeableView,
+  ArrowLeft
+} from '../components'
 
 const styles = {
   bg: {
@@ -83,7 +81,7 @@ const PaymentCreationPage = (props) => {
 
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       setBuilder(users[0])
-//       if (!builder) { alert('未授權') }
+      //       if (!builder) { alert('未授權') }
 
       setAmount(parseFloat(payment.amount))
       setName(payment.description)
@@ -120,11 +118,7 @@ const PaymentCreationPage = (props) => {
 
   return(
     <div style={styles.bg}>
-      <Link
-        style={styles.back}
-        to={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`}>
-        <FontAwesomeIcon icon={faArrowLeft} color='white'/>
-      </Link>
+      <ArrowLeft link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`} color='white'/>
       <div style={styles.header}>{titles[index]}</div>
       <DotGroup dotSize={2} index={index}/>
       <PaymentSwipeableView

@@ -1,9 +1,7 @@
 import React, {useState} from "react"
 import styles from './AccountingBookSettingsHeader.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { themeColors } from '../../constants/globalColors'
-import { faUsers } from '@fortawesome/fontawesome-free-solid'
-import PageHeader from '../../components/PageHeader/PageHeader'
+import { themeColors } from '../../../constants'
+import PageHeader from '../PageHeader/PageHeader'
 
 function AccountingBookSettingsHeader({ scrollInfo, group }){
   const [small, setSmall] = useState(false)
@@ -11,7 +9,7 @@ function AccountingBookSettingsHeader({ scrollInfo, group }){
   if (scrollInfo) {
     if (scrollInfo.y.value > 50 && !small) {
       setSmall(true)
-    } else if (scrollInfo.y.value == 0 && small){
+    } else if (scrollInfo.y.value === 0 && small){
       setSmall(false)
     }
   }

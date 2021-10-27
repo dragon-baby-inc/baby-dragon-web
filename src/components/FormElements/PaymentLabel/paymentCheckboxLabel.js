@@ -4,15 +4,10 @@ import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/PaymentLabel.scss";
 import { Collapse } from 'react-collapse';
 import FormatString from "../../../utilities/FormatString"
-import { themeColors } from '../../../constants/globalColors'
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button'
 import Checkbox from  '../Inputs/Checkbox'
 import { useHistory } from "react-router-dom";
-
-import Moment from 'react-moment';
-import moment from 'moment/min/moment-with-locales';
-import 'moment/locale/zh-tw';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
@@ -34,14 +29,6 @@ const PaymentCheckboxLabel = (props) => {
   let activeClass = open ? 'active' : ''
   let amount = object.amount
 
-  const calendar = {
-    sameDay: '[今日]',
-    lastDay: '[昨日]',
-    sameElse: 'M/DD',
-    nextWeek: 'M/DD',
-    lastWeek: 'M/DD',
-  }
-
   const handleLabelOnCheck = (e) => {
     if (e.target.checked) {
       setCollapseOpen(true)
@@ -50,9 +37,11 @@ const PaymentCheckboxLabel = (props) => {
     }
   }
 
+  let i = 0
   const allocations = object.allocations.map(allo => {
+    i += 1
     return(
-      <div key={allo.id} className='allocation'>
+      <div key={i} className='allocation'>
         <div className='allocationInner'>
           <span className='name'> { allo.ower_display_name } </span> <span>{props.currency_symbol}{allo.amount}</span>
         </div>

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { themeColors } from '../../../constants/globalColors'
+import React from 'react';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/UserLabel.scss";
-import FontAwesomeIcon from '../../../utilities/FontAwesomeIcon'
+import { themeColors } from '../../../constants'
+import { FontAwesomeIcon } from '../../index'
 
 const styles = {
   label: {
@@ -37,15 +37,12 @@ const UserLabel = (props) => {
         user.restrictedDestroy?
           null
           :
-          <div style={styles.trash} onClick={() => { props.handleDeleteUser(user.id) }}>
-            <FontAwesomeIcon faIcon="faTrash" color={themeColors.red} style={{ fontSize: '18px' }}/>
-          </div>
+            <div style={styles.trash} onClick={() => { props.handleDeleteUser(user.id) }}>
+              <FontAwesomeIcon faIcon="faTrash" color={themeColors.red} style={{ fontSize: '18px' }}/>
+            </div>
       }
     </label>
   )
 };
-//           <div style={styles.trash} onClick={() => { props.handleDeleteUser(user.id) }}>
-//             <FontAwesomeIcon faIcon="faTrash" color={themeColors.gray500} style={{ fontSize: '18px' }}/>
-//           </div>
 
 export default UserLabel;

@@ -10,15 +10,12 @@ const PopUpForm = ({
 }) => {
 
   const handleInputChange = (id, amount) => {
-    console.log(id)
-    console.log(amount)
     let updatedObjects = objects.map(object => {
-      if (object.id == id) {
+      if (object.id === id) {
         object.amount = amount
       }
       return object
     })
-    console.log(updatedObjects)
     changed(updatedObjects)
   }
 

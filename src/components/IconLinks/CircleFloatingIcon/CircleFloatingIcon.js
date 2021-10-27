@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import FontAwesomeIcon from '../../../utilities/FontAwesomeIcon'
-import { themeColors } from '../../../constants/globalColors'
 import FloatingIcon from '../FloatingIcon/FloatingIcon'
 import styles from './CircleFloatingIcon.module.scss'
 
