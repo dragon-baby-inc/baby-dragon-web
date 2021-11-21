@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useAccountingBooks } from '../hooks';
 import { themeColors } from '../constants/globalColors'
+import axios from '../api/dragonBabyApi'
 import {
   Loading,
   AccountingBookLabel,
   AccountingBooksHeader,
   AccountingBookForm,
-  Backdrop
+  Backdrop,
+  AccountingBookAddLabel
 } from '../components';
 
 const styles = {
@@ -18,7 +20,6 @@ const styles = {
     background: `linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)`,
   },
   books: {
-    paddingTop: '10px',
     paddingBottom: '100px',
     height: 'calc(100vh - 40px)',
     overflow: 'auto',
@@ -36,12 +37,28 @@ const styles = {
 const AccountingBookSummaryPage = ({
   users,
 }) => {
-  const [books, group, loading] = useAccountingBooks()
+  const [books, group, loading, currentBook, setCurrentBook] = useAccountingBooks()
   const [showForm, setShowForm] = useState(false)
 
   const objects = books.map(book => {
-    return <AccountingBookLabel key={book.uuid} object={book}/>
+    return <AccountingBookLabel
+      current={currentBook.uuid === book.uuid}
+      handleSetCurrent={(id) => handleSetAsCurrent(id)}
+      key={book.uuid}
+      object={book}/>
   })
+
+  const handleSetAsCurrent = (uuid) => {
+    if (uuid) {
+      axios.post(`api/v1/groups/${group.id}/accounting_books/${uuid}/set_as_current`)
+        .then((res) => {
+          setCurrentBook({ uuid: res.data.accounting_book.uuid })
+        })
+        .catch((res) => {
+          console.log(res.response)
+        })
+    }
+  }
 
   return(
     <div style={styles.bg}>
@@ -59,7 +76,10 @@ const AccountingBookSummaryPage = ({
         loading ?
           <div style={styles.loading}> <Loading /> </div>
           :
-          <div style={styles.books}> {objects} </div>
+          <div style={styles.books}>
+            {objects}
+            <AccountingBookAddLabel clicked={setShowForm}></AccountingBookAddLabel>
+          </div>
       }
     </div>
   )

@@ -22,8 +22,12 @@ import {
   faBook,
 } from '@fortawesome/fontawesome-free-solid'
 import {
-  faCheckDouble
+  faCheckDouble,
+  faStar as fasFaStar,
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  faStar as farFaStar,
+} from '@fortawesome/free-regular-svg-icons'
 
 const icons = {
   faBookOpen: faBookOpen,
@@ -47,6 +51,8 @@ const icons = {
   faList: faList,
   faHistory: faHistory,
   faBook: faBook,
+  farFaStar: farFaStar,
+  fasFaStar: fasFaStar
 }
 
 const Icon = (props) => {

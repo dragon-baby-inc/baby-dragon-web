@@ -25,6 +25,10 @@ import DatePickerInput from './DatePickerInput/DatePickerInput';
 import Button from './Button/Button';
 import AmountInput from './AmountInput/AmountInput';
 import AccountingBookLabel from './AccountingBookLabel/accountingBookLabel';
+import AccountingBookAddLabel from './AccountingBookAddLabel/accountingBookAddLabel';
+import Image from './Image/Image';
+import ColorBlock from './ColorBlock/ColorBlock';
+import Star from './Star/Star';
 
 export {
   UserSummaryLabel,
@@ -53,5 +57,9 @@ export {
   DatePickerInput,
   Button,
   AmountInput,
-  AccountingBookLabel
+  AccountingBookLabel,
+  AccountingBookAddLabel,
+  Image,
+  Star,
+  ColorBlock,
 };

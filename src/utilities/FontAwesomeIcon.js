@@ -18,8 +18,12 @@ import {
   faHome,
 } from '@fortawesome/fontawesome-free-solid'
 import {
-  faCheckDouble
+  faCheckDouble,
+  faStar as fasFaStar,
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  faStar as farFaStar,
+} from '@fortawesome/free-regular-svg-icons'
 
 const icons = {
   faBookOpen: faBookOpen,
@@ -38,10 +42,14 @@ const icons = {
   faCog: faCog,
   faLock: faLock,
   faLockOpen: faLockOpen,
-  faHome: faHome
+  faHome: faHome,
+  farStar: farFaStar,
+  fasFaStar: fasFaStar
 }
 
 const Icon = (props) => {
+  console.log(props.faicon)
+
   return(
     <FontAwesomeIcon icon={icons[props.faicon]} {...props}/>
   )

@@ -1,11 +1,12 @@
 @import "../../../styleSheets/globalColors.scss";
 
 .header {
+  padding: 16px 20px 17px;
   width: 100%;
   min-height: 58px;
   height: 58px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
   background: #ffffff;
@@ -25,12 +26,13 @@
     padding-bottom: 0px;
   }
   .name {
-    color: white;
-    color: $gold900;
-    font-weight: 500;
-    font-size: 1rem;
+    color: black;
     font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
     text-align: left;
-    padding: 0;
+
   }
 }
