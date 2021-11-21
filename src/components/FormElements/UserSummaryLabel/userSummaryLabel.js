@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Collapse } from 'react-collapse';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/userSummaryLabel.scss";
@@ -16,6 +17,18 @@ const UserSummaryLabel = (props) => {
       setCollapseOpen(false)
     }
   }
+
+  let i = 0
+  const debts = object.debts.map(allo => {
+    i += 1
+    return(
+      <div key={i} className='allocation'>
+        <div className='allocationInner'>
+          <span className='name'> { allo.ower_display_name } </span> <span className="amount">{props.currency_symbol}{allo.amount}</span>
+        </div>
+      </div>
+    )
+  })
 
   return (
     <>
@@ -60,12 +73,19 @@ const UserSummaryLabel = (props) => {
             </div>
           </div>
         </label>
-        <div>
-          <div className='user-summary collapse'>
-            <UserSummaryCollapse objects={object.debts} accountingBookDetails={props.accountingBookDetails}/>
+      </div>
+      <Collapse isOpened={true}>
+        <div className={`user-summary collapse`}>
+          <div className='allocations'>
+            {debts}
+          </div>
+          <div className='allocation buttons'>
+            <div className='btn edit'>
+              總計 {props.currency_symbol}{object.debts.reduce((pre, cur) => (cur.amount + pre), 0)}
+            </div>
           </div>
         </div>
-      </div>
+      </Collapse>
     </>
   )
 };

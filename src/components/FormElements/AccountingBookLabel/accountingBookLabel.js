@@ -21,7 +21,7 @@ const AccountingBookLabel = (props) => {
   }
 
   const handleClicked = () => {
-    history.push(`accounting_books/${object.uuid}/payments`)
+    history.push(`accounting_books/${object.uuid}/payments/index`)
   }
 
   const handleSetAsCurrent = (e) => {
@@ -56,7 +56,7 @@ const AccountingBookLabel = (props) => {
               <Star />
             </div>
           }
-          <FontAwesomeIcon style={{ fontSize: "10px", margin: "0px 10px" }} faicon='faChevronRight' color={themeColors.gray900}/>
+          <FontAwesomeIcon style={{ fontSize: "15px", margin: "0px 10px" }} faicon='faChevronRight' color={themeColors.gray900}/>
         </div>
       </label>
     </>

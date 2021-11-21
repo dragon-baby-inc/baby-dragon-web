@@ -1,6 +1,13 @@
 import React from "react"
-import { useLogMessages } from '../hooks'
-import { PageHeader, Loading, TopLeftIcon, EmptyResult } from '../components'
+import { useHistory, useLogMessages } from '../hooks'
+import { useParams } from 'react-router-dom';
+import {
+  Separater,
+  PageHeader,
+  Loading,
+  TopLeftIcon,
+  EmptyResult
+} from '../components'
 import { themeColors } from '../constants'
 
 const styles = {
@@ -23,7 +30,7 @@ const styles = {
     padding: '20px',
     paddingBottom: '200px',
     overflow: 'auto',
-    height: 'calc(100vh - 40px - 60px)',
+    height: 'calc(100vh - 58px)',
   },
   createdAt: {
     minWidth: '52px',
@@ -60,6 +67,8 @@ const BookHistoryPage = ({
   accountingBookDetails
 }) => {
   const [logMessages, loading] = useLogMessages()
+  const { group_id, accounting_book_id } = useParams();
+  const { routes } = useHistory();
 
   let currentDate = null
   let objects = []
@@ -86,12 +95,13 @@ const BookHistoryPage = ({
 
   return(
     <div style={styles.bg}>
-      <PageHeader title={'編輯歷史'} color={themeColors.gray400}/>
-      <TopLeftIcon
-        link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
-        color={themeColors.gold900}
-        faicon='faHome'
-        style={{fontSize: '20px'}}/>
+      <PageHeader
+        faicon='faChevronLeft'
+        link={routes.paymentIndexPage({ group_id, accounting_book_id })}
+        color={themeColors.black}>
+        編輯歷史
+      </PageHeader>
+      <Separater style={{ margin: "0px" }}/>
       {
         loading ?
           <Loading />

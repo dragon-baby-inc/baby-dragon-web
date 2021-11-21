@@ -19,7 +19,7 @@ const CustomToggle = ({
       onChange={changed}
       className={className}
       name={name}
-      icons={icons}
+      icons={{ checked: <></>, unchecked: <></> }}
     />
   )
 }

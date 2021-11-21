@@ -1,25 +1,44 @@
 import React from "react"
 import styles from './PageHeader.module.scss'
-import { FontAwesomeIcon } from '../../index'
+import { TopRightIcon, FontAwesomeIcon } from '../../index'
+
+const inlineStyles = {
+  icon: {
+    position: 'relative',
+    fontSize: '15px',
+    color: 'black',
+    textDecoration: "none",
+    padding: '18px 20px 22px',
+    top: '1px',
+  },
+  header: {
+    paddingLeft: '0px'
+  }
+}
 
 function PageHeader({
   children,
-  faIcon,
+  faicon,
   color,
-  title
+  title,
+  link
 }){
 
   let classes = [styles.header]
   return(
-    <div className={classes.join(' ')}>
+    <div className={classes.join(' ')} style={faicon ? inlineStyles.header : {}}>
       <div className={styles.innerBlock}>
         {
-          faIcon ?
-            <FontAwesomeIcon className={styles.icon} icon={faIcon} color={color}/> : null
+          faicon ?
+            <TopRightIcon
+              link={link}
+              style={inlineStyles.icon}
+              color={color}
+              faicon={faicon}/> : null
         }
         <div>
           <div className={styles.name}>
-            {title}
+            {children}
           </div>
         </div>
       </div>

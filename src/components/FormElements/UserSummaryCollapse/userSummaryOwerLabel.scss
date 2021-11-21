@@ -1,7 +1,6 @@
 @import "../../../styleSheets/globalColors.scss";
 
 label.group-menu-label.group-menu-ower-label:focus-within  {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
 label.group-menu-label.group-menu-ower-label {
@@ -50,13 +49,12 @@ label.group-menu-label.group-menu-ower-label {
   }
 }
 
-.payment.collapse {
+.ower-summary.collapse {
   background-color: #fff;
   position: relative;
   font-size: 13px;
   color: $gray900;
   margin: 0px 20px 10px;
-  padding: 10px 10px 5px;
   border-left: 1px solid $gray400;
   border-bottom: 1px solid $gray400;
   border-bottom-left-radius: 10px;

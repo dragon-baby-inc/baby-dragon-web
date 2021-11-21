@@ -22,6 +22,7 @@ import {
   faStar as fasFaStar,
 } from '@fortawesome/free-solid-svg-icons'
 import {
+  faClock as farFaClock,
   faStar as farFaStar,
 } from '@fortawesome/free-regular-svg-icons'
 
@@ -44,12 +45,11 @@ const icons = {
   faLockOpen: faLockOpen,
   faHome: faHome,
   farStar: farFaStar,
-  fasFaStar: fasFaStar
+  fasFaStar: fasFaStar,
+  farFaClock: farFaClock,
 }
 
 const Icon = (props) => {
-  console.log(props.faicon)
-
   return(
     <FontAwesomeIcon icon={icons[props.faicon]} {...props}/>
   )

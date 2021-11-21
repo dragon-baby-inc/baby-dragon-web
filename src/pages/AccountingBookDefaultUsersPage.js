@@ -4,7 +4,7 @@ import axios from '../api/dragonBabyApi'
 import { themeColors } from '../constants'
 import { useAccountingBook } from '../hooks'
 import {
-  TopLeftIcon,
+  Separater,
   PageHeader,
   Backdrop,
   UserForm,
@@ -40,8 +40,13 @@ const AccountingBookUsersPage = (props) => {
   return(
     <>
       <div style={styles.bg}>
-        <PageHeader title={editMode ? '編輯分帳名單' : '分帳名單'} color={themeColors.gray400}/>
-        <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`} color='black' faicon='faArrowLeft'/>
+        <PageHeader
+          faicon='faChevronLeft'
+          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`}
+          color={themeColors.black}>
+          分帳成員
+        </PageHeader>
+        <Separater style={{ margin: "0px" }}/>
         {
           loading ?
             null :

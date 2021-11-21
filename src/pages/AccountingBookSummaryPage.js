@@ -14,7 +14,7 @@ const styles = {
     paddingTop: '10px',
     paddingBottom: '200px',
     overflow: 'auto',
-    height: 'calc(100vh - 40px - 60px)',
+    height: 'calc(100vh - 58px - 49px)',
   }
 }
 
@@ -22,20 +22,14 @@ const AccountingBookSummaryPage = ({
   users,
   accountingBookDetails
 }) => {
-  const [summary, loading] = useAccountingBookSummary()
+  const [summary, loading] = useAccountingBookSummary(accountingBookDetails.group_id, accountingBookDetails.id)
 
   let objects = summary.map(object => {
-    return <UserSummaryLabel key={object.payer_id} object={object} accountingBookDetails={accountingBookDetails}></UserSummaryLabel>
+    return <UserSummaryLabel currency_symbol={accountingBookDetails.currency_symbol} key={object.payer_id} object={object} accountingBookDetails={accountingBookDetails}></UserSummaryLabel>
   })
 
   return(
     <div style={styles.bg}>
-      <PageHeader title={'分帳建議'} color={themeColors.gray400}/>
-      <TopLeftIcon
-        link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
-        color={themeColors.gold900}
-        faicon='faHome'
-        style={{fontSize: '20px'}}/>
       {
         loading ?
           <Loading />

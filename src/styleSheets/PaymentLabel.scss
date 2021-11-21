@@ -1,31 +1,54 @@
 @import "../styleSheets/globalColors.scss";
 
 label.group-menu-label.group-menu-payment:focus-within  {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
 }
 
-label.group-menu-label.group-menu-payment.active::before {
-  content: '';
-  width: 10px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: $gold900;
+label.group-menu-label.group-menu-payment.active {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+label.group-menu-label.group-menu-payment.paid-back {
+  background: #E6EFED;
+
+  .group-menu-username {
+    .description {
+      color: $green900;
+    }
+    .message {
+      color: $green900;
+    }
+  }
+  .group-menu-amount {
+
+    .description {
+      color: $gold900;
+    }
+
+    .message {
+      color: #E6EFED;
+    }
+  }
 }
 
 label.group-menu-label.group-menu-payment {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
-  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  background-color: $gray100;
   position: relative;
   overflow: hidden;
-  transition: .3s;
-  margin: 4px 10px;
-  padding-left:  20px;
-  padding-right: 20px;
-  border: 1px solid #eee;
+  margin: 12px 16px 0px;
+  padding-left:  16px;
+  padding-right: 16px;
   height: 70px;
-  border-radius: 5px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+
+  .group-menu-radio {
+    position: absolute;
+  }
 
   .group-menu-date {
     font-weight: 400;
@@ -49,8 +72,8 @@ label.group-menu-label.group-menu-payment {
     transform: translate(0px, 0px);
 
     img {
-      width: 28px;
-      height: 28px;
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -82,12 +105,20 @@ label.group-menu-label.group-menu-payment {
     flex-shrink: 1;
 
     .description {
-      font-weight: 500;
-      font-size: 15px;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 25px;
+      letter-spacing: 0em;
+      color: $gold900;
     }
     .message {
-      font-weight: 300;
-      font-size: 10px;
+      color: $gold900;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0px;
     }
   }
   .group-menu-amount {
@@ -96,6 +127,24 @@ label.group-menu-label.group-menu-payment {
     width: 70px;
     text-overflow: ellipsis;
     overflow: hidden;
+
+    .description {
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 25px;
+      letter-spacing: 0em;
+      color: $gold900;
+    }
+
+    .message {
+      color: $gray900;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0px;
+    }
   }
 
   .group-menu-amount.active {
@@ -166,27 +215,34 @@ label.group-menu-label.group-menu-payment {
   }
 }
 
+.payment.collapse.paid-back {
+  background: #E6EFED;
+  .allocation.buttons {
+    padding: 0;
+    border-top:  1px solid white;
+  }
+}
+
 .payment.collapse {
   margin-bottom: 100px;
-  background-color: #fff;
+  background-color: $gray100;
   position: relative;
   font-size: 13px;
   color: $gray900;
-  margin: 0px 20px 10px;
-  padding: 10px 10px 5px;
-  border-left: 1px solid $gray400;
-  border-bottom: 1px solid $gray400;
+  margin: 0px 16px 0px;
+  padding: 10px 16px 5px;
+  padding-top: 0px;
   border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   border: none;
 
   .allocations {
-    margin-left: 10px;
-    border-left: 1px solid $gray400;
+    padding-left: 37px;
     border: none;
 
     .allocationInner {
+      padding: 0;
       display: flex;
-      padding: 0px 10px;
       justify-content: space-between;
       flex-grow: 1;
     }
@@ -200,18 +256,30 @@ label.group-menu-label.group-menu-payment {
       top: 5px;
       width: 12px;
       height: 1px;
-      border-bottom: 1px solid $gray400;
+      border-bottom: 0px solid $gray400;
     }
   }
 
   .allocation {
     display: flex;
     justify-content: space-between;
-    padding: 3px 0px;
 
     span {
-      font-weight: 450;
-      color: $gold900;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+
+    span.amount {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
     }
   }
 
@@ -219,9 +287,24 @@ label.group-menu-label.group-menu-payment {
     padding: 3px 10px;
   }
 
-  .allocation.amount {
+  .allocation.buttons {
+    padding: 0;
+    border-top:  1px solid $gray400;
+
+    display: flex;
     justify-content: flex-end;
-    padding: 5px 10px;
-    font-weight: 500px;
+
+    .btn {
+      padding: 12px 8px;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .btn.edit {
+      color: $gold900;
+    }
   }
 }

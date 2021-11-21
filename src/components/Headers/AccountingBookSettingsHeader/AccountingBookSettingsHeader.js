@@ -1,10 +1,12 @@
 import React, {useState} from "react"
-import styles from './AccountingBookSettingsHeader.module.scss'
-import { themeColors } from '../../../constants'
-import PageHeader from '../PageHeader/PageHeader'
+import { useParams } from 'react-router-dom';
+import styles from './AccountingBookSettingsHeader.module.scss';
+import { themeColors } from '../../../constants';
+import PageHeader from '../PageHeader/PageHeader';
 
 function AccountingBookSettingsHeader({ scrollInfo, group }){
   const [small, setSmall] = useState(false)
+  const { group_id, accounting_book_id } = useParams()
 
   if (scrollInfo) {
     if (scrollInfo.y.value > 50 && !small) {
@@ -26,8 +28,15 @@ function AccountingBookSettingsHeader({ scrollInfo, group }){
   }
 
   return(
-    <PageHeader title={'帳本設定'} color={themeColors.gray400}/>
+    <PageHeader
+      faicon='faChevronLeft'
+      link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/index`}
+      color="black">
+      設定
+    </PageHeader>
   )
 }
 
 export default AccountingBookSettingsHeader
+//         <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faicon='faHome' style={{fontSize: '20px'}}/>
+

@@ -115,12 +115,12 @@ const PaymentCreationPage = (props) => {
   }, [users, authState, loading, paymentLoading])
 
   const afterSubmit = () => {
-    history.push(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`)
+    history.push(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/index`)
   }
 
   return(
     <div style={styles.bg}>
-      <ArrowLeft link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments`} color='white'/>
+      <ArrowLeft link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/index`} color='white'/>
       <div style={styles.header}>{titles[index]}</div>
       <DotGroup dotSize={2} index={index}/>
       <PaymentSwipeableView

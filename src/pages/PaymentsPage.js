@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react"
+import { useRouteMatch, Switch, Route } from 'react-router-dom';
 import useScrollInfo from 'react-element-scroll-hook';
+import AccountingBookSummaryPage from '../pages/AccountingBookSummaryPage'
+import { useHistory } from "react-router-dom";
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 import { themeColors } from '../constants'
@@ -10,16 +13,19 @@ import {
   Loading,
   EmptyResult,
   CircleFloatingIcon,
+  Views,
   PaymentCheckboxLabel,
 } from '../components'
 
 const PaymentsPage = (props) => {
+  const { url } = useRouteMatch();
+  const history = useHistory();
   const [ editMode, setEditMode ] = useState(false)
   const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
   const { state: authState } = useContext(AuthContext)
   const [ small, setSmall ] = useState(false)
   /* eslint-disable no-unused-vars */
-  const [users, accountingBookDetails] = useAccountingBook()
+  const [users, accountingBookDetails, accountingBookLoading] = useAccountingBook()
   const [payments, paymentLoading, getPayments] = usePayments('')
   const [scrollInfo, setRef] = useScrollInfo();
   const { group_id, accounting_book_id } = useParams();
@@ -31,8 +37,8 @@ const PaymentsPage = (props) => {
   let paymentStyle =  {
     background: '#FFFFFF',
     overflow: 'auto',
-    marginTop: small ? '56px' : '150px',
-    height: 'calc(100vh - 58px - 60px)',
+    marginTop: small ? '0px' : '0px',
+    height: 'calc(100vh - 58px - 49px)',
     paddingBottom: '150px',
   }
   //     marginTop: small ? '58px' : '20px',
@@ -50,6 +56,22 @@ const PaymentsPage = (props) => {
     setSelectedPaymentIds(paymentIds)
   }
 
+  const handleDeletePayment = (payment) => {
+    if (window.confirm(`確認刪除這筆帳款?`)) {
+      axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
+        payment_ids: [payment.id],
+        builder_id: authState.userLineIdToken
+      }).then(function (response) {
+        getPayments()
+        deactiveEditMode()
+      })
+        .catch(function (error) {
+          console.log(error)
+          alert('刪除失敗')
+        })
+    }
+  }
+
   payments.forEach(payment => {
     if (payment.created_at !== currentDate) {
       currentDate = payment.created_at
@@ -58,6 +80,7 @@ const PaymentsPage = (props) => {
 
     paymentLabels.push(
       <PaymentCheckboxLabel
+        deleted={handleDeletePayment}
         selectedPaymentIds={selectedPaymentIds}
         changed={handlePaymentChecked}
         key={payment.id}
@@ -71,25 +94,12 @@ const PaymentsPage = (props) => {
     setSmall(small)
   }
 
+  const handleAddPayment = () => {
+    history.push(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/new`)
+  }
+
   const activeEditMode = () => { setEditMode(true); setSmall(true) }
   const deactiveEditMode = () => { setEditMode(false); setSmall(false);  }
-
-  const handleDeletePayment = () => {
-    if (selectedPaymentIds.length === 0) { return }
-    if (window.confirm(`確認刪除 ${selectedPaymentIds.length} 筆帳款?`)) {
-      axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
-        payment_ids: selectedPaymentIds,
-        builder_id: authState.userLineIdToken
-      }).then(function (response) {
-        getPayments()
-        deactiveEditMode()
-      })
-        .catch(function (error) {
-          console.log(error)
-          alert('刪除失敗')
-        })
-    }
-  }
 
   const handleSelectAllClick = (e) => {
     setSelectAll(!selectAll)
@@ -100,50 +110,58 @@ const PaymentsPage = (props) => {
     }
   }
 
+  console.log(url)
   return(
     <>
       <div style={styles.bg}>
         <PaymentsHeader
+          loading={paymentLoading}
           deactiveEditMode={deactiveEditMode}
           editMode={editMode}
           activeEditMode={activeEditMode}
           selectAll={selectAll}
           handleSelectAllClick={handleSelectAllClick}
+          paymentSize={payments.length}
           scrollInfo={scrollInfo}
           small={small}
           accountingBookDetails={accountingBookDetails}
           handleSmallChange={handleSmallChange}
         />
 
-        {
-          paymentLoading ?
-            <div style={paymentStyle}>
-              <Loading />
-            </div>
-            :
-            <div style={paymentStyle} ref={setRef}>
-              {
-                payments.length > 0 ?
-                  paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
-              }
-            </div>
-        }
+
+        <Views group_id={group_id} id={accounting_book_id}/>
+
+        <Switch>
+          <>
+            {
+              (paymentLoading) ?
+                <div style={paymentStyle}>
+                  <Loading />
+                </div>
+                :
+                <div style={paymentStyle} ref={setRef}>
+                  <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index`}>
+                    {
+                      payments.length > 0 ?
+                        paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
+                    }
+                  </Route>
+                  <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary`}>
+                    <>
+                      <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
+                    </>
+                  </Route>
+                </div>
+            }
+          </>
+        </Switch>
       </div>
-      {
-        editMode ?
-          <>
-            <CircleFloatingIcon
-              faicon='faTrash'
-              faColor={themeColors.white}
-              clicked={handleDeletePayment}
-              iconInlineStyle={{background: 'none', backgroundColor: 'red'}}
-              containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
-          </>
-          :
-          <>
-            null
-          </>
-      }
+      <CircleFloatingIcon
+        faicon='faPlus'
+        faColor={themeColors.white}
+        clicked={handleAddPayment}
+        iconInlineStyle={{background: 'none', background: 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'}}
+        containerInlineStyle={{ right: '30px', bottom: '80px'}}/>
     </>
   )
 }
@@ -151,7 +169,7 @@ const PaymentsPage = (props) => {
 const styles = {
   bg: {
     width: '100vw',
-    height: 'calc(100vh - 60px)',
+    height: 'calc(100vh)',
     overflow: 'hidden',
     maxHeight: '-webkit-fill-available',
     position: 'relative',
@@ -162,10 +180,12 @@ const styles = {
     fontSize: '1.5rem',
   },
   dateSeparator: {
-    fontSize: '12px',
-    textAlign: 'center',
-    padding: '5px',
-    color: themeColors.gray600,
+    fontSize: '14px',
+    textAlign: 'left',
+    paddingLeft: '16px',
+    paddingTop: '12px',
+    fontWeight: 800,
+    color: themeColors.gray500,
   },
 }
 

@@ -1,0 +1,70 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.bg {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: none;
+  background-color: white;
+}
+
+.icons {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+
+  a {
+    color: $gray600;
+    font-weight: 500;
+    flex-grow: 1;
+    background-color: transparent;
+
+    span {
+      display: inline-block;
+      font-size: 13px;
+      padding-top: 10px;
+    }
+  }
+
+  a.disabled {
+    pointer-events: none;
+  }
+
+  .fa {
+    font-size: 15px;
+    color: $gray900;
+  }
+
+  .icon {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon.activeStyle {
+    color: $gold700;
+    border-bottom: 2px solid $gold700;
+  }
+}
+
+a.hover,
+a.active {
+  color: white;
+}
+
+.icon.activeStyle {
+  color: black;
+//   background-color: $green700;
+}
+.fa.activeStyle {
+  color: black;
+//   color: white;
+}
+
+

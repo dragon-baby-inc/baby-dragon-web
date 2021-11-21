@@ -41,11 +41,15 @@ const PaymentCheckboxLabel = (props) => {
     return(
       <div key={i} className='allocation'>
         <div className='allocationInner'>
-          <span className='name'> { allo.ower_display_name } </span> <span>{props.currency_symbol}{allo.amount}</span>
+          <span className='name'> { allo.ower_display_name } </span> <span className="amount">{props.currency_symbol}{allo.amount}</span>
         </div>
       </div>
     )
   })
+
+  const handleDeleteClick = () => {
+    props.deleted(object)
+  }
 
   const handleEditClick = () => {
     history.push(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${object.id}/edit`)
@@ -56,16 +60,12 @@ const PaymentCheckboxLabel = (props) => {
     props.changed(e)
   }
 
+  let paidBack = ""
+  if (object.paid_back) { paidBack = "paid-back" }
+
   return (
     <>
-      <label className={`group-menu-label group-menu-checkbox-label group-menu-payment ${activeClass}`}>
-        {
-          props.editMode ?
-            null
-            :
-            null
-
-        }
+      <label className={`group-menu-label group-menu-checkbox-label group-menu-payment ${activeClass} ${paidBack}`}>
         {
           props.editMode ?
             <Checkbox checked={isChecked} value={object.id.toString()} changed={handleCheckboxChaned}/>:
@@ -77,7 +77,7 @@ const PaymentCheckboxLabel = (props) => {
               />
             </div>
         }
-        <div className={`group-menu-image-block ${activeClass}`}>
+        <div className={`group-menu-image-block`}>
           {
             object.payer_image_url  ?
               <img className='group-menu-userimage' src={object.payer_image_url} alt="user"/>
@@ -85,36 +85,37 @@ const PaymentCheckboxLabel = (props) => {
               <img className='group-menu-userimage' src='https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png' alt="user"/>
           }
         </div>
-        <div className={`group-menu-payment-block ${activeClass}`}>
+        <div className={`group-menu-payment-block`}>
           <div className='group-menu-username'>
             <div className='description'>
-              { object.description }
+              {
+                object.paid_back ?
+                  `還 ${object.allocations[0].ower_display_name}`
+                  :
+                  object.description
+              }
             </div>
             <div className='message'>
-              { object.ower_and_payer_message }
+              {
+                object.paid_back ?
+                  `${object.payer_display_name} 還款`
+                  :
+                  object.payer_display_name
+              }
             </div>
           </div>
-          <div className={`col-4 group-menu-amount ${activeClass}`}>
-            { amount }
+          <div className={`col-4 group-menu-amount`}>
+            <div className='description'>
+              {props.currency_symbol}{ amount }
+            </div>
+            <div className="message" >
+              { object.allocations.length }人
+            </div>
           </div>
         </div>
-        {
-          open ?
-            <div className='btn-group active'>
-              <Button clicked={handleEditClick} className='icon'>
-                <FontAwesomeIcon icon={faEdit}/>
-              </Button>
-            </div>
-            :
-            <div className='btn-group'>
-              <Button className='icon'>
-                <FontAwesomeIcon icon={faEdit}/>
-              </Button>
-            </div>
-        }
       </label>
       <Collapse isOpened={open}>
-        <div className='payment collapse'>
+        <div className={`payment collapse ${paidBack}`}>
           {
             true ?
               null
@@ -123,11 +124,21 @@ const PaymentCheckboxLabel = (props) => {
                   <span> {object.ower_and_payer_message} </span>
                 </div>
           }
-          <div className='allocations'>
-            {allocations}
-          </div>
-          <div className='allocation amount'>
-            <span> 總計 {props.currency_symbol}{object.amount} </span>
+          {
+            object.paid_back ?
+              null
+              :
+                <div className='allocations'>
+                  {allocations}
+                </div>
+          }
+          <div className='allocation buttons'>
+            <div onClick={handleDeleteClick} className='btn'>
+              刪除
+            </div>
+            <div onClick={handleEditClick} className='btn edit'>
+              編輯
+            </div>
           </div>
         </div>
       </Collapse>
@@ -135,4 +146,18 @@ const PaymentCheckboxLabel = (props) => {
   )
 };
 
+        // {
+        //   open ?
+        //     <div className='btn-group active'>
+        //       <Button clicked={handleEditClick} className='icon'>
+        //         <FontAwesomeIcon icon={faEdit}/>
+        //       </Button>
+        //     </div>
+        //     :
+        //     <div className='btn-group'>
+        //       <Button className='icon'>
+        //         <FontAwesomeIcon icon={faEdit}/>
+        //       </Button>
+        //     </div>
+        // }
 export default PaymentCheckboxLabel;

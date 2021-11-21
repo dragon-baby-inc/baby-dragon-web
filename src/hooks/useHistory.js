@@ -7,7 +7,16 @@ const Hook =  () => {
     history.push(url)
   }
 
-  return { navigate };
+  const navigateTo = (page, args) => {
+    navigate(routes[page](args))
+  }
+
+  const routes = {
+    accountingBookPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books`,
+    paymentIndexPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/payments/index`,
+  }
+
+  return { navigate, navigateTo, routes };
 }
 
 export default Hook;

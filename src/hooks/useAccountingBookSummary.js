@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
-const useAccountingBookSummary =  () => {
+const useAccountingBookSummary =  (callback) => {
   const { group_id, accounting_book_id } = useParams();
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);

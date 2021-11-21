@@ -2,7 +2,7 @@ import React from "react"
 import styles from './PaymentsHeader.module.scss'
 import { themeColors } from '../../../constants'
 import { TopLeftIcon, TopRightIcon } from '../../index'
-import { FontAwesomeIcon } from '../../index'
+import { PageHeader, FontAwesomeIcon, Image, Star } from '../../index'
 
 const inlineStyles = {
   topLeft: {
@@ -17,6 +17,7 @@ const inlineStyles = {
 
 function PaymentsHeader({
   deactiveEditMode,
+  paymentSize,
   activeEditMode,
   selectAll,
   handleSelectAllClick,
@@ -24,11 +25,13 @@ function PaymentsHeader({
   scrollInfo,
   accountingBookDetails,
   handleSmallChange,
-  small
+  small,
+  loading
 }){
 
   if (scrollInfo && !editMode) {
-    if (scrollInfo.y.value > 20 && !small) {
+    console.log(scrollInfo)
+    if (scrollInfo.y.value > 10 && !small) {
       handleSmallChange(true)
     } else if (scrollInfo.y.value === 0 && small){
       handleSmallChange(false)
@@ -47,44 +50,66 @@ function PaymentsHeader({
   }
 
   return(
-    <div className={classes.join(' ')}>
-      {
-        editMode ?
-          <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
-            { selectAll ?
-              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faicon='faCheckDouble'/>
-              :
-              <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faicon='faCheckDouble'/>
+    <div>
+      <PageHeader
+        faicon='faChevronLeft'
+        link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
+      >
+        {accountingBookDetails.name}
+        <Star solid/>
+
+        {
+          editMode ?
+            <div onClick={handleSelectAllClick} style={inlineStyles.topLeft}>
+              { selectAll ?
+                <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faicon='faCheckDouble'/>
+                :
+                <FontAwesomeIcon style={{ fontSize: '20px' }} color={themeColors.gold900} faicon='faCheckDouble'/>
+              }
+            </div>
+            :
+            null
+        }
+        <TopRightIcon
+          style={{ fontSize: '20px', right: 36 }}
+          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/log_messages`}
+          color={"black"}
+          faicon='farFaClock'/>
+        <TopRightIcon
+          style={{ fontSize: '20px', right: 2 }}
+          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/settings`}
+          color={"black"}
+          faicon='faCog'/>
+        {
+          editMode ?
+            <TopRightIcon clicked={deactiveEditMode} style={{ fontSize: '20px', right: 40 }} color='gray' faicon='faTimes'/>
+            :
+            null
+        }
+      </PageHeader>
+      <div className={classes.join(' ')}>
+        <div className={innerBlockClasses.join(" ")}>
+          <div>
+            {
+              small ?
+                null : <Image size='80px' circle/>
+
             }
           </div>
-          :
-          null
-      }
-      <TopRightIcon style={{ fontSize: '20px', right: 2 }} link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/payments/new`} color={themeColors.gold900} faicon='faPlus'/>
-      {
-        editMode ?
-          <TopRightIcon clicked={deactiveEditMode} style={{ fontSize: '20px', right: 40 }} color='gray' faicon='faTimes'/>
-          :
-          <TopRightIcon clicked={activeEditMode} style={{ fontSize: '18px', right: 40, top: 1 }} color={themeColors.gold900} faicon='faTrash'/>
-      }
-      { small ?
-          null :
-          <TopLeftIcon link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`} color={themeColors.gold900} faicon='faHome' style={{fontSize: '20px'}}/>
-      }
-      <div className={innerBlockClasses.join(" ")}>
-        {
-          small ?
-            null : <FontAwesomeIcon className={styles.bookIcon} faicon='faBookOpen' color={themeColors.gold900}/>
-        }
-        <div className={styles.textBlock}>
-          <div>
-            <div className={nameClasses.join(' ')}>
-              {accountingBookDetails.name}
+          <div className={styles.info}>
+            <div className={styles.count}>
+              {loading ? "-" : accountingBookDetails.users_size}
             </div>
-            <div className={styles.details}>
-              <div className={styles.user_count}>
-                群組人數：{accountingBookDetails.users_size} 人
-              </div>
+            <div className={styles.label}>
+              分帳人數
+            </div>
+          </div>
+          <div className={styles.info}>
+            <div className={styles.count}>
+              {loading ? "-" : paymentSize}
+            </div>
+            <div className={styles.label}>
+              帳款數量
             </div>
           </div>
         </div>
@@ -92,5 +117,7 @@ function PaymentsHeader({
     </div>
   )
 }
+
+// <TopRightIcon clicked={activeEditMode} style={{ fontSize: '18px', right: 40, top: 1 }} color={themeColors.gold900} faicon='faTrash'/>
 
 export default PaymentsHeader

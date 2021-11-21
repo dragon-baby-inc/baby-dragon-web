@@ -27,9 +27,9 @@ function AccountingBooksHeader({ scrollInfo, group, setShowForm }){
   }
 
   return(
-    <>
-      <PageHeader title={'所有帳本'} color={themeColors.gray400}/>
-    </>
+    <PageHeader title={'所有帳本'} color={themeColors.gray400}>
+      所有帳本
+    </PageHeader>
   )
 }
 

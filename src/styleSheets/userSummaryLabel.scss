@@ -4,6 +4,11 @@
 //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 // }
 
+label.group-menu-label.group-menu-summary.active {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
 // label.group-menu-label.group-menu-summary::before {
 //   content: '';
 //   width: 10px;
@@ -15,39 +20,32 @@
 // }
 
 label.group-menu-label.group-menu-summary {
-  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+  background-color: $gray100;
   position: relative;
   overflow: hidden;
   transition: .3s;
-  margin: 0px 12px;
-  padding-right: 23px;
-//   border: 1px solid #eee;
+  margin: 12px 16px 0px;
+  padding-left:  12px;
+  padding-right: 12px;
   height: 70px;
-
-  .group-menu-date {
-    font-weight: 400;
-    width: 52px;
-  }
-
-  .group-menu-image-block.active {
-    transform: translate(-10px, 0px);
-  }
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 
   .group-menu-image-block {
     transition: .3s;
-    transform: translate(0px, 0px);
+    transform: translate(-10px, 0px);
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
     }
   }
 
-  .group-menu-payment-block.active {
-    transform: translate(-10px, 0px);
-  }
-
   .group-menu-payment-block {
+    transform: translate(-10px, 0px);
     transition: .3s;
     width: 100%;
     display: flex;
@@ -65,36 +63,126 @@ label.group-menu-label.group-menu-summary {
     flex-flow: column nowrap;
     line-height: 1rem;
     justify-content: center;
-    padding: 0px 13px;
+    padding: 0px 10px;
     text-align: left;
     flex-grow: 1;
     flex-shrink: 1;
 
     .description {
-      font-weight: 500;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 25px;
+      letter-spacing: 0em;
+      color: $gold900;
     }
   }
   .group-menu-amount {
-    text-align: right;
-      font-weight: 400;
-    width: 70px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
   }
 }
 
-.modal {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
-  border: 1px solid #eee;
-  margin: 20px;
-  border-radius: 5px;
-}
-
 .user-summary.collapse {
-  background-color: #fff;
+  margin-bottom: 100px;
+  background-color: $gray100;
   position: relative;
   font-size: 13px;
   color: $gray900;
-  margin: 0px 20px 10px;
-//   border-left: 1px solid $gray400;
-//   border-bottom: 1px solid $gray400;
-//   border-bottom-left-radius: 10px;
+  margin: 0px 10px 0px;
+  padding-top: 0px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+
+.user-summary.collapse {
+  margin-bottom: 100px;
+  background-color: $gray100;
+  position: relative;
+  font-size: 13px;
+  color: $gray900;
+  margin: 0px 16px 0px;
+  padding: 10px 16px 5px;
+  padding-top: 0px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+
+  .allocations {
+    padding-left: 37px;
+    border: none;
+
+    .allocationInner {
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .allocation::before {
+      content: '';
+      padding-right: 2px;
+      background-color: #eee;
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      width: 12px;
+      height: 1px;
+      border-bottom: 0px solid $gray400;
+    }
+  }
+
+  .allocation {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0px;
+
+    span {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+
+    span.amount {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+  }
+
+  .allocation.title {
+    padding: 3px 10px;
+  }
+
+  .allocation.buttons {
+    padding: 0;
+    border-top:  1px solid $gray400;
+
+    display: flex;
+    justify-content: flex-end;
+
+    .btn {
+      padding: 12px 8px;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .btn.edit {
+      color: $gold900;
+    }
+  }
 }
