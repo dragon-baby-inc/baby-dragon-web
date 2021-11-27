@@ -4,11 +4,13 @@ import { Image } from '../../index'
 
 const styles = {
   root: {
+    width: '100%',
     margin: 0,
     padding: '0 28vw',
     overflow: 'hidden',
   },
   slideContainer: {
+    width: '100%',
     justifyContent: 'center',
     display: "flex",
     alignItems: 'center',
@@ -17,6 +19,7 @@ const styles = {
     height: '100%',
   },
   activeSlide: {
+    height: '100%',
     margin: 0,
     overflow: 'hidden',
     height: '100%',
