@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '../../index'
 import styles from './Star.module.scss'
 
 const Star = ({
-  solid
+  solid,
+  style
 }) => {
 
   return (
-    <div className={styles.star}>
+    <div style={style ? style : {}} className={styles.star}>
       <FontAwesomeIcon
         faicon={ solid ? "fasFaStar" : "farFaStar" }
         style={{ fontSize: "16px", margin: "0px 2px" }}

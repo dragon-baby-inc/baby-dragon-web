@@ -4,13 +4,11 @@ import { Image } from '../../index'
 
 const styles = {
   root: {
-    width: '100%',
     margin: 0,
     padding: '0 28vw',
     overflow: 'hidden',
   },
   slideContainer: {
-    width: '100%',
     justifyContent: 'center',
     display: "flex",
     alignItems: 'center',
@@ -40,24 +38,24 @@ const IconSwappableView = ({ icons, initial, changed }) => {
   const [index, setIndex] = useState(initialIndex)
 
   useEffect(() => {
-    let initialIndex = initial ? initial : 1
-    if (initial) {
-      setIndex(initialIndex)
+    if (initial !== undefined) {
+      setIndex(initial)
       setTimeout(() => {
         setLoading(false)
-      }, 400)
+      }, 200)
     }
 
-  }, initial)
+  }, [initial])
 
   const handleIndexChanged = (index, indexLatest, meta) => {
-    setIndex(index)
-    changed(index)
+    setTimeout(() => {
+      setIndex(index)
+      changed(index)
+    }, 10)
   }
 
   const images = []
   let idx = 0
-
   let fakeImages = []
 
   icons.forEach(url => {
@@ -79,7 +77,8 @@ const IconSwappableView = ({ icons, initial, changed }) => {
 
   return(
     <>
-      <SwipeableViews style={styles.root}
+      <SwipeableViews
+        style={styles.root}
         index={index}
         slideStyle={styles.slideContainer}
         onChangeIndex={handleIndexChanged} >

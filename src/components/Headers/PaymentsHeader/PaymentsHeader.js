@@ -55,7 +55,7 @@ function PaymentsHeader({
         link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
       >
         {accountingBookDetails.name}
-        <Star solid/>
+        <Star solid={accountingBookDetails.current} style={{ paddingLeft: '4px', position: 'relative', bottom: '1px' }}/>
 
         {
           editMode ?
