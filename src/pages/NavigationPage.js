@@ -5,6 +5,7 @@ import useAccountingBook from '../hooks/useAccountingBook'
 import BookHistoryPage from './BookHistoryPage'
 import PaymentsPage from './PaymentsPage'
 import AccountingBookSettingPage from './AccountingBookSettingPage'
+import AccountingBookEditPage from './AccountingBookEditPage'
 import GroupUsersPage from './GroupUsersPage'
 import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
 import PaymentEditPage from './PaymentEditPage'
@@ -20,6 +21,9 @@ const NavigationPage = (props) => {
       <Route path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments" render={() => {
         return <PaymentsPage />
       }}>
+      </Route>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/edit/index">
+        <AccountingBookEditPage />
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/settings">
         <AccountingBookSettingPage />

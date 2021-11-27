@@ -1,6 +1,7 @@
 import React from "react"
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '../index'
+import classStyles from './TopRightIcon.module.scss'
 
 const styles = {
   back: {
@@ -9,11 +10,14 @@ const styles = {
     top: 0,
     color: 'white',
     textDecoration: "none",
-    padding: '18px 20px 22px',
+    maxHeight: '58px',
+    height: '58px',
+    display: 'flex',
+    alignItems: 'center'
   }
 }
 
-function TopRightIcon({ clicked, link, color, faicon, style }){
+function TopRightIcon({ children, clicked, link, color, faicon, style }){
   let addtionalStyle = {}
   if (style) { addtionalStyle = style }
   return(
@@ -26,7 +30,14 @@ function TopRightIcon({ clicked, link, color, faicon, style }){
             <FontAwesomeIcon faicon={faicon} color={color}/>
           </NavLink> :
           <div onClick={clicked} style={{ ...styles.back,  ...addtionalStyle}} >
-            <FontAwesomeIcon faicon={faicon} color={color}/>
+            {
+              faicon ?
+                <FontAwesomeIcon faicon={faicon} color={color}/>
+                :
+                <div className={classStyles.container}>
+                  {children}
+                </div>
+            }
           </div>
       }
     </>

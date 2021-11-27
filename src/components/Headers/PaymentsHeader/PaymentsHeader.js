@@ -71,12 +71,12 @@ function PaymentsHeader({
             null
         }
         <TopRightIcon
-          style={{ fontSize: '20px', right: 36 }}
+          style={{ fontSize: '20px', right: 58 }}
           link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/log_messages`}
           color={"black"}
           faicon='farFaClock'/>
         <TopRightIcon
-          style={{ fontSize: '20px', right: 2 }}
+          style={{ fontSize: '20px', right: 20 }}
           link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/settings`}
           color={"black"}
           faicon='faCog'/>

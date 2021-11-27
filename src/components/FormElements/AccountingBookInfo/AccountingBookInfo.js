@@ -13,8 +13,7 @@ function AccountingBookInfo({
   const { group_id, accounting_book_id } = useParams()
 
   const handleClick = () => {
-    return
-    navigateTo("accountingBookPage", { group_id: group_id })
+    navigateTo("accountingBookEditPage", { group_id, accounting_book_id })
   }
 
   return(

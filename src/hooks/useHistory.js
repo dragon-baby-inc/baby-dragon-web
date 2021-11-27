@@ -13,6 +13,8 @@ const Hook =  () => {
 
   const routes = {
     accountingBookPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books`,
+    accountingBookSettingsPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/settings`,
+    accountingBookEditPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/edit/index`,
     paymentIndexPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/payments/index`,
   }
 

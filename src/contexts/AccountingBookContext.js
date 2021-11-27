@@ -3,7 +3,7 @@ import createDataContext from './CreateDataContext'
 const AccountingBookReducer = (state, action) => {
   switch (action.type) {
     case 'set_name':
-      return { ...state, name: { value: action.payload } };
+    return { ...state, name: { value: action.payload.name, valid: action.payload.valid } };
     case 'set_auto_detect_payment':
       return { ...state, autoDetectPayment: { value: action.payload } };
     case 'set_line_notification':
@@ -15,8 +15,10 @@ const AccountingBookReducer = (state, action) => {
   }
 }
 
-const setName = dispatch => (name) => {
-  dispatch({ type: 'set_name', payload: name })
+const setName = dispatch => (payload) => {
+  if (payload) {
+    dispatch({ type: 'set_name', payload: { name: payload.name, valid: payload.valid } })
+  }
 }
 
 const setAutoDetectPayment = dispatch => (value) => {

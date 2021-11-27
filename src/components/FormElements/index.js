@@ -16,6 +16,7 @@ import PaymentCheckboxLabel from './PaymentLabel/paymentCheckboxLabel';
 import LogMessageLabel from './LogMessageLabel/LogMessageLabel';
 import Checkbox from './Inputs/Checkbox';
 import IconsList from './IconsList/IconsList';
+import IconSwappableView from './IconSwappableView/IconSwappableView'
 import Toggle from './Toggle/Toggle'
 import ToggleLabel from './ToggleLabel/ToggleLabel'
 import ActionLabel from './ActionLabel/ActionLabel'
@@ -76,4 +77,5 @@ export {
   Views,
   ActionLabel,
   SeparaterLabel,
+  IconSwappableView,
 };
