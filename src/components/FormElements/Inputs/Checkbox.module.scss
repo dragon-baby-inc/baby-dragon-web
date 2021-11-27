@@ -1,0 +1,60 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.label {
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  border: 2px solid #CCCCCC;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  border-radius: 3px;
+}
+
+.label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark:after {
+  content: "";
+  position: relative;
+  display: none;
+}
+
+.label input:checked ~ .checkmark {
+  background-color: $gold700;
+  border: 2px solid $gold700;
+}
+
+.label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.label .checkmark:after {
+  left: 4px;
+  top: -1px;
+  width: 6px;
+  height: 13px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

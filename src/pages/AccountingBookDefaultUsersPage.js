@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
 import axios from '../api/dragonBabyApi'
+import { dragonBabyApi } from '../api/dragonBabyApi'
 import { themeColors } from '../constants'
 import { useAccountingBook } from '../hooks'
 import {
+  Image,
+  Radio,
+  CheckboxLabel,
   Separater,
   PageHeader,
   Backdrop,
   UserForm,
-  AccountingBookUserMenu,
+  CheckboxSelect,
+  TopRightIcon
 } from '../components'
 
 const AccountingBookUsersPage = (props) => {
@@ -22,19 +27,32 @@ const AccountingBookUsersPage = (props) => {
     setSelectObjectIds(users.filter((u) => u.coverCost).map((u) => u.id))
   }, [users])
 
-  const [timer, setTimer] = useState(null)
   const handleCoverCostUser = (objects) => {
     setSelectObjectIds(objects.map(obj => obj.id))
+  }
 
-    clearTimeout(timer)
+  const updateCoverCostUsers = () => {
+    dragonBabyApi.updateCoverCostUsers(group_id, accounting_book_id, selectObjectIds)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((res) => {
+        window.location.reload();
+      })
+  }
 
-    let updateTimer = setTimeout(() => {
-      axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/users`, { accounting_book_user_ids: objects.map(obj => obj.id) })
-        .catch((res) => {
-          window.location.reload();
-        })
-    }, 1200)
-    setTimer(updateTimer)
+  const createLabel = ({ object, handleChange, selectedObjects }) => {
+    return <CheckboxLabel
+      key={object.id}
+      object={object}
+      changed={handleChange}
+      value={object.id}
+      checked={selectedObjects.map(el => el.id).includes(object.id)} >
+      <div style={styles.label}>
+        <Image style={{ paddingRight: '12px' }}/>
+        {object.displayName}
+      </div>
+    </CheckboxLabel>
   }
 
   return(
@@ -46,14 +64,21 @@ const AccountingBookUsersPage = (props) => {
           color={themeColors.black}>
           分帳成員
         </PageHeader>
+
+        <TopRightIcon
+          clicked={updateCoverCostUsers}
+          style={{ fontSize: '20px', right: '20px', color: 'black' }} >
+          <div> 更新 </div>
+        </TopRightIcon>
+
         <Separater style={{ margin: "0px" }}/>
         {
           loading ?
             null :
-            <AccountingBookUserMenu
+            <CheckboxSelect
+              createLabel={createLabel}
               editMode={editMode}
               setEditMode={setEditMode}
-              labelType="user"
               objects={users}
               selected_object_ids={selectObjectIds}
               changed={handleCoverCostUser}
@@ -108,6 +133,11 @@ const styles = {
     padding: '5px',
     color: themeColors.gray600,
   },
+  label: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 }
 
 export default AccountingBookUsersPage

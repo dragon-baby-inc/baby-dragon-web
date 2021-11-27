@@ -25,6 +25,10 @@ class DragonBabyApi {
   deleteAccountingBook(group_id, accounting_book_id) {
     return this.api.delete(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}`)
   }
+
+  updateCoverCostUsers(group_id, accounting_book_id, ids) {
+    return this.api.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/users`, { accounting_book_user_ids: ids })
+  }
 }
 
 const dragonBabyApi = new DragonBabyApi();

@@ -30,7 +30,6 @@ const AccountingBookLabel = (props) => {
     e.preventDefault()
     return false
   }
-  console.log(object)
 
   return (
     <>

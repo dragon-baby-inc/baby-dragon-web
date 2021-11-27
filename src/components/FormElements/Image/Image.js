@@ -8,7 +8,8 @@ const Image = ({
   size,
   circle,
   defaultImage,
-  clicked
+  clicked,
+  style
 }) => {
   let imageSize = size
   if (!imageSize) { imageSize = '40px'  }
@@ -18,7 +19,7 @@ const Image = ({
     accountingBook: "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-white.jpg"
   }
 
-  const style = {
+  const inlineStyle = {
     image: {
       width: imageSize,
       height: imageSize,
@@ -27,18 +28,18 @@ const Image = ({
   }
 
   return (
-    <div onClick={clicked} className={styles.imageBlock}>
+    <div onClick={clicked} className={styles.imageBlock} style={ style ? style : {} }>
       {
         imageUrl ?
           <img
-            style={style.image}
+            style={inlineStyle.image}
             className={styles.image}
             src={imageUrl}
             alt="user"
           />
           :
           <img
-            style={style.image}
+            style={inlineStyle.image}
             className={styles.image}
             src={defaultImageUrl[defaultImage] ? defaultImageUrl[defaultImage] : "https://storage.googleapis.com/baby-dragon/public/DummyImage.png"}
             alt={defaultImage}

@@ -4,6 +4,7 @@ import UserLabel from './UserLabel/UserLabel';
 import UserCheckboxLabel from './UserLabel/UserCheckboxLabel';
 import UserRadioLabel from './UserLabel/UserRadioLabel';
 import TextInput from './TextInput/TextInput';
+import CheckboxSelect from './CheckboxSelect/CheckboxSelect'
 import AccountingBookUserMenu from './SelectMenu/AccountingBookUserMenu';
 import CheckboxSelectMenu from './SelectMenu/CheckboxSelectMenu';
 import RadioSelectMenu from './SelectMenu/RadioSelectMenu';
@@ -15,6 +16,8 @@ import PopUpForm from './PopUpForm/PopUpForm';
 import PaymentCheckboxLabel from './PaymentLabel/paymentCheckboxLabel';
 import LogMessageLabel from './LogMessageLabel/LogMessageLabel';
 import Checkbox from './Inputs/Checkbox';
+import Radio from './Inputs/Radio'
+import CheckboxLabel from './CheckboxLabel/CheckboxLabel'
 import IconsList from './IconsList/IconsList';
 import IconSwappableView from './IconSwappableView/IconSwappableView'
 import Toggle from './Toggle/Toggle'
@@ -78,4 +81,7 @@ export {
   ActionLabel,
   SeparaterLabel,
   IconSwappableView,
+  Radio,
+  CheckboxLabel,
+  CheckboxSelect
 };

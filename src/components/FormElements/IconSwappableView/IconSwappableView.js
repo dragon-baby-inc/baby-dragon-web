@@ -33,11 +33,15 @@ const styles = {
 
 const IconSwappableView = ({ icons, initial, changed }) => {
   let initialIndex = initial ? initial : 0
+  const [loading, setLoading] = useState(true)
   const [index, setIndex] = useState(initialIndex)
 
   useEffect(() => {
     let initialIndex = initial ? initial : 0
-    setIndex(initialIndex)
+    if (initial) {
+      setIndex(initialIndex)
+      setLoading(false)
+    }
   }, initial)
 
   const handleIndexChanged = (index, indexLatest, meta) => {
@@ -62,15 +66,15 @@ const IconSwappableView = ({ icons, initial, changed }) => {
   return(
     <>
       {
-        initial ?
+        loading ?
+          null
+        :
           <SwipeableViews style={styles.root}
             index={index}
             slideStyle={styles.slideContainer}
             onChangeIndex={handleIndexChanged} >
             {images}
           </SwipeableViews>
-          :
-          null
       }
     </>
   )

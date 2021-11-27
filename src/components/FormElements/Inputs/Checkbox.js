@@ -1,19 +1,22 @@
-import React from "react"
-import "../../../styleSheets/Checkbox.scss";
-import "../../../styleSheets/CustomInput.scss";
+import React from 'react';
+import styles from './Checkbox.module.scss'
 
-function Checkbox(props){
+const Checkbox = ({
+  changed,
+  checked,
+  value
+}) => {
   return (
-    <div className='group-menu-checkbox group-menu-label'>
+    <div className={styles.label}>
       <input
-        onChange={props.changed}
+        checked={checked}
+        onChange={changed}
+        value={value}
         type="checkbox"
-        checked={props.checked}
-        value={props.value}
       />
-      <span className="checkmark"></span>
+      <span className={styles.checkmark}></span>
     </div>
   )
-}
+};
 
 export default Checkbox
