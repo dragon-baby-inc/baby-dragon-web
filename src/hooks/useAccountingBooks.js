@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { imageUrls } from '../constants'
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
@@ -14,7 +15,10 @@ const useAccountingBooks =  () => {
     setLoading(true)
     await axios.get(`api/v1/groups/${group_id}/accounting_books`)
       .then(function (response) {
-        setBooks(response.data.accounting_books)
+        const books = response.data.accounting_books.map(b => {
+          return { imageUrl: imageUrls[b.image_id], ...b }
+        })
+        setBooks(books)
         setCurrentBook(response.data.accounting_books.filter((b) => b.current)[0])
         setGroup(response.data.group)
       })

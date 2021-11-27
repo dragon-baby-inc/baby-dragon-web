@@ -30,11 +30,12 @@ const AccountingBookLabel = (props) => {
     e.preventDefault()
     return false
   }
+  console.log(object)
 
   return (
     <>
       <label onClick={handleClicked} className={`group-menu-label group-menu-checkbox-label group-menu-accounting-book`}>
-        <Image size='56px' circle/>
+        <Image imageUrl={object.imageUrl} size='56px' circle/>
         <div className={`group-menu-payment-block`}>
           <div className='group-menu-username'>
             <div className='description'>

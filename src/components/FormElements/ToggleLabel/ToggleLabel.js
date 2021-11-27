@@ -11,11 +11,15 @@ const toggleLabel = ({
   return (
     <label className={styles.label}>
       {description}
-      <Toggle
-        checked={checked}
-        changed={changed}
-        name={name}
-      />
+      {
+        checked === undefined ?
+          <div></div>:
+          <Toggle
+            checked={checked}
+            changed={changed}
+            name={name}
+          />
+      }
     </label>
   );
 };

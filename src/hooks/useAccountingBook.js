@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../api/dragonBabyApi'
+import { imageUrls } from '../constants'
 import { useParams } from 'react-router-dom';
 
 const useAccountingBook =  (callback) => {
@@ -43,12 +44,15 @@ const useAccountingBook =  (callback) => {
               imageURL: u.image_url,
               fromLine: u.from_line,
               coverCost: u.cover_cost
-
             }
-
           })
           setUsers(users)
-          setAccountingBook(response.data.accounting_book)
+          setAccountingBook(
+            {
+              imageUrl: imageUrls[response.data.accounting_book.image_id],
+              ...response.data.accounting_book
+            }
+          )
 
         })
         .catch(function (error) {

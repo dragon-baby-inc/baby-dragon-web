@@ -30,7 +30,6 @@ function PaymentsHeader({
 }){
 
   if (scrollInfo && !editMode) {
-    console.log(scrollInfo)
     if (scrollInfo.y.value > 10 && !small) {
       handleSmallChange(true)
     } else if (scrollInfo.y.value === 0 && small){
@@ -92,8 +91,7 @@ function PaymentsHeader({
           <div>
             {
               small ?
-                null : <Image size='80px' circle/>
-
+                null : <Image defaultImage="accountingBook" imageUrl={accountingBookDetails.imageUrl} size='80px' circle/>
             }
           </div>
           <div className={styles.info}>

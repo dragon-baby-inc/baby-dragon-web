@@ -2,8 +2,10 @@ import createDataContext from './CreateDataContext'
 
 const AccountingBookReducer = (state, action) => {
   switch (action.type) {
+    case 'set_image_id':
+      return { ...state, imageId: { value: action.payload, valid: true } };
     case 'set_name':
-    return { ...state, name: { value: action.payload.name, valid: action.payload.valid } };
+      return { ...state, name: { value: action.payload.name, valid: action.payload.valid } };
     case 'set_auto_detect_payment':
       return { ...state, autoDetectPayment: { value: action.payload } };
     case 'set_line_notification':
@@ -13,6 +15,10 @@ const AccountingBookReducer = (state, action) => {
     default:
       return state;
   }
+}
+
+const setImageId = dispatch => (id) => {
+  dispatch({ type: 'set_image_id', payload: id })
 }
 
 const setName = dispatch => (payload) => {
@@ -40,8 +46,10 @@ export const { Context, Provider } = createDataContext(
     setAutoDetectPayment,
     setLineNotification,
     setCurrent,
+    setImageId,
   },
   {
+    imageId: { value: 0, valid: true },
     name: { value: '', valid: null },
     autoDetectPayment: { value: true, valid: null },
     lineNotification: { value: true, valid: null },

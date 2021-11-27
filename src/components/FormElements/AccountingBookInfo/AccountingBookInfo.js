@@ -17,16 +17,23 @@ function AccountingBookInfo({
   }
 
   return(
-    <label style={style ? style : {}} className={styles.container} onClick={handleClick}>
-      <Image size='80px' circle/>
-      <div className={styles.label}>
-        {accountingBookDetails.name}
-        <FontAwesomeIcon
-          style={{ fontSize: "15px", margin: "0px 15px" }}
-          faicon='faChevronRight'
-          color={themeColors.gray900}/>
-      </div>
-    </label>
+    <>
+      {
+        accountingBookDetails ?
+        <label style={style ? style : {}} className={styles.container} onClick={handleClick}>
+          <Image size='80px' circle imageUrl={accountingBookDetails.imageUrl} defaultImage="accountingBook"/>
+          <div className={styles.label}>
+            {accountingBookDetails.name}
+            <FontAwesomeIcon
+              style={{ fontSize: "15px", margin: "0px 15px" }}
+              faicon='faChevronRight'
+              color={themeColors.gray900}/>
+          </div>
+        </label>
+        :
+          null
+      }
+    </>
   )
 }
 

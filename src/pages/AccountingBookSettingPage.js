@@ -12,6 +12,7 @@ import {
   AccountingBookInfo,
   Separater,
   SeparaterLabel,
+  Loading
 } from '../components'
 import { useHistory, useAccountingBook } from '../hooks'
 import axios from '../api/dragonBabyApi'
@@ -21,16 +22,20 @@ import { dragonBabyApi } from '../api/dragonBabyApi'
 const AccountingBookSettingPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, loading] = useAccountingBook()
+  const [pageLoading, setPageLoading] = useState(true)
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams()
 
   const { state, setCurrent, setName, setAutoDetectPayment, setLineNotification } = useContext(AccountingBookContext)
 
   useEffect(() => {
-    setName(accountingBookDetails.name)
-    setAutoDetectPayment(accountingBookDetails.use_payment_auto_detection)
-    setLineNotification(accountingBookDetails.send_liff_confirm_message)
-    setCurrent(accountingBookDetails.current)
+    if (accountingBookDetails) {
+      setName(accountingBookDetails.name)
+      setAutoDetectPayment(accountingBookDetails.use_payment_auto_detection)
+      setLineNotification(accountingBookDetails.send_liff_confirm_message)
+      setCurrent(accountingBookDetails.current)
+      setPageLoading(false)
+    }
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [accountingBookDetails])
 
@@ -81,6 +86,14 @@ const AccountingBookSettingPage = (props) => {
     }
   }
 
+  if (pageLoading) {
+    return <>
+      <AccountingBookSettingsHeader/>
+      <Separater style={{ margin: "0px" }}/>
+      <Loading />
+    </>
+  }
+
   return(
     <>
       <div style={styles.bg}>
@@ -125,13 +138,13 @@ const AccountingBookSettingPage = (props) => {
           <Separater />
           <SeparaterLabel name="LINEBOT"/>
           <ToggleLabel
-            checked={state.autoDetectPayment.value === undefined ? false : state.autoDetectPayment.value}
+            checked={state.autoDetectPayment.value}
             changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
             description="Line 自動偵測帳款指令"
             name="autoDetectPayment"
           />
           <ToggleLabel
-            checked={state.lineNotification.value === undefined ? false : state.lineNotification.value}
+            checked={state.lineNotification.value}
             changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
             description="傳送確認訊息到 Line 群組"
             name="lineNotification"

@@ -42,7 +42,7 @@ const AccountingBookSummaryPage = ({
 
   const objects = books.map(book => {
     return <AccountingBookLabel
-      current={currentBook.uuid === book.uuid}
+      current={currentBook ? currentBook.uuid === book.uuid : false}
       handleSetCurrent={(id) => handleSetAsCurrent(id)}
       key={book.uuid}
       object={book}/>

@@ -15,7 +15,7 @@ const Image = ({
 
   const defaultImageUrl = {
     user: "https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png",
-    accountingBook: "https://storage.googleapis.com/baby-dragon/public/DummyImage.png"
+    accountingBook: "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-white.jpg"
   }
 
   const style = {

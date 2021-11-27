@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
-import { themeColors } from '../constants'
+import { themeColors, imageUrls } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import {
   TopRightIcon,
@@ -21,21 +21,29 @@ const AccountingBookEditPage = (props) => {
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams()
 
-  const { state, setCurrent, setName, setAutoDetectPayment, setLineNotification } = useContext(AccountingBookContext)
+  const { state, setImageId, setName, setAutoDetectPayment, setLineNotification } = useContext(AccountingBookContext)
 
   useEffect(() => {
     if (accountingBookDetails) {
       setName({ name: accountingBookDetails.name, valid: true })
+      setImageId(accountingBookDetails.image_id)
     }
+    console.log(accountingBookDetails)
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [accountingBookDetails])
+  console.log(state.imageId)
 
   const updateAccountingBookName = () => {
     if (!state.name.valid) {
       return
     }
 
-    dragonBabyApi.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: { name: state.name.value } })
+    let params = {
+      name: state.name.value,
+      image_id: state.imageId.value
+    }
+
+    dragonBabyApi.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: params })
       .then((res) => {
         history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
       })
@@ -79,7 +87,10 @@ const AccountingBookEditPage = (props) => {
         </PageHeader>
         <Separater style={{ margin: "0px" }}/>
         <div style={styles.swapView}>
-          <IconSwappableView icons={[0, 1, 2, 3, 4, 5]}></IconSwappableView>
+          <IconSwappableView
+            changed={setImageId}
+            initial={state.imageId.value}
+            icons={imageUrls}/>
         </div>
         <div>
           <TextInput

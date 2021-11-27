@@ -31,32 +31,48 @@ const styles = {
   },
 };
 
-const IconSwappableView = ({ icons }) => {
-  const [index, setIndex] = useState(0)
+const IconSwappableView = ({ icons, initial, changed }) => {
+  let initialIndex = initial ? initial : 0
+  const [index, setIndex] = useState(initialIndex)
+
+  useEffect(() => {
+    let initialIndex = initial ? initial : 0
+    setIndex(initialIndex)
+  }, initial)
 
   const handleIndexChanged = (index, indexLatest, meta) => {
     setIndex(index)
-    console.log(index)
+    changed(index)
   }
-  const images = []
 
-  icons.forEach(i => {
-    let current = i === index
+  const images = []
+  let idx = 0
+
+  icons.forEach(url => {
+    let current = idx=== index
+    idx ++
     images.push(
-      <div key={i} style={current ? Object.assign({}, styles.activeSlide) : Object.assign({}, styles.slide)}>
-        <Image size={current ? "120px" : "120px"}/>
+      <div key={idx} style={current ? Object.assign({}, styles.activeSlide) : Object.assign({}, styles.slide)}>
+        <Image size={current ? "120px" : "120px"} imageUrl={url}/>
       </div>
     )
   })
 
 
   return(
-    <SwipeableViews style={styles.root}
-      index={index}
-      slideStyle={styles.slideContainer}
-      onChangeIndex={handleIndexChanged} >
-      {images}
-    </SwipeableViews>
+    <>
+      {
+        initial ?
+          <SwipeableViews style={styles.root}
+            index={index}
+            slideStyle={styles.slideContainer}
+            onChangeIndex={handleIndexChanged} >
+            {images}
+          </SwipeableViews>
+          :
+          null
+      }
+    </>
   )
 }
 

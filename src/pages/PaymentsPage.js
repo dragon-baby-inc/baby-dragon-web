@@ -110,7 +110,6 @@ const PaymentsPage = (props) => {
     }
   }
 
-  console.log(url)
   return(
     <>
       <div style={styles.bg}>
