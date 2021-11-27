@@ -62,10 +62,7 @@ const styles = {
   }
 }
 
-const BookHistoryPage = ({
-  users,
-  accountingBookDetails
-}) => {
+const BookHistoryPage = () => {
   const [logMessages, loading] = useLogMessages()
   const { group_id, accounting_book_id } = useParams();
   const { routes } = useHistory();

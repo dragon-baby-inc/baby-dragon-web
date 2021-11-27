@@ -12,7 +12,6 @@ import PaymentEditPage from './PaymentEditPage'
 import AccountingBookSummaryPage from './AccountingBookSummaryPage'
 
 const NavigationPage = (props) => {
-  const [users, accountingBookDetails] = useAccountingBook()
   return(
     <>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/:payment_id/edit">
@@ -31,12 +30,8 @@ const NavigationPage = (props) => {
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/default_users">
         <AccountingBookDefaultUsersPage />
       </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/users">
-        <GroupUsersPage />
-        <IconsList {...accountingBookDetails}/>
-      </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/log_messages">
-        <BookHistoryPage users={users} accountingBookDetails={accountingBookDetails}/>
+        <BookHistoryPage/>
       </Route>
     </>
   )

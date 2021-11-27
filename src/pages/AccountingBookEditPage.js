@@ -9,15 +9,16 @@ import {
   Separater,
   SeparaterLabel,
   TextInput,
+  Loading,
 } from '../components'
 import { useHistory, useAccountingBook } from '../hooks'
-import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 import { dragonBabyApi } from '../api/dragonBabyApi'
 
 const AccountingBookEditPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, loading] = useAccountingBook()
+  const [pageLoading, setPageLoading] = useState(true)
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams()
 
@@ -27,11 +28,10 @@ const AccountingBookEditPage = (props) => {
     if (accountingBookDetails) {
       setName({ name: accountingBookDetails.name, valid: true })
       setImageId(accountingBookDetails.image_id)
+      setPageLoading(false)
     }
-    console.log(accountingBookDetails)
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [accountingBookDetails])
-  console.log(state.imageId)
 
   const updateAccountingBookName = () => {
     if (!state.name.valid) {
@@ -86,26 +86,32 @@ const AccountingBookEditPage = (props) => {
           編輯帳本名稱
         </PageHeader>
         <Separater style={{ margin: "0px" }}/>
-        <div style={styles.swapView}>
-          <IconSwappableView
-            changed={setImageId}
-            initial={state.imageId.value}
-            icons={imageUrls}/>
-        </div>
-        <div>
-          <TextInput
-            key='name'
-            disabled={false}
-            placeholder={'輸入名稱'}
-            name={'名稱'}
-            labelStyle={styles.labelStyle}
-            changed={(value) => handlInputChange(value)}
-            value={state.name.value === undefined ? '' : state.name.value}
-            valid={state.name.valid}
-            invalidFeedback="*不可為空白，12字內"
-            type='text'
-          />
-        </div>
+        {
+          state.imageId ?
+            <>
+              <div style={styles.swapView}>
+                <IconSwappableView
+                  changed={setImageId}
+                  initial={state.imageId.value}
+                  icons={imageUrls}/>
+              </div>
+              <div>
+                <TextInput
+                  key='name'
+                  disabled={false}
+                  placeholder={'輸入名稱'}
+                  name={'名稱'}
+                  labelStyle={styles.labelStyle}
+                  changed={(value) => handlInputChange(value)}
+                  value={state.name.value === undefined ? '' : state.name.value}
+                  valid={state.name.valid}
+                  invalidFeedback="*不可為空白，12字內"
+                  type='text'
+                />
+              </div>
+            </>:
+            <Loading />
+        }
       </div>
     </>
   )

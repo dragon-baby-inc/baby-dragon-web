@@ -1,6 +1,6 @@
 import React from "react"
 import styles from './PageHeader.module.scss'
-import { TopRightIcon, FontAwesomeIcon } from '../../index'
+import { TopLeftIcon, FontAwesomeIcon } from '../../index'
 
 const inlineStyles = {
   icon: {
@@ -30,7 +30,7 @@ function PageHeader({
       <div className={styles.innerBlock}>
         {
           faicon ?
-            <TopRightIcon
+            <TopLeftIcon
               link={link}
               style={inlineStyles.icon}
               color={color}
