@@ -23,6 +23,7 @@ const useAccountingBooks =  () => {
         setGroup(response.data.group)
       })
       .catch(function (error) {
+        console.log(error)
         setErr(error);
       })
     setLoading(false)

@@ -1,35 +1,28 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
-import axios from '../api/dragonBabyApi'
-import { dragonBabyApi } from '../api/dragonBabyApi'
-import { themeColors } from '../constants'
-import { useAccountingBook, useUsersSelect } from '../hooks'
+import axios from '../../api/dragonBabyApi'
+import { dragonBabyApi } from '../../api/dragonBabyApi'
+import { themeColors } from '../../constants'
+import { useAccountingBook, useCurrencySelect } from '../../hooks'
 import {
   Image,
   Radio,
-  CheckboxLabel,
   Separater,
   PageHeader,
   Backdrop,
   UserForm,
-  CheckboxSelect,
+  RadioSelect,
+  RadioLabel,
   TopRightIcon
-} from '../components'
+} from '../../components'
 
-const AccountingBookUsersPage = (props) => {
+const AccountingBookCurrencyPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
-
-  const buildSelectUsers = (users) => {
-    return users.filter((u) => u.coverCost).map((u) => u.id)
-  }
-
-  const [value, select] = useUsersSelect({ users, buildSelectUsers })
-
-  const updateCoverCostUsers = () => {
-    dragonBabyApi.updateCoverCostUsers(group_id, accounting_book_id, value)
+  const sendUpdateRequest = () => {
+    dragonBabyApi.updateAccountingBook(group_id, accounting_book_id, { currency: currency })
       .then((res) => {
         console.log(res)
       })
@@ -38,6 +31,8 @@ const AccountingBookUsersPage = (props) => {
       })
   }
 
+  const [currency, select] = useCurrencySelect({ initialValue: accountingBookDetails.currency })
+
   return(
     <>
       <div style={styles.bg}>
@@ -45,13 +40,13 @@ const AccountingBookUsersPage = (props) => {
           faicon='faChevronLeft'
           link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`}
           color={themeColors.black}>
-          分帳成員
+          選擇幣別
         </PageHeader>
 
         <TopRightIcon
-          clicked={updateCoverCostUsers}
+          clicked={sendUpdateRequest}
           style={{ fontSize: '20px', right: '20px', color: 'black' }} >
-          <div> 完成 </div>
+          <div> 更新 </div>
         </TopRightIcon>
 
         <Separater style={{ margin: "0px" }}/>
@@ -115,4 +110,4 @@ const styles = {
   }
 }
 
-export default AccountingBookUsersPage
+export default AccountingBookCurrencyPage

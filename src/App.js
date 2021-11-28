@@ -13,22 +13,21 @@ const App = () => {
   const { setLogin } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
   const [isLoggedIn] = useLiff(setLogin)
-  console.log('App load')
 
   return (
     <>
       <BrowserRouter>
         <Switch>
           <PaymentProvider>
+            <Route exact path="/liff_entry">
+            </Route>
+            <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
+              <PaymentCreationPage />
+            </Route>
+            <Route exact path="/liff_entry/groups/:group_id/accounting_books">
+              <AccountingBooksPage/>
+            </Route>
             <AccountingBookProvider>
-              <Route exact path="/liff_entry">
-              </Route>
-              <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
-                <PaymentCreationPage />
-              </Route>
-              <Route exact path="/liff_entry/groups/:group_id/accounting_books">
-                <AccountingBooksPage/>
-              </Route>
               <FilterPaymentProvider>
                 <Route path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id">
                   <NavigationPage />

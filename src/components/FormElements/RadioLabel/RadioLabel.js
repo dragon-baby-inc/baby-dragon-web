@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './CheckboxLabel.module.scss'
-import { Image, Checkbox } from '../index'
+import styles from './RadioLabel.module.scss'
+import { Image, Radio } from '../index'
 
 const CheckboxLabel = ({
   children,
@@ -11,7 +11,7 @@ const CheckboxLabel = ({
   return (
     <label className={styles.label}>
       {children}
-      <Checkbox
+      <Radio
         value={value}
         changed={changed}
         checked={checked}

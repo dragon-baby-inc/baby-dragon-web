@@ -10,6 +10,8 @@ import CheckboxSelectMenu from './SelectMenu/CheckboxSelectMenu';
 import RadioSelectMenu from './SelectMenu/RadioSelectMenu';
 import CheckboxSelectInput from './SelectInput/CheckboxSelectInput';
 import RadioSelectInput from './SelectInput/RadioSelectInput';
+import RadioSelect from './RadioSelect/RadioSelect';
+import RadioLabel from './RadioLabel/RadioLabel';
 import SearchInput from './SearchInput/SearchInput';
 import PopUpInput from './PopUpInput/PopUpInput';
 import PopUpForm from './PopUpForm/PopUpForm';
@@ -83,5 +85,7 @@ export {
   IconSwappableView,
   Radio,
   CheckboxLabel,
-  CheckboxSelect
+  CheckboxSelect,
+  RadioSelect,
+  RadioLabel,
 };

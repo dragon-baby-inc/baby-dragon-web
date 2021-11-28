@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useAccountingBooks } from '../hooks';
+import { useParams } from 'react-router-dom';
+import { useHistory, useAccountingBooks } from '../hooks';
 import { themeColors } from '../constants/globalColors'
 import axios from '../api/dragonBabyApi'
 import {
@@ -38,7 +39,10 @@ const AccountingBookSummaryPage = ({
   users,
 }) => {
   const [books, group, loading, currentBook, setCurrentBook] = useAccountingBooks()
+  const history = useHistory();
+  const { group_id } = useParams()
   const [showForm, setShowForm] = useState(false)
+  console.log()
 
   const objects = books.map(book => {
     return <AccountingBookLabel
@@ -62,7 +66,7 @@ const AccountingBookSummaryPage = ({
 
   return(
     <div style={styles.bg}>
-      <AccountingBooksHeader setShowForm={setShowForm} group={group} title={'帳本列表'} color={themeColors.gray400}/>
+      <AccountingBooksHeader group={group} title={'帳本列表'} color={themeColors.gray400}/>
       {
         showForm ?
           <>
@@ -78,7 +82,7 @@ const AccountingBookSummaryPage = ({
           :
           <div style={styles.books}>
             {objects}
-            <AccountingBookAddLabel clicked={setShowForm}></AccountingBookAddLabel>
+            <AccountingBookAddLabel clicked={() => { history.navigateTo("accountingBookCreationPage", { group_id }) }}></AccountingBookAddLabel>
           </div>
       }
     </div>

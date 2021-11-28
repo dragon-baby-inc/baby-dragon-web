@@ -1,0 +1,35 @@
+@import "../../styleSheets/globalColors.scss";
+
+.dotGroup {
+  height: 24px;
+  min-height: 24px;
+  display: flex;
+  justify-content: center;
+  margin: 0px 60px;
+}
+
+.dot {
+  margin: 0px 2px;
+  width: 8px;
+  height: 8px;
+  background-color: #CCCCCC;
+  border-radius: 10px;
+  transition: .2s;
+}
+
+.dotLine {
+  position: relative;
+  flex-grow: 1;
+  height: 6px;
+  width: 20px;
+  margin: 0px 16px;
+  border-bottom: 2px solid #CCCCCC;
+}
+
+.dotLine.active {
+  border-bottom: 2px solid $gold500;
+}
+
+.dot.active {
+  background-color: $gold500;
+}

@@ -1,20 +1,27 @@
 import React from 'react';
 import styles from './Radio.module.scss'
 
-const Radio = (props) => {
+const Radio = ({
+  checked,
+  changed,
+  value
+}) => {
+
   const handleChanged = (e) => {
-    console.log(e)
+    changed(e)
   }
+
   return (
     <label className={styles.label}>
       <div>
         <input
           onChange={handleChanged}
+          value={value}
           type="radio"
+          checked={checked}
         />
         <span className={styles.checkmark}></span>
       </div>
-      hello
     </label>
 
   )

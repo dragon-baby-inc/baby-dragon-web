@@ -3,8 +3,6 @@ import styles from './CheckboxSelect.module.scss'
 import { CheckboxLabel, Image } from '../index'
 
 const CheckboxSelect = ({
-  editMode,
-  setEditMode,
   objects,
   selected_object_ids,
   createLabel,
@@ -17,7 +15,7 @@ const CheckboxSelect = ({
   useEffect(() => {
     setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
-  }, [objects, selected_object_ids, editMode])
+  }, [objects, selected_object_ids ])
 
   let handleChange = (e) => {
     let selected_objects = selectedObjects

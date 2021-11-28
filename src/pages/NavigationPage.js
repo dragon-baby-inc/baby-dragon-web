@@ -10,10 +10,17 @@ import GroupUsersPage from './GroupUsersPage'
 import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
 import PaymentEditPage from './PaymentEditPage'
 import AccountingBookSummaryPage from './AccountingBookSummaryPage'
+import {
+  AccountingBookCurrencyPage,
+  AccountingBookCreationPage
+} from './index'
 
 const NavigationPage = (props) => {
   return(
     <>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/new">
+        <AccountingBookCreationPage />
+      </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/:payment_id/edit">
         <PaymentEditPage />
       </Route>
@@ -23,6 +30,9 @@ const NavigationPage = (props) => {
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/edit/index">
         <AccountingBookEditPage />
+      </Route>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/currency">
+        <AccountingBookCurrencyPage />
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/settings">
         <AccountingBookSettingPage />

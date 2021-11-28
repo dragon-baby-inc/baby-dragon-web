@@ -4,7 +4,7 @@ import { themeColors } from '../../../constants'
 import PageHeader from '../PageHeader/PageHeader'
 import { TopRightIcon } from '../../index'
 
-function AccountingBooksHeader({ scrollInfo, group, setShowForm }){
+function AccountingBooksHeader({ scrollInfo, group }){
   const [small, setSmall] = useState(false)
 
   if (scrollInfo) {

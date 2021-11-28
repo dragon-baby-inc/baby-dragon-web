@@ -123,7 +123,7 @@ const AccountingBookSettingPage = (props) => {
           }
           <NavigationLabel
             description="編輯幣別"
-            clicked={() => {}}
+            clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
           />
           <NavigationLabel
             description="分帳成員"

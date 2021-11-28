@@ -1,5 +1,6 @@
 import EmptyResult from './EmptyResult/EmptyResult';
 import Backdrop from './Backdrop/Backdrop';
+import StepsWidget from './StepsWidget/StepsWidget'
 import PaymentSwipeableView from './PaymentSwipeableView/PaymentSwipeableView'
 import FontAwesomeIcon from './FontAwesomeIcon/FontAwesomeIcon'
 
@@ -7,7 +8,8 @@ export {
   EmptyResult,
   Backdrop,
   PaymentSwipeableView,
-  FontAwesomeIcon
+  FontAwesomeIcon,
+  StepsWidget
 };
 
 export * from './FormElements'

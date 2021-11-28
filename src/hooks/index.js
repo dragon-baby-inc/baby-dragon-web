@@ -9,6 +9,8 @@ import usePayment from './usePayment'
 import usePayments from './usePayments'
 import useToggle from './useToggle'
 import useUsers from './useUsers'
+import useCurrencySelect from './useCurrencySelect'
+import useUsersSelect from './useUsersSelect'
 
 export {
   useAccountingBookSummary,
@@ -21,5 +23,7 @@ export {
   usePayment,
   usePayments,
   useToggle,
-  useUsers
+  useUsers,
+  useCurrencySelect,
+  useUsersSelect
 }
