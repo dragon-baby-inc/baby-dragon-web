@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from '../api/dragonBabyApi'
+import { dragonBabyApi } from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
 const usePayment =  (query_params) => {
@@ -10,7 +10,7 @@ const usePayment =  (query_params) => {
 
   const getPayment = async () => {
     setLoading(true)
-    await axios.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${payment_id}`)
+    await dragonBabyApi.getPayment(group_id, accounting_book_id, payment_id)
       .then(function (response) {
         setPayment(response.data)
       })

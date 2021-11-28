@@ -14,6 +14,22 @@ class DragonBabyApi {
     ;
   }
 
+  getPayment(group_id, accounting_book_id, payment_id) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${payment_id}`)
+  }
+
+  createPayment(group_id, accounting_book_id, params) {
+    return this.api.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments`, { payment: params })
+  }
+
+  getUsers(group_id) {
+    return this.api.get(`api/v1/groups/${group_id}/users`)
+  }
+
+  getAccountingBook(group_id, accounting_book_id) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}`)
+  }
+
   createAccountingBook(group_id, params) {
     return this.api.post(`api/v1/groups/${group_id}/accounting_books`, { accounting_book: params })
   }

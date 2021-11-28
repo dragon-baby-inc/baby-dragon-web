@@ -20,6 +20,7 @@ import {
 import {
   useHistory,
   useAccountingBook,
+  useUsersSelect,
   useCurrencySelect
 } from '../../hooks'
 import { useParams } from 'react-router-dom';
@@ -27,25 +28,13 @@ import { dragonBabyApi } from '../../api/dragonBabyApi'
 
 const AccountingBookEditPage = (props) => {
   /* eslint-disable no-unused-vars */
-  const [pageLoading, setPageLoading] = useState(true)
   const history = useHistory();
-  const { group_id, accounting_book_id } = useParams()
+  const [pageLoading, setPageLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [selectObjectIds, setSelectObjectIds] = useState([])
+  const { group_id, accounting_book_id } = useParams()
   const [users, userLoading] = useUsers()
-
-  const handleCoverCostUser = (objects) => {
-    let selectedIds = objects.map(obj => obj.id)
-    setUsers({ value: selectedIds, valid: selectedIds.length > 0})
-    setSelectObjectIds(selectedIds)
-  }
-
-  useEffect(() => {
-    let selectedIds = users.map(obj => obj.id)
-    setUsers({ value: selectedIds, valid: selectedIds.length > 0})
-    setSelectObjectIds(selectedIds)
-  }, [users])
-
+  const defaultCurrency = "TWD"
   const {
     state,
     resetContext,
@@ -58,15 +47,36 @@ const AccountingBookEditPage = (props) => {
     setLineNotification
   } = useContext(AccountingBookContext)
 
-  const [currency, currencySelect] = useCurrencySelect({
-    initialValue: null,
-    callback: (currency) => setCurrency({ value: currency, valid: true  })
-  })
+  const buildSelectUsers = (objects) => {
+    return objects.map(obj => obj.id)
+  }
+
+  const userSelectChanged = (selectedIds) => {
+    setUsers({ value: selectedIds, valid: selectedIds.length > 0})
+  }
+
+  const [selecteUserIds, userSelect] = useUsersSelect({ users, buildSelectUsers, callback: userSelectChanged })
 
   useEffect(() => {
     resetContext()
     setImageId(0)
+    setCurrency({ value: defaultCurrency, valid: true })
   }, [])
+
+  useEffect(() => {
+    if (users) {
+      let selectedIds = users.map(obj => obj.id)
+      setUsers({ value: selectedIds, valid: selectedIds.length > 0})
+      setSelectObjectIds(selectedIds)
+    }
+  }, [users])
+
+
+  // TODO: To be refactor
+  const [currency, currencySelect] = useCurrencySelect({
+    initialValue: defaultCurrency,
+    callback: (currency) => setCurrency({ value: currency, valid: true  })
+  })
 
   const updateAccountingBook = () => {
     validateForm(state, ['name', 'imageId', 'currency'])
@@ -89,20 +99,6 @@ const AccountingBookEditPage = (props) => {
 
   const handlInputChange = (value) => {
     setName({ name: value, valid: value.length > 0 })
-  }
-
-  const createUserLabel = ({ object, handleChange, selectedObjects }) => {
-    return <CheckboxLabel
-      key={object.id}
-      object={object}
-      changed={handleChange}
-      value={object.id}
-      checked={selectedObjects.map(el => el.id).includes(object.id)} >
-      <div style={styles.label}>
-        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
-        {object.displayName}
-      </div>
-    </CheckboxLabel>
   }
 
   const steps = [
@@ -134,12 +130,8 @@ const AccountingBookEditPage = (props) => {
     {
       name: "選擇分帳成員",
       component: <div style={styles.select}>
-          <CheckboxSelect
-            createLabel={createUserLabel}
-            objects={users}
-            selected_object_ids={state.users.value}
-            changed={handleCoverCostUser}/>
-        </div>
+        {userSelect}
+      </div>
     },
     {
       name: "選擇幣別",
@@ -181,7 +173,7 @@ const AccountingBookEditPage = (props) => {
             containerInlineStyle={{ left: '30px', bottom: '30px'}}/>
       }
       {
-        currentStep === steps.size - 1 ?
+        currentStep === steps.length - 1 ?
           null:
           <CircleFloatingIcon
             faicon='faChevronRight'
@@ -224,7 +216,6 @@ const styles = {
     backgroundColor: themeColors.gray100,
     margin: "0px 20px",
     borderRadius: "16px",
-
   }
 }
 

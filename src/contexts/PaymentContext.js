@@ -1,6 +1,6 @@
 import createDataContext from './CreateDataContext'
 import Validator from '../utilities/Validator'
-import axios from '../api/dragonBabyApi'
+import { dragonBabyApi } from '../api/dragonBabyApi'
 
 const paymentReducer = (state, action) => {
   let valid
@@ -249,7 +249,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
 
   let details = state.accounting_book_details
 
-  axios.post(`api/v1/groups/${details.group_id}/accounting_books/${details.id}/payments`, { payment: params })
+  dragonBabyApi.createPayment(details.group_id, details.id, params)
     .then(function (response) {
       afterSubmit()
     })

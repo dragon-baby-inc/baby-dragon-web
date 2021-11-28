@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from '../api/dragonBabyApi'
+import { dragonBabyApi } from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
 const useUsers =  (callback) => {
@@ -9,9 +9,8 @@ const useUsers =  (callback) => {
 
   const getUsers = async () => {
     setLoading(true)
-    await axios.get(`api/v1/groups/${group_id}/users`)
+    await dragonBabyApi.getUsers(group_id)
       .then(function (response) {
-        console.log(response.data)
         setUsers(response.data.users.map((u) => {
           return {
             id: u.line_id,

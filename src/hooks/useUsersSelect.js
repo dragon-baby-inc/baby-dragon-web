@@ -8,7 +8,8 @@ import {
 
 const useUsersSelect = ({
   users,
-  buildSelectUsers
+  buildSelectUsers,
+  callback
 }) => {
   const [_selectObjectIds, setSelectObjectIds] = useState()
 
@@ -18,7 +19,7 @@ const useUsersSelect = ({
 
   const handleSelectChanged = (objects) => {
     setSelectObjectIds(objects.map(obj => obj.id))
-    console.log(objects)
+    if (callback) { callback(objects.map(obj => obj.id)) }
   }
 
   const createLabel = ({ object, handleChange, selectedObjects }) => {
@@ -29,7 +30,7 @@ const useUsersSelect = ({
       value={object.id}
       checked={selectedObjects.map(el => el.id).includes(object.id)} >
       <div style={styles.label}>
-        <Image style={{ paddingRight: '12px' }}/>
+        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
         {object.displayName}
       </div>
     </CheckboxLabel>
