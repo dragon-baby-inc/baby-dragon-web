@@ -3,13 +3,15 @@ import Backdrop from './Backdrop/Backdrop';
 import StepsWidget from './StepsWidget/StepsWidget'
 import PaymentSwipeableView from './PaymentSwipeableView/PaymentSwipeableView'
 import FontAwesomeIcon from './FontAwesomeIcon/FontAwesomeIcon'
+import ColumnSwappableView from './ColumnSwappableView/ColumnSwappableView'
 
 export {
   EmptyResult,
   Backdrop,
   PaymentSwipeableView,
   FontAwesomeIcon,
-  StepsWidget
+  StepsWidget,
+  ColumnSwappableView
 };
 
 export * from './FormElements'

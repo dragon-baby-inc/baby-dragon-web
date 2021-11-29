@@ -1,9 +1,23 @@
 @import "../../../styleSheets/globalColors.scss";
 
+.wiggle {
+  display: block;
+  width: 50%;
+  height: 2px;
+  background-color: $gold700;
+  transition: .2s;
+}
+
+.wiggle.active {
+  transform: translateX(100%);
+}
+
 .bg {
+  padding: 0px 20px;
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-flow: column;
   text-align: center;
   background: none;
   background-color: white;
@@ -16,6 +30,8 @@
   justify-content: space-around;
 
   .icon {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
     color: $gray600;
     font-weight: 500;
     flex-grow: 1;
@@ -40,7 +56,6 @@
   .icon {
     padding-top: 12px;
     padding-bottom: 12px;
-    border-bottom: 2px solid transparent;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -49,7 +64,6 @@
 
   .icon.activeStyle {
     color: $gold700;
-    border-bottom: 2px solid $gold700;
   }
 }
 

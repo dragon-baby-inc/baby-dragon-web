@@ -9,6 +9,7 @@ import { themeColors } from '../constants'
 import { Context as AuthContext } from '../contexts/AuthContext'
 import { usePayments, useAccountingBook } from '../hooks'
 import {
+  ColumnSwappableView,
   PaymentsHeader,
   Loading,
   EmptyResult,
@@ -30,19 +31,28 @@ const PaymentsPage = (props) => {
   const [scrollInfo, setRef] = useScrollInfo();
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
+  const [index, setIndex] = useState(0)
 
   let currentDate = null
   let paymentLabels = []
 
+  console.log(small)
+  let paymentHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
+  let paymentsHeight = small ? 'calc(100vh - 58px - 49px)' : 'calc(100vh - 58px - 120px - 49px)'
   let paymentStyle =  {
     background: '#FFFFFF',
     overflow: 'auto',
     marginTop: small ? '0px' : '0px',
-    height: 'calc(100vh - 58px - 49px)',
+    height: paymentHeight,
     paddingBottom: '150px',
   }
   //     marginTop: small ? '58px' : '20px',
   //     paddingTop: small ? '10px' : '0px',
+  //
+  //
+  const handleIndexChanged = (i) => {
+    setIndex(i)
+  }
 
   const handlePaymentChecked = (e) => {
     let paymentIds = selectedPaymentIds
@@ -101,14 +111,19 @@ const PaymentsPage = (props) => {
   const activeEditMode = () => { setEditMode(true); setSmall(true) }
   const deactiveEditMode = () => { setEditMode(false); setSmall(false);  }
 
-  const handleSelectAllClick = (e) => {
-    setSelectAll(!selectAll)
-    if (!selectAll === true) {
-      setSelectedPaymentIds(payments.map(p => p.id.toString()))
-    } else {
-      setSelectedPaymentIds([])
+  const steps = [
+    {
+      name: '帳目明細',
+      component: <div style={paymentStyle} ref={setRef}>
+          { payments.length > 0 ?  paymentLabels : <EmptyResult message='目前沒有任何款項喔'/> }
+        </div>
+    },
+    {
+      name: '分帳建議',
+      component: <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
     }
-  }
+  ]
+
 
   return(
     <>
@@ -119,7 +134,6 @@ const PaymentsPage = (props) => {
           editMode={editMode}
           activeEditMode={activeEditMode}
           selectAll={selectAll}
-          handleSelectAllClick={handleSelectAllClick}
           paymentSize={payments.length}
           scrollInfo={scrollInfo}
           small={small}
@@ -127,33 +141,10 @@ const PaymentsPage = (props) => {
           handleSmallChange={handleSmallChange}
         />
 
-
-        <Views group_id={group_id} id={accounting_book_id}/>
-
-        <Switch>
-          <>
-            {
-              (paymentLoading) ?
-                <div style={paymentStyle}>
-                  <Loading />
-                </div>
-                :
-                <div style={paymentStyle} ref={setRef}>
-                  <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index`}>
-                    {
-                      payments.length > 0 ?
-                        paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
-                    }
-                  </Route>
-                  <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary`}>
-                    <>
-                      <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
-                    </>
-                  </Route>
-                </div>
-            }
-          </>
-        </Switch>
+        {
+          paymentLoading ? <div style={paymentStyle}><Loading /></div> :
+            <ColumnSwappableView index={index} setIndex={handleIndexChanged} steps={steps} height={paymentsHeight}/>
+        }
       </div>
       <CircleFloatingIcon
         faicon='faPlus'
@@ -190,3 +181,29 @@ const styles = {
 
 
 export default PaymentsPage
+
+
+//         <Switch>
+//           <>
+//             {
+//               (paymentLoading) ?
+//                 <div style={paymentStyle}>
+//                   <Loading />
+//                 </div>
+//                 :
+//                 <div style={paymentStyle} ref={setRef}>
+//                   <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index`}>
+//                     {
+//                       payments.length > 0 ?
+//                         paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
+//                     }
+//                   </Route>
+//                   <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary`}>
+//                     <>
+//                       <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
+//                     </>
+//                   </Route>
+//                 </div>
+//             }
+//           </>
+//         </Switch>
