@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBookOpen,
   faTimes,
+  faTimesCircle,
   faEdit,
   faPlus,
   faBars,
@@ -13,6 +14,7 @@ import {
   faArrowRight,
   faChevronRight,
   faChevronLeft,
+  faChevronDown,
   faCog,
   faLock,
   faLockOpen,
@@ -29,6 +31,7 @@ import {
 import {
   faClock as farFaClock,
   faStar as farFaStar,
+  faCreditCard as farCreditCard,
 } from '@fortawesome/free-regular-svg-icons'
 
 const icons = {
@@ -45,6 +48,7 @@ const icons = {
   faArrowLeft: faArrowLeft,
   faArrowRight: faArrowRight,
   faChevronRight: faChevronRight,
+  faChevronDown: faChevronDown,
   faCog: faCog,
   faLock: faLock,
   faLockOpen: faLockOpen,
@@ -57,6 +61,8 @@ const icons = {
   fasFaStar: fasFaStar,
   faChevronLeft: faChevronLeft,
   farFaClock: farFaClock,
+  farCreditCard: farCreditCard,
+  faTimesCircle: faTimesCircle,
 }
 
 const Icon = (props) => {

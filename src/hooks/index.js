@@ -11,6 +11,11 @@ import useToggle from './useToggle'
 import useUsers from './useUsers'
 import useCurrencySelect from './useCurrencySelect'
 import useUsersSelect from './useUsersSelect'
+import useTextInput from './useTextInput'
+import useDatePickerInput from './useDatePickerInput'
+import useUserRadioSelect from './useUserRadioSelect'
+import useUserRadioSelectLabel from './useUserRadioSelectLabel'
+import useSearchLabel from './useSearchLabel'
 
 export {
   useAccountingBookSummary,
@@ -25,5 +30,10 @@ export {
   useToggle,
   useUsers,
   useCurrencySelect,
-  useUsersSelect
+  useUsersSelect,
+  useTextInput,
+  useDatePickerInput,
+  useUserRadioSelect,
+  useUserRadioSelectLabel,
+  useSearchLabel
 }

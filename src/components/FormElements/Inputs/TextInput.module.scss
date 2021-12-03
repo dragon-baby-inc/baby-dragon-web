@@ -2,6 +2,9 @@
 
 .container {
   width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 16px;
 }
 
 .label:focus-within  {
@@ -9,57 +12,77 @@
 }
 
 .label {
+  padding: 0px 20px;
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 54px;
+  height: 48px;
   display: flex;
   text-align: center;
+  align-items: center;
   border-radius: 16px;
-  border: 1px solid #eee;
+  border: 1px solid transparent;
   font-size: 16px;
   transition: .2s;
+  background-color: $gray100;
 }
 
 .label.invalid {
-  border: 1px solid rgb(214 92 92);
+  border: 1px solid #D65C5C;
   border-radius: 16px;
-  box-shadow: 0 0 0 2px rgba(214, 92, 92, 0.2);
+}
+
+.labelName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gold900;
 }
 
 .name {
-  width: 100px;
   font-weight: 900;
-  border-right: 1px solid #eee;
   color: $gold900;
-  line-height: 52px;
+  font-size: 16px;
+  padding: 0px 12px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .input {
-  font-size: 16px;
+  background-color: $gray100;
   flex-grow: 1;
-  text-align: center;
   transition: .4s;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  padding: 0px;
+  color: $gray900;
+  padding-top: 1px;
 }
 
 .input[disabled] {
-  background-color: #eee;
+  background-color: transparent;
   border-radius: none;
 }
 
-input, input:focus {
+.input, .input:focus {
   border: none;
   outline: none;
 }
 
-input::placeholder {
+.input::placeholder {
   color: $gray500;
 }
 
 .invalidFeedback {
-  font-weight: 500;
-  padding: 8px 0px 4px;
-  text-align: right;
   color: red;
   font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
 }

@@ -15,6 +15,7 @@ const Radio = ({
     <label className={styles.label}>
       <div>
         <input
+          onClick={handleChanged}
           onChange={handleChanged}
           value={value}
           type="radio"

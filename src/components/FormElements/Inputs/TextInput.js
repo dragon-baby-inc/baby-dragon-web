@@ -1,30 +1,31 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styles from './TextInput.module.scss'
+import { FontAwesomeIcon } from '../../../components'
 
 const TextInput = ({
   name,
-  labelStyle,
   changed,
   value,
   placeholder,
   type,
   valid,
+  faicon,
   invalidFeedback,
   disabled,
-  hideLabel,
   invalidFeedbackStyle
 }) => {
+
   let labelClasses = [styles.label]
   if (valid === false) { labelClasses.push(styles.invalid) }
   if (disabled) { labelClasses.push(styles.disabled) }
+
   return(
-    <div style={labelStyle} className={styles.container}>
+    <div className={styles.container}>
       <label className={labelClasses.join(' ')} >
-        {
-          hideLabel ?
-            null:
-            <div className={styles.name}>{name}</div>
-        }
+        <div className={styles.labelName}>
+          <FontAwesomeIcon faicon={faicon}/>
+          <div className={styles.name}>{name}</div>
+        </div>
         <input
           disabled={disabled}
           value={value}
@@ -34,7 +35,9 @@ const TextInput = ({
           type={type} />
       </label>
       {
-        (valid === false) ?  <div style={invalidFeedbackStyle} className={styles.invalidFeedback}>{invalidFeedback}</div> : null
+        (valid === false) ?
+          <div style={invalidFeedbackStyle} className={styles.invalidFeedback}>{invalidFeedback}</div> :
+          null
       }
     </div>
   )

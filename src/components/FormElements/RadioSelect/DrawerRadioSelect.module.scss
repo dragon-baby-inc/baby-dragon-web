@@ -1,0 +1,10 @@
+
+.container {
+  height: 100%;
+  overflow: hidden;
+}
+.labels {
+  height: calc(100vh - calc(100vh - 100%)- 72px - 1px);
+  max-height: calc(100vh - calc(100vh - 100%) - 72px - 1px);
+  overflow: auto;
+}

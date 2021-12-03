@@ -1,0 +1,84 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  vertical-align: center;
+  padding: 16px 0px 16px 20px;
+}
+
+.close {
+  padding: 12px 25px 12px 17px;
+}
+
+.search {
+  -webkit-border-radius: 0;
+}
+
+.searchGroup {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  vertical-align: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #eee;
+  background-color: #eee;
+  padding: 10px 12px;
+  border-radius: 20px;
+  color: $gray600;
+
+}
+.search {
+  background-color: #eee;
+  flex-grow: 2;
+  border: none;
+  padding: 0px 10px;
+  border: none;
+  font-size: 14px;
+}
+
+.search::placeholder {
+  color: $gray600;
+}
+
+.search:focus {
+  box-shadow: none;
+  border: none !important;
+  outline: 0 none;
+}
+
+.label {
+  display: flex;
+  flex-grow: 1;
+  text-align: left;
+  margin-bottom: 0px;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.faTimesBlock {
+  color: $gray600;
+  padding: 0px 10px;
+  display: inline-block;
+  font-size: 15px;
+}
+
+.faTimesBlockHide {
+  opacity: 0;
+}
+
+.faTimes:hover {
+  position: relative;
+  color: #333;
+}
+.faSearch {
+  position: relative;
+  color: #ccc;
+}
+.search:focus {
+  outline: none;
+}
+

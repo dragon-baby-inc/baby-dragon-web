@@ -12,12 +12,16 @@ import PaymentEditPage from './PaymentEditPage'
 import AccountingBookSummaryPage from './AccountingBookSummaryPage'
 import {
   AccountingBookCurrencyPage,
-  AccountingBookCreationPage
+  AccountingBookCreationPage,
+  PaymentCreationPage
 } from './index'
 
 const NavigationPage = (props) => {
   return(
     <>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
+        <PaymentCreationPage />
+      </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/new">
         <AccountingBookCreationPage />
       </Route>

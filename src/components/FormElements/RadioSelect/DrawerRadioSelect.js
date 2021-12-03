@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react"
-import styles from './RadioSelect.module.scss'
+import styles from './DrawerRadioSelect.module.scss'
 import {
-  useSearchLabel
+  useSearchLabel,
 } from '../../../hooks'
+import {
+  Separater
+} from '../../../components'
 
-const RadioSelect = ({
+const DrawerRadioSelect = ({
   objects,
   createLabel,
   changed,
-  searchInput,
-  selectedObject
+  selectedObject,
+  closed
 }) => {
   const [displayObjects, setDisplayObjects] = useState(objects)
   const [_selectedObject, setSelectedObject] = useState(selectedObject)
@@ -25,7 +28,8 @@ const RadioSelect = ({
 
   const [searchValue, searchLabel] = useSearchLabel({
     reset: () => { setDisplayObjects(objects) },
-    changed: handleFilter
+    changed: handleFilter,
+    closed: closed
   })
 
   useEffect(() => {
@@ -46,14 +50,10 @@ const RadioSelect = ({
     return createLabel({ object, handleChange, selectedObject: _selectedObject })
   })
 
-  const containerStyles = [styles.container]
-
   return(
-    <div className={containerStyles.join(' ')}>
-      {
-        searchInput ?
-          searchLabel : null
-      }
+    <div className={styles.container}>
+      { searchLabel }
+      <Separater style={{ margin: 0 }}/>
       <div className={styles.labels}>
         {objectLabels}
       </div>
@@ -61,4 +61,4 @@ const RadioSelect = ({
   )
 }
 
-export default RadioSelect
+export default DrawerRadioSelect

@@ -10,6 +10,7 @@ const styles = {
     padding: '0 15px',
     height: 'calc(100% - 66px)',
     overflow: 'hidden',
+    maxHeight: '-webkit-fill-available'
   },
   slideContainer: {
     margin: 0,

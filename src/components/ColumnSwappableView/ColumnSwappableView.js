@@ -18,7 +18,7 @@ const ColumnSwappableView = ({
 
   const defaultStyles = {
     root: {
-      height: '100%',
+      maxHeight: '-webkit-fill-available',
       margin: 0,
       height: height ? height : '100%',
       overflow: 'hidden',
@@ -28,7 +28,7 @@ const ColumnSwappableView = ({
       margin: 0,
     },
     slide: {
-      margin: 0,
+      margin: '20px',
       overflow: 'hidden',
       height: height ? height : 'calc(100%  - 49px)',
       backgroundColor: '#FFFFFF',
@@ -40,7 +40,7 @@ const ColumnSwappableView = ({
 
   steps.forEach(step => {
     stepsComponents.push(
-      <div style={Object.assign({}, _styles.slide)}>
+      <div key={step.name} style={Object.assign({}, _styles.slide)}>
         {step.component}
       </div>
     )

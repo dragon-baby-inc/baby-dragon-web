@@ -114,7 +114,8 @@ const PaymentCheckboxLabel = (props) => {
           </div>
         </div>
       </label>
-      <Collapse isOpened={open}>
+      <Collapse isOpened={open}
+        initialStyle={open ? { height: 'auto', overflow: 'initial' } : { height: '0px', overflow: 'hidden' }} >
         <div className={`payment collapse ${paidBack}`}>
           {
             true ?
