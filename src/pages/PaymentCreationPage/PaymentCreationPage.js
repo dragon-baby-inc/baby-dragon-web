@@ -4,13 +4,17 @@ import {
   PageHeader,
   ColumnSwappableView,
   Separater,
-  Image
+  Image,
+  Section,
+  Button,
+  Footer
 } from '../../components'
 import {
   useTextInput,
   useDatePickerInput,
   useUserRadioSelect,
   useUserRadioSelectLabel,
+  useUserCheckboxSelectLabel,
   useUsers,
 } from '../../hooks'
 
@@ -20,6 +24,10 @@ const PaymentCreationPage = () => {
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
     initialValue: users[0]
+  })
+  const [owers, owersLabel] = useUserCheckboxSelectLabel({
+    users: users,
+    initialValue: users,
   })
 
   const [name, nameInput] = useTextInput({
@@ -53,20 +61,33 @@ const PaymentCreationPage = () => {
     setIndex(i)
   }
 
+  let contentHeight = "calc(100%)"
+  let contentStyle = {
+    maxHeight: contentHeight,
+    height: contentHeight,
+    padding: '0px 20px',
+    paddingTop: '16px',
+    overflow: 'auto'
+  }
   const steps = [
     {
       name: '平分',
-      component: <div>
+      component: <div
+      style={contentStyle}>
         { nameInput }
         { amountInput }
         { datePickerInput }
+        <Section name="付款者"/>
         { payerLabel }
+        <Section name="分款者" style={{ marginTop: '16px' }}/>
+        { owersLabel }
       </div>
 
     },
     {
       name: '自己分',
-      component: <div>
+      component: <div
+      style={contentStyle}>
         { nameInput }
         { datePickerInput }
         { payerLabel }
@@ -76,14 +97,19 @@ const PaymentCreationPage = () => {
 
   const styles = {
     slide: {
-      margin: '20px',
-      overflow: 'hidden',
-      height: 'calc(100%  - 58px - 49px)',
+      height: '100%',
       backgroundColor: '#FFFFFF',
+    },
+    containter: {
+      display: 'flex',
+      flexFlow: 'column nowrap',
+      height: '100vh',
+      overflow: 'hidden',
     }
   }
+
   return(
-    <>
+    <div style={styles.containter}>
       <PageHeader color={themeColors.gray400}>
         新增帳款
       </PageHeader>
@@ -92,10 +118,13 @@ const PaymentCreationPage = () => {
         key="PaymentCreationPage__ColumnSwappableView"
         styles={styles}
         index={index}
+        height={'100%'}
         setIndex={handleIndexChanged}
-        steps={steps}
-        height={"100%"}/>
-    </>
+        steps={steps} />
+      <Footer>
+        <Button>建立帳款</Button>
+      </Footer>
+    </div>
   )
 }
 

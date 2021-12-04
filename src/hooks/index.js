@@ -16,6 +16,7 @@ import useDatePickerInput from './useDatePickerInput'
 import useUserRadioSelect from './useUserRadioSelect'
 import useUserRadioSelectLabel from './useUserRadioSelectLabel'
 import useSearchLabel from './useSearchLabel'
+import useUserCheckboxSelectLabel from './useUserCheckboxSelectLabel'
 
 export {
   useAccountingBookSummary,
@@ -35,5 +36,6 @@ export {
   useDatePickerInput,
   useUserRadioSelect,
   useUserRadioSelectLabel,
+  useUserCheckboxSelectLabel,
   useSearchLabel
 }

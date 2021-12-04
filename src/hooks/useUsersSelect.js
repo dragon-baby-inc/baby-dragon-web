@@ -5,6 +5,9 @@ import {
   CheckboxLabel,
   Image
 } from '../components'
+import {
+  createUserCheckbokLabel
+} from '../generators/labelGenerator'
 
 const useUsersSelect = ({
   users,
@@ -22,22 +25,8 @@ const useUsersSelect = ({
     if (callback) { callback(objects.map(obj => obj.id)) }
   }
 
-  const createLabel = ({ object, handleChange, selectedObjects }) => {
-    return <CheckboxLabel
-      key={object.id}
-      object={object}
-      changed={handleChange}
-      value={object.id}
-      checked={selectedObjects.map(el => el.id).includes(object.id)} >
-      <div style={styles.label}>
-        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
-        {object.displayName}
-      </div>
-    </CheckboxLabel>
-  }
-
   const select = <CheckboxSelect
-    createLabel={createLabel}
+    createLabel={createUserCheckbokLabel}
     objects={users}
     selected_object_ids={_selectObjectIds}
     changed={handleSelectChanged}

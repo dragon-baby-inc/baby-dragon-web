@@ -4,9 +4,11 @@ import StepsWidget from './StepsWidget/StepsWidget'
 import PaymentSwipeableView from './PaymentSwipeableView/PaymentSwipeableView'
 import FontAwesomeIcon from './FontAwesomeIcon/FontAwesomeIcon'
 import ColumnSwappableView from './ColumnSwappableView/ColumnSwappableView'
+import Footer from './Footer/Footer'
 
 export {
   EmptyResult,
+  Footer,
   Backdrop,
   PaymentSwipeableView,
   FontAwesomeIcon,

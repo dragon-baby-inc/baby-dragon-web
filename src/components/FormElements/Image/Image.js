@@ -9,6 +9,7 @@ const Image = ({
   circle,
   defaultImage,
   clicked,
+  avatarStyles,
   style
 }) => {
   let imageSize = size
@@ -28,7 +29,10 @@ const Image = ({
   }
 
   return (
-    <div onClick={clicked} className={styles.imageBlock} style={ style ? style : {} }>
+    <div
+      onClick={clicked}
+      className={styles.imageBlock}
+      style={ style ? style : {} }>
       {
         imageUrl ?
           <img

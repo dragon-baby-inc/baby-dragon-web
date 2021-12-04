@@ -6,6 +6,7 @@ import {
   faEdit,
   faPlus,
   faBars,
+  faUser,
   faTrash,
   faFilter,
   faSearch,
@@ -32,6 +33,7 @@ import {
   faClock as farFaClock,
   faStar as farFaStar,
   faCreditCard as farCreditCard,
+  faUser as farUser
 } from '@fortawesome/free-regular-svg-icons'
 
 const icons = {
@@ -63,6 +65,8 @@ const icons = {
   farFaClock: farFaClock,
   farCreditCard: farCreditCard,
   faTimesCircle: faTimesCircle,
+  faUser: faUser,
+  farUser: farUser,
 }
 
 const Icon = (props) => {

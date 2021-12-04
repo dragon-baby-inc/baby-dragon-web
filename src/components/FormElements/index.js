@@ -7,6 +7,8 @@ import TextInput from './Inputs/TextInput';
 import Drawer from './Drawer/Drawer'
 import SelectLabel from './SelectLabel/SelectLabel'
 import UserRadioSelectLabel from './SelectLabel/UserRadioSelectLabel'
+import UserCheckboxSelectLabel from './SelectLabel/UserCheckboxSelectLabel'
+import DrawerCheckboxSelect from './CheckboxSelect/DrawerCheckboxSelect'
 import CheckboxSelect from './CheckboxSelect/CheckboxSelect'
 import AccountingBookUserMenu from './SelectMenu/AccountingBookUserMenu';
 import CheckboxSelectMenu from './SelectMenu/CheckboxSelectMenu';
@@ -31,6 +33,7 @@ import ToggleLabel from './ToggleLabel/ToggleLabel'
 import ActionLabel from './ActionLabel/ActionLabel'
 import NavigationLabel from './NavigateLabel/NavigateLabel'
 import Separater from './Separater/Separater'
+import Section from './Section/Section'
 import SeparaterLabel from './SeparaterLabel/SeparaterLabel'
 import FormTypeToggle from './FormTypeToggle/Toggle';
 import FloatIcon from './FloatIcon/FloatIcon';
@@ -95,5 +98,8 @@ export {
   Drawer,
   SelectLabel,
   UserRadioSelectLabel,
-  DrawerRadioSelect
+  DrawerRadioSelect,
+  UserCheckboxSelectLabel,
+  DrawerCheckboxSelect,
+  Section,
 };
