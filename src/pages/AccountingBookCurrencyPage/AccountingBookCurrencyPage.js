@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from '../../api/dragonBabyApi'
 import { dragonBabyApi } from '../../api/dragonBabyApi'
 import { themeColors } from '../../constants'
-import { useAccountingBook, useCurrencySelect } from '../../hooks'
+import { useHistory, useAccountingBook, useCurrencySelect } from '../../hooks'
 import {
   Image,
   Radio,
@@ -19,12 +19,14 @@ import {
 const AccountingBookCurrencyPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
   const [users, accountingBookDetails, loading] = useAccountingBook()
+  const history = useHistory();
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
   const sendUpdateRequest = () => {
     dragonBabyApi.updateAccountingBook(group_id, accounting_book_id, { currency: currency })
       .then((res) => {
-        console.log(res)
+        history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
+
       })
       .catch((res) => {
         window.location.reload();

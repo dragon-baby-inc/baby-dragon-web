@@ -6,6 +6,7 @@ import {
 const useUserRadioSelectLabel = ({
   users,
   initialValue,
+  callback,
   key
 }) => {
   const [user, setUser] = useState(initialValue)
@@ -16,6 +17,7 @@ const useUserRadioSelectLabel = ({
 
   const handleUserSelect = (object) => {
     setUser(object)
+    if (callback) { callback(object) }
   }
 
   const selectLabel = <UserRadioSelectLabel

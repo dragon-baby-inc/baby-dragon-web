@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context as PaymentContext } from '../../contexts/PaymentContext'
 import { useParams } from 'react-router-dom';
 import styles from './PaymentCreationPage.module.scss'
 import { themeColors } from '../../constants'
@@ -25,6 +26,23 @@ import {
 } from '../../hooks'
 
 const PaymentCreationPage = () => {
+  const {
+    state,
+    setName,
+    setAmount,
+    setPayer,
+    setOwers,
+    setManualOwers,
+    setCreationDate,
+    setAllocationType,
+    setShowRadioSelect,
+    setShowCheckboxSelect,
+    setShowPopUpForm,
+    validateForm,
+    createPayment,
+  } = useContext(PaymentContext)
+
+  console.log(state)
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const [users, userLoading] = useUsers()
@@ -33,10 +51,12 @@ const PaymentCreationPage = () => {
     users: users,
     owers: [{ user: users[0], amount: null }]
   })
+
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
     initialValue: users[0]
   })
+
   const [owers, owersLabel] = useUserCheckboxSelectLabel({
     users: users,
     initialValue: users,
@@ -63,6 +83,7 @@ const PaymentCreationPage = () => {
   const [amount, amountInput] = useTextInput({
     name: '金額',
     placeholder: '輸入金額',
+    disabled: userLoading === true,
     faicon: "farCreditCard",
     type: 'number',
     invalidFeedback: "不可為空",
@@ -128,6 +149,13 @@ const PaymentCreationPage = () => {
     },
   }
 
+  const handleSubmit = (e) => {
+    console.log(e)
+    let params = {
+
+    }
+  }
+
   return(
     <div className={styles.container}>
       <TopRightIcon
@@ -147,7 +175,7 @@ const PaymentCreationPage = () => {
         setIndex={handleIndexChanged}
         steps={steps} />
       <Footer>
-        <Button>建立帳款</Button>
+        <Button clicked={handleSubmit}>建立帳款</Button>
       </Footer>
     </div>
   )

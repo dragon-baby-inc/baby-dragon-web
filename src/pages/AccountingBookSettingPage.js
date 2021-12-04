@@ -123,11 +123,12 @@ const AccountingBookSettingPage = (props) => {
           }
           <NavigationLabel
             description="編輯幣別"
+            selectedOptionName={accountingBookDetails.currency}
             clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
           />
           <NavigationLabel
             description="分帳成員"
-            selectedOptionName={`${accountingBookDetails.cover_cost_users_size}人`}
+            selectedOptionName={`${accountingBookDetails.cover_cost_users_size ? accountingBookDetails.cover_cost_users_size : '-'} 人`}
             clicked={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/default_users`) }}
           />
           <ActionLabel
