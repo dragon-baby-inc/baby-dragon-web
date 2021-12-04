@@ -1,0 +1,12 @@
+.container {
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.Icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .05s;
+}

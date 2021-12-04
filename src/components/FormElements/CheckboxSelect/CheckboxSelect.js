@@ -5,6 +5,7 @@ import { CheckboxLabel, Image } from '../index'
 const CheckboxSelect = ({
   objects,
   selected_object_ids,
+  style,
   createLabel,
   changed
 }) => {
@@ -48,7 +49,7 @@ const CheckboxSelect = ({
   const containerStyles = [styles.container]
   if (mount) { containerStyles.push(styles.mount) }
   return(
-    <div className={containerStyles.join(' ')}>
+    <div style={style ? style: {}} className={containerStyles.join(' ')}>
       <div className={styles.labels}>
         {objectLabels}
       </div>

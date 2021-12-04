@@ -10,6 +10,7 @@ function CircleFloatingIcon({
   containerInlineStyle,
   iconInlineStyle,
   faColor,
+  disabled,
   faicon
 }){
   const [active, setActive] = useState(true)
@@ -30,16 +31,27 @@ function CircleFloatingIcon({
     avatarClasses.push(styles.active)
   }
 
+  const handleClicked = () => {
+    if (disabled) { return }
+    clicked()
+  }
+
   return(
     <FloatingIcon
       containerInlineStyle={containerInlineStyle}
       containerStyle={styles.floatingIcon}
       avatarStyle={avatarClasses.join(' ')} >
-      <div style={iconInlineStyle} className={iconClasses.join(' ')} onClick={clicked} >
+      <div style={disabled ? _styles.disabled : iconInlineStyle} className={iconClasses.join(' ')} onClick={handleClicked} >
         <FontAwesomeIcon faicon={faicon} color={faColor}/>
       </div>
     </FloatingIcon >
   )
+}
+
+const _styles = {
+  disabled: {
+    background: 'gray'
+  }
 }
 
 export default CircleFloatingIcon;

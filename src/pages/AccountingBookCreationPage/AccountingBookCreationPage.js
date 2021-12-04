@@ -1,18 +1,23 @@
 import React, { useState, useContext, useEffect } from "react"
 import { useUsers } from '../../hooks'
+import _styles from './AccountingBookCreationPage.module.scss'
 import { themeColors, imageUrls } from '../../constants'
 import { Context as AccountingBookContext} from '../../contexts/AccountingBookContext.js'
 import {
+  Footer,
   Image,
   StepsWidget,
   TopRightIcon,
+  CircleIcon,
   IconSwappableView,
   PageHeader,
   FontAwesomeIcon,
   Separater,
   SeparaterLabel,
+  FloatingIcon,
   TextInput,
   Loading,
+  Button,
   CheckboxSelect,
   CheckboxLabel,
   CircleFloatingIcon,
@@ -29,6 +34,12 @@ import { dragonBabyApi } from '../../api/dragonBabyApi'
 const AccountingBookEditPage = (props) => {
   /* eslint-disable no-unused-vars */
   const history = useHistory();
+  const [stepStates, setStepStates] = useState([
+    false,
+    true,
+    true
+  ])
+
   const [pageLoading, setPageLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [selectObjectIds, setSelectObjectIds] = useState([])
@@ -52,10 +63,19 @@ const AccountingBookEditPage = (props) => {
   }
 
   const userSelectChanged = (selectedIds) => {
+    let _stepStates = [...stepStates]
+    _stepStates[currentStep] = selectedIds.length > 0
+    setStepStates(_stepStates)
+
     setUsers({ value: selectedIds, valid: selectedIds.length > 0})
   }
 
-  const [selecteUserIds, userSelect] = useUsersSelect({ users, buildSelectUsers, callback: userSelectChanged })
+  const [selecteUserIds, userSelect] = useUsersSelect({
+    users,
+    buildSelectUsers,
+    callback: userSelectChanged,
+    style: { height: '100%' }
+  })
 
   useEffect(() => {
     resetContext()
@@ -79,12 +99,16 @@ const AccountingBookEditPage = (props) => {
   })
 
   const updateAccountingBook = () => {
-    validateForm(state, ['name', 'imageId', 'currency'])
-    if (!state.formValid) { return }
+    let formValid = validateForm(state, ['name', 'users', 'imageId', 'currency'])
+    if (!formValid) { return }
 
     dragonBabyApi.createAccountingBook(group_id, buildParams())
       .then((res) => {
-        history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
+        console.log(res)
+        history.navigateTo("paymentIndexPage", { group_id, accounting_book_id: res.data.accounting_book.id })
+      })
+      .catch(err => {
+        console.log(err)
       })
   }
 
@@ -93,11 +117,14 @@ const AccountingBookEditPage = (props) => {
       name: state.name.value,
       image_id: state.imageId.value,
       currency: state.currency.value,
-      users: state.users.value
+      user_ids: state.users.value
     }
   }
 
   const handlInputChange = (value) => {
+    let _stepStates = [...stepStates]
+    _stepStates[currentStep] = value.length > 0
+    setStepStates(_stepStates)
     setName({ name: value, valid: value.length > 0 })
   }
 
@@ -111,9 +138,10 @@ const AccountingBookEditPage = (props) => {
             initial={state.imageId.value}
             icons={imageUrls}/>
         </div>
-        <div>
+        <div style={styles.nameInput}>
           <TextInput
             key='name'
+            faicon="farCreditCard"
             disabled={false}
             placeholder={'輸入名稱'}
             name={'名稱'}
@@ -129,9 +157,10 @@ const AccountingBookEditPage = (props) => {
     },
     {
       name: "選擇分帳成員",
-      component: <div style={styles.select}>
-        {userSelect}
-      </div>
+      component:
+          <div style={styles.select}>
+            {userSelect}
+          </div>
     },
     {
       name: "選擇幣別",
@@ -141,47 +170,70 @@ const AccountingBookEditPage = (props) => {
     },
   ]
 
+  const handleNextStep = () => {
+     setCurrentStep(currentStep + 1)
+
+  }
+
+  const handlePreviousStep = () => {
+     setCurrentStep(currentStep - 1)
+  }
+
+
+  const currentStepValid = () => {
+    return !stepStates[currentStep]
+  }
+
+  const handleSubmit = () => {
+    updateAccountingBook()
+  }
+
   return(
     <>
-      <div style={styles.bg}>
-        <TopRightIcon
-          clicked={() => {history.navigateTo("accountingBookPage", { group_id })}}
-          style={{ fontSize: '20px', right: '20px', color: 'black' }} >
-          <div> 取消 </div>
-        </TopRightIcon>
+      <div style={styles.container}>
+        <div style={styles.bg}>
+          <TopRightIcon
+            clicked={() => {history.navigateTo("accountingBookPage", { group_id })}}
+            style={{ fontSize: '20px', right: '20px', color: 'black' }} >
+            <div> 取消 </div>
+          </TopRightIcon>
 
-        <PageHeader
-          faicon='faChevronLeft'
-          link={history.routes["accountingBookPage"]({group_id})}
-          color="black">
-          建立新帳本
-        </PageHeader>
-        <Separater style={{ margin: "0px" }}/>
-        <div style={styles.stepName}>
-          {steps[currentStep].name}
-        </div>
-        <StepsWidget height={'calc(100vh - 58px - 70px)'} index={currentStep} steps={steps}/>
-      </div>
-      {
-        currentStep === 0 ?
-          null:
-          <CircleFloatingIcon
+          <PageHeader
             faicon='faChevronLeft'
-            faColor={themeColors.white}
-            clicked={() => { setCurrentStep(currentStep - 1) }}
-            iconInlineStyle={{background: 'none', background: 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'}}
-            containerInlineStyle={{ left: '30px', bottom: '30px'}}/>
-      }
-      {
-        currentStep === steps.length - 1 ?
-          null:
-          <CircleFloatingIcon
-            faicon='faChevronRight'
-            faColor={themeColors.white}
-            clicked={() => { setCurrentStep(currentStep + 1) }}
-            iconInlineStyle={{background: 'none', background: 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'}}
-            containerInlineStyle={{ right: '30px', bottom: '30px'}}/>
-      }
+            link={history.routes["accountingBookPage"]({group_id})}
+            color="black">
+            建立新帳本
+          </PageHeader>
+          <Separater style={{ margin: "0px" }}/>
+          <div style={styles.stepName}>
+            {steps[currentStep].name}
+          </div>
+          <StepsWidget
+            height={'calc(100vh - 58px - 70px - 97px - 24px)'}
+            index={currentStep} steps={steps}/>
+          <Footer>
+            <CircleIcon
+              color='green'
+              faicon='faChevronLeft'
+              clicked={handlePreviousStep}
+              disabled={currentStep === 0}
+              style={currentStep === 0 ? { opacity: 0, marginRight: '5px' }: {marginRight: '5px'}}
+            />
+            <Button
+              clicked={handleSubmit}
+              disabled={currentStep !== steps.length - 1}
+              style={currentStep === steps.length - 1 ? {} : { opacity: 0 }}
+            btnClass={_styles.button}>建立帳本</Button>
+            <CircleIcon
+              color='green'
+              clicked={handleNextStep}
+              disabled={currentStepValid()}
+              faicon='faChevronRight'
+              style={currentStep === steps.length - 1 ? { display: 'none' } : {marginLeft: '5px'}} />
+          </Footer>
+        </div>
+      </div>
+
     </>
   )
 }
@@ -193,6 +245,9 @@ const styles = {
     overflow: 'hidden',
     maxHeight: '-webkit-fill-available',
     position: 'relative',
+  },
+  nameInput: {
+    margin: '40px 20px',
   },
   labelStyle: {
     padding: '20px'
@@ -213,9 +268,14 @@ const styles = {
     fontWeight: '700',
   },
   select: {
+    margin: '0px 20px',
+    height: '100%',
+    overflow: 'auto',
     backgroundColor: themeColors.gray100,
-    margin: "0px 20px",
     borderRadius: "16px",
+  },
+  footer: {
+    height: '101px',
   }
 }
 

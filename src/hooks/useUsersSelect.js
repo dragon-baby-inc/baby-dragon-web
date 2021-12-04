@@ -12,6 +12,7 @@ import {
 const useUsersSelect = ({
   users,
   buildSelectUsers,
+  style,
   callback
 }) => {
   const [_selectObjectIds, setSelectObjectIds] = useState()
@@ -28,6 +29,7 @@ const useUsersSelect = ({
   const select = <CheckboxSelect
     createLabel={createUserCheckbokLabel}
     objects={users}
+    style={style}
     selected_object_ids={_selectObjectIds}
     changed={handleSelectChanged}
   />

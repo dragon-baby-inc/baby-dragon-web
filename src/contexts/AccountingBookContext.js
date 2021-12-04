@@ -110,6 +110,7 @@ export const { Context, Provider } = createDataContext(
     setAutoDetectPayment,
     setLineNotification,
     setCurrent,
+    validateForm,
     setImageId,
     resetContext,
   },
