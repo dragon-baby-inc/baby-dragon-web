@@ -4,7 +4,8 @@ import {
   FontAwesomeIcon,
   Drawer,
   Image,
-  DrawerRadioSelect
+  DrawerRadioSelect,
+  TextInput
 } from '../../../components'
 import {
   useUserRadioSelect
@@ -13,22 +14,34 @@ import {
   createUserRadioLabel
 } from '../../../generators/labelGenerator'
 
-const UserRadioSelectLabel = ({
+const UserRadioSelectAmountLabel = ({
   users,
+  amount,
   user,
-  initialValue,
   callback,
-  style
+  style,
+  index,
+  forceDrawerActive,
+  deleted,
+  deleteActive
 }) => {
-  const [drawerActive, setDrawerActive] = useState(false)
+  const [drawerActive, setDrawerActive] = useState(forceDrawerActive)
 
   const userSelectCallback = (object) => {
     setDrawerActive(false)
-    if (callback) { callback(object) }
+    if (callback) { callback(index, { user: object, amount: amount }) }
+  }
+
+  const amountCallback = (value) => {
+    if (callback) { callback(index, { user: user, amount: value }) }
   }
 
   const handleClicked = () => {
     setDrawerActive(!drawerActive)
+  }
+
+  const handleLabelDelete = () => {
+    deleted(index)
   }
 
   const getUserName = () => {
@@ -44,7 +57,7 @@ const UserRadioSelectLabel = ({
   return (
     <>
       <label
-        style={style ? style : {}}
+        style={inlineStyles.label}
         className={styles.label}
         onClick={handleClicked}>
         <div className={styles.name}>
@@ -58,6 +71,20 @@ const UserRadioSelectLabel = ({
           />
         </div>
       </label>
+
+      <TextInput
+        name="金額"
+        faicon="farCreditCard"
+        style={inlineStyles.amountLabel}
+        value={amount}
+        invalidFeedback={'不可為空'}
+        valid={true}
+        placeholder='輸入金額'
+        changed={amountCallback}
+        type='number'
+        deleted={handleLabelDelete}
+        deleteActive={deleteActive}
+      />
 
       <Drawer
         open={drawerActive}
@@ -74,4 +101,17 @@ const UserRadioSelectLabel = ({
   )
 };
 
-export default UserRadioSelectLabel
+export default UserRadioSelectAmountLabel
+
+const inlineStyles = {
+  label: {
+    background: '#F6F6F6',
+    borderBottomRightRadius: '0px',
+    borderBottomLeftRadius: '0px'
+  },
+  amountLabel: {
+    background: '#F6F6F6',
+    borderTopRightRadius: '0px',
+    borderTopLeftRadius: '0px'
+  }
+}

@@ -3,6 +3,7 @@ import { themeColors } from '../../constants'
 import {
   PageHeader,
   ColumnSwappableView,
+  UserRadioSelectAmountLabel,
   Separater,
   Image,
   Section,
@@ -15,12 +16,17 @@ import {
   useUserRadioSelect,
   useUserRadioSelectLabel,
   useUserCheckboxSelectLabel,
+  useUserRadioSelectAmountLabel,
   useUsers,
 } from '../../hooks'
 
 const PaymentCreationPage = () => {
   const [users, userLoading] = useUsers()
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
+  const [customOwers, customOwersSelect] = useUserRadioSelectAmountLabel({
+    users: users,
+    owers: [{ user: users[0], amount: null }]
+  })
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
     initialValue: users[0]
@@ -90,7 +96,10 @@ const PaymentCreationPage = () => {
       style={contentStyle}>
         { nameInput }
         { datePickerInput }
+        <Section name="付款者"/>
         { payerLabel }
+        <Section name="欠款者" style={{ marginTop: '16px' }}/>
+        { customOwersSelect }
       </div>
     }
   ]

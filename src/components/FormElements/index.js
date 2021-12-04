@@ -12,6 +12,7 @@ import DrawerCheckboxSelect from './CheckboxSelect/DrawerCheckboxSelect'
 import CheckboxSelect from './CheckboxSelect/CheckboxSelect'
 import AccountingBookUserMenu from './SelectMenu/AccountingBookUserMenu';
 import CheckboxSelectMenu from './SelectMenu/CheckboxSelectMenu';
+import UserRadioSelectAmountLabel from './SelectLabel/UserRadioSelectAmountLabel'
 import RadioSelectMenu from './SelectMenu/RadioSelectMenu';
 import CheckboxSelectInput from './SelectInput/CheckboxSelectInput';
 import RadioSelectInput from './SelectInput/RadioSelectInput';
@@ -101,5 +102,6 @@ export {
   DrawerRadioSelect,
   UserCheckboxSelectLabel,
   DrawerCheckboxSelect,
+  UserRadioSelectAmountLabel,
   Section,
 };

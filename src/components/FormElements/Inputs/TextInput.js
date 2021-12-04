@@ -12,6 +12,9 @@ const TextInput = ({
   faicon,
   invalidFeedback,
   disabled,
+  style,
+  deleted,
+  deleteActive,
   invalidFeedbackStyle
 }) => {
 
@@ -19,8 +22,17 @@ const TextInput = ({
   if (valid === false) { labelClasses.push(styles.invalid) }
   if (disabled) { labelClasses.push(styles.disabled) }
 
+  let deleteIcon = null
+  if (deleted) {
+    if (deleteActive) {
+      deleteIcon = <FontAwesomeIcon faicon="faTrash" onClick={deleted}/>
+    } else {
+      deleteIcon = null
+    }
+  }
+
   return(
-    <div className={styles.container}>
+    <div className={styles.container} style={style ? style : {}}>
       <label className={labelClasses.join(' ')} >
         <div className={styles.labelName}>
           <FontAwesomeIcon faicon={faicon}/>
@@ -33,6 +45,7 @@ const TextInput = ({
           onChange={e => { changed(e.target.value) }}
           className={styles.input}
           type={type} />
+        { deleteIcon }
       </label>
       {
         (valid === false) ?

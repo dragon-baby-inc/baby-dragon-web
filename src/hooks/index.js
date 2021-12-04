@@ -17,6 +17,7 @@ import useUserRadioSelect from './useUserRadioSelect'
 import useUserRadioSelectLabel from './useUserRadioSelectLabel'
 import useSearchLabel from './useSearchLabel'
 import useUserCheckboxSelectLabel from './useUserCheckboxSelectLabel'
+import useUserRadioSelectAmountLabel from './useUserRadioSelectAmountLabel'
 
 export {
   useAccountingBookSummary,
@@ -37,5 +38,6 @@ export {
   useUserRadioSelect,
   useUserRadioSelectLabel,
   useUserCheckboxSelectLabel,
-  useSearchLabel
+  useSearchLabel,
+  useUserRadioSelectAmountLabel
 }
