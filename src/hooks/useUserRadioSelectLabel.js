@@ -7,6 +7,7 @@ const useUserRadioSelectLabel = ({
   users,
   initialValue,
   callback,
+  valid,
   key
 }) => {
   const [user, setUser] = useState(initialValue)
@@ -24,6 +25,7 @@ const useUserRadioSelectLabel = ({
     key={key}
     users={users}
     callback={handleUserSelect}
+    valid={valid}
     user={user}
     initialValue={user}
   />

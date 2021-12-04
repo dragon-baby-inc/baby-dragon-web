@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { DatePickerInput } from '../components'
 
 const useDatePickerInput = ({
@@ -8,12 +8,18 @@ const useDatePickerInput = ({
   placeholder,
   invalidFeedback,
   valid,
+  callback,
   initialValue,
 }) => {
   const [value, setValue] = useState((initialValue ? initialValue : ""));
 
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
+
   const handleChange = (value) => {
     setValue(value)
+    callback(value)
   }
 
   const input = <DatePickerInput

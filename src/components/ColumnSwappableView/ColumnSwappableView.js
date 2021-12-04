@@ -6,9 +6,15 @@ const ColumnSwappableView = ({
   styles,
   index,
   steps,
+  callback,
   height,
 }) => {
   const [_index, setIndex] = useState(0)
+
+  const handleIndexChanged = (value) => {
+    setIndex(value)
+    if (callback) { callback(value) }
+  }
 
   useEffect(() => {
     if (index) {
@@ -49,7 +55,7 @@ const ColumnSwappableView = ({
 
   return (
     <>
-      <Views steps={steps} index={parseInt(_index)} setIndex={setIndex}/>
+      <Views steps={steps} index={parseInt(_index)} setIndex={handleIndexChanged}/>
       <SwipeableViews style={_styles.root}
         disabled={true}
         index={parseInt(_index)}

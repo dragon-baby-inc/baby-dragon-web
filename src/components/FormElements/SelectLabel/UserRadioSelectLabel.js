@@ -18,6 +18,7 @@ const UserRadioSelectLabel = ({
   user,
   initialValue,
   callback,
+  valid,
   style
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
@@ -39,6 +40,11 @@ const UserRadioSelectLabel = ({
   const getUserImage = () => {
     if (!user) { return null }
     return user.imageURL
+  }
+
+  let labelClasses = [styles.label]
+  if (!valid) {
+    labelClasses.push(styles.invalidLabel)
   }
 
   return (

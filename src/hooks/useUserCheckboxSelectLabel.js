@@ -6,6 +6,7 @@ import {
 const useUserCheckboxSelectLabel = ({
   users,
   initialValue,
+  callback,
   key
 }) => {
   const [_users, setUsers] = useState(initialValue)
@@ -18,6 +19,7 @@ const useUserCheckboxSelectLabel = ({
 
   const handleUsersSelect = (objects) => {
     setUsers(objects)
+    if (callback) { callback(objects) }
   }
 
   const selectLabel = <UserCheckboxSelectLabel

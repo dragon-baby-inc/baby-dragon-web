@@ -46,8 +46,6 @@ class Validator {
         return prev + 0
       }
     }, 0)
-    console.log('validation')
-    console.log(amount)
 
     if (amount > 0) { return true }
     return false

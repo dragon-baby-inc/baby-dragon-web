@@ -1,5 +1,13 @@
 @import '../../../styleSheets/globalColors.scss';
 
+.container {
+  margin-bottom: 12px;
+}
+.invalid {
+  border: 1px solid red;
+  border-radius: 16px;
+}
+
 .label {
   display: flex;
   flex-direction: row;
@@ -16,9 +24,14 @@
   flex-grow: 0;
 }
 
+.invalidLabel {
+  border: 1px solid red;
+}
+
 .icon {
   padding-right: 7px;
 }
+
 .name {
   display: flex;
   align-items: center;

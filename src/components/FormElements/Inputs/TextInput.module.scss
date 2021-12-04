@@ -3,7 +3,6 @@
 .container {
   width: 100%;
   overflow: hidden;
-  border-radius: 16px;
   margin-bottom: 16px;
 }
 
@@ -80,9 +79,10 @@
 .invalidFeedback {
   color: red;
   font-size: 12px;
+  border-radius: 0;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
   letter-spacing: 0em;
-  text-align: center;
+  text-align: right;
 }

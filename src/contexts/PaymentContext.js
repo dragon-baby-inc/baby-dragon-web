@@ -45,13 +45,13 @@ const paymentReducer = (state, action) => {
       let owersValid = action.payload.length > 0
       return { ...state, owers: { value: action.payload, valid: owersValid } }
     case 'set_manual_owers':
-      let objects = action.payload.filter(object => object.amount > 0)
+      let objects = action.payload.owers.filter(object => object.amount > 0)
       let amount = objects.reduce((prev, object) => {
         if (parseFloat(object.amount) > 0) { return prev + parseFloat(object.amount) }
         else { return (prev + 0) }
       }, 0)
-      valid = amount > 0
-      return { ...state, fixedAmount: { value: amount, valid: valid }, manualOwers: { value: action.payload, valid: valid } }
+      valid = action.payload.valid ? action.payload.valid : action.payload.owers.filter(ower => ower.amount > 0).length === action.payload.owers.length
+      return { ...state, fixedAmount: { value: amount, valid: valid }, manualOwers: { value: action.payload.owers, valid: valid } }
     case 'set_hidden':
       return { ...state,
         showDatePicker: false,
@@ -135,8 +135,8 @@ const setFixedAmount = dispatch => (amount) => {
   dispatch({ type: 'set_fixed_amount', payload: amount })
 }
 
-const setManualOwers = dispatch => (owers) => {
-  dispatch({ type: 'set_manual_owers', payload: owers })
+const setManualOwers = dispatch => ({ owers, valid }) => {
+  dispatch({ type: 'set_manual_owers', payload: { owers, valid } })
 }
 
 const setCreationDate = dispatch => (date) => {
@@ -211,9 +211,17 @@ const validateForm = dispatch => (state, formKeys) => {
         isKeyValid = false
         formValid = false
       }
+
+      if (key === 'manualOwers') {
+        isKeyValid = state[key].value.filter(o => o.amount > 0).length === state[key].value.length
+        formValid = isKeyValid
+      }
+
       newState[key] = { value: state[key].value, valid: isKeyValid }
     })
   })
+
+
   newState['formValid'] = formValid
   dispatch({ type: 'validate_form', payload: newState })
   return formValid
@@ -240,7 +248,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
     if (state.allocation_type === 'amount') {
       params['amount'] = state.fixedAmount.value
       params['owers'] = state.manualOwers.value.filter(o => o.amount > 0).map(o => {
-        return { ower_id: o.id, amount: o.amount }
+        return { ower_id: o.user.id, amount: o.amount }
       })
     } else {
       params['ower_ids'] = state.owers.value.map(o => o.id)
@@ -267,8 +275,8 @@ let initialState = {
   fixedAmount: { value: 0, valid: null },
   payer: { value: null, valid: null },
   ower: { value: null, valid: null },
-  owers: { value: null, valid: true },
-  manualOwers: { value: null, valid: null },
+  owers: { value: [], valid: true },
+  manualOwers: { value: null, valid: true },
   creation_date: { value: null, valid: null },
   paid_back: false,
   formValid: false,

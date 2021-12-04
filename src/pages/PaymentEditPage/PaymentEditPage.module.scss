@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow: 'hidden';
+}

@@ -8,9 +8,9 @@ import AccountingBookSettingPage from './AccountingBookSettingPage'
 import AccountingBookEditPage from './AccountingBookEditPage'
 import GroupUsersPage from './GroupUsersPage'
 import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
-import PaymentEditPage from './PaymentEditPage'
 import AccountingBookSummaryPage from './AccountingBookSummaryPage'
 import {
+  PaymentEditPage,
   AccountingBookCurrencyPage,
   AccountingBookCreationPage,
   PaymentCreationPage

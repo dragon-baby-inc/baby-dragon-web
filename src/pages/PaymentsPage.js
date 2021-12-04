@@ -36,7 +36,6 @@ const PaymentsPage = (props) => {
   let currentDate = null
   let paymentLabels = []
 
-  console.log(small)
   let paymentHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
   let paymentsHeight = small ? 'calc(100vh - 58px - 49px)' : 'calc(100vh - 58px - 120px - 49px)'
   let paymentStyle =  {

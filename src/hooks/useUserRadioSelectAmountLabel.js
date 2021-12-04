@@ -8,6 +8,7 @@ import {
 const useUserRadioSelectAmountLabel = ({
   users,
   owers,
+  valid,
   callback
 }) => {
   const [_owers, setOwers] = useState([])
@@ -17,7 +18,7 @@ const useUserRadioSelectAmountLabel = ({
     if (owers){
       setOwers(owers)
     }
-  }, [users])
+  }, [owers])
 
   const handleOwersChanged = (index, value) => {
     let newOwers = [..._owers]
@@ -48,6 +49,7 @@ const useUserRadioSelectAmountLabel = ({
     return <UserRadioSelectAmountLabel
       index={i}
       forceDrawerActive={forceDrawerActive ? forceDrawerActive === i : false}
+      valid={valid}
       deleteActive={_owers.length > 1}
       deleted={handleLabelDelete}
       key={i}
