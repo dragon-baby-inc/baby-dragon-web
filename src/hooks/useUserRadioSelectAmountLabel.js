@@ -58,9 +58,9 @@ const useUserRadioSelectAmountLabel = ({
   const select = <>
     {labels}
     <Button
+      color="gold"
       clicked={handleAddOwer}
       style={{
-        background: themeColors.gold300,
         color: themeColors.gold900
       }}>
       新增</Button>

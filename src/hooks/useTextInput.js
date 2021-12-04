@@ -10,6 +10,7 @@ const useTextInput = ({
   valid,
   style,
   initialValue,
+  disabled,
 }) => {
   const [value, setValue] = useState((initialValue ? initialValue : ""));
 
@@ -23,6 +24,7 @@ const useTextInput = ({
     faicon={faicon}
     value={value}
     invalidFeedback={invalidFeedback}
+    disabled={disabled}
     valid={valid}
     placeholder={placeholder}
     changed={e => handleChange(e)}

@@ -30,7 +30,6 @@ const ColumnSwappableView = ({
       overflow: 'hidden',
     },
     slide: {
-      margin: '20px',
       overflow: 'hidden',
       height: height ? height : 'calc(100%  - 49px)',
       backgroundColor: '#FFFFFF',

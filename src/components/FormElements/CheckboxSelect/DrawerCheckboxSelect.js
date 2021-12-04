@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import styles from '../RadioSelect/DrawerRadioSelect.module.scss'
-import { Separater, CheckboxLabel, Image } from '../index'
+import styles from '../CheckboxSelect/DrawerCheckboxSelect.module.scss'
+import { CheckboxLabel, Separater, Image } from '../index'
 import {
-  useSearchLabel,
+  useSearchLabel
 } from '../../../hooks'
 
 const DrawerCheckboxSelect = ({
@@ -46,6 +46,7 @@ const DrawerCheckboxSelect = ({
       selected_objects = selected_objects.filter(object => String(object.id) !== String(e.target.value))
     }
 
+    setSelectAll(selected_objects.length === objects.length)
     setSelectedObjects(selected_objects)
     changed(selected_objects)
   }
@@ -71,6 +72,14 @@ const DrawerCheckboxSelect = ({
   return(
     <div className={styles.container}>
       { searchLabel }
+      <CheckboxLabel
+        changed={handleSelectAll}
+        checked={selectAll}
+      >
+        <div className={styles.selectAll}>
+          所有人
+        </div>
+      </CheckboxLabel >
       <Separater style={{ margin: 0 }}/>
       <div className={styles.labels}>
         {objectLabels}

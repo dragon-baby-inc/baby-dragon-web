@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import styles from './PaymentCreationPage.module.scss'
 import { themeColors } from '../../constants'
 import {
   PageHeader,
@@ -8,9 +10,11 @@ import {
   Image,
   Section,
   Button,
-  Footer
+  Footer,
+  TopRightIcon
 } from '../../components'
 import {
+  useHistory,
   useTextInput,
   useDatePickerInput,
   useUserRadioSelect,
@@ -21,8 +25,10 @@ import {
 } from '../../hooks'
 
 const PaymentCreationPage = () => {
+  const { group_id, accounting_book_id } = useParams()
+  const history = useHistory();
   const [users, userLoading] = useUsers()
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0);
   const [customOwers, customOwersSelect] = useUserRadioSelectAmountLabel({
     users: users,
     owers: [{ user: users[0], amount: null }]
@@ -62,6 +68,17 @@ const PaymentCreationPage = () => {
     invalidFeedback: "不可為空",
     valid: true,
   })
+
+  const [fixedAmount, fixedAmountInput] = useTextInput({
+    name: '金額',
+    placeholder: '輸入金額',
+    faicon: "farCreditCard",
+    type: 'number',
+    invalidFeedback: "不可為空",
+    disabled: true,
+    valid: true,
+  })
+
 
   const handleIndexChanged = (i) => {
     setIndex(i)
@@ -104,28 +121,27 @@ const PaymentCreationPage = () => {
     }
   ]
 
-  const styles = {
+  const customStyles = {
     slide: {
       height: '100%',
       backgroundColor: '#FFFFFF',
     },
-    containter: {
-      display: 'flex',
-      flexFlow: 'column nowrap',
-      height: '100vh',
-      overflow: 'hidden',
-    }
   }
 
   return(
-    <div style={styles.containter}>
+    <div className={styles.container}>
+      <TopRightIcon
+        clicked={() => {history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })}}
+        style={{ fontSize: '20px', right: '20px', color: 'black' }} >
+        <div> 取消 </div>
+      </TopRightIcon>
       <PageHeader color={themeColors.gray400}>
         新增帳款
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
       <ColumnSwappableView
         key="PaymentCreationPage__ColumnSwappableView"
-        styles={styles}
+        styles={customStyles}
         index={index}
         height={'100%'}
         setIndex={handleIndexChanged}

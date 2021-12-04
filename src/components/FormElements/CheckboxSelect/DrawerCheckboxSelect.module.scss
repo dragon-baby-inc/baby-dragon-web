@@ -1,0 +1,15 @@
+.container {
+  height: 100%;
+  overflow: hidden;
+}
+.labels {
+  height: calc(100vh - calc(100vh - 100%)- 72px - 1px - 44px);
+  max-height: calc(100vh - calc(100vh - 100%) - 72px - 1px - 44px);
+  overflow: auto;
+}
+
+.selectAll {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}

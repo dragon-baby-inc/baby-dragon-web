@@ -6,11 +6,10 @@
   padding: 12px 0px;
   border-radius: 100px;
   font-size: 16px;
-  background: linear-gradient(92.29deg, #103C2B 0%, #07694D 100%);
-
   color: white;
   font-weight: 600;
 }
+
 .button[disabled] {
   background: $gray700;
 }
@@ -22,9 +21,20 @@ button:active {
 
 button:active {
   outline: none;
-  background: linear-gradient(92.29deg, #103C2B 40%, #07694D 100%);
 }
 
 .green {
-  background: $green700;
+  background: linear-gradient(92.29deg, #103C2B 0%, #07694D 100%);
+}
+
+.green:active {
+  background: linear-gradient(92.29deg, #103C2B 40%, #07694D 100%);
+}
+
+.gold {
+  background: $gold300;
+}
+
+.gold:active {
+  background: $gold500;
 }
