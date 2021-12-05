@@ -100,6 +100,29 @@ const PaymentForm = () => {
     valid: state.manualOwers.valid
   })
 
+
+  const handleManualOwersChanged = (index, data) => {
+    let newOwers = [..._manualOwers]
+    newOwers[index] = data
+    _setManualOwers(newOwers)
+  }
+
+  let i = -1
+  const [_manualOwers, _setManualOwers] = useState([{ user: null, amount: null }])
+  let radioAmountLabels = _manualOwers.map(ower => {
+    i++
+    return(
+      <UserRadioSelectAmountLabel
+        index={i}
+        deleteActive={false}
+        users={users}
+        amount={ower.amount}
+        user={ower.user}
+        callback={handleManualOwersChanged}
+      />
+    )
+  })
+
   const [ower, setOwer] = useState({ user: null, amount: null  })
   const radioAmountLabel = <UserRadioSelectAmountLabel
     index={0}
@@ -124,6 +147,7 @@ const PaymentForm = () => {
         { amountInput }
         { payerLabel }
         { owersLabel }
+        { radioAmountLabels }
         { radioAmountLabel }
       </div>
     },
