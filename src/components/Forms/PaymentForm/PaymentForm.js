@@ -6,6 +6,7 @@ import {
   TextInput,
   ColumnSwappableView,
   UserCheckboxSelectLabel,
+  UserRadioSelectAmountLabel,
 } from '../../../components'
 import {
   useUserRadioSelectAmountLabel,
@@ -99,6 +100,16 @@ const PaymentForm = () => {
     valid: state.manualOwers.valid
   })
 
+  const [ower, setOwer] = useState({ user: null, amount: null  })
+  const radioAmountLabel = <UserRadioSelectAmountLabel
+    index={0}
+    deleteActive={false}
+    users={users}
+    amount={ower.amount}
+    user={ower.user}
+    callback={(index, o) => setOwer(o)}
+  />
+
   const buildSelectUsers = (users) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
@@ -113,7 +124,7 @@ const PaymentForm = () => {
         { amountInput }
         { payerLabel }
         { owersLabel }
-        { customOwersSelect }
+        { radioAmountLabel }
       </div>
     },
     {
