@@ -5,6 +5,7 @@ import {
   Drawer,
   Image,
   DrawerRadioSelect,
+  RadioFilterSelect,
   TextInput
 } from '../../../components'
 import {
@@ -100,7 +101,7 @@ const UserRadioSelectAmountLabel = ({
       <Drawer
         open={drawerActive}
         closed={() => setDrawerActive(false)}>
-        <DrawerRadioSelect
+        <RadioFilterSelect
           selectedObject={user}
           createLabel={createUserRadioLabel}
           objects={users}

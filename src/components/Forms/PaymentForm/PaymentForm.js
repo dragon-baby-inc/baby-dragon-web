@@ -8,6 +8,7 @@ import {
   UserCheckboxSelectLabel,
 } from '../../../components'
 import {
+  useUserRadioSelectAmountLabel,
   useUserRadioSelectLabel,
   useAccountingBook,
   useUsersSelect,
@@ -91,6 +92,13 @@ const PaymentForm = () => {
     selectedObjects={state.owers.value}
   />
 
+  const [customOwers, customOwersSelect] = useUserRadioSelectAmountLabel({
+    users: users,
+    owers: state.manualOwers.value,
+    callback: (owers) => setManualOwers({ owers }),
+    valid: state.manualOwers.valid
+  })
+
   const buildSelectUsers = (users) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
@@ -105,6 +113,7 @@ const PaymentForm = () => {
         { amountInput }
         { payerLabel }
         { owersLabel }
+        { customOwersSelect }
       </div>
     },
     {
