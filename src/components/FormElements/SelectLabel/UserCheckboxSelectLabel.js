@@ -38,8 +38,9 @@ const UserCheckboxSelectLabel = ({
   const [value, select] = useUsersFilterSelect({ users, buildSelectUsers, selectAll: true })
 
   let i = 0
-  const displayCount = selectedObjects.length > 5 ? 5 : selectedObjects.length
-  const displayUsers = [...selectedObjects].slice(0, displayCount)
+  const selected = users.filter(o => value.includes(o.id))
+  const displayCount = selected.length > 5 ? 5 : selected.length
+  const displayUsers = [...selected].slice(0, displayCount)
   const images = displayUsers.map(u => {
     i++
     return(
@@ -64,7 +65,7 @@ const UserCheckboxSelectLabel = ({
             position: 'relative',
             right: `${(displayCount - 1) * 10 - 8}px`
           }}>
-            {selectedObjects.length}
+            {value ? value.length : 0}
             <FontAwesomeIcon
               faicon="farUser"
               style={{
