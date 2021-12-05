@@ -24,6 +24,7 @@ const CheckboxSelect = ({
   useEffect(() => {
     setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
+    setSelectAll(selected_object_ids.length === objects.length)
   }, [objects, selected_object_ids ])
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const CheckboxSelect = ({
       selected_objects = selected_objects.filter(object => String(object.id) !== String(e.target.value))
     }
 
+    setSelectAll(selected_objects.length === objects.length)
     setSelectedObjects(selected_objects)
     changed(selected_objects)
   }
