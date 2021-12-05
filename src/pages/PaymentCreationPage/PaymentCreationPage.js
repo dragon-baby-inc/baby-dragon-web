@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import styles from './PaymentCreationPage.module.scss'
 import { themeColors } from '../../constants'
 import {
+  DatePickerInput,
+  TextInput,
   PageHeader,
   ColumnSwappableView,
   UserRadioSelectAmountLabel,
@@ -12,6 +14,7 @@ import {
   Image,
   Section,
   Button,
+  UserCheckboxSelectLabel,
   Footer,
   TopRightIcon
 } from '../../components'
@@ -85,57 +88,44 @@ const PaymentCreationPage = () => {
     initialValue: state.payer.value,
   })
 
-  const [owers, owersLabel] = useUserCheckboxSelectLabel({
-    users: users,
-    initialValue: state.owers.value,
-    callback: setOwers
-  })
+  const owersLabel = <UserCheckboxSelectLabel
+    users={users}
+    callback={setOwers}
+    selectedObjects={state.owers.value}
+  />
 
-  const [name, nameInput] = useTextInput({
-    name: '款項',
-    placeholder: '輸入名稱',
-    initialValue: state.name.value,
-    faicon: "farCreditCard",
-    type: 'text',
-    invalidFeedback: "不可為空",
-    valid: state.name.valid,
-    callback: setName
-  })
+  const nameInput = <TextInput
+    key='name'
+    faicon="farCreditCard"
+    disabled={false}
+    placeholder='輸入名稱'
+    name={'名稱'}
+    changed={setName}
+    value={state.name.value === undefined ? '' : state.name.value}
+    valid={state.name.valid}
+    invalidFeedback="*不可為空白，12字內"
+    type='text'
+  />
 
-  const [datePicker, datePickerInput] = useDatePickerInput({
-    name: '日期',
-    placeholder: '輸入名稱',
-    invalidFeedbackStyle: { textAlign: 'right' },
-    initialValue: state.creation_date.value,
-    faicon: "farCreditCard",
-    type: 'text',
-    invalidFeedback: "不可為空",
-    valid: true,
-    callback: setCreationDate
-  })
+  const datePickerInput = <DatePickerInput
+    name='日期'
+    changed={setCreationDate}
+    value={state.creation_date.value}
+    faicon="farCreditCard"
+    />
 
-  const [amount, amountInput] = useTextInput({
-    name: '金額',
-    placeholder: '輸入金額',
-    disabled: disableForm,
-    initialValue: state.amount.value,
-    faicon: "farCreditCard",
-    type: 'number',
-    invalidFeedback: "不可為空",
-    valid: state.amount.valid,
-    callback: setAmount,
-  })
-
-  const [fixedAmount, fixedAmountInput] = useTextInput({
-    name: '金額',
-    placeholder: '輸入金額',
-    faicon: "farCreditCard",
-    type: 'number',
-    invalidFeedback: "不可為空",
-    disabled: true,
-    valid: true,
-  })
-
+  const amountInput = <TextInput
+    key='amount'
+    faicon="farCreditCard"
+    disabled={false}
+    placeholder='輸入金額'
+    name='金額'
+    changed={setAmount}
+    value={state.amount.value === undefined ? '' : state.amount.value}
+    valid={state.amount.valid}
+    invalidFeedback="*不可為空白，12字內"
+    type='number'
+  />
 
   const handleIndexChanged = (i) => {
     if (i === 0) {
@@ -197,7 +187,8 @@ const PaymentCreationPage = () => {
 
   const handleSubmit = (e) => {
     if (disableForm) { return }
-    validateForm(state, form[state.allocation_type])
+    let valid = validateForm(state, form[state.allocation_type])
+    if (!valid) { return }
     createPayment(state, () => {
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
     })

@@ -20,8 +20,8 @@ const UserCheckboxSelectLabel = ({
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
 
-  const userSelectCallback = (object) => {
-    if (callback) { callback(object) }
+  const userSelectCallback = (objects) => {
+    if (callback) { callback(objects) }
   }
 
   const handleClicked = () => {
