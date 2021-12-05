@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styles from './CheckboxSelect.module.scss'
 import {
+  SearchInput,
   CheckboxLabel,
   Image
 } from '../index'
@@ -15,8 +16,33 @@ const CheckboxFilterSelect = ({
 }) => {
   const [mount, setMount] = useState(false) /* eslint-disable no-unused-vars */
   const [_selectAll, setSelectAll] = useState(true)
+  const [searchValue, setSearchValue] = useState('')
   const [selectedObjects, setSelectedObjects] = useState([])
   const [displayObjects, setDisplayObjects] = useState([])
+
+  const handleFilter = (e) => {
+    let searchTerm = e.target.value
+
+    setSearchValue(searchTerm)
+
+    let filter = searchTerm.toUpperCase();
+    let newObjects = objects.filter(user => {
+      return user.displayName.toUpperCase().indexOf(filter) > -1
+    })
+
+    setDisplayObjects(newObjects)
+  }
+
+  const handleReset = () => {
+    setSearchValue('')
+    setDisplayObjects(objects)
+  }
+
+  const searchInput = <SearchInput
+    reset={handleReset}
+    filtered={handleFilter}
+    value={searchValue}
+  />
 
   useEffect(() => {
     setMount(true)
@@ -59,6 +85,7 @@ const CheckboxFilterSelect = ({
   if (mount) { containerStyles.push(styles.mount) }
   return(
     <div style={style ? style: {}} className={containerStyles.join(' ')}>
+      { searchInput }
       {
         selectAll ?
           <CheckboxLabel
