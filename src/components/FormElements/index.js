@@ -7,8 +7,9 @@ import TextInput from './Inputs/TextInput';
 import Drawer from './Drawer/Drawer'
 import SelectLabel from './SelectLabel/SelectLabel'
 import UserRadioSelectLabel from './SelectLabel/UserRadioSelectLabel'
+import CheckboxFilterSelect from './CheckboxSelect/CheckboxFilterSelect'
 import UserCheckboxSelectLabel from './SelectLabel/UserCheckboxSelectLabel'
-import DrawerCheckboxSelect from './CheckboxSelect/DrawerCheckboxSelect'
+import DrawerCheckboxSelect from './CheckboxSelect/DrawerCheckboxSelect';
 import CheckboxSelect from './CheckboxSelect/CheckboxSelect'
 import AccountingBookUserMenu from './SelectMenu/AccountingBookUserMenu';
 import CheckboxSelectMenu from './SelectMenu/CheckboxSelectMenu';
@@ -104,4 +105,5 @@ export {
   DrawerCheckboxSelect,
   UserRadioSelectAmountLabel,
   Section,
+  CheckboxFilterSelect,
 };

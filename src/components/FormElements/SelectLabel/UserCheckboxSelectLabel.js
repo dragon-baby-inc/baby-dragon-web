@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styles from './UserCheckboxSelectLabel.module.scss'
 import {
   CheckboxSelect,
+  useSearchLabel,
   FontAwesomeIcon,
   Drawer,
   Image,
   DrawerCheckboxSelect
 } from '../../../components'
 import {
-  useUsersSelect
+  useUsersSelect,
+  useUsersFilterSelect
 } from '../../../hooks'
 import {
   createUserCheckbokLabel
@@ -33,7 +35,7 @@ const UserCheckboxSelectLabel = ({
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
 
-  const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
+  const [value, select] = useUsersFilterSelect({ users, buildSelectUsers, selectAll: true })
 
   let i = 0
   const displayCount = selectedObjects.length > 5 ? 5 : selectedObjects.length
