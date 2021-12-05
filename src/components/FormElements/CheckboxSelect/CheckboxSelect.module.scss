@@ -1,4 +1,9 @@
 .container {
-  height: calc(100% - 58px);
+  height: 100%;
+  overflow: hidden;
+}
+
+.labels {
   overflow: auto;
+  height: 100%;
 }
