@@ -8,6 +8,7 @@ import {
   UserCheckboxSelectLabel,
 } from '../../../components'
 import {
+  useUserRadioSelectLabel,
   useAccountingBook,
   useUsersSelect,
 } from '../../../hooks'
@@ -53,6 +54,11 @@ const PaymentForm = () => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [users, authState, accountingBookDetails, loading])
 
+  const [payer, payerLabel] = useUserRadioSelectLabel({
+    users: users,
+    initialValue: state.payer.value,
+  })
+
   const nameInput = <TextInput
     key='name'
     faicon="farCreditCard"
@@ -64,6 +70,19 @@ const PaymentForm = () => {
     valid={state.name.valid}
     invalidFeedback="*不可為空白，12字內"
     type='text'
+  />
+
+  const amountInput = <TextInput
+    key='amount'
+    faicon="farCreditCard"
+    disabled={false}
+    placeholder='輸入金額'
+    name='金額'
+    changed={setAmount}
+    value={state.amount.value === undefined ? '' : state.amount.value}
+    valid={state.amount.valid}
+    invalidFeedback="*不可為空白，12字內"
+    type='number'
   />
 
   const owersLabel = <UserCheckboxSelectLabel
@@ -83,8 +102,9 @@ const PaymentForm = () => {
       name: '平分',
       component: <div>
         { nameInput }
+        { amountInput }
+        { payerLabel }
         { owersLabel }
-        { select }
       </div>
     },
     {
@@ -95,7 +115,6 @@ const PaymentForm = () => {
 
   return(
     <div>
-      {nameInput}
       <ColumnSwappableView
         key="PaymentCreationPage__ColumnSwappableView"
         index={0}

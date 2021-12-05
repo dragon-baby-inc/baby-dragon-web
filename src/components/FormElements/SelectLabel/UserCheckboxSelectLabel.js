@@ -35,7 +35,7 @@ const UserCheckboxSelectLabel = ({
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
 
-  const [value, select] = useUsersFilterSelect({ users, buildSelectUsers, selectAll: true })
+  const [value, select] = useUsersFilterSelect({ users, buildSelectUsers, selectAll: true, closed: () => setDrawerActive(false) })
 
   let i = 0
   const selected = users.filter(o => value.includes(o.id))

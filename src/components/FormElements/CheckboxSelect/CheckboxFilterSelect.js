@@ -12,7 +12,8 @@ const CheckboxFilterSelect = ({
   style,
   createLabel,
   selectAll,
-  changed
+  changed,
+  closed
 }) => {
   const [mount, setMount] = useState(false) /* eslint-disable no-unused-vars */
   const [_selectAll, setSelectAll] = useState(true)
@@ -42,12 +43,14 @@ const CheckboxFilterSelect = ({
     reset={handleReset}
     filtered={handleFilter}
     value={searchValue}
+    closed={closed}
   />
 
   useEffect(() => {
     setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
-  }, [objects, selected_object_ids ])
+    setSelectAll(objects.length === selected_object_ids.length)
+  }, [objects, selected_object_ids])
 
   useEffect(() => {
     setDisplayObjects(objects)

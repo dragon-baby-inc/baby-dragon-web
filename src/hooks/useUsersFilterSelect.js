@@ -15,7 +15,8 @@ const useUsersFilterSelect = ({
   buildSelectUsers,
   style,
   selectAll,
-  callback
+  callback,
+  closed,
 }) => {
   const [_selectObjectIds, setSelectObjectIds] = useState()
 
@@ -29,6 +30,7 @@ const useUsersFilterSelect = ({
   }
 
   const select = <CheckboxFilterSelect
+    closed={closed}
     createLabel={createUserCheckbokLabel}
     selectAll={selectAll}
     objects={users}
