@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react"
 import styles from './CheckboxSelect.module.scss'
 import {
   CheckboxLabel,
+  Separater,
+  Warning,
   Image
 } from '../index'
 
 const CheckboxSelect = ({
   objects,
+  warning,
   selected_object_ids,
   style,
   createLabel,
@@ -55,6 +58,10 @@ const CheckboxSelect = ({
     }
   }
 
+  let labelHeight = "calc(100% - 44px - 1px)"
+  if (warning) {
+    labelHeight = "calc(100% - 44px - 1px - 20px)"
+  }
   const containerStyles = [styles.container]
   if (mount) { containerStyles.push(styles.mount) }
   return(
@@ -71,9 +78,15 @@ const CheckboxSelect = ({
             </div>
           </CheckboxLabel > : null
       }
-      <div className={styles.labels}>
+      <Separater style={{margin: '0px'}}/>
+      <div style={{height: labelHeight}} className={styles.labels}>
         {objectLabels}
       </div>
+      {
+        warning ?
+          <Warning name="找不到成員？請他在Line群組說說話喔！"></Warning>
+          : null
+      }
     </div>
   )
 }

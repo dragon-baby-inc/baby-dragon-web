@@ -9,6 +9,14 @@ import { Context as AuthContext } from './contexts/AuthContext'
 import { useLiff } from './hooks'
 
 const App = () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+  window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
+
   const { setLogin } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
   const [isLoggedIn] = useLiff(setLogin)

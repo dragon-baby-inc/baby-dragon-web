@@ -1,6 +1,8 @@
 .MuiPaper-root {
   border-radius: 8px 8px 0px 0px;
-  height: calc(100vh - calc(100vh - 100%) - 58px) !important;
-  max-height: calc(100vh - calc(100vh - 100%) - 58px) !important;
+//   height: calc(100vh - calc(100vh - 100%) - 58px) !important;
+//   max-height: calc(100vh - calc(100vh - 100%) - 58px) !important;
+  max-height: calc(100% - 58px) !important;
+  height: calc(100% - 58px) !important;
   overflow: hidden;
 }

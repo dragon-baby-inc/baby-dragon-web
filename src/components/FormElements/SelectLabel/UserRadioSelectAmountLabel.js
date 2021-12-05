@@ -102,6 +102,7 @@ const UserRadioSelectAmountLabel = ({
         open={drawerActive}
         closed={() => setDrawerActive(false)}>
         <RadioFilterSelect
+          searchInput={true}
           selectedObject={user}
           createLabel={createUserRadioLabel}
           objects={users}

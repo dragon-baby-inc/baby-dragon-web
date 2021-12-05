@@ -27,17 +27,17 @@ const ColumnSwappableView = ({
       flexGrow: 1,
       maxHeight: '-webkit-fill-available',
       margin: 0,
-      height: height ? height : '100%',
+      height: height ? `calc(${height} - 49px)` : 'calc(100%  - 49px)',
       overflow: 'hidden',
     },
     slideContainer: {
-      height: height ? height : 'calc(100%  - 49px)',
+      height: `calc(100%)`,
       margin: 0,
       overflow: 'hidden',
     },
     slide: {
       overflow: 'hidden',
-      height: height ? height : 'calc(100%  - 49px)',
+      height: `calc(100%)`,
       backgroundColor: '#FFFFFF',
     },
   };

@@ -7,6 +7,7 @@ import {
 const RadioFilterSelect = ({
   objects,
   createLabel,
+  closed,
   changed,
   searchInput,
   selectedObject
@@ -25,7 +26,8 @@ const RadioFilterSelect = ({
 
   const [searchValue, searchLabel] = useSearchLabel({
     reset: () => { setDisplayObjects(objects) },
-    changed: handleFilter
+    changed: handleFilter,
+    closed: closed
   })
 
   useEffect(() => {

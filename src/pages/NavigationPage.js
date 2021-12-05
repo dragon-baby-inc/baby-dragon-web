@@ -21,7 +21,7 @@ const NavigationPage = (props) => {
   return(
     <>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
-        <PaymentForm />
+        <PaymentCreationPage />
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/new">
         <AccountingBookCreationPage />
@@ -52,5 +52,4 @@ const NavigationPage = (props) => {
 }
 
 export default NavigationPage
-//         <PaymentCreationPage />
 

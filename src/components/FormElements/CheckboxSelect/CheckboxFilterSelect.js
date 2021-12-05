@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import styles from './CheckboxSelect.module.scss'
+import styles from './CheckboxFilterSelect.module.scss'
 import {
   SearchInput,
   CheckboxLabel,

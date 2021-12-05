@@ -37,7 +37,7 @@ const PaymentsPage = (props) => {
   let paymentLabels = []
 
   let paymentHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
-  let paymentsHeight = small ? 'calc(100vh - 58px - 49px)' : 'calc(100vh - 58px - 120px - 49px)'
+  let paymentsHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
   let paymentStyle =  {
     background: '#FFFFFF',
     overflow: 'auto',

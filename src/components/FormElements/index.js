@@ -5,6 +5,7 @@ import UserCheckboxLabel from './UserLabel/UserCheckboxLabel';
 import UserRadioLabel from './UserLabel/UserRadioLabel';
 import TextInput from './Inputs/TextInput';
 import Drawer from './Drawer/Drawer'
+import Warning from './Warning/Warning'
 import SelectLabel from './SelectLabel/SelectLabel'
 import UserRadioSelectLabel from './SelectLabel/UserRadioSelectLabel'
 import RadioFilterSelect from './RadioSelect/RadioFilterSelect'
@@ -107,5 +108,6 @@ export {
   UserRadioSelectAmountLabel,
   Section,
   RadioFilterSelect,
+  Warning,
   CheckboxFilterSelect,
 };

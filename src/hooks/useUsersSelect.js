@@ -11,6 +11,7 @@ import {
 
 const useUsersSelect = ({
   users,
+  warning,
   buildSelectUsers,
   style,
   selectAll,
@@ -28,6 +29,7 @@ const useUsersSelect = ({
   }
 
   const select = <CheckboxSelect
+    warning={warning}
     createLabel={createUserCheckbokLabel}
     selectAll={selectAll}
     objects={users}

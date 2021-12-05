@@ -259,9 +259,11 @@ const createPayment = dispatch => (state, afterSubmit) => {
 
   dragonBabyApi.createPayment(details.group_id, details.id, params)
     .then(function (response) {
+      console.log(response)
       afterSubmit()
     })
     .catch(function (error) {
+      console.log(error)
       afterSubmit()
     })
 }

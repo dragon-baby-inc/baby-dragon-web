@@ -4,6 +4,7 @@ import _styles from './AccountingBookCreationPage.module.scss'
 import { themeColors, imageUrls } from '../../constants'
 import { Context as AccountingBookContext} from '../../contexts/AccountingBookContext.js'
 import {
+  Warning,
   Footer,
   Image,
   StepsWidget,
@@ -71,6 +72,8 @@ const AccountingBookEditPage = (props) => {
   }
 
   const [selecteUserIds, userSelect] = useUsersSelect({
+    warning: true,
+    selectAll: true,
     users,
     buildSelectUsers,
     callback: userSelectChanged,
