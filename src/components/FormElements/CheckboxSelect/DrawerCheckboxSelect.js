@@ -14,14 +14,13 @@ const DrawerCheckboxSelect = ({
 }) => {
   const [mount, setMount] = useState(false) /* eslint-disable no-unused-vars */
   const [selectAll, setSelectAll] = useState(true)
-  const [_selectedObjects, setSelectedObjects] = useState(selectedObjects)
   const [displayObjects, setDisplayObjects] = useState(objects)
 
   useEffect(() => {
     setMount(true)
-    setSelectedObjects(selectedObjects)
+    setSelectAll(objects.length === selectedObjects.length)
     setDisplayObjects(objects)
-  }, [selectedObjects, objects])
+  }, [objects])
 
   const handleFilter = (searchTerm) => {
     let filter = searchTerm.toUpperCase();
@@ -39,7 +38,7 @@ const DrawerCheckboxSelect = ({
   })
 
   let handleChange = (e) => {
-    let selected_objects = [..._selectedObjects]
+    let selected_objects = [...selectedObjects]
     if (e.target.checked) {
       selected_objects.push(...objects.filter(object => String(object.id) === String(e.target.value)))
     } else {
@@ -47,22 +46,19 @@ const DrawerCheckboxSelect = ({
     }
 
     setSelectAll(selected_objects.length === objects.length)
-    setSelectedObjects(selected_objects)
     changed(selected_objects)
   }
 
   let objectLabels = displayObjects.map(object => {
-    return createLabel({ object, handleChange, selectedObjects: _selectedObjects })
+    return createLabel({ object, handleChange, selectedObjects: selectedObjects })
   })
 
   const handleSelectAll = (e) => {
     setSelectAll(e.target.checked)
 
     if (e.target.checked) {
-      setSelectedObjects(objects)
       changed(objects)
     } else {
-      setSelectedObjects([])
       changed([])
     }
   }
@@ -73,6 +69,7 @@ const DrawerCheckboxSelect = ({
     <div className={styles.container}>
       { searchLabel }
       <CheckboxLabel
+        value="select-all"
         changed={handleSelectAll}
         checked={selectAll}
       >

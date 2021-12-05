@@ -7,10 +7,11 @@ const CheckboxSelect = ({
   selected_object_ids,
   style,
   createLabel,
+  selectAll,
   changed
 }) => {
   const [mount, setMount] = useState(false) /* eslint-disable no-unused-vars */
-  const [selectAll, setSelectAll] = useState(true)
+  const [_selectAll, setSelectAll] = useState(true)
   const [selectedObjects, setSelectedObjects] = useState([])
 
   useEffect(() => {
@@ -50,6 +51,18 @@ const CheckboxSelect = ({
   if (mount) { containerStyles.push(styles.mount) }
   return(
     <div style={style ? style: {}} className={containerStyles.join(' ')}>
+      {
+        selectAll ?
+          <CheckboxLabel
+            value="select-all"
+            changed={handleSelectAll}
+            checked={_selectAll}
+          >
+            <div className={styles.selectAll}>
+              所有人
+            </div>
+          </CheckboxLabel > : null
+      }
       <div className={styles.labels}>
         {objectLabels}
       </div>
