@@ -199,7 +199,7 @@ const resetForm = dispatch => () => {
   dispatch({ type: 'reset_form' })
 }
 
-const validateForm = dispatch => (state, formKeys) => {
+const validateForm = dispatch => (state, formKeys, callback) => {
   let validator = new Validator();
   let newState = {}
   let formValid = true
@@ -223,6 +223,7 @@ const validateForm = dispatch => (state, formKeys) => {
 
 
   newState['formValid'] = formValid
+  if (callback) { callback(newState) }
   dispatch({ type: 'validate_form', payload: newState })
   return formValid
 }
@@ -278,7 +279,7 @@ let initialState = {
   payer: { value: null, valid: null },
   ower: { value: null, valid: null },
   owers: { value: [], valid: true },
-  manualOwers: { value: null, valid: true },
+  manualOwers: { value: [], valid: true },
   creation_date: { value: null, valid: null },
   paid_back: false,
   formValid: false,

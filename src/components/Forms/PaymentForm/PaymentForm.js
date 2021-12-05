@@ -50,20 +50,6 @@ const PaymentForm = () => {
     resetForm()
   }, [])
 
-  useEffect(() => {
-    if (!loading) {
-      let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
-      if (payer) { setPayer(payer) }
-      // if (!payer) { alert('未授權') }
-      setPayer(users[0])
-      setAccountingBookDetails(accountingBookDetails)
-      setBuilder(users[0])
-      setOwers(users.filter((u) => u.coverCost))
-      setManualOwers({ owers: [{ user: users[0], amount: null }], valid: true })
-    }
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [users, authState, accountingBookDetails, loading])
-
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
     initialValue: state.payer.value,
@@ -110,28 +96,48 @@ const PaymentForm = () => {
     selectedObjects={state.owers.value}
   />
 
-  const [customOwers, customOwersSelect] = useUserRadioSelectAmountLabel({
-    users: users,
-    owers: state.manualOwers.value,
-    callback: (owers) => setManualOwers({ owers }),
-    valid: state.manualOwers.valid
-  })
+  const validateManulOwers = (newState) => {
+    if (!newState.manualOwers.valid) {
+      _setManualOwers({ value: newState.manualOwers.value, valid: false })
+    }
+  }
 
   const handleManualOwersChanged = (index, data) => {
-    let newOwers = [..._manualOwers]
+    let newOwers = [..._manualOwers.value]
     newOwers[index] = data
-    setManualOwers({ owers: newOwers })
-    _setManualOwers(newOwers)
+
+    let objects = newOwers.filter(object => object.amount > 0)
+    let amount = objects.reduce((prev, object) => {
+      if (parseFloat(object.amount) > 0) { return prev + parseFloat(object.amount) }
+      else { return (prev + 0) }
+    }, 0)
+
+    let valid = newOwers.filter(ower => ower.amount > 0).length === newOwers.length
+
+    setManualOwers({ owers: newOwers, valid: valid })
+    _setManualOwers({ value: newOwers, valid: valid })
+  }
+
+  const handleLabelDelete = (index) => {
+    let newOwers = [..._manualOwers.value]
+    if (newOwers.length === 1) {
+      return
+    }
+    newOwers.splice(index, 1)
+    _setManualOwers({ value: newOwers, valid: null})
   }
 
   let i = -1
-  const [_manualOwers, _setManualOwers] = useState([{ user: null, amount: null }])
-  let radioAmountLabels = _manualOwers.map(ower => {
+  const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
+  let radioAmountLabels = _manualOwers.value.map(ower => {
     i++
     return(
       <UserRadioSelectAmountLabel
+        key={i}
+        valid={_manualOwers.valid}
         index={i}
-        deleteActive={false}
+        deleted={handleLabelDelete}
+        deleteActive={_manualOwers.value.length > 1}
         users={users}
         amount={ower.amount}
         user={ower.user}
@@ -141,9 +147,9 @@ const PaymentForm = () => {
   })
 
   const handleAddOwer = () => {
-    let newOwers = [..._manualOwers]
+    let newOwers = [..._manualOwers.value]
     newOwers.push({ user: users[0], amount: null })
-    _setManualOwers(newOwers)
+    _setManualOwers({ value: newOwers, valid: null })
   }
 
   const AddManualOwerButton = <Button
@@ -157,6 +163,24 @@ const PaymentForm = () => {
   const buildSelectUsers = (users) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
+
+  useEffect(() => {
+    if (!loading) {
+      let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      if (payer) { setPayer(payer) }
+      // if (!payer) { alert('未授權') }
+      setPayer(users[0])
+      setAccountingBookDetails(accountingBookDetails)
+      setBuilder(users[0])
+      setOwers(users.filter((u) => u.coverCost))
+    }
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [users, authState, accountingBookDetails, loading])
+
+  useEffect(() => {
+    _setManualOwers({ value: [{ user: users[0], amount: null }], valid: true })
+  }, [users])
+
 
   const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
 
@@ -179,9 +203,6 @@ const PaymentForm = () => {
         { nameInput }
         { datePickerInput }
         <Section name="付款者"/>
-        {JSON.stringify(state.manualOwers)}
-        <br/>
-        {JSON.stringify(_manualOwers)}
         { payerLabel }
         <Section name="欠款者" style={{ marginTop: '16px' }}/>
         { radioAmountLabels }
@@ -199,9 +220,10 @@ const PaymentForm = () => {
   }
 
   const handleSubmit = () => {
-    let valid = validateForm(state, form[state.allocation_type])
+    let newState = { ...state, manualOwers: _manualOwers }
+    let valid = validateForm(newState, form[state.allocation_type], validateManulOwers)
     if (!valid) { return }
-    createPayment(state, () => {
+    createPayment(newState, () => {
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
     })
   }
