@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
 import { Context as PaymentContext } from '../../../contexts/PaymentContext'
 import { Context as AuthContext } from '../../../contexts/AuthContext'
 import {
+  Button,
   TextInput,
   ColumnSwappableView,
   UserCheckboxSelectLabel,
@@ -100,7 +102,6 @@ const PaymentForm = () => {
     valid: state.manualOwers.valid
   })
 
-
   const handleManualOwersChanged = (index, data) => {
     let newOwers = [..._manualOwers]
     newOwers[index] = data
@@ -122,6 +123,20 @@ const PaymentForm = () => {
       />
     )
   })
+
+  const handleAddOwer = () => {
+    let newOwers = [..._manualOwers]
+    newOwers.push({ user: users[0], amount: null })
+    _setManualOwers(newOwers)
+  }
+
+  const AddManualOwerButton = <Button
+    color="gold"
+    clicked={handleAddOwer}
+    style={{
+      color: themeColors.gold900
+    }}> 新增</Button>
+
 
   const [ower, setOwer] = useState({ user: null, amount: null  })
   const radioAmountLabel = <UserRadioSelectAmountLabel
@@ -148,7 +163,7 @@ const PaymentForm = () => {
         { payerLabel }
         { owersLabel }
         { radioAmountLabels }
-        { radioAmountLabel }
+        { AddManualOwerButton }
       </div>
     },
     {
