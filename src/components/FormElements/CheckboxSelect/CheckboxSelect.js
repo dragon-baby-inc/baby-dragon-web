@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
 import styles from './CheckboxSelect.module.scss'
-import { CheckboxLabel, Image } from '../index'
+import {
+  CheckboxLabel,
+  Image
+} from '../index'
 
 const CheckboxSelect = ({
   objects,
@@ -13,11 +16,16 @@ const CheckboxSelect = ({
   const [mount, setMount] = useState(false) /* eslint-disable no-unused-vars */
   const [_selectAll, setSelectAll] = useState(true)
   const [selectedObjects, setSelectedObjects] = useState([])
+  const [displayObjects, setDisplayObjects] = useState([])
 
   useEffect(() => {
     setMount(true)
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
   }, [objects, selected_object_ids ])
+
+  useEffect(() => {
+    setDisplayObjects(objects)
+  }, [objects])
 
   let handleChange = (e) => {
     let selected_objects = selectedObjects
@@ -31,7 +39,7 @@ const CheckboxSelect = ({
     changed(selected_objects)
   }
 
-  let objectLabels = objects.map(object => {
+  let objectLabels = displayObjects.map(object => {
     return createLabel({ object, handleChange, selectedObjects })
   })
 
@@ -39,8 +47,8 @@ const CheckboxSelect = ({
     setSelectAll(e.target.checked)
 
     if (e.target.checked) {
-      setSelectedObjects(objects)
-      changed(objects)
+      setSelectedObjects(displayObjects)
+      changed(displayObjects)
     } else {
       setSelectedObjects([])
       changed([])

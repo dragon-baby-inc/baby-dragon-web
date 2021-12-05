@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserCheckboxSelectLabel.module.scss'
 import {
+  CheckboxSelect,
   FontAwesomeIcon,
   Drawer,
   Image,
   DrawerCheckboxSelect
 } from '../../../components'
 import {
-  useUserRadioSelect
+  useUsersSelect
 } from '../../../hooks'
 import {
   createUserCheckbokLabel
@@ -27,6 +28,12 @@ const UserCheckboxSelectLabel = ({
   const handleClicked = () => {
     setDrawerActive(!drawerActive)
   }
+
+  const buildSelectUsers = (users) => {
+    return users.filter((u) => u.coverCost).map((u) => u.id)
+  }
+
+  const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
 
   let i = 0
   const displayCount = selectedObjects.length > 5 ? 5 : selectedObjects.length
@@ -73,13 +80,7 @@ const UserCheckboxSelectLabel = ({
       <Drawer
         open={drawerActive}
         closed={() => setDrawerActive(false)}>
-        <DrawerCheckboxSelect
-          selectedObjects={selectedObjects}
-          createLabel={createUserCheckbokLabel}
-          objects={users}
-          changed={userSelectCallback}
-          closed={() => setDrawerActive(false)}
-        />
+        {select}
       </Drawer>
     </>
   )
