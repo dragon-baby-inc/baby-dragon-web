@@ -179,6 +179,9 @@ const PaymentForm = () => {
         { nameInput }
         { datePickerInput }
         <Section name="付款者"/>
+        {JSON.stringify(state.manualOwers)}
+        {JSON.stringify(state.name.value)}
+        {JSON.stringify(state.fixedAmount)}
         { payerLabel }
         <Section name="欠款者" style={{ marginTop: '16px' }}/>
         { radioAmountLabels }

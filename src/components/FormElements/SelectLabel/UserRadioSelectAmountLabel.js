@@ -42,6 +42,7 @@ const UserRadioSelectAmountLabel = ({
   }
 
   const amountCallback = (value) => {
+    console.log(value)
     setValid(value.length > 0)
     if (callback) { callback(index, { user: user, amount: value }) }
   }
