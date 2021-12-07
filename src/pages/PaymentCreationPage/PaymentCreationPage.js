@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import styles from './PaymentCreationPage.module.scss'
 import { themeColors } from '../../constants'
 import {
-  useHistory
+  useHistory,
+  useAccountingBook,
 } from '../../hooks'
 import {
   PageHeader,
@@ -18,6 +19,44 @@ const PaymentCreationPage = () => {
   const { group_id, accounting_book_id } = useParams()
   const [disableForm, setDisableForm] = useState(true)
   const history = useHistory();
+  const [users, accountingBookDetails, loading] = useAccountingBook()
+  const { state: authState } = useContext(AuthContext)
+  const {
+    state,
+    setName,
+    setAmount,
+    setPayer,
+    setBuilder,
+    setOwers,
+    setManualOwers,
+    setCreationDate,
+    setAllocationType,
+    setShowRadioSelect,
+    setAccountingBookDetails,
+    setShowCheckboxSelect,
+    setShowPopUpForm,
+    validateForm,
+    createPayment,
+    resetForm
+  } = useContext(PaymentContext)
+
+  useEffect(() => {
+    resetForm()
+  }, [])
+
+
+  useEffect(() => {
+    if (!loading) {
+      let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      if (payer) { setPayer(payer) }
+      // if (!payer) { alert('未授權') }
+      setPayer(users[0])
+      setAccountingBookDetails(accountingBookDetails)
+      setBuilder(users[0])
+      setOwers(users.filter((u) => u.coverCost))
+    }
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [users, authState, accountingBookDetails, loading])
 
   return(
     <>
@@ -30,7 +69,7 @@ const PaymentCreationPage = () => {
         新增帳款
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
-      <PaymentForm />
+      <PaymentForm users={users}/>
     </>
   )
 }

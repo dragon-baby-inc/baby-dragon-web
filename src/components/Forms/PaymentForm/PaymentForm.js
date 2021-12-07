@@ -22,11 +22,9 @@ import {
   useUsersSelect,
 } from '../../../hooks'
 
-const PaymentForm = () => {
+const PaymentForm = ({ users }) => {
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
-  const [users, accountingBookDetails, loading] = useAccountingBook()
-  const { state: authState } = useContext(AuthContext)
   const {
     state,
     setName,
@@ -45,10 +43,6 @@ const PaymentForm = () => {
     createPayment,
     resetForm
   } = useContext(PaymentContext)
-
-  useEffect(() => {
-    resetForm()
-  }, [])
 
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
@@ -163,19 +157,6 @@ const PaymentForm = () => {
   const buildSelectUsers = (users) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
-
-  useEffect(() => {
-    if (!loading) {
-      let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
-      if (payer) { setPayer(payer) }
-      // if (!payer) { alert('未授權') }
-      setPayer(users[0])
-      setAccountingBookDetails(accountingBookDetails)
-      setBuilder(users[0])
-      setOwers(users.filter((u) => u.coverCost))
-    }
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [users, authState, accountingBookDetails, loading])
 
   useEffect(() => {
     _setManualOwers({ value: [{ user: users[0], amount: null }], valid: true })
