@@ -54,6 +54,7 @@ const PaymentCreationPage = () => {
       setAccountingBookDetails(accountingBookDetails)
       setBuilder(users[0])
       setOwers(users.filter((u) => u.coverCost))
+      setManualOwers({ owers: [{ user: users[0], amount: null }], valid: true })
     }
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [users, authState, accountingBookDetails, loading])

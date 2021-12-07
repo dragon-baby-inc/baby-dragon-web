@@ -90,11 +90,14 @@ const PaymentForm = ({ users }) => {
     selectedObjects={state.owers.value}
   />
 
+  const [alertMessage, setMessage] = useState(null)
   const validateManulOwers = (newState) => {
-    setMessage(JSON.stringify({ creation_date: newState.creation_date.valid, payer: newState.payer.valid, owers: newState.payer.valid, amount: newState.amount.valid, name: newState.name.valid }))
+    console.log(newState.manualOwers)
+    setMessage(JSON.stringify({ manualOwers: newState.manualOwers, creation_date: newState.creation_date.valid, payer: newState.payer.valid, owers: newState.payer.valid, amount: newState.amount.valid, name: newState.name.valid }))
 
     if (newState.manualOwers && !newState.manualOwers.valid) {
       _setManualOwers({ value: newState.manualOwers.value, valid: false })
+      setManualOwers({ owers: newState.manualOwers.value, valid: false })
     }
   }
 
@@ -120,12 +123,13 @@ const PaymentForm = ({ users }) => {
       return
     }
     newOwers.splice(index, 1)
+    setManualOwers({ owers: newOwers, valid: null })
     _setManualOwers({ value: newOwers, valid: null})
   }
 
   let i = -1
   const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
-  let radioAmountLabels = _manualOwers.value.map(ower => {
+  let radioAmountLabels = state.manualOwers.value.map(ower => {
     i++
     return(
       <UserRadioSelectAmountLabel
@@ -145,6 +149,7 @@ const PaymentForm = ({ users }) => {
   const handleAddOwer = () => {
     let newOwers = [..._manualOwers.value]
     newOwers.push({ user: users[0], amount: null })
+    setManualOwers({ owers: newOwers, valid: null })
     _setManualOwers({ value: newOwers, valid: null })
   }
 
@@ -164,10 +169,8 @@ const PaymentForm = ({ users }) => {
     _setManualOwers({ value: [{ user: users[0], amount: null }], valid: true })
   }, [users])
 
-
   const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
 
-  const [alertMessage, setMessage] = useState(null)
   const steps = [
     {
       name: '平分',

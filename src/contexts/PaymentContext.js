@@ -201,7 +201,7 @@ const resetForm = dispatch => () => {
 
 const validateForm = dispatch => (state, formKeys, callback) => {
   let validator = new Validator();
-  let newState = {}
+  let newState = { ...state }
   let formValid = true
 
   formKeys.forEach(key => {
