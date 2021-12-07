@@ -97,7 +97,7 @@ const PaymentForm = () => {
   />
 
   const validateManulOwers = (newState) => {
-    if (!newState.manualOwers.valid) {
+    if (newState.manualOwers && !newState.manualOwers.valid) {
       _setManualOwers({ value: newState.manualOwers.value, valid: false })
     }
   }

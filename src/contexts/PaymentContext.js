@@ -212,15 +212,15 @@ const validateForm = dispatch => (state, formKeys, callback) => {
         formValid = false
       }
 
-      if (key === 'manualOwers') {
-        isKeyValid = state[key].value.filter(o => o.amount > 0).length === state[key].value.length
-        formValid = isKeyValid
-      }
-
       newState[key] = { value: state[key].value, valid: isKeyValid }
     })
   })
 
+  if (formKeys.includes('manualOwers')) {
+    let isKeyValid = state['manualOwers'].value.filter(o => o.amount > 0).length === state['manualOwers'].value.length
+    newState['manualOwers'] = { value: state['manualOwers'].value, valid: isKeyValid }
+    formValid = isKeyValid
+  }
 
   newState['formValid'] = formValid
   if (callback) { callback(newState) }
