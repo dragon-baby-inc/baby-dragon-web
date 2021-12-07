@@ -44,7 +44,7 @@ const useAccountingBook =  (callback) => {
     users_size: 13,
   }
 
-  let stub = true
+  let stub = false
   useEffect(() => {
     if (stub) {
       setUsers(stubUsers)

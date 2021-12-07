@@ -22,7 +22,7 @@ import {
   useUsersSelect,
 } from '../../../hooks'
 
-const PaymentForm = ({ users, manualOwers }) => {
+const PaymentForm = ({ users, manualOwers, index }) => {
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const {
@@ -92,8 +92,6 @@ const PaymentForm = ({ users, manualOwers }) => {
 
   const [alertMessage, setMessage] = useState(null)
   const validateManulOwers = (newState) => {
-    setMessage(JSON.stringify({ manualOwers: newState.manualOwers, creation_date: newState.creation_date.valid, payer: newState.payer.valid, owers: newState.payer.valid, amount: newState.amount.valid, name: newState.name.valid }))
-
     if (newState.manualOwers && !newState.manualOwers.valid) {
       _setManualOwers({ value: newState.manualOwers.value, valid: false })
     }
@@ -178,13 +176,8 @@ const PaymentForm = ({ users, manualOwers }) => {
   }
 
   useEffect(() => {
-    let user = users[0]
-    if (state.payer.value && users.length > 1) {
-      user = users.filter(u => u.id !== state.payer.value.id)[0]
-    }
-
-    _setManualOwers({ value: [{ user: user, amount: null }], valid: true })
-  }, [users, state.payer.value])
+    _setManualOwers({ value: manualOwers, valid: true })
+  }, [payer])
 
   const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
 
@@ -236,6 +229,7 @@ const PaymentForm = ({ users, manualOwers }) => {
     <div className={styles.container}>
       <ColumnSwappableView
         styles={defaultStyles}
+        index={index ? index : 0}
         key="PaymentCreationPage__ColumnSwappableView"
         callback={(index) => { index === 0 ? setAllocationType('evenly') : setAllocationType('amount') }}
         steps={steps} />

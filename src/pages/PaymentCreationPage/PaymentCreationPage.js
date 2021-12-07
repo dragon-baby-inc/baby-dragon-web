@@ -21,6 +21,7 @@ const PaymentCreationPage = () => {
   const history = useHistory();
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const { state: authState } = useContext(AuthContext)
+  const [payer, _setPayer] = useState(null)
   const {
     state,
     setName,
@@ -58,6 +59,7 @@ const PaymentCreationPage = () => {
       setAccountingBookDetails(accountingBookDetails)
       setBuilder(payer)
       setOwers(users.filter((u) => u.coverCost))
+      _setPayer(payer)
 
       let user = users[-1]
       if (users.length > 1) {
@@ -71,7 +73,7 @@ const PaymentCreationPage = () => {
   }, [users, authState, accountingBookDetails, loading])
 
   const getUser = () => {
-    let user = users.filter(u => u.id !== state.payer.value.id)[0]
+    let user = users.filter(u => u.id !== payer.id)[0]
     if (!user) { user = users[0] }
     return user
   }
@@ -88,7 +90,7 @@ const PaymentCreationPage = () => {
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
       {
-        state.payer.value ?
+        payer ?
           <PaymentForm users={users} manualOwers={[ {user: getUser(), amount: null} ]}/> : null
       }
     </>
