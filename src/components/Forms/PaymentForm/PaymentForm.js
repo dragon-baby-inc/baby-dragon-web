@@ -22,7 +22,7 @@ import {
   useUsersSelect,
 } from '../../../hooks'
 
-const PaymentForm = ({ users }) => {
+const PaymentForm = ({ users, manualOwers }) => {
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const {
@@ -92,12 +92,10 @@ const PaymentForm = ({ users }) => {
 
   const [alertMessage, setMessage] = useState(null)
   const validateManulOwers = (newState) => {
-    console.log(newState.manualOwers)
     setMessage(JSON.stringify({ manualOwers: newState.manualOwers, creation_date: newState.creation_date.valid, payer: newState.payer.valid, owers: newState.payer.valid, amount: newState.amount.valid, name: newState.name.valid }))
 
     if (newState.manualOwers && !newState.manualOwers.valid) {
       _setManualOwers({ value: newState.manualOwers.value, valid: false })
-      setManualOwers({ owers: newState.manualOwers.value, valid: false })
     }
   }
 
@@ -113,7 +111,6 @@ const PaymentForm = ({ users }) => {
 
     let valid = newOwers.filter(ower => ower.amount > 0).length === newOwers.length
 
-    setManualOwers({ owers: newOwers, valid: valid })
     _setManualOwers({ value: newOwers, valid: valid })
   }
 
@@ -123,8 +120,7 @@ const PaymentForm = ({ users }) => {
       return
     }
     newOwers.splice(index, 1)
-    setManualOwers({ owers: newOwers, valid: null })
-    _setManualOwers({ value: newOwers, valid: null})
+    _setManualOwers({ value: newOwers, valid: true})
   }
 
   let i = -1
@@ -148,9 +144,8 @@ const PaymentForm = ({ users }) => {
 
   const handleAddOwer = () => {
     let newOwers = [..._manualOwers.value]
-    newOwers.push({ user: selectUser(), amount: null })
-    setManualOwers({ owers: newOwers, valid: null })
-    _setManualOwers({ value: newOwers, valid: null })
+    newOwers.push({ user: selectUser(), amount: true })
+    _setManualOwers({ value: newOwers, valid: true })
   }
 
   const selectUser = () => {
@@ -183,6 +178,7 @@ const PaymentForm = ({ users }) => {
   }
 
   useEffect(() => {
+    console.log('payer changed')
     let user = users[0]
     if (state.payer.value && users.length > 1) {
       user = users.filter(u => u.id !== state.payer.value.id)[0]

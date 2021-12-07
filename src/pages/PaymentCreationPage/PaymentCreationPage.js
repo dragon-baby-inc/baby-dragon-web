@@ -52,13 +52,18 @@ const PaymentCreationPage = () => {
   useEffect(() => {
     if (!loading) {
       let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
-      if (payer) { setPayer(payer) }
+      if (!payer) { payer = users[0] }
       // if (!payer) { alert('未授權') }
-      setPayer(users[0])
+      setPayer(payer)
       setAccountingBookDetails(accountingBookDetails)
-      setBuilder(users[0])
+      setBuilder(payer)
       setOwers(users.filter((u) => u.coverCost))
-      setManualOwers({ owers: [{ user: users[0], amount: null }], valid: true })
+
+      let user = users[-1]
+      if (users.length > 1) {
+        user = users.filter(u => u.id !== payer.id)[0]
+      }
+      setManualOwers({ owers: [{ user: user, amount: null }], valid: true, first: true })
     }
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [users, authState, accountingBookDetails, loading])
