@@ -91,6 +91,8 @@ const PaymentForm = ({ users }) => {
   />
 
   const validateManulOwers = (newState) => {
+    setMessage(JSON.stringify({ creation_date: newState.creation_date.valid, payer: newState.payer.valid, owers: newState.payer.valid, amount: newState.amount.valid, name: newState.name.valid }))
+
     if (newState.manualOwers && !newState.manualOwers.valid) {
       _setManualOwers({ value: newState.manualOwers.value, valid: false })
     }
@@ -165,11 +167,13 @@ const PaymentForm = ({ users }) => {
 
   const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
 
+  const [alertMessage, setMessage] = useState(null)
   const steps = [
     {
       name: '平分',
       component: <div className={styles.stepContainer}>
         { nameInput }
+        { alertMessage }
         { amountInput }
         { datePickerInput }
         <Section name="付款者"/>
