@@ -232,6 +232,7 @@ const PaymentForm = ({ users }) => {
     let valid = validateForm(newState, form[state.allocation_type], validateManulOwers)
     if (!valid) { return }
     createPayment(newState, () => {
+      resetForm()
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
     })
   }

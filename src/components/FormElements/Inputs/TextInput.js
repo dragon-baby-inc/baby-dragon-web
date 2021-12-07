@@ -22,10 +22,15 @@ const TextInput = ({
   if (valid === false) { labelClasses.push(styles.invalid) }
   if (disabled) { labelClasses.push(styles.disabled) }
 
+  const handleDelete = (e) => {
+    deleted(e)
+    e.preventDefault()
+  }
+
   let deleteIcon = null
   if (deleted) {
     if (deleteActive) {
-      deleteIcon = <FontAwesomeIcon faicon="faTrash" onClick={deleted}/>
+      deleteIcon = <FontAwesomeIcon faicon="faTrash" onClick={handleDelete}/>
     } else {
       deleteIcon = null
     }

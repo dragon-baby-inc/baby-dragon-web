@@ -44,6 +44,10 @@ const PaymentCreationPage = () => {
     resetForm()
   }, [])
 
+  const handleBack = () => {
+    resetForm()
+    history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
+  }
 
   useEffect(() => {
     if (!loading) {
@@ -62,7 +66,7 @@ const PaymentCreationPage = () => {
   return(
     <>
       <TopRightIcon
-        clicked={() => {history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })}}
+        clicked={handleBack}
         style={{ fontSize: '20px', right: '20px', color: 'black' }} >
         <div> 取消 </div>
       </TopRightIcon>
