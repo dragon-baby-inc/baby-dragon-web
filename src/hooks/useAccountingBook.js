@@ -54,7 +54,6 @@ const useAccountingBook =  (callback) => {
     }
 
     setTimeout(() => {
-      setLoading(true)
       dragonBabyApi.getAccountingBook(group_id, accounting_book_id)
         .then(function (response) {
           let users = response.data.users.map(u => {

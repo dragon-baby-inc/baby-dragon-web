@@ -63,10 +63,18 @@ const PaymentCreationPage = () => {
       if (users.length > 1) {
         user = users.filter(u => u.id !== payer.id)[0]
       }
+
       setManualOwers({ owers: [{ user: user, amount: null }], valid: true, first: true })
+      setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [users, authState, accountingBookDetails, loading])
+
+  const getUser = () => {
+    let user = users.filter(u => u.id !== state.payer.value.id)[0]
+    if (!user) { user = users[0] }
+    return user
+  }
 
   return(
     <>
@@ -79,7 +87,10 @@ const PaymentCreationPage = () => {
         新增帳款
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
-      <PaymentForm users={users}/>
+      {
+        state.payer.value ?
+          <PaymentForm users={users} manualOwers={[ {user: getUser(), amount: null} ]}/> : null
+      }
     </>
   )
 }

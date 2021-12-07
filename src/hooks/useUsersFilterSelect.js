@@ -18,7 +18,7 @@ const useUsersFilterSelect = ({
   callback,
   closed,
 }) => {
-  const [_selectObjectIds, setSelectObjectIds] = useState()
+  const [_selectObjectIds, setSelectObjectIds] = useState([])
 
   useEffect(() => {
     setSelectObjectIds(buildSelectUsers(users))

@@ -178,7 +178,6 @@ const PaymentForm = ({ users, manualOwers }) => {
   }
 
   useEffect(() => {
-    console.log('payer changed')
     let user = users[0]
     if (state.payer.value && users.length > 1) {
       user = users.filter(u => u.id !== state.payer.value.id)[0]
@@ -238,7 +237,6 @@ const PaymentForm = ({ users, manualOwers }) => {
       <ColumnSwappableView
         styles={defaultStyles}
         key="PaymentCreationPage__ColumnSwappableView"
-        height="calc(100% - 10px)"
         callback={(index) => { index === 0 ? setAllocationType('evenly') : setAllocationType('amount') }}
         steps={steps} />
 
