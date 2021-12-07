@@ -148,9 +148,26 @@ const PaymentForm = ({ users }) => {
 
   const handleAddOwer = () => {
     let newOwers = [..._manualOwers.value]
-    newOwers.push({ user: users[0], amount: null })
+    newOwers.push({ user: selectUser(), amount: null })
     setManualOwers({ owers: newOwers, valid: null })
     _setManualOwers({ value: newOwers, valid: null })
+  }
+
+  const selectUser = () => {
+    let existing = []
+    _manualOwers.value.reduce((prev, ower) => {
+      if (ower.user) {
+        existing.push(ower.user.id)
+      }
+    }, existing)
+
+    if (state.payer.value) {
+      existing.push(state.payer.value.id)
+    }
+
+    let newUsers = users.filter(u => !existing.includes(u.id))
+
+    return newUsers.length > 0 ? newUsers[0] : users[0]
   }
 
   const AddManualOwerButton = <Button
@@ -166,8 +183,13 @@ const PaymentForm = ({ users }) => {
   }
 
   useEffect(() => {
-    _setManualOwers({ value: [{ user: users[0], amount: null }], valid: true })
-  }, [users])
+    let user = users[0]
+    if (state.payer.value && users.length > 1) {
+      user = users.filter(u => u.id !== state.payer.value.id)[0]
+    }
+
+    _setManualOwers({ value: [{ user: user, amount: null }], valid: true })
+  }, [users, state.payer.value])
 
   const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
 
@@ -176,7 +198,6 @@ const PaymentForm = ({ users }) => {
       name: '平分',
       component: <div className={styles.stepContainer}>
         { nameInput }
-        { alertMessage }
         { amountInput }
         { datePickerInput }
         <Section name="付款者"/>
@@ -198,7 +219,6 @@ const PaymentForm = ({ users }) => {
           { AddManualOwerButton }
         </div>
       </div>
-
     }
   ]
 
