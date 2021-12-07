@@ -129,7 +129,7 @@ const PaymentForm = ({ users }) => {
 
   let i = -1
   const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
-  let radioAmountLabels = state.manualOwers.value.map(ower => {
+  let radioAmountLabels = _manualOwers.value.map(ower => {
     i++
     return(
       <UserRadioSelectAmountLabel
