@@ -12,6 +12,7 @@ import {
   TextInput,
   ColumnSwappableView,
   UserCheckboxSelectLabel,
+  OwerCheckboxSelectLabel,
   UserRadioSelectAmountLabel,
 } from '../../../components'
 import {
@@ -84,7 +85,7 @@ const PaymentForm = ({ users, manualOwers, index }) => {
     type='number'
   />
 
-  const owersLabel = <UserCheckboxSelectLabel
+  const owersLabel = <OwerCheckboxSelectLabel
     users={users}
     callback={setOwers}
     selectedObjects={state.owers.value}
