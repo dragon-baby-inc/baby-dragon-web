@@ -107,7 +107,6 @@ const AccountingBookEditPage = (props) => {
 
     dragonBabyApi.createAccountingBook(group_id, buildParams())
       .then((res) => {
-        console.log(res)
         history.navigateTo("paymentIndexPage", { group_id, accounting_book_id: res.data.accounting_book.id })
       })
       .catch(err => {

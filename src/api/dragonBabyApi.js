@@ -31,7 +31,7 @@ class DragonBabyApi {
   }
 
   createAccountingBook(group_id, params) {
-    return this.api.post(`api/v1/groups/${group_id}/accounting_books`, params)
+    return this.api.post(`api/v1/groups/${group_id}/accounting_books`, { accounting_book: params })
   }
 
   updateAccountingBook(group_id, accounting_book_id, params) {
