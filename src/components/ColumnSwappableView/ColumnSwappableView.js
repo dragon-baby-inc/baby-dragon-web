@@ -9,7 +9,7 @@ const ColumnSwappableView = ({
   callback,
   height,
 }) => {
-  const [_index, setIndex] = useState(0)
+  const [_index, setIndex] = useState(index)
 
   const handleIndexChanged = (value) => {
     setIndex(value)
