@@ -13,6 +13,7 @@ import {
 const useUsersFilterSelect = ({
   users,
   buildSelectUsers,
+  selectedObjects,
   style,
   selectAll,
   callback,
@@ -21,8 +22,14 @@ const useUsersFilterSelect = ({
   const [_selectObjectIds, setSelectObjectIds] = useState([])
 
   useEffect(() => {
-    setSelectObjectIds(buildSelectUsers(users))
-  }, [users])
+    if (selectedObjects) {
+      setSelectObjectIds(users.filter(u => {
+      return selectedObjects.map(su => su.id).includes(u.id)
+    }))
+    } else {
+      setSelectObjectIds(buildSelectUsers(users))
+    }
+  }, [users, selectedObjects])
 
   const handleSelectChanged = (objects) => {
     setSelectObjectIds(objects.map(obj => obj.id))

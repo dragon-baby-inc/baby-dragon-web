@@ -23,8 +23,8 @@ const UserCheckboxSelectLabel = ({
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
 
-  const userSelectCallback = (objects) => {
-    if (callback) { callback(objects) }
+  const userSelectCallback = (object_ids) => {
+    if (callback) { callback(users.filter(u => object_ids.includes(u.id))) }
   }
 
   const handleClicked = () => {
@@ -35,7 +35,14 @@ const UserCheckboxSelectLabel = ({
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
 
-  const [value, select] = useUsersFilterSelect({ users, buildSelectUsers, selectAll: true, closed: () => setDrawerActive(false) })
+  const [value, select] = useUsersFilterSelect({
+    users,
+    buildSelectUsers,
+    selectedObjects,
+    selectAll: true,
+    callback: userSelectCallback,
+    closed: () => setDrawerActive(false) }
+  )
 
   let i = 0
   const selected = users.filter(o => value.includes(o.id))

@@ -65,6 +65,7 @@ const PaymentEditPage = () => {
 
       if (payment.allocation_type === 'evenly') {
         let ower_ids = payment.allocations.map(a => a.ower_id)
+        console.log(users.filter(u => ower_ids.includes(u.id)))
         setOwers(users.filter(u => ower_ids.includes(u.id)))
         setAllocationType(payment.allocation_type)
       } else if (payment.allocation_type === 'amount'){
