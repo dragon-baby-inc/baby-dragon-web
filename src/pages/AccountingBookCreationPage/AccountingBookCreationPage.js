@@ -72,6 +72,7 @@ const AccountingBookEditPage = (props) => {
   }
 
   const [selecteUserIds, userSelect] = useUsersSelect({
+    labelsHeight: "calc(100% - 44px - 1px - 20px)",
     warning: true,
     selectAll: true,
     users,

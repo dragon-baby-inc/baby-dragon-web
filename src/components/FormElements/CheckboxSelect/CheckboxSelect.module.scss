@@ -1,8 +1,11 @@
 .container {
   height: 100%;
+  display: flex;
+  flex-flow: column;
   overflow: hidden;
 }
 
 .labels {
   overflow: auto;
+  flex-shrink: 1;
 }

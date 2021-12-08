@@ -27,7 +27,12 @@ const AccountingBookUsersPage = (props) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
 
-  const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
+  const [value, select] = useUsersSelect({
+    users,
+    buildSelectUsers,
+    selectAll: true,
+    labelsHeight: "calc(100% - 44px - 1px - 58px)"
+  })
 
   const updateCoverCostUsers = () => {
     dragonBabyApi.updateCoverCostUsers(group_id, accounting_book_id, value)

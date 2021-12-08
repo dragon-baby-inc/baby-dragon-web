@@ -11,6 +11,7 @@ const CheckboxSelect = ({
   objects,
   warning,
   selected_object_ids,
+  labelsHeight,
   style,
   createLabel,
   selectAll,
@@ -60,10 +61,13 @@ const CheckboxSelect = ({
     }
   }
 
-  let labelHeight = "calc(100% - 44px - 1px)"
-  if (warning) {
-    labelHeight = "calc(100% - 44px - 1px - 20px)"
+  if (!labelsHeight) {
+    labelsHeight = "calc(100% - 44px - 1px - 58px)"
+    if (warning) {
+      labelsHeight = "calc(100% - 44px - 1px - 20px - 58px)"
+    }
   }
+
   const containerStyles = [styles.container]
   if (mount) { containerStyles.push(styles.mount) }
   return(
@@ -81,7 +85,7 @@ const CheckboxSelect = ({
           </CheckboxLabel > : null
       }
       <Separater style={{margin: '0px'}}/>
-      <div style={{height: labelHeight}} className={styles.labels}>
+      <div style={{height: labelsHeight}} className={styles.labels}>
         {objectLabels}
       </div>
       {

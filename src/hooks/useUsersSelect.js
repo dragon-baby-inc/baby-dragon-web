@@ -11,6 +11,7 @@ import {
 
 const useUsersSelect = ({
   users,
+  labelsHeight,
   warning,
   buildSelectUsers,
   style,
@@ -28,7 +29,9 @@ const useUsersSelect = ({
     if (callback) { callback(objects.map(obj => obj.id)) }
   }
 
+  console.log(labelsHeight)
   const select = <CheckboxSelect
+    labelsHeight={labelsHeight}
     warning={warning}
     createLabel={createUserCheckbokLabel}
     selectAll={selectAll}
