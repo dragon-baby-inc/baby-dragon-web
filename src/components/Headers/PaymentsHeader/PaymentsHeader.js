@@ -96,7 +96,7 @@ function PaymentsHeader({
           </div>
           <div className={styles.info}>
             <div className={styles.count}>
-              {loading ? "-" : accountingBookDetails.users_size}
+              {loading ? "-" : accountingBookDetails.cover_cost_users_size}
             </div>
             <div className={styles.label}>
               分帳人數
