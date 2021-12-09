@@ -22,6 +22,10 @@ const useOwersFilterSelect = ({
   const [_selectObjectIds, setSelectObjectIds] = useState([])
 
   useEffect(() => {
+    if (selectedObjects.length === _selectObjectIds.length) {
+      return
+    }
+
     if (selectedObjects) {
       setSelectObjectIds(users.filter(u => {
       return selectedObjects.map(su => su.id).includes(u.id)

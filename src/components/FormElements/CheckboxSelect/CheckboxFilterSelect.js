@@ -48,6 +48,10 @@ const CheckboxFilterSelect = ({
 
   useEffect(() => {
     setMount(true)
+    if (selected_object_ids.length === selectedObjects.length) {
+      return
+    }
+
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
     setSelectAll(objects.length === selected_object_ids.length)
   }, [objects, selected_object_ids])

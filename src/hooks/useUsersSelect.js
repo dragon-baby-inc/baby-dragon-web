@@ -29,7 +29,6 @@ const useUsersSelect = ({
     if (callback) { callback(objects.map(obj => obj.id)) }
   }
 
-  console.log(labelsHeight)
   const select = <CheckboxSelect
     labelsHeight={labelsHeight}
     warning={warning}

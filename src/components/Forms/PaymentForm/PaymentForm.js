@@ -23,7 +23,7 @@ import {
   useUsersSelect,
 } from '../../../hooks'
 
-const PaymentForm = ({ users, manualOwers, index }) => {
+const PaymentForm = ({ users, manualOwers, index, owers }) => {
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const {
@@ -85,13 +85,16 @@ const PaymentForm = ({ users, manualOwers, index }) => {
     type='number'
   />
 
+    const [_owers, _setOwers] = useState({ value: [], valid: true })
   const owersLabel = <OwerCheckboxSelectLabel
     users={users}
-    callback={setOwers}
-    selectedObjects={state.owers.value}
+    callback={(ids) => _setOwers({ value: ids, valid: true })}
+    valid={_owers.valid}
+    selectedObjects={_owers.value}
   />
 
-  const [alertMessage, setMessage] = useState(null)
+  const [alertMessage, setAlertMessage] = useState(null)
+
   const validateManulOwers = (newState) => {
     if (newState.manualOwers && !newState.manualOwers.valid) {
       _setManualOwers({ value: newState.manualOwers.value, valid: false })
@@ -178,6 +181,7 @@ const PaymentForm = ({ users, manualOwers, index }) => {
 
   useEffect(() => {
     _setManualOwers({ value: manualOwers, valid: true })
+    _setOwers({ value: owers, valid: true })
   }, [payer])
 
   const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
@@ -187,6 +191,7 @@ const PaymentForm = ({ users, manualOwers, index }) => {
       name: '平分',
       component: <div className={styles.stepContainer}>
         { nameInput }
+        { alertMessage }
         { amountInput }
         { datePickerInput }
         <Section name="付款者"/>
@@ -217,7 +222,7 @@ const PaymentForm = ({ users, manualOwers, index }) => {
   }
 
   const handleSubmit = () => {
-    let newState = { ...state, manualOwers: _manualOwers }
+    let newState = { ...state, manualOwers: _manualOwers, owers: _owers }
     let valid = validateForm(newState, form[state.allocation_type], validateManulOwers)
     if (!valid) { return }
     createPayment(newState, () => {

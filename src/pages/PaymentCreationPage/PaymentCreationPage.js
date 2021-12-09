@@ -91,7 +91,7 @@ const PaymentCreationPage = () => {
       <Separater style={{ margin: 0 }}/>
       {
         payer ?
-          <PaymentForm users={users} manualOwers={[ {user: getUser(), amount: null} ]}/> : null
+          <PaymentForm users={users} manualOwers={[ {user: getUser(), amount: null} ]} owers={users.filter(u => u.coverCost === true)}/> : null
       }
     </>
   )
