@@ -45,6 +45,7 @@ const PaymentEditPage = () => {
   const { state: authState } = useContext(AuthContext)
   const [index, setIndex] = useState(0);
   const [_manualOwers, _setManualOwers] = useState([])
+  const [_owers, _setOwers] = useState([])
 
   useEffect(() => {
     resetForm()
@@ -67,6 +68,7 @@ const PaymentEditPage = () => {
         let ower_ids = payment.allocations.map(a => a.ower_id)
         console.log(users.filter(u => ower_ids.includes(u.id)))
         setOwers(users.filter(u => ower_ids.includes(u.id)))
+        _setOwers(users.filter(u => ower_ids.includes(u.id)))
         setAllocationType(payment.allocation_type)
       } else if (payment.allocation_type === 'amount'){
         let owers = payment.allocations.map(all => {
@@ -103,7 +105,7 @@ const PaymentEditPage = () => {
       <Separater style={{ margin: 0 }}/>
       {
         _manualOwers ?
-          <PaymentForm index={index} users={users} manualOwers={_manualOwers}/> : null
+          <PaymentForm index={index} users={users} manualOwers={_manualOwers} owers={_owers}/> : null
       }
     </>
 
