@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"
 import styles from './CheckboxFilterSelect.module.scss'
 import {
+  Warning,
   SearchInput,
   CheckboxLabel,
+  Separater,
   Image
 } from '../index'
 
@@ -49,6 +51,7 @@ const CheckboxFilterSelect = ({
   useEffect(() => {
     setMount(true)
     if (selected_object_ids.length === selectedObjects.length) {
+      setSelectAll(objects.length === selected_object_ids.length)
       return
     }
 
@@ -93,17 +96,22 @@ const CheckboxFilterSelect = ({
   return(
     <div style={style ? style: {}} className={containerStyles.join(' ')}>
       { searchInput }
+      <Warning name="找不到成員？請他在Line群裡說說話喔！"/>
       {
         selectAll ?
-          <CheckboxLabel
-            value="select-all"
-            changed={handleSelectAll}
-            checked={_selectAll}
-          >
-            <div className={styles.selectAll}>
-              所有人
-            </div>
-          </CheckboxLabel > : null
+          <>
+            <CheckboxLabel
+              value="select-all"
+              changed={handleSelectAll}
+              checked={_selectAll}
+            >
+              <div className={styles.selectAll}>
+                所有人
+              </div>
+            </CheckboxLabel >
+            <Separater style={{ margin: 0 }}/>
+          </>
+          : null
       }
       <div className={styles.labels}>
         {objectLabels}
