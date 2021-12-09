@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
 import axios from '../api/dragonBabyApi'
 import { dragonBabyApi } from '../api/dragonBabyApi'
-import { themeColors } from '../constants'
+import { themeColors, imageUrls } from '../constants'
 import { useHistory, useAccountingBook, useUsersSelect } from '../hooks'
 import {
   Image,
+  IconSwappableView,
+  TextInput,
   Radio,
   CheckboxLabel,
   Separater,
@@ -13,7 +15,8 @@ import {
   Backdrop,
   UserForm,
   CheckboxSelect,
-  TopRightIcon
+  TopRightIcon,
+  ConfirmBox
 } from '../components'
 
 const AccountingBookUsersPage = (props) => {
@@ -27,10 +30,29 @@ const AccountingBookUsersPage = (props) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
 
+  const [editBoxActive, setEditBoxActive] = useState(false)
+  const [imageId, setImageId] = useState(0)
+  const [name, setName] = useState({ value: '', valid: true })
+
+  const handleEditUserConfirm = () => {
+    setEditBoxActive(false)
+  }
+
+  const handleUserEdit = (e, object) => {
+    setName({ value: object.displayName, valid: true })
+    setEditBoxActive(true)
+    e.preventDefault()
+  }
+  const handleUserDelete = (e, object) => {
+    e.preventDefault()
+  }
+
   const [value, select] = useUsersSelect({
     users,
     buildSelectUsers,
     selectAll: true,
+    handleEdit: handleUserEdit,
+    handleTrash: handleUserDelete,
     labelsHeight: "calc(100% - 44px - 1px - 58px)"
   })
 
@@ -43,6 +65,15 @@ const AccountingBookUsersPage = (props) => {
         window.location.reload();
       })
   }
+
+  const _styles = {
+    root: {
+      backgroundColor: 'white',
+      margin: 0,
+      padding: '0px 22vw',
+      overflow: 'hidden',
+    },
+  };
 
   return(
     <>
@@ -74,6 +105,33 @@ const AccountingBookUsersPage = (props) => {
           : null
       }
       </div>
+      {
+        editBoxActive ?  <ConfirmBox title="編輯虛擬使用者" confirmed={handleEditUserConfirm} canceled={() => setEditBoxActive(false)}>
+            <div style={styles.swapView}>
+              <IconSwappableView
+                imageSize="80px"
+                styles={_styles}
+                changed={setImageId}
+                initial={imageId}
+                icons={imageUrls}/>
+              <div style={{ padding: '24px 16px' }}>
+                <TextInput
+                  key='name'
+                  faicon="farCreditCard"
+                  disabled={false}
+                  placeholder={'輸入名稱'}
+                  name={'名稱'}
+                  style={{ width: '100%', margin: '0px' }}
+                  changed={(value) => setName({ value: value, valid: value.length > 0 })}
+                  value={name.value === undefined ? '' : name.value}
+                  valid={name.valid}
+                  invalidFeedback="*不可為空白，12字內"
+                  type='text'
+                />
+              </div>
+            </div>
+          </ConfirmBox>  : null
+      }
     </>
   )
 }
@@ -118,6 +176,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  swapView: {
+    backgroundColor: 'white',
+    width: '100%',
   }
 }
 

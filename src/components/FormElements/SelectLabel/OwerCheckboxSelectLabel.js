@@ -12,9 +12,6 @@ import {
   useUsersSelect,
   useOwersFilterSelect
 } from '../../../hooks'
-import {
-  createUserCheckbokLabel
-} from '../../../generators/labelGenerator'
 
 const OwerCheckboxSelectLabel = ({
   users,

@@ -6,6 +6,7 @@ import { Context as AccountingBookContext} from '../../contexts/AccountingBookCo
 import {
   Warning,
   Footer,
+  ConfirmBox,
   Image,
   StepsWidget,
   TopRightIcon,
@@ -71,11 +72,31 @@ const AccountingBookEditPage = (props) => {
     setUsers({ value: selectedIds, valid: selectedIds.length > 0})
   }
 
+  const [editBoxActive, setEditBoxActive] = useState(false)
+  const [imageUserId, setUserImageId] = useState(0)
+  const [userName, setUserName] = useState({ value: '', valid: true })
+
+  const handleEditUserConfirm = () => {
+    setEditBoxActive(false)
+  }
+
+  const handleUserEdit = (e, object) => {
+    console.log(e)
+    setUserName({ value: object.displayName, valid: true })
+    setEditBoxActive(true)
+    e.preventDefault()
+  }
+  const handleUserDelete = (e, object) => {
+    e.preventDefault()
+  }
+
   const [selecteUserIds, userSelect] = useUsersSelect({
     labelsHeight: "calc(100% - 44px - 1px - 20px)",
     warning: true,
     selectAll: true,
     users,
+    handleEdit: handleUserEdit,
+    handleTrash: handleUserDelete,
     buildSelectUsers,
     callback: userSelectChanged,
     style: { height: '100%' }
@@ -131,6 +152,15 @@ const AccountingBookEditPage = (props) => {
     setName({ name: value, valid: value.length > 0 })
   }
 
+  const _styles = {
+    root: {
+      backgroundColor: 'white',
+      margin: 0,
+      padding: '0px 22vw',
+      overflow: 'hidden',
+    },
+  };
+
   const steps = [
     {
       name: "為帳本命名吧",
@@ -161,9 +191,12 @@ const AccountingBookEditPage = (props) => {
     {
       name: "選擇分帳成員",
       component:
+        <>
           <div style={styles.select}>
             {userSelect}
           </div>
+        </>
+
     },
     {
       name: "選擇幣別",
@@ -236,7 +269,33 @@ const AccountingBookEditPage = (props) => {
           </Footer>
         </div>
       </div>
-
+      {
+        editBoxActive ?  <ConfirmBox title="編輯虛擬使用者" confirmed={handleEditUserConfirm} canceled={() => setEditBoxActive(false)}>
+          <div style={{ backgroundColor: 'white', width: '100%' }}>
+            <IconSwappableView
+              imageSize="80px"
+              styles={_styles}
+              changed={setUserImageId}
+              initial={imageUserId}
+              icons={imageUrls}/>
+            <div style={{ padding: '24px 16px' }}>
+              <TextInput
+                key='name'
+                faicon="farCreditCard"
+                disabled={false}
+                placeholder={'輸入名稱'}
+                name={'名稱'}
+                style={{ width: '100%', margin: '0px' }}
+                changed={(value) => setUserName({ value: value, valid: value.length > 0 })}
+                value={userName.value === undefined ? '' : userName.value}
+                valid={userName.valid}
+                invalidFeedback="*不可為空白，12字內"
+                type='text'
+              />
+            </div>
+          </div>
+        </ConfirmBox>  : null
+      }
     </>
   )
 }

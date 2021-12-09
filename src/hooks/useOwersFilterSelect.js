@@ -7,7 +7,7 @@ import {
   Image
 } from '../components'
 import {
-  createUserCheckbokLabel
+  createOwerCheckbokLabel
 } from '../generators/labelGenerator'
 
 const useOwersFilterSelect = ({
@@ -42,7 +42,7 @@ const useOwersFilterSelect = ({
 
   const select = <CheckboxFilterSelect
     closed={closed}
-    createLabel={createUserCheckbokLabel}
+    createLabel={createOwerCheckbokLabel}
     selectAll={selectAll}
     objects={users}
     style={style}

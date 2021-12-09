@@ -11,6 +11,8 @@ import {
 
 const useUsersSelect = ({
   users,
+  handleEdit,
+  handleTrash,
   labelsHeight,
   warning,
   buildSelectUsers,
@@ -32,7 +34,7 @@ const useUsersSelect = ({
   const select = <CheckboxSelect
     labelsHeight={labelsHeight}
     warning={warning}
-    createLabel={createUserCheckbokLabel}
+    createLabel={createUserCheckbokLabel({ handleEdit, handleTrash })}
     selectAll={selectAll}
     objects={users}
     style={style}

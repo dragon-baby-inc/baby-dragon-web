@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { Image } from '../../index'
 
-const styles = {
+const _styles = {
   root: {
     margin: 0,
     padding: '0 28vw',
@@ -32,10 +32,16 @@ const styles = {
   },
 };
 
-const IconSwappableView = ({ icons, initial, changed }) => {
+const IconSwappableView = ({ styles, icons, initial, changed, imageSize }) => {
   let initialIndex = initial ? initial : 1
   const [loading, setLoading] = useState(true)
   const [index, setIndex] = useState(initialIndex)
+
+  if (styles) {
+    styles = { ..._styles, ...styles }
+  } else {
+    styles = _styles
+  }
 
   useEffect(() => {
     if (initial !== undefined) {
@@ -58,18 +64,20 @@ const IconSwappableView = ({ icons, initial, changed }) => {
   let idx = 0
   let fakeImages = []
 
+  if(!imageSize) { imageSize = '120px' }
+
   icons.forEach(url => {
     let current = idx=== index
     idx ++
     images.push(
       <div key={idx} style={current ? Object.assign({}, styles.activeSlide) : Object.assign({}, styles.slide)}>
-        <Image size={current ? "120px" : "120px"} imageUrl={url}/>
+        <Image size={imageSize} imageUrl={url}/>
       </div>
     )
 
     fakeImages.push(
       <div key={idx} style={Object.assign({}, styles.activeSlide)}>
-        <div style={{ backgroundColor: '#EEEEEE', borderRadius: '50%', width: "120px", height: '120px' }}></div>
+        <div style={{ backgroundColor: '#EEEEEE', borderRadius: '50%', width: imageSize, height: imageSize }}></div>
       </div>
     )
   })

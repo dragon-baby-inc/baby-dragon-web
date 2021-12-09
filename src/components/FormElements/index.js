@@ -5,6 +5,7 @@ import UserCheckboxLabel from './UserLabel/UserCheckboxLabel';
 import UserRadioLabel from './UserLabel/UserRadioLabel';
 import TextInput from './Inputs/TextInput';
 import Drawer from './Drawer/Drawer'
+import ConfirmBox from './ConfirmBox/ConfirmBox'
 import Warning from './Warning/Warning'
 import SelectLabel from './SelectLabel/SelectLabel'
 import UserRadioSelectLabel from './SelectLabel/UserRadioSelectLabel'
@@ -112,4 +113,5 @@ export {
   Warning,
   CheckboxFilterSelect,
   OwerCheckboxSelectLabel,
+  ConfirmBox,
 };

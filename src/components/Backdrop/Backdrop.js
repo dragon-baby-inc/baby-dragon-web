@@ -14,9 +14,13 @@ const backdrop = (props) => {
   if (!icon) { icon = 'faCheck' }
   return (
     <div className={[styles.backdrop].join(' ')} onClick={props.clicked}>
-      <div className={styles.icon}>
-        <FontAwesomeIcon icon={icons[icon]} color='#eeeeee'/>
-      </div>
+      {
+        props.hideCheck ?
+          null:
+          <div className={styles.icon}>
+            <FontAwesomeIcon icon={icons[icon]} color='#eeeeee'/>
+          </div>
+      }
     </div>
   )
 };
