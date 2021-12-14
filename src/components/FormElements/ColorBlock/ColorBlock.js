@@ -6,9 +6,10 @@ import styles from './ColorBlock.module.scss'
 const ColorBlock = ({
   circle,
   imageSize,
+  style,
   children
 }) => {
-  const style = {
+  const defaultStyle = {
     image: {
       width: imageSize ? imageSize : "56px",
       height: imageSize ? imageSize : "56px",
@@ -16,10 +17,12 @@ const ColorBlock = ({
     }
   }
 
+  let _style = style ? style : defaultStyle
+
   return (
     <div className={styles.imageBlock}>
       <div
-        style={style.image}
+        style={_style.image}
         className={styles.image} >
         {
           children ?

@@ -22,6 +22,18 @@ class DragonBabyApi {
     return this.api.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments`, { payment: params })
   }
 
+  updateUser(group_id, user_id, params) {
+    return this.api.patch(`api/v1/groups/${group_id}/users/${user_id}`, params)
+  }
+
+  deleteUser(group_id, user_id, params) {
+    return this.api.delete(`api/v1/groups/${group_id}/users/${user_id}`)
+  }
+
+  createUser(group_id, params) {
+    return this.api.post(`api/v1/groups/${group_id}/users`, params)
+  }
+
   getUsers(group_id) {
     return this.api.get(`api/v1/groups/${group_id}/users`)
   }

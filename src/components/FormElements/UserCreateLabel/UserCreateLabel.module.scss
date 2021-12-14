@@ -1,0 +1,31 @@
+@import "../../../styleSheets/globalColors.scss";
+
+.label {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+}
+
+.leftBox {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: $gold700;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.colorBlock {
+  padding-right: 12px;
+}

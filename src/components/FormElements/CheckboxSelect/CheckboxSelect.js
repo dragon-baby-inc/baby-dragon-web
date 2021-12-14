@@ -3,6 +3,8 @@ import styles from './CheckboxSelect.module.scss'
 import {
   CheckboxLabel,
   Separater,
+  UserCreateLabel,
+  handleAddUser,
   Warning,
   Image
 } from '../index'
@@ -12,6 +14,7 @@ const CheckboxSelect = ({
   warning,
   selected_object_ids,
   labelsHeight,
+  handleAddUser,
   style,
   createLabel,
   selectAll,
@@ -87,6 +90,7 @@ const CheckboxSelect = ({
       <Separater style={{margin: '0px'}}/>
       <div style={{height: labelsHeight}} className={styles.labels}>
         {objectLabels}
+        <UserCreateLabel clicked={handleAddUser}/>
       </div>
       {
         warning ?

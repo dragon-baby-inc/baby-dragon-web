@@ -12,6 +12,7 @@ import {
 const useUsersSelect = ({
   users,
   handleEdit,
+  handleAddUser,
   handleTrash,
   labelsHeight,
   warning,
@@ -20,10 +21,12 @@ const useUsersSelect = ({
   selectAll,
   callback
 }) => {
-  const [_selectObjectIds, setSelectObjectIds] = useState()
+  const [_selectObjectIds, setSelectObjectIds] = useState([])
 
   useEffect(() => {
-    setSelectObjectIds(buildSelectUsers(users))
+    if (_selectObjectIds.length === 0) {
+      setSelectObjectIds(buildSelectUsers(users))
+    }
   }, [users])
 
   const handleSelectChanged = (objects) => {
@@ -33,6 +36,7 @@ const useUsersSelect = ({
 
   const select = <CheckboxSelect
     labelsHeight={labelsHeight}
+    handleAddUser={handleAddUser}
     warning={warning}
     createLabel={createUserCheckbokLabel({ handleEdit, handleTrash })}
     selectAll={selectAll}

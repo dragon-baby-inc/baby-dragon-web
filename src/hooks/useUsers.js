@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { normalizeGroupUser } from '../normalizers'
 import { dragonBabyApi } from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
@@ -12,14 +13,7 @@ const useUsers =  (callback) => {
     await dragonBabyApi.getUsers(group_id)
       .then(function (response) {
         setUsers(response.data.users.map((u) => {
-          return {
-            id: u.line_id,
-            displayName: u.display_name,
-            imageURL: u.image_url,
-            fromLine: u.from_line,
-            coverCost: u.cover_cost,
-            restrictedDestroy: u.restricted_destroy
-          }
+          return normalizeGroupUser(u)
         }))
       })
       .catch(function (error) {
@@ -33,7 +27,7 @@ const useUsers =  (callback) => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
-  return [users, loading];
+  return [users, loading, setUsers, getUsers];
 }
 
 export default useUsers;

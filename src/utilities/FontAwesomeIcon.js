@@ -47,6 +47,7 @@ const icons = {
   farStar: farFaStar,
   fasFaStar: fasFaStar,
   farFaClock: farFaClock,
+  faTrashCanSlash: faTrashCanSlash,
 }
 
 const Icon = (props) => {

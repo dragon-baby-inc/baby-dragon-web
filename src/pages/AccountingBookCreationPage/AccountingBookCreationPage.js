@@ -3,7 +3,10 @@ import { useUsers } from '../../hooks'
 import _styles from './AccountingBookCreationPage.module.scss'
 import { themeColors, imageUrls } from '../../constants'
 import { Context as AccountingBookContext} from '../../contexts/AccountingBookContext.js'
+import { normalizeGroupUser } from '../../normalizers'
 import {
+  UserConfirmBox,
+  UserCreateLabel,
   Warning,
   Footer,
   ConfirmBox,
@@ -46,7 +49,7 @@ const AccountingBookEditPage = (props) => {
   const [currentStep, setCurrentStep] = useState(0)
   const [selectObjectIds, setSelectObjectIds] = useState([])
   const { group_id, accounting_book_id } = useParams()
-  const [users, userLoading] = useUsers()
+  const [users, userLoading, _setUsers, getUsers] = useUsers()
   const defaultCurrency = "TWD"
   const {
     state,
@@ -76,23 +79,62 @@ const AccountingBookEditPage = (props) => {
   const [imageUserId, setUserImageId] = useState(0)
   const [userName, setUserName] = useState({ value: '', valid: true })
 
+  const [editObject, setEditObject] = useState(null)
+  const handleEditUserCancel = () => {
+    setUserImageId(0)
+    setUserName({ value: '', valid: true })
+    setEditBoxActive(false)
+  }
+
   const handleEditUserConfirm = () => {
+    if(!userName.valid) {
+      return
+    }
+
+    dragonBabyApi.updateUser(group_id, editObject.id, { name: userName.value, image_url: imageUrls[imageUserId] })
+      .then(res => {
+        let _users = [...users]
+        let index = _users.findIndex((u) => u.id === editObject.id)
+        let newUser = _users[index]
+        newUser.displayName = res.data.user.display_name
+        newUser.imageURL = res.data.user.image_url
+        _users[index] = newUser
+        setUsers(_users)
+      }).catch(err => {
+        console.log(err)
+      })
     setEditBoxActive(false)
   }
 
   const handleUserEdit = (e, object) => {
-    console.log(e)
+    setEditObject(object)
+    let imageId = imageUrls.indexOf(object.imageURL)
+    if (imageId === -1) { imageId = imageUrls.length - 1 }
+    setUserImageId(imageId)
     setUserName({ value: object.displayName, valid: true })
     setEditBoxActive(true)
     e.preventDefault()
   }
+
   const handleUserDelete = (e, object) => {
+    dragonBabyApi.deleteUser(group_id, object.id)
+      .then(res => {
+        console.log(res)
+        let _users = [...users]
+        let index = _users.findIndex((u) => u.id === object.id)
+        _users.splice(index, 1)
+        setUsers(_users)
+        _setUsers(_users)
+      }).catch(err => {
+        console.log(err)
+      })
     e.preventDefault()
   }
 
   const [selecteUserIds, userSelect] = useUsersSelect({
     labelsHeight: "calc(100% - 44px - 1px - 20px)",
     warning: true,
+    handleAddUser: () => { setCreateBoxActive(true) },
     selectAll: true,
     users,
     handleEdit: handleUserEdit,
@@ -109,13 +151,48 @@ const AccountingBookEditPage = (props) => {
   }, [])
 
   useEffect(() => {
-    if (users) {
+    if (users && selectObjectIds.length === 0) {
       let selectedIds = users.map(obj => obj.id)
       setUsers({ value: selectedIds, valid: selectedIds.length > 0})
       setSelectObjectIds(selectedIds)
     }
   }, [users])
 
+  const handleCreateUserConfirm = () => {
+    if (userName.value.length < 1) {
+      setUserName({ value: userName.value, valid: false })
+      return
+    }
+
+    dragonBabyApi.createUser(group_id, { name: userName.value, image_url: imageUrls[imageUserId] })
+      .then(res => {
+        let _users = [...users]
+        _users.push(
+          normalizeGroupUser(res.data.user)
+        )
+        setUsers(_users)
+        _setUsers(_users)
+        setCreateBoxActive(false)
+      }).catch(err => {
+        console.log(err)
+        setCreateBoxActive(false)
+      })
+  }
+
+  const handleCancelUserConfirm = () => {
+    setCreateBoxActive(false)
+  }
+
+  const [createBoxActive, setCreateBoxActive] = useState(false)
+  const createUserConfirmBox = <UserConfirmBox
+    confirmed={handleCreateUserConfirm}
+    canceled={handleCancelUserConfirm}
+    title='新增使用者'
+    userName={userName}
+    setUserName={setUserName}
+    imageUserId={imageUserId}
+    setUserImageId={setUserImageId}
+  />
 
   // TODO: To be refactor
   const [currency, currencySelect] = useCurrencySelect({
@@ -270,7 +347,10 @@ const AccountingBookEditPage = (props) => {
         </div>
       </div>
       {
-        editBoxActive ?  <ConfirmBox title="編輯虛擬使用者" confirmed={handleEditUserConfirm} canceled={() => setEditBoxActive(false)}>
+        editBoxActive ?  <ConfirmBox
+          title="編輯虛擬使用者"
+          confirmed={handleEditUserConfirm}
+          canceled={handleEditUserCancel}>
           <div style={{ backgroundColor: 'white', width: '100%' }}>
             <IconSwappableView
               imageSize="80px"
@@ -295,6 +375,9 @@ const AccountingBookEditPage = (props) => {
             </div>
           </div>
         </ConfirmBox>  : null
+      }
+      {
+        createBoxActive ? createUserConfirmBox : null
       }
     </>
   )

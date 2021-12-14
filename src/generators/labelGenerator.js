@@ -43,7 +43,7 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
     checked={selectedObjects.map(el => el.id).includes(object.id)} >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
+        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL} size='56px'/>
         {object.displayName}
       </div>
       <div>
@@ -53,9 +53,14 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
               <div style={{ marginRight: '20px' }} onClick={(e) => handleEdit(e, object)}>
                 <FontAwesomeIcon faicon="faEdit" style={{color: '#6F6F6F'}}/>
               </div>
-              <div style={{ marginRight: '20px' }} onClick={(e) => handleTrash(e, object)}>
-                <FontAwesomeIcon faicon="faTrash" style={{color: '#6F6F6F'}}/>
-              </div>
+              {
+                object.restrictedDestroy ?
+                  null
+                :
+                 <div style={{ marginRight: '20px' }} onClick={(e) => handleTrash(e, object)}>
+                   <FontAwesomeIcon faicon="faTrash" style={{color: '#6F6F6F'}}/>
+                 </div>
+              }
             </div>
         }
       </div>
