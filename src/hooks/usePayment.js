@@ -8,10 +8,26 @@ const usePayment =  (query_params) => {
   const [loading, setLoading] = useState(false);
   const [payment, setPayment] = useState(null);
 
+  let stubPayment = {
+    allocation_type: "amount",
+    allocations: [{ower_id: 'CUSTOM-1d6c9fd5f5bff722720e5a9b', ower_display_name: '12345678', amount: 1001}] ,
+    amount: 1001,
+    created_at: "2021-12",
+    description: "test",
+    id: 120,
+    ower_and_payer_message: "Ting En廷恩 付款 (由 1 人分)",
+    paid_at: "2021-12-09T12:48:58.387Z",
+    paid_back: false,
+    payer_display_name: "Ting En廷恩",
+    payer_id: "U4fb1cd3edb7c2552e2a25f286f5c102d",
+  }
+
+  let stub = true
   const getPayment = async () => {
     setLoading(true)
     await dragonBabyApi.getPayment(group_id, accounting_book_id, payment_id)
       .then(function (response) {
+        console.log(response.data)
         setPayment(response.data)
       })
       .catch(function (error) {
@@ -21,6 +37,11 @@ const usePayment =  (query_params) => {
   }
 
   useEffect(() => {
+    if (stub) {
+      setPayment(stubPayment)
+      return
+    }
+
     getPayment();
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [])

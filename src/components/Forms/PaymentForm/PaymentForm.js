@@ -23,7 +23,7 @@ import {
   useUsersSelect,
 } from '../../../hooks'
 
-const PaymentForm = ({ users, manualOwers, index, owers }) => {
+const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const {
@@ -50,6 +50,17 @@ const PaymentForm = ({ users, manualOwers, index, owers }) => {
     initialValue: state.payer.value,
   })
 
+  const [_name, _setName] = useState({ value: '', valid: true })
+  const [_amount, _setAmount] = useState({ value: null, valid: true })
+
+  useEffect(() => {
+    if (payment) {
+      _setName({ value: payment.description, valid: true })
+      _setAmount({ value: payment.amount, valid: true })
+      _setCreationDate({ value: payment.paid_at, valid: true })
+    }
+  }, [payment])
+
   const nameInput = <TextInput
     style={{ paddingTop: '16px' }}
     key='name'
@@ -57,17 +68,18 @@ const PaymentForm = ({ users, manualOwers, index, owers }) => {
     disabled={false}
     placeholder='輸入名稱'
     name={'名稱'}
-    changed={setName}
-    value={state.name.value === undefined ? '' : state.name.value}
-    valid={state.name.valid}
+    changed={(v) => _setName({ value: v, valid: v.length > 0 })}
+    value={_name.value}
+    valid={_name.valid}
     invalidFeedback="*不可為空白，12字內"
     type='text'
   />
 
+  const [_creation_date, _setCreationDate] = useState({ value: null, valid: true })
   const datePickerInput = <DatePickerInput
     name='日期'
-    changed={setCreationDate}
-    value={state.creation_date.value}
+    changed={_setCreationDate}
+    value={_creation_date}
     faicon="farCreditCard"
     />
 
@@ -78,9 +90,9 @@ const PaymentForm = ({ users, manualOwers, index, owers }) => {
     placeholder='輸入金額'
     name='金額'
     style={{ borderRadius: '16px' }}
-    changed={setAmount}
-    value={state.amount.value === undefined ? '' : state.amount.value}
-    valid={state.amount.valid}
+    changed={_setAmount}
+    value={_amount.value}
+    valid={_amount.valid}
     invalidFeedback="*不可為空白，12字內"
     type='number'
   />
@@ -94,12 +106,6 @@ const PaymentForm = ({ users, manualOwers, index, owers }) => {
   />
 
   const [alertMessage, setAlertMessage] = useState(null)
-
-  const validateManulOwers = (newState) => {
-    if (newState.manualOwers && !newState.manualOwers.valid) {
-      _setManualOwers({ value: newState.manualOwers.value, valid: false })
-    }
-  }
 
   const handleManualOwersChanged = (index, data) => {
     let newOwers = [..._manualOwers.value]
@@ -204,6 +210,7 @@ const PaymentForm = ({ users, manualOwers, index, owers }) => {
       name: '自己分',
       component: <div className={styles.stepContainer}>
         { nameInput }
+        { alertMessage }
         { datePickerInput }
         <Section name="付款者"/>
         { payerLabel }
@@ -222,12 +229,29 @@ const PaymentForm = ({ users, manualOwers, index, owers }) => {
   }
 
   const handleSubmit = () => {
-    let newState = { ...state, manualOwers: _manualOwers, owers: _owers }
-    let valid = validateForm(newState, form[state.allocation_type], validateManulOwers)
+    let newState = { ...state, manualOwers: _manualOwers, owers: _owers, name: _name, creation_date: _creation_date, amount: _amount }
+    let valid = validateForm(newState, form[state.allocation_type], validate)
+//     setAlertMessage(JSON.stringify(newState.manualOwers))
     if (!valid) { return }
     createPayment(newState, () => {
       resetForm()
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
+    })
+  }
+
+  const setFunction = {
+    'name': _setName,
+    'manualOwers': _setManualOwers,
+    'amount': _setAmount,
+  }
+
+  const validate = (newState) => {
+    if (!newState) { return }
+
+    ['name', 'manualOwers', 'amount'].forEach(el => {
+      if (newState[el] && !newState[el].valid) {
+        setFunction[el]({ value: newState[el].value, valid: false })
+      }
     })
   }
 

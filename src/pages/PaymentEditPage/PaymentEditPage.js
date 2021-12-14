@@ -105,7 +105,7 @@ const PaymentEditPage = () => {
       <Separater style={{ margin: 0 }}/>
       {
         _manualOwers ?
-          <PaymentForm index={index} users={users} manualOwers={_manualOwers} owers={_owers}/> : null
+          <PaymentForm index={index} users={users} manualOwers={_manualOwers} owers={_owers} payment={payment}/> : null
       }
     </>
 
