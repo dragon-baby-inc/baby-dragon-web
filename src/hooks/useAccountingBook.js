@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { normalizeGroupUser } from '../normalizers'
 import { dragonBabyApi } from '../api/dragonBabyApi'
 import { imageUrls } from '../constants'
 import { useParams } from 'react-router-dom';
@@ -57,13 +58,7 @@ const useAccountingBook =  (callback) => {
       dragonBabyApi.getAccountingBook(group_id, accounting_book_id)
         .then(function (response) {
           let users = response.data.users.map(u => {
-            return {
-              id: u.line_id,
-              displayName: u.display_name,
-              imageURL: u.image_url,
-              fromLine: u.from_line,
-              coverCost: u.cover_cost
-            }
+            return normalizeGroupUser(u)
           })
           setUsers(users)
           setAccountingBook(
@@ -83,7 +78,7 @@ const useAccountingBook =  (callback) => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
-  return [users, accountingBook, loading, err];
+  return [users, accountingBook, loading, err, setUsers];
 }
 
 export default useAccountingBook;

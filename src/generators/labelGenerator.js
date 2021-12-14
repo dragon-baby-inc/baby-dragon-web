@@ -54,7 +54,7 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
                 <FontAwesomeIcon faicon="faEdit" style={{color: '#6F6F6F'}}/>
               </div>
               {
-                object.restrictedDestroy ?
+                object.restrictedDestroy || !handleTrash ?
                   null
                 :
                  <div style={{ marginRight: '20px' }} onClick={(e) => handleTrash(e, object)}>

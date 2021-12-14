@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import axios from '../api/dragonBabyApi'
 import { dragonBabyApi } from '../api/dragonBabyApi'
 import { themeColors, imageUrls } from '../constants'
+import { normalizeGroupUser } from '../normalizers'
 import { useHistory, useAccountingBook, useUsersSelect } from '../hooks'
 import {
+  UserConfirmBox,
   Image,
   IconSwappableView,
   TextInput,
@@ -22,7 +24,7 @@ import {
 const AccountingBookUsersPage = (props) => {
   const [ editMode, setEditMode ] = useState(false)
   const history = useHistory();
-  const [users, accountingBookDetails, loading] = useAccountingBook()
+  const [users, accountingBookDetails, loading, _err, setUsers] = useAccountingBook()
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
 
@@ -33,23 +35,68 @@ const AccountingBookUsersPage = (props) => {
   const [editBoxActive, setEditBoxActive] = useState(false)
   const [imageId, setImageId] = useState(0)
   const [name, setName] = useState({ value: '', valid: true })
+  const [editObject, setEditObject] = useState(null)
 
-  const handleEditUserConfirm = () => {
+  const resetConfirmBox = () => {
+    setImageId(0)
+    setName({ value: '', valid: true })
+  }
+
+  const handleEditUserCancel = () => {
+    resetConfirmBox()
     setEditBoxActive(false)
   }
 
+  const handleEditUserConfirm = () => {
+    if(!name.valid) {
+      return
+    }
+
+    dragonBabyApi.updateUser(group_id, editObject.id, { name: name.value, image_url: imageUrls[imageId] })
+      .then(res => {
+        let _users = [...users]
+        let index = _users.findIndex((u) => u.id === editObject.id)
+        let newUser = _users[index]
+        newUser.displayName = res.data.user.display_name
+        newUser.imageURL = res.data.user.image_url
+        _users[index] = newUser
+        setUsers(_users)
+        resetConfirmBox()
+        setEditBoxActive(false)
+      }).catch(err => {
+        console.log(err)
+        setEditBoxActive(false)
+      })
+  }
+
   const handleUserEdit = (e, object) => {
+    setEditObject(object)
+    let imageId = imageUrls.indexOf(object.imageURL)
+    if (imageId === -1) { imageId = imageUrls.length - 1 }
+    setImageId(imageId)
     setName({ value: object.displayName, valid: true })
     setEditBoxActive(true)
     e.preventDefault()
   }
+
   const handleUserDelete = (e, object) => {
+    dragonBabyApi.deleteUser(group_id, object.id)
+      .then(res => {
+        console.log(res)
+        let _users = [...users]
+        let index = _users.findIndex((u) => u.id === object.id)
+        _users.splice(index, 1)
+        setUsers(_users)
+      }).catch(err => {
+        console.log(err)
+      })
     e.preventDefault()
   }
 
   const [value, select] = useUsersSelect({
     users,
     buildSelectUsers,
+    handleAddUser: () => { setCreateBoxActive(true) },
     selectAll: true,
     handleEdit: handleUserEdit,
     handleTrash: handleUserDelete,
@@ -74,6 +121,53 @@ const AccountingBookUsersPage = (props) => {
       overflow: 'hidden',
     },
   };
+
+  const handleCreateUserConfirm = () => {
+    if (name.value.length < 1) {
+      setName({ value: name.value, valid: false })
+      return
+    }
+
+    dragonBabyApi.createUser(group_id, { name: name.value, image_url: imageUrls[imageId] })
+      .then(res => {
+        let _users = [...users]
+        _users.push(
+          normalizeGroupUser(res.data.user)
+        )
+        setUsers(_users)
+        resetConfirmBox()
+        setCreateBoxActive(false)
+      }).catch(err => {
+        console.log(err)
+        setCreateBoxActive(false)
+      })
+  }
+
+  const handleCancelUserConfirm = () => {
+    resetConfirmBox()
+    setCreateBoxActive(false)
+  }
+
+  const [createBoxActive, setCreateBoxActive] = useState(false)
+  const createUserConfirmBox = <UserConfirmBox
+    confirmed={handleCreateUserConfirm}
+    canceled={handleCancelUserConfirm}
+    title='新增使用者'
+    userName={name}
+    setUserName={setName}
+    imageUserId={imageId}
+    setUserImageId={setImageId}
+  />
+
+  const editUserConfirmBox = <UserConfirmBox
+    confirmed={handleEditUserConfirm}
+    canceled={handleEditUserCancel}
+    title='編輯使用者'
+    userName={name}
+    setUserName={setName}
+    imageUserId={imageId}
+    setUserImageId={setImageId}
+  />
 
   return(
     <>
@@ -105,33 +199,8 @@ const AccountingBookUsersPage = (props) => {
           : null
       }
       </div>
-      {
-        editBoxActive ?  <ConfirmBox title="編輯虛擬使用者" confirmed={handleEditUserConfirm} canceled={() => setEditBoxActive(false)}>
-            <div style={styles.swapView}>
-              <IconSwappableView
-                imageSize="80px"
-                styles={_styles}
-                changed={setImageId}
-                initial={imageId}
-                icons={imageUrls}/>
-              <div style={{ padding: '24px 16px' }}>
-                <TextInput
-                  key='name'
-                  faicon="farCreditCard"
-                  disabled={false}
-                  placeholder={'輸入名稱'}
-                  name={'名稱'}
-                  style={{ width: '100%', margin: '0px' }}
-                  changed={(value) => setName({ value: value, valid: value.length > 0 })}
-                  value={name.value === undefined ? '' : name.value}
-                  valid={name.valid}
-                  invalidFeedback="*不可為空白，12字內"
-                  type='text'
-                />
-              </div>
-            </div>
-          </ConfirmBox>  : null
-      }
+      { editBoxActive ? editUserConfirmBox : null }
+      { createBoxActive ? createUserConfirmBox : null }
     </>
   )
 }
