@@ -45,6 +45,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     resetForm
   } = useContext(PaymentContext)
 
+  const [_allocationType, _setAllocationType] = useState('evenly')
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
     initialValue: state.payer.value,
@@ -58,6 +59,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       _setName({ value: payment.description, valid: true })
       _setAmount({ value: payment.amount, valid: true })
       _setCreationDate({ value: payment.paid_at, valid: true })
+      _setAllocationType(payment.allocation_type)
     }
   }, [payment])
 
@@ -229,9 +231,17 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   }
 
   const handleSubmit = () => {
-    let newState = { ...state, manualOwers: _manualOwers, owers: _owers, name: _name, creation_date: _creation_date, amount: _amount }
+    let newState = {
+      ...state,
+      manualOwers: _manualOwers,
+      owers: _owers,
+      name: _name,
+      creation_date: _creation_date,
+      amount: _amount,
+      allocation_type: _allocationType
+    }
+
     let valid = validateForm(newState, form[state.allocation_type], validate)
-    setAlertMessage(JSON.stringify(newState.allocation_type))
     if (!valid) { return }
     createPayment(newState, () => {
       resetForm()
@@ -261,7 +271,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
         styles={defaultStyles}
         index={index ? index : 0}
         key="PaymentCreationPage__ColumnSwappableView"
-        callback={(index) => { index === 0 ? setAllocationType('evenly') : setAllocationType('amount') }}
+        callback={(index) => { index === 0 ? _setAllocationType('evenly') : _setAllocationType('amount') }}
         steps={steps} />
 
       <div className={styles.footer}>
