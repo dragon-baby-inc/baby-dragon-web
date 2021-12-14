@@ -231,7 +231,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const handleSubmit = () => {
     let newState = { ...state, manualOwers: _manualOwers, owers: _owers, name: _name, creation_date: _creation_date, amount: _amount }
     let valid = validateForm(newState, form[state.allocation_type], validate)
-//     setAlertMessage(JSON.stringify(newState.manualOwers))
+    setAlertMessage(JSON.stringify(newState.allocation_type))
     if (!valid) { return }
     createPayment(newState, () => {
       resetForm()
