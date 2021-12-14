@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import "../../../styleSheets/Checkbox.scss";
-import "../../../styleSheets/CustomInput.scss";
-import "../../../styleSheets/PaymentLabel.scss";
-import { Collapse } from 'react-collapse';
+import styles from './paymentCheckboxLabel.module.scss'
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button'
 import Checkbox from  '../Inputs/Checkbox'
 import { useHistory } from "react-router-dom";
+import { Image, Separater } from '../../index'
+import { Collapse } from '../../index'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
@@ -24,7 +23,7 @@ const PaymentCheckboxLabel = (props) => {
   }, [props.selectedPaymentIds])
 
   let object = props.object
-  let activeClass = open ? 'active' : ''
+  let activeClass = open ? styles.active : ''
   let amount = object.amount
 
   const handleLabelOnCheck = (e) => {
@@ -39,9 +38,9 @@ const PaymentCheckboxLabel = (props) => {
   const allocations = object.allocations.map(allo => {
     i += 1
     return(
-      <div key={i} className='allocation'>
-        <div className='allocationInner'>
-          <span className='name'> { allo.ower_display_name } </span> <span className="amount">{props.currency_symbol}{allo.amount}</span>
+      <div key={i} className={[styles.allocation].join(' ')}>
+        <div className={styles.allocationInner}>
+          <span className={[styles.alloName].join(' ')}> { allo.ower_display_name } </span> <span className={[styles.alloAmount].join(' ')}>{props.currency_symbol}{allo.amount}</span>
         </div>
       </div>
     )
@@ -61,83 +60,72 @@ const PaymentCheckboxLabel = (props) => {
   }
 
   let paidBack = ""
-  if (object.paid_back) { paidBack = "paid-back" }
+  if (object.paid_back) { paidBack = styles.paidBack }
 
   return (
     <>
-      <label className={`group-menu-label group-menu-checkbox-label group-menu-payment ${activeClass} ${paidBack}`}>
-        {
-          props.editMode ?
-            <Checkbox checked={isChecked} value={object.id.toString()} changed={handleCheckboxChaned}/>:
-            <div className='group-menu-radio'>
-              <input
-                onChange={handleLabelOnCheck}
-                type="checkbox"
-                value={ object.id }
-              />
-            </div>
-        }
-        <div className={`group-menu-image-block`}>
+      <div className={[styles.container, activeClass].join(' ')}>
+        <label className={[`${activeClass} ${paidBack}`, styles.label].join(" ")}>
           {
-            object.payer_image_url  ?
-              <img className='group-menu-userimage' src={object.payer_image_url} alt="user"/>
-              :
-              <img className='group-menu-userimage' src='https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png' alt="user"/>
+            props.editMode ?
+              <Checkbox checked={isChecked} value={object.id.toString()} changed={handleCheckboxChaned}/>:
+              <div className={[styles.checkbox].join(" ")}>
+                <input
+                  onChange={handleLabelOnCheck}
+                  type="checkbox"
+                  value={ object.id }
+                />
+              </div>
           }
-        </div>
-        <div className={`group-menu-payment-block`}>
-          <div className='group-menu-username'>
-            <div className='description'>
-              {
-                object.paid_back ?
-                  `還 ${object.allocations[0].ower_display_name}`
-                  :
-                  object.description
-              }
+          <div className={[styles.image].join(' ')}>
+            <Image imageUrl={object.payer_image_url} defaultImage='user'/>
+          </div>
+          <div className={[styles.paymentBlock].join(' ')}>
+            <div className={[styles.name].join(" ")}>
+              <div className={[styles.description].join(" ")}>
+                {
+                  object.paid_back ?
+                    `還 ${object.allocations[0].ower_display_name}`
+                    :
+                    object.description
+                }
+              </div>
+              <div className={[styles.message].join(" ")}>
+                {
+                  object.paid_back ?
+                    `${object.payer_display_name} 還款`
+                    :
+                    object.payer_display_name
+                }
+              </div>
             </div>
-            <div className='message'>
-              {
-                object.paid_back ?
-                  `${object.payer_display_name} 還款`
-                  :
-                  object.payer_display_name
-              }
+            <div className={[styles.amount].join(" ")}>
+              <div className={[styles.description].join(" ")}>
+                {props.currency_symbol}{ amount }
+              </div>
+              <div className={[styles.message].join(" ")}>
+                { object.allocations.length }人
+              </div>
             </div>
           </div>
-          <div className={`col-4 group-menu-amount`}>
-            <div className='description'>
-              {props.currency_symbol}{ amount }
-            </div>
-            <div className="message" >
-              { object.allocations.length }人
-            </div>
-          </div>
-        </div>
-      </label>
+        </label>
+      </div>
       <Collapse isOpened={open}
         initialStyle={open ? { height: 'auto', overflow: 'initial' } : { height: '0px', overflow: 'hidden' }} >
-        <div className={`payment collapse ${paidBack}`}>
-          {
-            true ?
-              null
-              :
-                <div className='allocation title'>
-                  <span> {object.ower_and_payer_message} </span>
-                </div>
-          }
+        <div className={[`${paidBack}`, styles.paymentCollapse].join(" ")}>
           {
             object.paid_back ?
               null
               :
-                <div className='allocations'>
+                <div className={[styles.allocations].join(" ")}>
                   {allocations}
                 </div>
           }
-          <div className='allocation buttons'>
-            <div onClick={handleDeleteClick} className='btn'>
+          <div className={[styles.buttons].join(" ")}>
+            <div onClick={handleDeleteClick} className={[styles.btn].join(" ")}>
               刪除
             </div>
-            <div onClick={handleEditClick} className='btn edit'>
+            <div onClick={handleEditClick} className={[styles.btn, styles.edit].join(' ')}>
               編輯
             </div>
           </div>
@@ -147,18 +135,4 @@ const PaymentCheckboxLabel = (props) => {
   )
 };
 
-        // {
-        //   open ?
-        //     <div className='btn-group active'>
-        //       <Button clicked={handleEditClick} className='icon'>
-        //         <FontAwesomeIcon icon={faEdit}/>
-        //       </Button>
-        //     </div>
-        //     :
-        //     <div className='btn-group'>
-        //       <Button className='icon'>
-        //         <FontAwesomeIcon icon={faEdit}/>
-        //       </Button>
-        //     </div>
-        // }
 export default PaymentCheckboxLabel;

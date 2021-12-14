@@ -13,8 +13,6 @@ function Loading(){
   return(
     <div style={styles.bg}>
       <BulletList />
-      <BulletList />
-      <BulletList />
     </div>
   )
 }

@@ -39,17 +39,16 @@ const PaymentsPage = (props) => {
 
   let paymentHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
   let paymentsHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
+  paymentsHeight = "calc(100% - 29px)"
+  console.log(paymentsHeight)
   let paymentStyle =  {
     background: '#FFFFFF',
     overflow: 'auto',
     marginTop: small ? '0px' : '0px',
-    height: paymentHeight,
-    paddingBottom: '150px',
+    height: paymentsHeight,
+    paddingBottom: '150px'
   }
-  //     marginTop: small ? '58px' : '20px',
-  //     paddingTop: small ? '10px' : '0px',
-  //
-  //
+
   const handleIndexChanged = (i) => {
     setIndex(i)
   }
@@ -187,10 +186,10 @@ const styles = {
   dateSeparator: {
     fontSize: '14px',
     textAlign: 'left',
-    paddingLeft: '16px',
     paddingTop: '12px',
-    fontWeight: 800,
-    color: themeColors.gray500,
+    paddingLeft: '16px',
+    fontWeight: 700,
+    color: themeColors.gray600,
   },
 }
 

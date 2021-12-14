@@ -9,6 +9,7 @@
   background-color: white;
 }
 
+
 .icons {
   width: 100%;
   display: flex;
@@ -17,13 +18,13 @@
 
   .icon {
     color: $gray600;
-    font-weight: 500;
+    font-weight: 600;
     flex-grow: 1;
     background-color: transparent;
 
     span {
       display: inline-block;
-      font-size: 13px;
+      font-size: 14px;
       padding-top: 10px;
     }
   }

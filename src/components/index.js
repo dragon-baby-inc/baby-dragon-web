@@ -5,6 +5,7 @@ import PaymentSwipeableView from './PaymentSwipeableView/PaymentSwipeableView'
 import FontAwesomeIcon from './FontAwesomeIcon/FontAwesomeIcon'
 import ColumnSwappableView from './ColumnSwappableView/ColumnSwappableView'
 import Footer from './Footer/Footer'
+import Collapse from './Collapse/Collapse'
 
 export {
   EmptyResult,
@@ -13,7 +14,8 @@ export {
   PaymentSwipeableView,
   FontAwesomeIcon,
   StepsWidget,
-  ColumnSwappableView
+  ColumnSwappableView,
+  Collapse
 };
 
 export * from './FormElements'
