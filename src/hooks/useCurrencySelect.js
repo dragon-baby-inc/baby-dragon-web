@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import { RadioSelect, Image, RadioLabel } from '../components'
 
 const currencies = [
-  { id: "TWD", name: "TWD" },
-  { id: 'USD', name: "USD" },
+  { id: "TWD", name: "TWD", displayName: "台幣" },
+  { id: 'USD', name: "USD", displayName: "美金" },
 ]
 
 const useCurrencySelect = ({
@@ -41,7 +41,7 @@ const useCurrencySelect = ({
     changed={handleSelectChange}
   />
 
-    return [value, select];
+    return [value, select, currencies];
 }
 
 export default useCurrencySelect;

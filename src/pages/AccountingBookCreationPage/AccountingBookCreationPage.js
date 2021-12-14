@@ -103,7 +103,7 @@ const AccountingBookEditPage = (props) => {
         newUser.displayName = res.data.user.display_name
         newUser.imageURL = res.data.user.image_url
         _users[index] = newUser
-        setUsers(_users)
+        setUsers({ value: _users, valid: true })
         resetConfirmBox()
       }).catch(err => {
         console.log(err)
@@ -128,7 +128,7 @@ const AccountingBookEditPage = (props) => {
         let _users = [...users]
         let index = _users.findIndex((u) => u.id === object.id)
         _users.splice(index, 1)
-        setUsers(_users)
+        setUsers({ value: _users, valid: true })
         _setUsers(_users)
       }).catch(err => {
         console.log(err)
@@ -175,7 +175,7 @@ const AccountingBookEditPage = (props) => {
         _users.push(
           normalizeGroupUser(res.data.user)
         )
-        setUsers(_users)
+        setUsers({ value: _users, valid: true })
         _setUsers(_users)
         resetConfirmBox()
         setCreateBoxActive(false)
@@ -212,12 +212,12 @@ const AccountingBookEditPage = (props) => {
   />
 
   // TODO: To be refactor
-  const [currency, currencySelect] = useCurrencySelect({
+  const [currency, currencySelect, currencies] = useCurrencySelect({
     initialValue: defaultCurrency,
     callback: (currency) => setCurrency({ value: currency, valid: true  })
   })
 
-  const updateAccountingBook = () => {
+  const createAccountingBook = () => {
     let formValid = validateForm(state, ['name', 'users', 'imageId', 'currency'])
     if (!formValid) { return }
 
@@ -283,7 +283,7 @@ const AccountingBookEditPage = (props) => {
       </>
     },
     {
-      name: "選擇分帳成員",
+      name: <div>選擇 <span style={styles.nameSpan}>{state.users.value.length}位</span> 分帳成員</div>,
       component:
         <>
           <div style={styles.select}>
@@ -294,6 +294,7 @@ const AccountingBookEditPage = (props) => {
     },
     {
       name: "選擇幣別",
+      name: <div>選擇 <span style={styles.nameSpan}>{state.currency.value ? currencies.filter(c => c.name === state.currency.value)[0].displayName : '台幣'}</span> 作為帳款幣別</div>,
       component: <div style={styles.select}>
         {currencySelect}
       </div>
@@ -315,7 +316,7 @@ const AccountingBookEditPage = (props) => {
   }
 
   const handleSubmit = () => {
-    updateAccountingBook()
+    createAccountingBook()
   }
 
   return(
@@ -407,6 +408,13 @@ const styles = {
   },
   footer: {
     height: '101px',
+  },
+  swapView: {
+    paddingTop: '20px'
+  },
+  nameSpan: {
+    color: themeColors.gold700,
+    fontWeight: 800,
   }
 }
 
