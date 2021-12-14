@@ -81,9 +81,13 @@ const AccountingBookEditPage = (props) => {
 
   const [editObject, setEditObject] = useState(null)
   const handleEditUserCancel = () => {
+    resetConfirmBox()
+    setEditBoxActive(false)
+  }
+
+  const resetConfirmBox = () => {
     setUserImageId(0)
     setUserName({ value: '', valid: true })
-    setEditBoxActive(false)
   }
 
   const handleEditUserConfirm = () => {
@@ -100,6 +104,7 @@ const AccountingBookEditPage = (props) => {
         newUser.imageURL = res.data.user.image_url
         _users[index] = newUser
         setUsers(_users)
+        resetConfirmBox()
       }).catch(err => {
         console.log(err)
       })
@@ -172,6 +177,7 @@ const AccountingBookEditPage = (props) => {
         )
         setUsers(_users)
         _setUsers(_users)
+        resetConfirmBox()
         setCreateBoxActive(false)
       }).catch(err => {
         console.log(err)
@@ -180,6 +186,7 @@ const AccountingBookEditPage = (props) => {
   }
 
   const handleCancelUserConfirm = () => {
+    resetConfirmBox()
     setCreateBoxActive(false)
   }
 
@@ -188,6 +195,16 @@ const AccountingBookEditPage = (props) => {
     confirmed={handleCreateUserConfirm}
     canceled={handleCancelUserConfirm}
     title='新增使用者'
+    userName={userName}
+    setUserName={setUserName}
+    imageUserId={imageUserId}
+    setUserImageId={setUserImageId}
+  />
+
+  const editUserConfirmBox = <UserConfirmBox
+    confirmed={handleEditUserConfirm}
+    canceled={handleEditUserCancel}
+    title='編輯使用者'
     userName={userName}
     setUserName={setUserName}
     imageUserId={imageUserId}
@@ -346,39 +363,8 @@ const AccountingBookEditPage = (props) => {
           </Footer>
         </div>
       </div>
-      {
-        editBoxActive ?  <ConfirmBox
-          title="編輯虛擬使用者"
-          confirmed={handleEditUserConfirm}
-          canceled={handleEditUserCancel}>
-          <div style={{ backgroundColor: 'white', width: '100%' }}>
-            <IconSwappableView
-              imageSize="80px"
-              styles={_styles}
-              changed={setUserImageId}
-              initial={imageUserId}
-              icons={imageUrls}/>
-            <div style={{ padding: '24px 16px' }}>
-              <TextInput
-                key='name'
-                faicon="farCreditCard"
-                disabled={false}
-                placeholder={'輸入名稱'}
-                name={'名稱'}
-                style={{ width: '100%', margin: '0px' }}
-                changed={(value) => setUserName({ value: value, valid: value.length > 0 })}
-                value={userName.value === undefined ? '' : userName.value}
-                valid={userName.valid}
-                invalidFeedback="*不可為空白，12字內"
-                type='text'
-              />
-            </div>
-          </div>
-        </ConfirmBox>  : null
-      }
-      {
-        createBoxActive ? createUserConfirmBox : null
-      }
+      { editBoxActive ? editUserConfirmBox : null }
+      { createBoxActive ? createUserConfirmBox : null }
     </>
   )
 }
