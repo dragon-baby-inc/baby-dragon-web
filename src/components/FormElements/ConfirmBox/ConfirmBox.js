@@ -5,7 +5,14 @@ import {
   Separater,
 } from '../../../components'
 
-const ConfirmBox = ({ title, children, confirmed, canceled }) => {
+const ConfirmBox = ({
+  title,
+  children,
+  confirmed,
+  canceled ,
+  confirm_text,
+  cancel_text,
+}) => {
   const handleCanceled = (e) => {
     canceled()
     e.preventDefault()
@@ -25,10 +32,10 @@ const ConfirmBox = ({ title, children, confirmed, canceled }) => {
         <Separater style={{margin: "0px"}}/>
         <div className={styles.btnGroup}>
           <button className={[styles.button, styles.cancel].join(" ")} onClick={handleCanceled}>
-            取消
+            {cancel_text ? cancel_text: "取消"}
           </button>
           <button className={[styles.button, styles.confirm].join(" ")} onClick={handleConfirmed}>
-            確認
+            {confirm_text ? confirm_text: "確認"}
           </button>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { themeColors } from '../constants'
 import { Context as AuthContext } from '../contexts/AuthContext'
 import { usePayments, useAccountingBook } from '../hooks'
 import {
+  ConfirmBox,
   ColumnSwappableView,
   PaymentsHeader,
   Loading,
@@ -65,20 +66,34 @@ const PaymentsPage = (props) => {
     setSelectedPaymentIds(paymentIds)
   }
 
-  const handleDeletePayment = (payment) => {
-    if (window.confirm(`確認刪除這筆帳款?`)) {
-      axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
-        payment_ids: [payment.id],
-        builder_id: authState.userLineIdToken
-      }).then(function (response) {
-        getPayments()
-        deactiveEditMode()
+  const [deleteActive, seDeleteActive] = useState(null)
+
+  let deleteConfirmBox = <ConfirmBox
+    title="刪除帳款"
+    confirmed={() => deletePayment(deleteActive)}
+    canceled={() => { seDeleteActive(null) }}
+    confirm_text="確認"
+    cancel_text="取消">
+    <div style={{ paddingBottom: '20px' }}> 確認刪除 {deleteActive ? deleteActive.description : null } 這筆帳款嗎? </div>
+    </ConfirmBox>
+
+  const deletePayment = (payment) => {
+    axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
+      payment_ids: [payment.id],
+      builder_id: authState.userLineIdToken
+    }).then(function (response) {
+      getPayments()
+      seDeleteActive(null)
+    })
+      .catch(function (error) {
+        console.log(error)
+        alert('刪除失敗')
+        seDeleteActive(null)
       })
-        .catch(function (error) {
-          console.log(error)
-          alert('刪除失敗')
-        })
-    }
+  }
+
+  const handleDeletePayment = (payment) =>{
+    seDeleteActive(payment)
   }
 
   payments.forEach(payment => {
@@ -151,6 +166,7 @@ const PaymentsPage = (props) => {
         clicked={handleAddPayment}
         iconInlineStyle={{background: 'none', background: 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'}}
         containerInlineStyle={{ right: '30px', bottom: '24px'}}/>
+      { deleteActive ? deleteConfirmBox : null }
     </>
   )
 }

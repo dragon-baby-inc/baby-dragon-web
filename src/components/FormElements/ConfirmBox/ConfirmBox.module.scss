@@ -24,7 +24,14 @@
   flex-flow: column;
   flex-grow: 1;
   justify-content: center;
+  align-items: center;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
 }
+
 .title {
   padding: 24px 0px;
   text-align: center;
