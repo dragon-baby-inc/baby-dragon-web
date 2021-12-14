@@ -46,14 +46,14 @@ const AccountingBookLabel = (props) => {
           </div>
           { props.current ?
             <>
-              <div onClick={handleSetAsCurrent} className={`col-4 group-menu-amount`}>
+              <div className={`col-4 group-menu-amount`}>
                 預設帳本
-                <Star solid/>
+                <Star solid clicked={handleSetAsCurrent} />
               </div>
             </>
             :
-            <div onClick={handleSetAsCurrent} className={`col-4 group-menu-amount`}>
-              <Star />
+            <div className={`col-4 group-menu-amount`}>
+              <Star clicked={handleSetAsCurrent} />
             </div>
           }
           <FontAwesomeIcon style={{ fontSize: "15px", margin: "0px 10px" }} faicon='faChevronRight' color={themeColors.gray900}/>
