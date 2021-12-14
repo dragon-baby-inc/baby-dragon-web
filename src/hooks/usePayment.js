@@ -22,7 +22,7 @@ const usePayment =  (query_params) => {
     payer_id: "U4fb1cd3edb7c2552e2a25f286f5c102d",
   }
 
-  let stub = true
+  let stub = false
   const getPayment = async () => {
     setLoading(true)
     await dragonBabyApi.getPayment(group_id, accounting_book_id, payment_id)

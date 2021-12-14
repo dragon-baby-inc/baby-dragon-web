@@ -22,7 +22,7 @@ const usePayments =  (query) => {
     },
   ]
 
-  let stub = true
+  let stub = false
 
   const getPayments = async () => {
     setLoading(true)
