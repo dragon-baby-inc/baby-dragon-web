@@ -78,8 +78,8 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const [_creation_date, _setCreationDate] = useState({ value: null, valid: true })
   const datePickerInput = <DatePickerInput
     name='日期'
-    changed={_setCreationDate}
-    value={_creation_date}
+    changed={(v) => _setCreationDate({ value: v, valid: true })}
+    value={_creation_date.value}
     faicon="farCreditCard"
     />
 
@@ -90,7 +90,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     placeholder='輸入金額'
     name='金額'
     style={{ borderRadius: '16px' }}
-    changed={_setAmount}
+    changed={(v) => _setAmount({ value: v, valid: v.length > 0 })}
     value={_amount.value}
     valid={_amount.valid}
     invalidFeedback="*不可為空白，12字內"
