@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Collapse } from 'react-collapse';
+import { useCookies } from 'react-cookie';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/userSummaryLabel.scss";
 import UserSummaryCollapse from '../UserSummaryCollapse/userSummaryCollapse'
 import { Separater } from '../../../components/FormElements'
+import {
+  useHistory
+} from '../../../hooks'
 
 const UserSummaryLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(true)
+  const { group_id, accounting_book_id } = useParams();
+  const { navigateTo } = useHistory();
   let object = props.object
   let activeClass = collapseOpen ? 'active' : ''
+  const [cookies, setCookie] = useCookies(['name']);
+
+  const handlePaidBackClick = (object, allo) => {
+    let payment = {
+      id: null,
+      description: '還款',
+      amount: allo.amount,
+      paid_back: true,
+      allocation_type: 'amount',
+      ower_id:  object.payer_id,
+      payer_id: allo.ower_id
+    }
+
+    setCookie('payment', payment, { path: '/' });
+    navigateTo('paidBackPaymentPage', { group_id, accounting_book_id, payment })
+  }
 
   const handleLabelOnCheck = (e) => {
     if (e.target.checked) {
@@ -28,7 +51,7 @@ const UserSummaryLabel = (props) => {
           <span className='name'> { allo.ower_display_name } </span>
           <span className="amount">{props.currency_symbol}{allo.amount}</span>
         </div>
-        <div className='paidbackBtn'>
+        <div className='paidbackBtn' onClick={() => handlePaidBackClick(object, allo)}>
           還款
         </div>
       </div>

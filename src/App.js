@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationPage from './pages/NavigationPage'
 import AccountingBooksPage from './pages/AccountingBooksPage'
+import { CookiesProvider } from 'react-cookie';
 import { Provider as PaymentProvider } from './contexts/PaymentContext'
 import { Provider as FilterPaymentProvider } from './contexts/FilterPaymentContext'
 import { Provider as AccountingBookProvider } from './contexts/AccountingBookContext'
@@ -36,20 +37,22 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
-          <PaymentProvider>
-            <Route exact path="/liff_entry">
-            </Route>
-            <Route exact path="/liff_entry/groups/:group_id/accounting_books">
-              <AccountingBooksPage/>
-            </Route>
-            <AccountingBookProvider>
-              <FilterPaymentProvider>
-                <Route path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id">
-                  <NavigationPage />
-                </Route>
-              </FilterPaymentProvider>
-            </AccountingBookProvider>
-          </PaymentProvider>
+          <CookiesProvider>
+            <PaymentProvider>
+              <Route exact path="/liff_entry">
+              </Route>
+              <Route exact path="/liff_entry/groups/:group_id/accounting_books">
+                <AccountingBooksPage/>
+              </Route>
+              <AccountingBookProvider>
+                <FilterPaymentProvider>
+                  <Route path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id">
+                    <NavigationPage />
+                  </Route>
+                </FilterPaymentProvider>
+              </AccountingBookProvider>
+            </PaymentProvider>
+          </CookiesProvider>
         </Switch>
       </BrowserRouter>
     </>

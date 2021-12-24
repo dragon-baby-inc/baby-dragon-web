@@ -81,6 +81,7 @@ const PaymentCreationPage = (props) => {
       if (payer) { setPayer(payer) }
 
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      if (!builder) { builder = users[0] }
       setBuilder(users[0])
       // if (!builder) { alert('未授權') }
 

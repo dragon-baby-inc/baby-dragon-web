@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import styles from './paymentCheckboxLabel.module.scss'
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button'
 import Checkbox from  '../Inputs/Checkbox'
-import { useHistory } from "react-router-dom";
 import { Image, Separater } from '../../index'
 import { Collapse } from '../../index'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/fontawesome-free-solid'
+import {
+  useHistory
+} from '../../../hooks'
 
 const PaymentCheckboxLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(false)
+  const { navigateTo, navigate } = useHistory();
+  const [cookies, setCookie] = useCookies([]);
   const { group_id, accounting_book_id } = useParams();
-  const history = useHistory();
   const open = collapseOpen && !props.editMode
   const [ isChecked, setIsChecked ] = useState(props.checked)
 
@@ -51,7 +55,23 @@ const PaymentCheckboxLabel = (props) => {
   }
 
   const handleEditClick = () => {
-    history.push(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${object.id}/edit`)
+    navigate(`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${object.id}/edit`)
+  }
+
+  const handlePaidBackEditClick = () => {
+    console.log(object)
+    let payment = {
+      id: object.id,
+      description: object.description,
+      amount: object.amount,
+      paid_back: true,
+      allocation_type: 'amount',
+      payer_id:  object.payer_id,
+      ower_id: object.allocations[0].ower_id
+    }
+
+    setCookie('payment', payment, { path: '/' });
+    navigateTo('paidBackPaymentPage', { group_id, accounting_book_id, payment })
   }
 
   const handleCheckboxChaned = (e) => {
@@ -64,7 +84,7 @@ const PaymentCheckboxLabel = (props) => {
 
   return (
     <>
-      <div className={[styles.container, activeClass].join(' ')}>
+      <div className={[styles.container, activeClass, paidBack].join(' ')}>
         <label className={[`${activeClass} ${paidBack}`, styles.label].join(" ")}>
           {
             props.editMode ?
@@ -125,7 +145,7 @@ const PaymentCheckboxLabel = (props) => {
             <div onClick={handleDeleteClick} className={[styles.btn].join(" ")}>
               刪除
             </div>
-            <div onClick={handleEditClick} className={[styles.btn, styles.edit].join(' ')}>
+            <div onClick={object.paid_back ? handlePaidBackEditClick : handleEditClick} className={[styles.btn, styles.edit].join(' ')}>
               編輯
             </div>
           </div>

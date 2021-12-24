@@ -18,6 +18,7 @@ const Hook =  () => {
     accountingBookSettingsPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/settings`,
     accountingBookEditPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/edit/index`,
     paymentIndexPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/payments/index`,
+    paidBackPaymentPage: (args) => `/liff_entry/groups/${args.group_id}/accounting_books/${args.accounting_book_id}/payments/paid_back?`,
   }
 
   return { navigate, navigateTo, routes };

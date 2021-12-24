@@ -14,6 +14,7 @@ import {
   PaymentEditPage,
   AccountingBookCurrencyPage,
   AccountingBookCreationPage,
+  PaymentPaidBackPage,
   PaymentCreationPage
 } from './index'
 
@@ -22,6 +23,9 @@ const NavigationPage = (props) => {
     <>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
         <PaymentCreationPage />
+      </Route>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/paid_back">
+        <PaymentPaidBackPage />
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/new">
         <AccountingBookCreationPage />

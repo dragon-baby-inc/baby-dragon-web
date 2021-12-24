@@ -24,11 +24,14 @@
 
 .label.active {
   border-bottom: 1px solid $gray400;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  transition: border 400ms;
 }
 
 .label {
   border-bottom: 1px solid transparent;
-  transition: 400ms;
+  transition: border 100ms;
 
   display: flex;
   justify-content: space-between;
@@ -183,6 +186,12 @@
     padding: 0;
     border-top:  1px solid white;
   }
+}
+
+
+.paymentCollapse.paidBack {
+  background: #E6EFED;
+  background-color: #E6EFED;
 }
 
 .paymentCollapse {

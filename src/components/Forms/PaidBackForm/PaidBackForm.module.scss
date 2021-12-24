@@ -1,0 +1,23 @@
+.container {
+  height: calc(100vh - 59px);
+//   height: calc(var(--vh, 1vh) * 100 - 59px);
+  overflow: hidden;
+}
+.stepContainer {
+  padding: 0px 20px;
+  height: calc(100% - 82px);
+  overflow: auto;
+}
+
+.AddOwerbutton {
+  padding-bottom: 30px;
+
+}
+
+.footer {
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 12px 20px 24px;
+}
