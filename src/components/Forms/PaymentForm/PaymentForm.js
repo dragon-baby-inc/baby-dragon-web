@@ -46,13 +46,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   } = useContext(PaymentContext)
 
   const [_allocationType, _setAllocationType] = useState('evenly')
-  const [payer, payerLabel] = useUserRadioSelectLabel({
-    users: users,
-    initialValue: state.payer.value,
-  })
-
   const [_name, _setName] = useState({ value: '', valid: true })
   const [_amount, _setAmount] = useState({ value: null, valid: true })
+  const [_creation_date, _setCreationDate] = useState({ value: null, valid: true })
+  const [_owers, _setOwers] = useState({ value: [], valid: true })
+  const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
+  const [_payer, _setPayer] = useState({ value: null, valid: true })
+  const [alertMessage, setAlertMessage] = useState(null)
 
   useEffect(() => {
     if (payment) {
@@ -62,6 +62,11 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       _setAllocationType(payment.allocation_type)
     }
   }, [payment])
+
+  const [payer, payerLabel] = useUserRadioSelectLabel({
+    users: users,
+    initialValue: state.payer.value,
+  })
 
   const nameInput = <TextInput
     style={{ paddingTop: '16px' }}
@@ -77,7 +82,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     type='text'
   />
 
-  const [_creation_date, _setCreationDate] = useState({ value: null, valid: true })
   const datePickerInput = <DatePickerInput
     name='日期'
     changed={(v) => _setCreationDate({ value: v, valid: true })}
@@ -99,15 +103,12 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     type='number'
   />
 
-    const [_owers, _setOwers] = useState({ value: [], valid: true })
   const owersLabel = <OwerCheckboxSelectLabel
     users={users}
     callback={(ids) => _setOwers({ value: ids, valid: true })}
     valid={_owers.valid}
     selectedObjects={_owers.value}
   />
-
-  const [alertMessage, setAlertMessage] = useState(null)
 
   const handleManualOwersChanged = (index, data) => {
     let newOwers = [..._manualOwers.value]
@@ -134,7 +135,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   }
 
   let i = -1
-  const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
   let radioAmountLabels = _manualOwers.value.map(ower => {
     i++
     return(
@@ -235,6 +235,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       ...state,
       manualOwers: _manualOwers,
       owers: _owers,
+      payer: { value: payer, valid: true },
       name: _name,
       creation_date: _creation_date,
       amount: _amount,
