@@ -1,0 +1,38 @@
+.label {
+  display: flex;
+  padding: 16px 0px;
+}
+
+.img {
+  position: relative;
+  margin-right: 20px;
+}
+
+.content {
+  display: flex;
+  flex-flow: column;
+}
+
+.category {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 140%;
+  padding-bottom: 2px;
+  color: #2D2D2D;
+}
+
+.message {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  color: #4B4B4B;
+}
+
+.time {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 180%;
+  color: #909090;
+}

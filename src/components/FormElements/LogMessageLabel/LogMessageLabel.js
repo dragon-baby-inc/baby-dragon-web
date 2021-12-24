@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
+import {
+  themeColors
+} from '../../../constants'
 import "../../../styleSheets/userSummaryLabel.scss";
+import styles from './LogMessageLabel.module.scss'
+import {
+  ColorBlock,
+  Image,
+  FontAwesomeIcon
+} from '../../../components'
 
 const UserSummaryLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(true)
@@ -16,40 +25,56 @@ const UserSummaryLabel = (props) => {
     }
   }
 
+  let faIcon;
+  let color;
+  console.log(object.category)
+  switch(object.category) {
+    case 'create_payment':
+      faIcon = 'faPlus'
+      color = 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'
+      break;
+    case 'update_payment':
+      faIcon = 'faEdit'
+      color = 'linear-gradient(92.29deg, #88631C 0%, #C5AF85 100%)'
+      break;
+    case 'delete_payment':
+      faIcon = 'faTrash'
+      color = 'linear-gradient(133.78deg, #D65C5C 2.04%, #BE2323 100%)'
+      break;
+    default:
+      color = themeColors.green700
+      break;
+
+  }
+
   return (
     <>
-      <label className={`group-menu-label group-menu-checkbox-label group-menu-summary ${activeClass}`}>
-            <div className='group-menu-radio'>
-              <input
-                onChange={handleLabelOnCheck}
-                checked={props.checked}
-                type="checkbox"
-                value={ object.payer_id }
-              />
-            </div>
-        <div className={`group-menu-image-block ${activeClass}`}>
-          {
-            object.payer_image_url  ?
-              <img className='group-menu-userimage' src={object.payer_image_url} alt="user"/>
-              :
-              <img className='group-menu-userimage' src='https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png' alt="user"/>
-          }
+      <label className={styles.label}>
+        <div className={styles.img}>
+          <Image size='56px' imageUrl={object.imageURL}/>
+          <ColorBlock
+            color={color}
+            imageSize='24px'
+            blockStyle={{
+              position: 'absolute',
+              top: 38,
+              right: 0,
+            }}>
+            <FontAwesomeIcon faicon={faIcon} style={{ fontSize: '11px', color: 'ffffff' }}/>
+          </ColorBlock>
         </div>
-        <div className={`group-menu-payment-block ${activeClass}`}>
-          <div className='group-menu-username'>
-            <div className='description'>
-              {object.payer_display_name}
-            </div>
+        <div className={styles.content}>
+          <div className={styles.category}>
+            {object.display_category}
           </div>
-            <div className='group-menu-amount'>
-              應收
-            </div>
+          <div className={styles.message}>
+            {object.content}
+          </div>
+          <div className={styles.time}>
+            {object.created_at}
+          </div>
         </div>
       </label>
-      <div>
-        <div className='user-summary collapse'>
-        </div>
-      </div>
     </>
   )
 };

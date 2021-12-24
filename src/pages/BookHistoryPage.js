@@ -6,7 +6,8 @@ import {
   PageHeader,
   Loading,
   TopLeftIcon,
-  EmptyResult
+  EmptyResult,
+  LogMessageLabel
 } from '../components'
 import { themeColors } from '../constants'
 
@@ -27,7 +28,7 @@ const styles = {
     overflow: 'hidden',
   },
   logMessages: {
-    padding: '20px',
+    padding: '0px 20px',
     paddingBottom: '200px',
     overflow: 'auto',
     height: 'calc(100vh - 58px)',
@@ -72,21 +73,11 @@ const BookHistoryPage = () => {
   logMessages.forEach(object => {
     if (object.created_at !== currentDate) {
       currentDate = object.created_at
-      objects.push(
-        <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
+//       objects.push(
+//         <div key={currentDate} style={styles.dateSeparator}>{currentDate}</div>)
     }
     objects.push(
-      <div key={object.id} style={styles.label}>
-        <div style={styles.category}>
-          {object.display_category}
-        </div>
-        <div style={styles.text}>
-          {object.content}
-          <span style={styles.userName}>
-            - {object.user_name}
-          </span>
-        </div>
-      </div>
+      <LogMessageLabel object={object}/>
     )
   })
 
