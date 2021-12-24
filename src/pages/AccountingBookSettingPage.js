@@ -12,7 +12,8 @@ import {
   AccountingBookInfo,
   Separater,
   SeparaterLabel,
-  Loading
+  Loading,
+  ConfirmBox
 } from '../components'
 import { useHistory, useAccountingBook } from '../hooks'
 import axios from '../api/dragonBabyApi'
@@ -44,19 +45,26 @@ const AccountingBookSettingPage = (props) => {
   }
 
   const handleAccountingBookDeletion = (e) => {
-    e.preventDefault()
-
-    let confirm = window.confirm("確定要刪除帳本嗎？此動作無法回覆喔");
-
-    if (confirm === true) {
-      dragonBabyApi.deleteAccountingBook(group_id, accounting_book_id)
-        .then((res) => {
-          history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`)
-        })
-    } else {
-      return
-    }
+    dragonBabyApi.deleteAccountingBook(group_id, accounting_book_id)
+      .then((res) => {
+        history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`)
+        seDeleteActive(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
+
+  const [deleteActive, seDeleteActive] = useState(false)
+  let deleteConfirmBox = <ConfirmBox
+    title="刪除帳本"
+    confirmed={handleAccountingBookDeletion}
+    canceled={() => { seDeleteActive(false) }}
+    confirm_text="確認"
+    cancel_text="取消">
+    <div style={{ paddingBottom: '4px' }}> 確認刪除此本帳本嗎?</div>
+    <div style={{ paddingBottom: '20px' }}> 此動作無法回覆喔！</div>
+    </ConfirmBox>
 
   const handleCurrentChange = (value, params, setState) => {
     dragonBabyApi.updateAccountingBook(group_id, accounting_book_id, { accounting_book: params })
@@ -122,6 +130,7 @@ const AccountingBookSettingPage = (props) => {
               </label>
           }
           <NavigationLabel
+            hideIcon={true}
             description="編輯幣別"
             selectedOptionName={accountingBookDetails.currency}
             clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
@@ -134,7 +143,7 @@ const AccountingBookSettingPage = (props) => {
           <ActionLabel
             style={{ color: "#D65C5C" }}
             description="永久刪除帳本"
-            clicked={handleAccountingBookDeletion}
+            clicked={() => seDeleteActive(true)}
           />
           <Separater />
           <SeparaterLabel name="LINEBOT"/>
@@ -152,6 +161,10 @@ const AccountingBookSettingPage = (props) => {
           />
         </div>
       </div>
+      {
+        deleteActive ?
+          deleteConfirmBox : null
+      }
     </>
   )
 }

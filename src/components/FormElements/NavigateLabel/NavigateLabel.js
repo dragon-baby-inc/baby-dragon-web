@@ -5,19 +5,24 @@ import { themeColors } from '../../../constants'
 
 const navigateLabel = ({
   clicked,
+  hideIcon,
   description,
   selectedOptionName,
   name
 }) => {
   return (
-    <label className={styles.label} onClick={clicked}>
+    <label className={styles.label} onClick={hideIcon ? () => {} : clicked}>
       {description}
       <div className={styles.rightContainer}>
         {selectedOptionName}
-        <FontAwesomeIcon
-          style={{ fontSize: "15px", margin: "0px 15px" }}
-          faicon='faChevronRight'
-          color={themeColors.gray900}/>
+        {
+          hideIcon ?
+            null:
+            <FontAwesomeIcon
+              style={{ fontSize: "15px", margin: "0px 15px" }}
+              faicon='faChevronRight'
+              color={themeColors.gray900}/>
+        }
       </div>
     </label>
   );
