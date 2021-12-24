@@ -29,11 +29,18 @@ function PaymentsHeader({
   loading
 }){
 
+  let timer = null
   if (scrollInfo && !editMode) {
     if (scrollInfo.y.value > 10 && !small) {
-      handleSmallChange(true)
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        handleSmallChange(true)
+      }, 100)
     } else if (scrollInfo.y.value === 0 && small){
-      handleSmallChange(false)
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        handleSmallChange(false)
+      }, 100)
     }
   }
 

@@ -49,7 +49,7 @@ const PaymentsPage = (props) => {
     marginTop: small ? '0px' : '0px',
     flexGrow: 1,
     height: paymentsHeight,
-    paddingBottom: '150px'
+    paddingBottom: '300px'
   }
 
   const handleIndexChanged = (i) => {
