@@ -25,7 +25,7 @@ const useAccountingBookSummary =  (callback) => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
-  return [summary, loading, err];
+  return [summary, loading, err, getAccountingBook];
 }
 
 export default useAccountingBookSummary;

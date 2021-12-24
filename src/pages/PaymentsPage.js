@@ -35,7 +35,7 @@ const PaymentsPage = (props) => {
 //   const [scrollInfo, setRef] = useScrollInfo();
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
-  const [summary, loading] = useAccountingBookSummary(group_id, accounting_book_id)
+  const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(group_id, accounting_book_id)
   const [index, setIndex] = useState(0)
   const ref = useRef();
   const paymentRef = useRef();
@@ -130,6 +130,7 @@ const PaymentsPage = (props) => {
       builder_id: authState.userLineIdToken
     }).then(function (response) {
       getPayments()
+      getAccountingBook()
       seDeleteActive(null)
     })
       .catch(function (error) {
