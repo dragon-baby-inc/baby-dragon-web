@@ -59,7 +59,6 @@ const PaymentCheckboxLabel = (props) => {
   }
 
   const handlePaidBackEditClick = () => {
-    console.log(object)
     let payment = {
       id: object.id,
       description: object.description,
