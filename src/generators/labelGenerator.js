@@ -3,6 +3,7 @@ import {
   RadioLabel,
   CheckboxLabel,
   FontAwesomeIcon,
+  OwerCheckboxLabel,
   Image
 } from '../components'
 
@@ -20,8 +21,10 @@ const createUserRadioLabel = ({ object, handleChange, selectedObject }) => {
   </RadioLabel>
 }
 
-const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects }) => {
-  return <CheckboxLabel
+const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handleAddCoverCostUser }) => {
+  return <OwerCheckboxLabel
+    handleAddCoverCostUser={handleAddCoverCostUser}
+    hideCheckbox={!object.coverCost}
     key={object.id}
     object={object}
     changed={handleChange}
@@ -31,7 +34,7 @@ const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects }) => {
       <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
       {object.displayName}
     </div>
-  </CheckboxLabel>
+  </OwerCheckboxLabel>
 }
 
 const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, handleChange, selectedObjects }) => {

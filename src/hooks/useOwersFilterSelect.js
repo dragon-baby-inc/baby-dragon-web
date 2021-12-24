@@ -13,6 +13,7 @@ import {
 const useOwersFilterSelect = ({
   users,
   buildSelectUsers,
+  handleAddCoverCostUser,
   selectedObjects,
   style,
   selectAll,
@@ -42,6 +43,7 @@ const useOwersFilterSelect = ({
 
   const select = <CheckboxFilterSelect
     closed={closed}
+    handleAddCoverCostUser={handleAddCoverCostUser}
     createLabel={createOwerCheckbokLabel}
     selectAll={selectAll}
     objects={users}

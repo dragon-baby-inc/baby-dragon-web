@@ -4,6 +4,7 @@ import { Image, Checkbox } from '../index'
 
 const CheckboxLabel = ({
   children,
+  hideCheckbox,
   changed,
   checked,
   value
@@ -11,11 +12,15 @@ const CheckboxLabel = ({
   return (
     <label className={styles.label}>
       {children}
-      <Checkbox
-        value={value}
-        changed={changed}
-        checked={checked}
-      />
+      {
+      hideCheckbox ?
+          null:
+          <Checkbox
+            value={value}
+            changed={changed}
+            checked={checked}
+          />
+      }
     </label>
   )
 };

@@ -14,6 +14,7 @@ const useUsersFilterSelect = ({
   users,
   buildSelectUsers,
   selectedObjects,
+  handleAddCoverCostUser,
   style,
   selectAll,
   callback,
@@ -37,6 +38,7 @@ const useUsersFilterSelect = ({
   }
 
   const select = <CheckboxFilterSelect
+    handleAddCoverCostUser={handleAddCoverCostUser}
     closed={closed}
     createLabel={createUserCheckbokLabel}
     selectAll={selectAll}

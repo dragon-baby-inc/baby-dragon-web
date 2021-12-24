@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { dragonBabyApi } from '../../../api/dragonBabyApi'
 import styles from './PaymentForm.module.scss'
 import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
@@ -53,6 +54,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
   const [_payer, _setPayer] = useState({ value: null, valid: true })
   const [alertMessage, setAlertMessage] = useState(null)
+  const [_users, setUsers] = useState(users)
+
+  useEffect(() => {
+    if (users) {
+      setUsers(users)
+    }
+  }, [users])
 
   useEffect(() => {
     if (payment) {
@@ -102,9 +110,20 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     invalidFeedback="*不可為空白，12字內"
     type='number'
   />
+  const handleAddCoverCostUser = (id) => {
+    dragonBabyApi.updateCoverCostUser(group_id, accounting_book_id, [id])
+
+    let newUsers = [..._users]
+    let index = newUsers.findIndex(u => u.id === id)
+    let user = newUsers[index]
+    user.coverCost = true
+    newUsers[index] = user
+    setUsers(newUsers)
+  }
 
   const owersLabel = <OwerCheckboxSelectLabel
-    users={users}
+    handleAddCoverCostUser={handleAddCoverCostUser}
+    users={_users}
     callback={(ids) => _setOwers({ value: ids, valid: true })}
     valid={_owers.valid}
     selectedObjects={_owers.value}

@@ -11,6 +11,7 @@ import {
 const CheckboxFilterSelect = ({
   objects,
   selected_object_ids,
+  handleAddCoverCostUser,
   style,
   createLabel,
   selectAll,
@@ -76,7 +77,7 @@ const CheckboxFilterSelect = ({
   }
 
   let objectLabels = displayObjects.map(object => {
-    return createLabel({ object, handleChange, selectedObjects })
+    return createLabel({ object, handleChange, selectedObjects, handleAddCoverCostUser })
   })
 
   const handleSelectAll = (e) => {

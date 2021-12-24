@@ -15,6 +15,7 @@ import {
 
 const OwerCheckboxSelectLabel = ({
   users,
+  handleAddCoverCostUser,
   selectedObjects,
   callback
 }) => {
@@ -33,6 +34,7 @@ const OwerCheckboxSelectLabel = ({
   }
 
   const [value, select] = useOwersFilterSelect({
+    handleAddCoverCostUser,
     users,
     buildSelectUsers,
     selectedObjects,
