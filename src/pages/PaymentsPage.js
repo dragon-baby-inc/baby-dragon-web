@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react"
+import React, { useCallback, useRef, useEffect, useState, useContext } from "react"
+import ObserveSize from 'react-observe-size';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 import useScrollInfo from 'react-element-scroll-hook';
 import AccountingBookSummaryPage from '../pages/AccountingBookSummaryPage'
@@ -31,16 +32,60 @@ const PaymentsPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, accountingBookLoading] = useAccountingBook()
   const [payments, paymentLoading, getPayments] = usePayments('')
-  const [scrollInfo, setRef] = useScrollInfo();
+//   const [scrollInfo, setRef] = useScrollInfo();
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
   const [summary, loading] = useAccountingBookSummary(group_id, accounting_book_id)
   const [index, setIndex] = useState(0)
+  const ref = useRef();
+  const paymentRef = useRef();
+  const paymentHeightRef = useRef();
+  const summaryHeightRef = useRef();
+  const [paymentsScrollInfo, setPaymentsScrollInfo] = useState({ x: { value: 0 }, y: { value: 0 } })
+  const [paymentHeight, setPaymentHeight] = useState(0)
+  const [summaryScrollInfo, setSummaryScrollInfo] = useState({ x: { value: 0 }, y: { value: 0 } })
+  const [summaryHeight, setSummaryHeight] = useState(0)
+
+  const handleScroll = useCallback((e) => {
+    setSummaryScrollInfo({ x: { value: e.target.scrollLeft }, y: { value: e.target.scrollTop } })
+  }, []);
+
+  const handlePaymentsScroll = useCallback((e) => {
+    setPaymentsScrollInfo({ x: { value: e.target.scrollLeft }, y: { value: e.target.scrollTop } })
+  }, []);
+
+  useEffect(() => {
+    const div = ref.current
+    if (div) {
+      div.addEventListener('scroll', handleScroll);
+      setSummaryHeight(ref.current.offsetHeight)
+    }
+  }, [ref.current]);
+
+  useEffect(() => {
+    const div = paymentRef.current
+    if (div) {
+      div.addEventListener('scroll', handlePaymentsScroll);
+    }
+  }, [paymentRef.current]);
+
+  useEffect(() => {
+    const div = summaryHeightRef.current
+    if (div) {
+      setSummaryHeight(summaryHeightRef.current.offsetHeight)
+    }
+  }, [summaryHeightRef.current])
+
+  useEffect(() => {
+    const div = paymentHeightRef.current
+    if (div) {
+      setPaymentHeight(paymentHeightRef.current.offsetHeight)
+    }
+  }, [paymentHeightRef.current])
 
   let currentDate = null
   let paymentLabels = []
 
-  let paymentHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
   let paymentsHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
   paymentsHeight = "calc(100%)"
   let paymentStyle =  {
@@ -49,7 +94,7 @@ const PaymentsPage = (props) => {
     marginTop: small ? '0px' : '0px',
     flexGrow: 1,
     height: paymentsHeight,
-    paddingBottom: '300px'
+    paddingBottom: '260px'
   }
 
   const handleIndexChanged = (i) => {
@@ -138,14 +183,21 @@ const PaymentsPage = (props) => {
   const steps = [
     {
       name: '帳目明細',
-      component: <div style={paymentStyle} ref={setRef}>
-          { payments.length > 0 ?  paymentLabels : <EmptyResult message='目前沒有任何款項喔'/> }
-        </div>
+      component:
+          <div style={paymentStyle} ref={paymentRef}>
+            {
+            payments.length > 0 ?
+              <div ref={paymentHeightRef}> {paymentLabels} </div>
+            : <EmptyResult message='目前沒有任何款項喔'/> }
+          </div>
+
     },
     {
       name: '分帳建議',
-      component: <div style={paymentStyle}>
-        { summarObjects.length > 0 ?  summarObjects : <EmptyResult message='目前沒有任何款項喔'/> }
+      component: <div style={paymentStyle} ref={ref}>
+        { summarObjects.length > 0 ?
+          <div ref={summaryHeightRef}> {summarObjects} </div>
+        : <EmptyResult message='目前沒有任何款項喔'/> }
       </div>
     }
   ]
@@ -157,13 +209,17 @@ const PaymentsPage = (props) => {
     <>
       <div style={styles.bg}>
         <PaymentsHeader
+          index={index}
+          summaryHeight={summaryHeight}
+          paymentHeight={paymentHeight}
+          summaryScrollInfo={summaryScrollInfo}
           loading={paymentLoading}
           deactiveEditMode={deactiveEditMode}
           editMode={editMode}
           activeEditMode={activeEditMode}
           selectAll={selectAll}
           paymentSize={payments.length}
-          scrollInfo={scrollInfo}
+          scrollInfo={paymentsScrollInfo}
           small={small}
           accountingBookDetails={accountingBookDetails}
           handleSmallChange={handleSmallChange}
@@ -171,7 +227,7 @@ const PaymentsPage = (props) => {
 
         {
           paymentLoading ? <div style={paymentStyle}><Loading /></div> :
-            <ColumnSwappableView index={index} setIndex={handleIndexChanged} steps={steps} height={paymentsHeight}/>
+            <ColumnSwappableView index={index} callback={handleIndexChanged} steps={steps} height={paymentsHeight}/>
         }
       </div>
       <CircleFloatingIcon

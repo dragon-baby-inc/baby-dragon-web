@@ -18,7 +18,11 @@ const inlineStyles = {
 function PaymentsHeader({
   deactiveEditMode,
   paymentSize,
+  summaryHeight,
+  paymentHeight,
+  summaryScrollInfo,
   activeEditMode,
+  index,
   selectAll,
   handleSelectAllClick,
   editMode,
@@ -28,19 +32,40 @@ function PaymentsHeader({
   small,
   loading
 }){
-
   let timer = null
-  if (scrollInfo && !editMode) {
-    if (scrollInfo.y.value > 10 && !small) {
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        handleSmallChange(true)
-      }, 100)
-    } else if (scrollInfo.y.value === 0 && small){
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        handleSmallChange(false)
-      }, 100)
+
+  if (index === 0 && paymentHeight > 250) {
+    if (scrollInfo && !editMode) {
+      if (scrollInfo.y.value > 10 && !small) {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          handleSmallChange(true)
+        }, 10)
+      } else if (scrollInfo.y.value === 0 && small){
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          handleSmallChange(false)
+        }, 10)
+      }
+    }
+  }
+
+  let lastSummaryY
+  if (index === 1) {
+    if (summaryScrollInfo && !editMode) {
+      if (summaryScrollInfo.y.value > 10 && !small) {
+        lastSummaryY = summaryScrollInfo.y.value
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          handleSmallChange(true)
+        }, 10)
+      } else if (summaryScrollInfo.y.value === 0 && summaryScrollInfo !== 0 && small){
+        lastSummaryY = summaryScrollInfo.y.value
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          handleSmallChange(false)
+        }, 100)
+      }
     }
   }
 
