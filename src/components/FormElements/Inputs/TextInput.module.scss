@@ -38,6 +38,12 @@
   justify-content: center;
   color: $gold900;
 }
+.faIcon {
+  min-width: 18px;
+  max-width: 18px;
+  display: flex;
+  justify-content: center;
+}
 
 .name {
   font-weight: 900;

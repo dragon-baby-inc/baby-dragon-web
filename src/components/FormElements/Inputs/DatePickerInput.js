@@ -41,7 +41,9 @@ const DatePickerInput = ({
       <label
         className={labelStyles.join(' ')} style={labelStyle} >
         <div className={styles.labelName}>
-          <FontAwesomeIcon faicon={faicon}/>
+          <div className={styles.faIcon}>
+            <FontAwesomeIcon faicon={faicon}/>
+          </div>
           <div className={styles.name}>{name}</div>
         </div>
         <div className={datePickerStyles.value} >

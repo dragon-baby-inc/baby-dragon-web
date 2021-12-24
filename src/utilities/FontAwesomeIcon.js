@@ -20,6 +20,7 @@ import {
 import {
   faCheckDouble,
   faStar as fasFaStar,
+  faDollarSign as fasDollarSign,
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faClock as farFaClock,
@@ -28,6 +29,7 @@ import {
 
 const icons = {
   faBookOpen: faBookOpen,
+  fasDollarSign: fasDollarSign,
   faTimes: faTimes,
   faEdit: faEdit,
   faPlus: faPlus,

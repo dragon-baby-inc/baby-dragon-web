@@ -33,6 +33,10 @@ const UserSummaryLabel = (props) => {
       faIcon = 'faPlus'
       color = 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'
       break;
+    case 'create_paid_back_payment':
+      faIcon = 'faPlus'
+      color = 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'
+      break;
     case 'update_payment':
       faIcon = 'faEdit'
       color = 'linear-gradient(92.29deg, #88631C 0%, #C5AF85 100%)'
@@ -65,7 +69,7 @@ const UserSummaryLabel = (props) => {
         </div>
         <div className={styles.content}>
           <div className={styles.category}>
-            {object.display_category}
+            {object.user_name + object.display_category}
           </div>
           <div className={styles.message}>
             {object.content}

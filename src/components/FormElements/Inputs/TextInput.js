@@ -40,7 +40,9 @@ const TextInput = ({
     <div className={styles.container} style={style ? style : {}}>
       <label className={labelClasses.join(' ')} >
         <div className={styles.labelName}>
+          <div className={styles.faIcon}>
           <FontAwesomeIcon faicon={faicon}/>
+          </div>
           <div className={styles.name}>{name}</div>
         </div>
         <input
