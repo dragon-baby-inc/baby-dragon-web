@@ -150,14 +150,8 @@ const AccountingBookSettingPage = (props) => {
           <ToggleLabel
             checked={state.autoDetectPayment.value}
             changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
-            description="Line 自動偵測帳款指令"
+            description="Line 自動偵測新增帳款指令"
             name="autoDetectPayment"
-          />
-          <ToggleLabel
-            checked={state.lineNotification.value}
-            changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
-            description="傳送確認訊息到 Line 群組"
-            name="lineNotification"
           />
         </div>
       </div>
@@ -168,6 +162,12 @@ const AccountingBookSettingPage = (props) => {
     </>
   )
 }
+//           <ToggleLabel
+//             checked={state.lineNotification.value}
+//             changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
+//             description="傳送確認訊息到 Line 群組"
+//             name="lineNotification"
+//           />
 
 const styles = {
   settings: {
