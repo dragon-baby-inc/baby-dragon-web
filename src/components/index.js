@@ -5,6 +5,7 @@ import PaymentSwipeableView from './PaymentSwipeableView/PaymentSwipeableView'
 import FontAwesomeIcon from './FontAwesomeIcon/FontAwesomeIcon'
 import ColumnSwappableView from './ColumnSwappableView/ColumnSwappableView'
 import Footer from './Footer/Footer'
+import DisclaimerBox from './DisclaimerBox/DisclaimerBox'
 import Collapse from './Collapse/Collapse'
 
 export {
@@ -15,7 +16,8 @@ export {
   FontAwesomeIcon,
   StepsWidget,
   ColumnSwappableView,
-  Collapse
+  Collapse,
+  DisclaimerBox
 };
 
 export * from './FormElements'

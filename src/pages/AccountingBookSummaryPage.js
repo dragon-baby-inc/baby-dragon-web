@@ -1,18 +1,13 @@
 import React from "react"
 import { useAccountingBookSummary } from '../hooks'
+import useScrollInfo from 'react-element-scroll-hook';
 import { PageHeader, TopLeftIcon, Loading, EmptyResult, UserSummaryLabel } from '../components'
 import { themeColors } from '../constants'
 
 const styles = {
-  bg: {
-    width: '100vw',
-    height: '100vh',
-    maxHeight: '-webkit-fill-available',
-    overflow: 'hidden',
-  },
   summary: {
     paddingTop: '10px',
-    paddingBottom: '200px',
+    paddingBottom: '300px',
     overflow: 'auto',
     height: 'calc(100vh - 58px - 49px)',
   }
@@ -20,7 +15,8 @@ const styles = {
 
 const AccountingBookSummaryPage = ({
   users,
-  accountingBookDetails
+  accountingBookDetails,
+  setRef
 }) => {
   const [summary, loading] = useAccountingBookSummary(accountingBookDetails.group_id, accountingBookDetails.id)
 
@@ -34,7 +30,7 @@ const AccountingBookSummaryPage = ({
         loading ?
           <Loading />
           :
-          <div style={styles.summary}>
+          <div style={styles.summary} ref={setRef}>
             { objects.length > 0 ?  objects : <EmptyResult message='目前沒有任何款項喔'/> }
           </div>
       }

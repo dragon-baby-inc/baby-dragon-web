@@ -7,8 +7,10 @@ import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 import { themeColors } from '../constants'
 import { Context as AuthContext } from '../contexts/AuthContext'
-import { usePayments, useAccountingBook } from '../hooks'
+import { usePayments, useAccountingBook, useAccountingBookSummary } from '../hooks'
 import {
+  UserSummaryLabel,
+  DisclaimerBox,
   ConfirmBox,
   ColumnSwappableView,
   PaymentsHeader,
@@ -32,6 +34,7 @@ const PaymentsPage = (props) => {
   const [scrollInfo, setRef] = useScrollInfo();
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
+  const [summary, loading] = useAccountingBookSummary(group_id, accounting_book_id)
   const [index, setIndex] = useState(0)
 
   let currentDate = null
@@ -39,12 +42,12 @@ const PaymentsPage = (props) => {
 
   let paymentHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
   let paymentsHeight = small ? 'calc(100vh - 58px)' : 'calc(100vh - 58px - 120px)'
-  paymentsHeight = "calc(100% - 29px)"
-  console.log(paymentsHeight)
+  paymentsHeight = "calc(100%)"
   let paymentStyle =  {
     background: '#FFFFFF',
     overflow: 'auto',
     marginTop: small ? '0px' : '0px',
+    flexGrow: 1,
     height: paymentsHeight,
     paddingBottom: '150px'
   }
@@ -124,6 +127,14 @@ const PaymentsPage = (props) => {
   const activeEditMode = () => { setEditMode(true); setSmall(true) }
   const deactiveEditMode = () => { setEditMode(false); setSmall(false);  }
 
+  let summarObjects = summary.map(object => {
+    return <UserSummaryLabel
+      currency_symbol={accountingBookDetails.currency_symbol}
+      key={object.payer_id}
+      object={object}
+      accountingBookDetails={accountingBookDetails}/>
+  })
+
   const steps = [
     {
       name: '帳目明細',
@@ -133,10 +144,14 @@ const PaymentsPage = (props) => {
     },
     {
       name: '分帳建議',
-      component: <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
+      component: <div style={paymentStyle}>
+        { summarObjects.length > 0 ?  summarObjects : <EmptyResult message='目前沒有任何款項喔'/> }
+      </div>
     }
   ]
 
+//       component:
+//         <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
 
   return(
     <>
@@ -175,6 +190,8 @@ const styles = {
     width: '100vw',
     height: 'calc(100vh)',
     overflow: 'hidden',
+    display: 'flex',
+    flexFlow: 'column',
     maxHeight: '-webkit-fill-available',
     position: 'relative',
   },
@@ -195,29 +212,3 @@ const styles = {
 
 
 export default PaymentsPage
-
-
-//         <Switch>
-//           <>
-//             {
-//               (paymentLoading) ?
-//                 <div style={paymentStyle}>
-//                   <Loading />
-//                 </div>
-//                 :
-//                 <div style={paymentStyle} ref={setRef}>
-//                   <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index`}>
-//                     {
-//                       payments.length > 0 ?
-//                         paymentLabels : <EmptyResult message='目前沒有任何款項喔'/>
-//                     }
-//                   </Route>
-//                   <Route exact path={`/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary`}>
-//                     <>
-//                       <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
-//                     </>
-//                   </Route>
-//                 </div>
-//             }
-//           </>
-//         </Switch>

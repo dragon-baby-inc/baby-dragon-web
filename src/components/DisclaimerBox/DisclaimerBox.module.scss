@@ -1,0 +1,26 @@
+@import "../../styleSheets/globalColors.scss";
+
+.container {
+  background: #F6F6F6;
+  flex: row nowrap;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.closed {
+  font-weight: bold;
+  font-size: 14px;
+  min-width: 70px;
+  color: $gold700;
+  padding-left: 10px;
+  line-height: 140%;
+}
+
+.children {
+  text-align: left;
+  font-size: 14px;
+  color: $gray700;
+  flex-shrink: 1;
+  line-height: 140%;
+}

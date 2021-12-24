@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styles from './PaymentsHeader.module.scss'
 import { themeColors } from '../../../constants'
 import { TopLeftIcon, TopRightIcon } from '../../index'
-import { PageHeader, FontAwesomeIcon, Image, Star } from '../../index'
+import { DisclaimerBox, PageHeader, FontAwesomeIcon, Image, Star } from '../../index'
 
 const inlineStyles = {
   topLeft: {
@@ -35,6 +35,18 @@ function PaymentsHeader({
     } else if (scrollInfo.y.value === 0 && small){
       handleSmallChange(false)
     }
+  }
+
+  const [showDisclamier, setShowDisclaimer] = useState(false)
+
+  useEffect(() => {
+    if (accountingBookDetails.current !== undefined) {
+      setShowDisclaimer(!accountingBookDetails.current)
+    }
+  }, [accountingBookDetails])
+
+  const disclaimerClosed = () => {
+    setShowDisclaimer(false)
   }
 
   let classes = [styles.header]
@@ -86,12 +98,24 @@ function PaymentsHeader({
             null
         }
       </PageHeader>
+
       <div className={classes.join(' ')}>
+        {
+          showDisclamier ?
+            <DisclaimerBox closed={disclaimerClosed}>
+              如需於聊天室中使用帳款指令請將此帳本設為預設
+            </DisclaimerBox > : null
+        }
         <div className={innerBlockClasses.join(" ")}>
           <div>
             {
               small ?
-                null : <Image defaultImage="accountingBook" imageUrl={accountingBookDetails.imageUrl} size='80px' circle/>
+                null :
+                <>
+                  <div>
+                    <Image defaultImage="accountingBook" imageUrl={accountingBookDetails.imageUrl} size='80px' circle/>
+                  </div>
+                </>
             }
           </div>
           <div className={styles.info}>

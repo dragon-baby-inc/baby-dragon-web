@@ -4,6 +4,7 @@ import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/userSummaryLabel.scss";
 import UserSummaryCollapse from '../UserSummaryCollapse/userSummaryCollapse'
+import { Separater } from '../../../components/FormElements'
 
 const UserSummaryLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(true)
@@ -24,7 +25,11 @@ const UserSummaryLabel = (props) => {
     return(
       <div key={i} className='allocation'>
         <div className='allocationInner'>
-          <span className='name'> { allo.ower_display_name } </span> <span className="amount">{props.currency_symbol}{allo.amount}</span>
+          <span className='name'> { allo.ower_display_name } </span>
+          <span className="amount">{props.currency_symbol}{allo.amount}</span>
+        </div>
+        <div className='paidbackBtn'>
+          還款
         </div>
       </div>
     )
@@ -73,7 +78,9 @@ const UserSummaryLabel = (props) => {
             </div>
           </div>
         </label>
+        <Separater style={{ margin: '0px 20px' }}/>
       </div>
+
       <Collapse isOpened={true}>
         <div className={`user-summary collapse`}>
           <div className='allocations'>
