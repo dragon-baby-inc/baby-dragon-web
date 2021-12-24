@@ -25,7 +25,7 @@ function AccountingBookInfo({
           <div className={styles.label}>
             {accountingBookDetails.name}
             <FontAwesomeIcon
-              style={{ fontSize: "15px", margin: "0px 15px" }}
+              style={{ fontSize: "15px", margin: "0px 0px" }}
               faicon='faChevronRight'
               color={themeColors.gray900}/>
           </div>

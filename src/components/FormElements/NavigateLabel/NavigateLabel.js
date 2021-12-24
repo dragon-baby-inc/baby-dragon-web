@@ -19,7 +19,7 @@ const navigateLabel = ({
           hideIcon ?
             null:
             <FontAwesomeIcon
-              style={{ fontSize: "15px", margin: "0px 15px" }}
+              style={{ fontSize: "15px", margin: "0px 15px", marginRight: "0px" }}
               faicon='faChevronRight'
               color={themeColors.gray900}/>
         }
