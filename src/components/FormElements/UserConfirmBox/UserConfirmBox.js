@@ -44,7 +44,7 @@ const UserConfirmBox = ({
             changed={(value) => setUserName({ value: value, valid: value.length > 0 })}
             value={userName.value === undefined ? '' : userName.value}
             valid={userName.valid}
-            invalidFeedback="*不可為空白，12字內"
+            invalidFeedback="不可為空，不可同名，12字內"
             type='text'
           />
         </div>

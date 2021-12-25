@@ -95,6 +95,12 @@ const AccountingBookEditPage = (props) => {
       return
     }
 
+    let sameUser = users.filter(u => u.displayName === userName.value)
+    if (sameUser.length > 0) {
+      setUserName({ value: userName.value, valid: false })
+      return
+    }
+
     dragonBabyApi.updateUser(group_id, editObject.id, { name: userName.value, image_url: imageUserId })
       .then(res => {
         let _users = [...users]
@@ -165,6 +171,12 @@ const AccountingBookEditPage = (props) => {
 
   const handleCreateUserConfirm = () => {
     if (userName.value.length < 1) {
+      setUserName({ value: userName.value, valid: false })
+      return
+    }
+
+    let sameUser = users.filter(u => u.displayName === userName.value)
+    if (sameUser.length > 0) {
       setUserName({ value: userName.value, valid: false })
       return
     }

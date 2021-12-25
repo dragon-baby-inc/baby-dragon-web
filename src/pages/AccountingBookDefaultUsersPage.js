@@ -52,6 +52,12 @@ const AccountingBookUsersPage = (props) => {
       return
     }
 
+    let sameUser = users.filter(u => u.displayName === name.value)
+    if (sameUser.length > 0) {
+      setName({ value: name.value, valid: false })
+      return
+    }
+
     dragonBabyApi.updateUser(group_id, editObject.id, { name: name.value, image_url: imageId })
       .then(res => {
         let _users = [...users]
@@ -124,6 +130,12 @@ const AccountingBookUsersPage = (props) => {
 
   const handleCreateUserConfirm = () => {
     if (name.value.length < 1) {
+      setName({ value: name.value, valid: false })
+      return
+    }
+
+    let sameUser = users.filter(u => u.displayName === name.value)
+    if (sameUser.length > 0) {
       setName({ value: name.value, valid: false })
       return
     }
