@@ -111,7 +111,7 @@ const UserSummaryLabel = (props) => {
           </div>
           <div className='allocation buttons'>
             <div className='btn edit'>
-              總計 {props.currency_symbol}{object.debts.reduce((pre, cur) => (cur.amount + pre), 0)}
+              總計 {props.currency_symbol}{object.total}
             </div>
           </div>
         </div>
