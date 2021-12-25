@@ -9,7 +9,10 @@ class DragonBabyApi {
   constructor() {
     this.api = axios.create({
       baseURL: process.env.REACT_APP_BACKEND_URI,
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': process.env.DRAGONBABY_API_SECRET
+      }
     });
     ;
   }
