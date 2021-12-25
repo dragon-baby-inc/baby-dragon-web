@@ -1,6 +1,5 @@
 export const imageUrls = [
-  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-0.jpg",
-  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-1.jpg",
-  "https://storage.googleapis.com/baby-dragon/public/DummyImage.png",
-  null
+  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v1-0.jpg",
+  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v1-1.jpg",
+  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v1-2.jpg",
 ]
