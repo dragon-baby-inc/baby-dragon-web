@@ -29,7 +29,6 @@ const styles = {
   },
   logMessages: {
     padding: '0px 20px',
-    paddingBottom: '200px',
     overflow: 'auto',
     height: 'calc(100vh - 58px)',
   },
