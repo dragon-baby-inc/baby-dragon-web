@@ -78,7 +78,7 @@ const PaymentsPage = (props) => {
 //   console.log('paymentContainerDirY: ' + paymentContainerDir.y)
   const [paymentOverflow, setPaymentOverflow] = useState('hidden')
 
-  if (paymentContainerScrollInfo.y.value > (headerContainerHeight - 5) && paymentOverflow !== 'auto') {
+  if (paymentContainerScrollInfo.y.value > (headerContainerHeight - 25) && paymentOverflow !== 'auto') {
     setPaymentOverflow('auto')
     paymentsRef.current.scroll(0, 5)
   }
@@ -87,7 +87,7 @@ const PaymentsPage = (props) => {
   let paymentStyle =  {
     background: '#FFFFFF',
     overflow: paymentOverflow,
-    marginTop: small ? '0px' : '0px',
+    marginTop: small ? '0px' : '1px',
     flexGrow: 1,
     height: paymentsHeight,
     paddingBottom: '260px'
