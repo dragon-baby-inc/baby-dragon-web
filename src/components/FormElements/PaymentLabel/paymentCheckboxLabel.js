@@ -111,17 +111,17 @@ const PaymentCheckboxLabel = (props) => {
                 }
               </div>
               <div className={[styles.message].join(" ")}>
+                {props.currency_symbol}{ amount }
+              </div>
+            </div>
+            <div className={[styles.amount].join(" ")}>
+              <div className={[styles.description].join(" ")}>
                 {
                   object.paid_back ?
                     `${object.payer_display_name} 還款`
                     :
                     object.payer_display_name
                 }
-              </div>
-            </div>
-            <div className={[styles.amount].join(" ")}>
-              <div className={[styles.description].join(" ")}>
-                {props.currency_symbol}{ amount }
               </div>
               <div className={[styles.message].join(" ")}>
                 { object.allocations.length }人
