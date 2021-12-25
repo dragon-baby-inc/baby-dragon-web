@@ -46,8 +46,10 @@ const AccountingBookUsersPage = (props) => {
 
     let sameUser = users.filter(u => u.displayName === name.value)
     if (sameUser.length > 0) {
-      setName({ value: name.value, valid: false })
-      return
+      if (editObject.id !== sameUser[0].id) {
+        setName({ value: name.value, valid: false })
+        return
+      }
     }
 
     dragonBabyApi.updateUser(group_id, editObject.id, { name: name.value, image_url: imageId })
