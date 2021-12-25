@@ -24,9 +24,16 @@ const SearchInput = (props) => {
           <FontAwesomeIcon faicon={"faTimesCircle"}/>
         </div>
       </div>
-      <div className={styles.close} onClick={props.closed}>
-        <FontAwesomeIcon faicon={"faTimes"}/>
-      </div>
+      {
+        props.checkbox ?
+          <div className={styles.checkboxClose} onClick={props.closed}>
+            完成
+          </div>
+          :
+        <div className={styles.close} onClick={props.closed}>
+          <FontAwesomeIcon faicon={"faTimes"}/>
+        </div>
+      }
     </div>
   )
 };

@@ -11,11 +11,12 @@ const icons = {
 
 const backdrop = (props) => {
   let icon = props.icon
+  let hideCheck = true
   if (!icon) { icon = 'faCheck' }
   return (
     <div className={[styles.backdrop].join(' ')} onClick={props.clicked}>
       {
-        props.hideCheck ?
+        hideCheck ?
           null:
           <div className={styles.icon}>
             <FontAwesomeIcon icon={icons[icon]} color='#eeeeee'/>

@@ -4,6 +4,9 @@ import { RadioSelect, Image, RadioLabel } from '../components'
 const currencies = [
   { id: "TWD", name: "TWD", displayName: "台幣" },
   { id: 'USD', name: "USD", displayName: "美金" },
+  { id: 'HKD', name: "HKD", displayName: "港幣" },
+  { id: 'JPY', name: "JPY", displayName: "日幣" },
+  { id: 'EUR', name: "EUR", displayName: "歐元" },
 ]
 
 const useCurrencySelect = ({

@@ -48,6 +48,7 @@ const CheckboxFilterSelect = ({
     filtered={handleFilter}
     value={searchValue}
     closed={closed}
+    checkbox={true}
   />
 
   useEffect(() => {

@@ -131,7 +131,7 @@ const AccountingBookSettingPage = (props) => {
           }
           <NavigationLabel
             hideIcon={true}
-            description="編輯幣別"
+            description="帳本幣別"
             selectedOptionName={accountingBookDetails.currency}
             clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
           />
@@ -150,7 +150,7 @@ const AccountingBookSettingPage = (props) => {
           <ToggleLabel
             checked={state.autoDetectPayment.value}
             changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
-            description="Line 自動偵測新增帳款指令"
+            description="新增帳款指令"
             name="autoDetectPayment"
           />
         </div>
