@@ -77,9 +77,11 @@ const AccountingBookUsersPage = (props) => {
 
   const handleUserEdit = (e, object) => {
     setEditObject(object)
-    let imageId = imageUrls.indexOf(object.imageURL)
-    if (imageId === -1) { imageId = imageUrls.length - 1 }
-    setImageId(imageId)
+    if (object.imageURL && object.imageURL.length < 10) {
+      setImageId(object.imageURL)
+    } else {
+      setImageId(0)
+    }
     setName({ value: object.displayName, valid: true })
     setEditBoxActive(true)
     e.preventDefault()
