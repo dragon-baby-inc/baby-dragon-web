@@ -15,7 +15,7 @@ const createUserRadioLabel = ({ object, handleChange, selectedObject }) => {
     checked={selectedObject ? selectedObject.id === String(object.id) : null}
     changed={handleChange}>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
+      <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL} defaultImage='user'/>
       {object.displayName}
     </div>
   </RadioLabel>
@@ -31,7 +31,7 @@ const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handle
     value={object.id}
     checked={selectedObjects.map(el => el.id).includes(object.id)} >
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL}/>
+      <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL} defaultImage='user'/>
       {object.displayName}
     </div>
   </OwerCheckboxLabel>
@@ -46,7 +46,7 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
     checked={selectedObjects.map(el => el.id).includes(object.id)} >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL} size='56px'/>
+        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL} size='56px' defaultImage='user'/>
         {object.displayName}
       </div>
       <div>

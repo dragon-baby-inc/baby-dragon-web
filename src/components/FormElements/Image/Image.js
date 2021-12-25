@@ -1,5 +1,5 @@
 import React from 'react';
-import { themeColors } from '../../../constants'
+import { themeColors, userImageUrls as imageUrls } from '../../../constants'
 import { FontAwesomeIcon } from '../../index'
 import styles from './Image.module.scss'
 
@@ -18,6 +18,10 @@ const Image = ({
   const defaultImageUrl = {
     user: "https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png",
     accountingBook: "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-white.jpg"
+  }
+
+  if (imageUrl && imageUrl.length < 10) {
+    imageUrl = imageUrls[imageUrl]
   }
 
   const inlineStyle = {

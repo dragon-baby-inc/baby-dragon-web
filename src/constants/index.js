@@ -1,7 +1,8 @@
 import { themeColors } from './globalColors'
-import { imageUrls } from './imageUrls'
+import { imageUrls, userImageUrls } from './imageUrls'
 
 export {
   themeColors,
-  imageUrls
+  imageUrls,
+  userImageUrls,
 }

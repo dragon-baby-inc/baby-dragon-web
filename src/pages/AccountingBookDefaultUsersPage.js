@@ -52,7 +52,7 @@ const AccountingBookUsersPage = (props) => {
       return
     }
 
-    dragonBabyApi.updateUser(group_id, editObject.id, { name: name.value, image_url: imageUrls[imageId] })
+    dragonBabyApi.updateUser(group_id, editObject.id, { name: name.value, image_url: imageId })
       .then(res => {
         let _users = [...users]
         let index = _users.findIndex((u) => u.id === editObject.id)
@@ -128,7 +128,7 @@ const AccountingBookUsersPage = (props) => {
       return
     }
 
-    dragonBabyApi.createUser(group_id, { name: name.value, image_url: imageUrls[imageId] })
+    dragonBabyApi.createUser(group_id, { name: name.value, image_url: imageId })
       .then(res => {
         let _users = [...users]
         _users.push(
