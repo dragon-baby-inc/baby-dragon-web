@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import FormatString from '../../../utilities/FormatString'
 import { useCookies } from 'react-cookie';
 import styles from './paymentCheckboxLabel.module.scss'
 import { useParams } from 'react-router-dom';
@@ -104,9 +105,9 @@ const PaymentCheckboxLabel = (props) => {
               <div className={[styles.description].join(" ")}>
                 {
                   object.paid_back ?
-                    `還 ${object.allocations[0].ower_display_name}`
+                    FormatString.sliceToLength(`還 ${object.allocations[0].ower_display_name}`, 18, '..')
                     :
-                    object.description
+                    FormatString.sliceToLength(object.description, 18, '..')
                 }
               </div>
               <div className={[styles.message].join(" ")}>

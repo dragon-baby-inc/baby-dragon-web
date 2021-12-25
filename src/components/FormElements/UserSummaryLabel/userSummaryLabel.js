@@ -7,6 +7,7 @@ import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/userSummaryLabel.scss";
 import UserSummaryCollapse from '../UserSummaryCollapse/userSummaryCollapse'
 import { Separater } from '../../../components/FormElements'
+import { Image } from '../../../components'
 import {
   useHistory
 } from '../../../hooks'
@@ -83,12 +84,7 @@ const UserSummaryLabel = (props) => {
               </div>
           }
           <div className={`group-menu-image-block ${activeClass}`}>
-            {
-              object.payer_image_url  ?
-                <img className='group-menu-userimage' src={object.payer_image_url} alt="user"/>
-                :
-                <img className='group-menu-userimage' src='https://storage.googleapis.com/baby-dragon/public/dummy_user_L.png' alt="user"/>
-            }
+            <Image imageUrl={object.payer_image_url} defaultImage='user' size='40px'/>
           </div>
           <div className={`group-menu-payment-block ${activeClass}`}>
             <div className='group-menu-username'>

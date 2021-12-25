@@ -1,4 +1,16 @@
+import FormatString from './FormatString'
+
 class Validator {
+  validPaymentName(value) {
+    if (value.length <= 0) {
+      return false
+    }
+
+    let length = FormatString.halfLength(value)
+
+    return length <= 24
+  }
+
   validAmount(value) {
     if (value > 0 && value < 100000000) {
       return true
