@@ -42,6 +42,7 @@ const useOwersFilterSelect = ({
   }
 
   const select = <CheckboxFilterSelect
+    buildSelectUsers={buildSelectUsers}
     closed={closed}
     handleAddCoverCostUser={handleAddCoverCostUser}
     createLabel={createOwerCheckbokLabel}

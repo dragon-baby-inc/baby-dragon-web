@@ -10,6 +10,7 @@ import {
 
 const CheckboxFilterSelect = ({
   objects,
+  buildSelectUsers,
   selected_object_ids,
   handleAddCoverCostUser,
   style,
@@ -52,12 +53,12 @@ const CheckboxFilterSelect = ({
   useEffect(() => {
     setMount(true)
     if (selected_object_ids.length === selectedObjects.length) {
-      setSelectAll(objects.length === selected_object_ids.length)
+      setSelectAll(buildSelectUsers(objects).length === selected_object_ids.length)
       return
     }
 
     setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
-    setSelectAll(objects.length === selected_object_ids.length)
+    setSelectAll(buildSelectUsers(objects).length === selected_object_ids.length)
   }, [objects, selected_object_ids])
 
   useEffect(() => {
@@ -84,8 +85,9 @@ const CheckboxFilterSelect = ({
     setSelectAll(e.target.checked)
 
     if (e.target.checked) {
-      setSelectedObjects(displayObjects)
-      changed(displayObjects)
+      let validSeletedIds = buildSelectUsers(displayObjects)
+      setSelectedObjects(displayObjects.filter(u => validSeletedIds.includes(u.id)))
+      changed(displayObjects.filter(u => validSeletedIds.includes(u.id)))
     } else {
       setSelectedObjects([])
       changed([])
