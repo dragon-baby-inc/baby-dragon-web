@@ -28,7 +28,7 @@ const UserCreateLabel = ({
           <div className={styles.colorBlock}>
             <ColorBlock></ColorBlock>
           </div>
-          新增使用者
+          新增虛擬成員
         </div>
         <FontAwesomeIcon faicon="faPlus" color={themeColors.gold700} style={{ fontSize: '18px' }}></FontAwesomeIcon>
       </label>

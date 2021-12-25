@@ -152,7 +152,7 @@ const AccountingBookUsersPage = (props) => {
   const createUserConfirmBox = <UserConfirmBox
     confirmed={handleCreateUserConfirm}
     canceled={handleCancelUserConfirm}
-    title='新增使用者'
+    title='新增虛擬成員'
     userName={name}
     setUserName={setName}
     imageUserId={imageId}
@@ -162,7 +162,7 @@ const AccountingBookUsersPage = (props) => {
   const editUserConfirmBox = <UserConfirmBox
     confirmed={handleEditUserConfirm}
     canceled={handleEditUserCancel}
-    title='編輯使用者'
+    title='編輯虛擬成員'
     userName={name}
     setUserName={setName}
     imageUserId={imageId}
