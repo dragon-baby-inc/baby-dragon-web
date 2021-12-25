@@ -141,7 +141,7 @@ const PaymentCheckboxLabel = (props) => {
                   {allocations}
                 </div>
           }
-          <div className={[styles.buttons].join(" ")}>
+          <div className={[styles.buttons, paidBack].join(" ")}>
             <div onClick={handleDeleteClick} className={[styles.btn].join(" ")}>
               刪除
             </div>
