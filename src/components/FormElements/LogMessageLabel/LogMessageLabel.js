@@ -27,7 +27,6 @@ const UserSummaryLabel = (props) => {
 
   let faIcon;
   let color;
-  console.log(object.category)
   switch(object.category) {
     case 'create_payment':
       faIcon = 'faPlus'
@@ -55,7 +54,7 @@ const UserSummaryLabel = (props) => {
     <>
       <label className={styles.label}>
         <div className={styles.img}>
-          <Image size='56px' imageUrl={object.imageURL}/>
+          <Image size='56px' imageUrl={object.user_image_url}/>
           <ColorBlock
             color={color}
             imageSize='24px'
