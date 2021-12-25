@@ -99,3 +99,7 @@ html {
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
 }
+
+label, div {
+  -webkit-tap-highlight-color: transparent;
+}
