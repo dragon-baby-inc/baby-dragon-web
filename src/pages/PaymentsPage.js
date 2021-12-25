@@ -7,7 +7,7 @@ import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 import { themeColors } from '../constants'
 import { Context as AuthContext } from '../contexts/AuthContext'
-import { usePayments, useAccountingBook, useAccountingBookSummary } from '../hooks'
+import { useScrollRef, usePayments, useAccountingBook, useAccountingBookSummary } from '../hooks'
 import {
   PaymentInfoHeader,
   UserSummaryLabel,
@@ -35,8 +35,13 @@ const PaymentsPage = (props) => {
   const [selectAll, setSelectAll] = useState(false)
   const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(group_id, accounting_book_id)
   const [index, setIndex] = useState(0)
-  const paymentContainerRef = useRef();
-  const [paymentContainerScrollInfo, setPaymentContainerScrollInfo] = useState({ x: { value: 0 }, y: { value: 0 } })
+
+  const [paymentsScrollInfo, paymentsDir, paymentsRef] = useScrollRef()
+  const [paymentContainerScrollInfo, paymentContainerDir, paymentContainerRef] = useScrollRef()
+
+//   const paymentContainerRef = useRef();
+  const summaryRef = useRef();
+//   const [paymentContainerScrollInfo, setPaymentContainerScrollInfo] = useState({ x: { value: 0 }, y: { value: 0 } })
   const [headerContainerHeight, setHeaderContainerHeight] = useState(120)
 
   useEffect(() => {
@@ -54,20 +59,34 @@ const PaymentsPage = (props) => {
     set({ x: { value: e.target.scrollLeft }, y: { value: e.target.scrollTop } })
   }, []);
 
-  useEffect(() => {
-    const div = paymentContainerRef.current
-    if (div) {
-      div.addEventListener('scroll', (e) => handleScroll(e, setPaymentContainerScrollInfo));
-    }
-  }, [paymentContainerRef.current]);
+//   useEffect(() => {
+//     const div = paymentContainerRef.current
+//     if (div) {
+//       div.addEventListener('scroll', (e) => handleScroll(e, setPaymentContainerScrollInfo));
+//     }
+//   }, [paymentContainerRef.current]);
 
   let currentDate = null
   let paymentLabels = []
 
+//   console.log(paymentContainerDir.y)
+//   console.log(paymentContainerScrollInfo.y.value)
+//   console.log('-')
+//   console.log('paymentContainerScrollInfo: '+ paymentContainerScrollInfo.y.value)
+//   console.log('paymentsScrollInfo:' + paymentsScrollInfo.y.value)
+//   console.log('paymentsDirY: ' + paymentsDir.y)
+//   console.log('paymentContainerDirY: ' + paymentContainerDir.y)
+  const [paymentOverflow, setPaymentOverflow] = useState('hidden')
+
+  if (paymentContainerScrollInfo.y.value > (headerContainerHeight - 5) && paymentOverflow !== 'auto') {
+    setPaymentOverflow('auto')
+    paymentsRef.current.scroll(0, 5)
+  }
+
   let paymentsHeight = "calc(100%)"
   let paymentStyle =  {
     background: '#FFFFFF',
-    overflow: paymentContainerScrollInfo.y.value === headerContainerHeight ? 'auto' : 'hidden',
+    overflow: paymentOverflow,
     marginTop: small ? '0px' : '0px',
     flexGrow: 1,
     height: paymentsHeight,
@@ -146,7 +165,7 @@ const PaymentsPage = (props) => {
     {
       name: '帳目明細',
       component:
-        <div style={paymentStyle}>
+        <div style={paymentStyle} ref={paymentsRef}>
           {
             payments.length > 0 ?
               paymentLabels
@@ -156,7 +175,7 @@ const PaymentsPage = (props) => {
     },
     {
       name: '分帳建議',
-      component: <div style={paymentStyle}>
+      component: <div style={paymentStyle} ref={summaryRef}>
         { summarObjects.length > 0 ?
             summarObjects
             : <EmptyResult message='目前沒有任何款項喔'/> }

@@ -20,6 +20,7 @@ import useUserCheckboxSelectLabel from './useUserCheckboxSelectLabel'
 import useUserRadioSelectAmountLabel from './useUserRadioSelectAmountLabel'
 import useUsersFilterSelect from './useUsersFilterSelect'
 import useOwersFilterSelect from './useOwersFilterSelect'
+import useScrollRef from './useScrollRef'
 
 export {
   useAccountingBookSummary,
@@ -43,5 +44,6 @@ export {
   useSearchLabel,
   useUserRadioSelectAmountLabel,
   useUsersFilterSelect,
-  useOwersFilterSelect
+  useOwersFilterSelect,
+  useScrollRef,
 }
