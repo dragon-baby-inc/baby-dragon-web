@@ -97,7 +97,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     changed={(v) => _setName({ value: v, valid: v.length > 0 })}
     value={_name.value}
     valid={_name.valid}
-    invalidFeedback="*不可為空白，12字內"
+    invalidFeedback="內容不可為空，12字內"
     type='text'
   />
 
@@ -118,7 +118,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     changed={(v) => _setAmount({ value: v, valid: v.length > 0 })}
     value={_amount.value}
     valid={_amount.valid}
-    invalidFeedback="*不可為空白，12字內"
+    invalidFeedback="內容不可為空，小於100000000"
     type='number'
   />
 

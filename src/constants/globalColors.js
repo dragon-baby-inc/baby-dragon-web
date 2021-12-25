@@ -16,4 +16,5 @@ export const themeColors = {
   gray100:  '#f6f6f6',
   white:    '#FFFFFF',
   red:      '#F9676A',
+  invalid:  '#D65C5C'
 }

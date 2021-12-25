@@ -9,6 +9,7 @@ import {
   Section,
   Footer,
   DatePickerInput,
+  FontAwesomeIcon,
   Button,
   TextInput,
   ColumnSwappableView,
@@ -236,7 +237,22 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
         { datePickerInput }
         <Section name="付款者"/>
         { payerLabel }
-        <Section name="欠款者" style={{ marginTop: '16px' }}/>
+        <div className={styles.section}>
+          <Section name="欠款者" style={{ marginTop: '16px' }}/>
+          <div className={styles.section}>
+            <div className={styles.sectionSpan}>
+              {_manualOwers.value.length}
+            </div>
+            <FontAwesomeIcon
+              faicon="farUser"
+              style={{
+                color: themeColors.green500,
+                margin: '0px 4px',
+                fontSize: '15px'
+              }}
+            />
+          </div>
+        </div>
         { radioAmountLabels }
         <div className={styles.AddOwerbutton}>
           { AddManualOwerButton }

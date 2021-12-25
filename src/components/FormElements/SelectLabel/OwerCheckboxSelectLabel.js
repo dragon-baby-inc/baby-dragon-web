@@ -71,14 +71,18 @@ const OwerCheckboxSelectLabel = ({
             position: 'relative',
             right: `${(displayCount - 1) * 10 - 8}px`
           }}>
-            {value ? value.length : 0}
-            <FontAwesomeIcon
-              faicon="farUser"
-              style={{
-                marginLeft: '4px',
-                fontSize: '15px'
-              }}
-            />
+            <div className={styles.countSection}>
+              <div className={styles.count}>
+                {value ? value.length : 0}
+              </div>
+              <FontAwesomeIcon
+                faicon="farUser"
+                style={{
+                  marginLeft: '4px',
+                  fontSize: '15px'
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.icon}>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { themeColors } from '../../../constants'
 import styles from './TextInput.module.scss'
 import { FontAwesomeIcon } from '../../../components'
 
@@ -30,7 +31,7 @@ const TextInput = ({
   let deleteIcon = null
   if (deleted) {
     if (deleteActive) {
-      deleteIcon = <FontAwesomeIcon faicon="faTrash" onClick={handleDelete}/>
+      deleteIcon = <FontAwesomeIcon faicon="faTrash" onClick={handleDelete} style={{ color: themeColors.invalid }}/>
     } else {
       deleteIcon = null
     }

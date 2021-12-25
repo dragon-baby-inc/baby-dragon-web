@@ -1,3 +1,5 @@
+@import '../../../styleSheets/globalColors.scss';
+
 .container {
   height: calc(100vh - 59px);
 //   height: calc(var(--vh, 1vh) * 100 - 59px);
@@ -20,4 +22,17 @@
   width: 100%;
   bottom: 0;
   padding: 12px 20px 24px;
+}
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $green500;
+}
+
+.sectionSpan {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: $green500;
 }
