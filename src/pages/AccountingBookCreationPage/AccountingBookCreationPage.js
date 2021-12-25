@@ -342,7 +342,12 @@ const AccountingBookEditPage = (props) => {
           <StepsWidget
             height={'calc(100vh - 58px - 70px - 97px - 24px)'}
             index={currentStep} steps={steps}/>
-          <Footer>
+          <Footer style={{
+            position: 'absolute',
+            width: '100vw',
+            right: 0,
+            bottom: 0,
+            }}>
             <CircleIcon
               color='green'
               faicon='faChevronLeft'
