@@ -95,17 +95,18 @@ const AccountingBookEditPage = (props) => {
                   initial={state.imageId.value}
                   icons={imageUrls}/>
               </div>
-              <div>
+              <div style={{margin: '0px 20px'}}>
                 <TextInput
                   key='name'
                   disabled={false}
+                  faicon="farCreditCard"
                   placeholder={'輸入名稱'}
                   name={'名稱'}
                   labelStyle={styles.labelStyle}
                   changed={(value) => handlInputChange(value)}
                   value={state.name.value === undefined ? '' : state.name.value}
                   valid={state.name.valid}
-                  invalidFeedback="*不可為空白，12字內"
+                  invalidFeedback="不可為空，12字內"
                   type='text'
                 />
               </div>

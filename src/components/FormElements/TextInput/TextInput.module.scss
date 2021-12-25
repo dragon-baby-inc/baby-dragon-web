@@ -2,14 +2,13 @@
 
 .container {
   width: 100%;
-  border-radius: 16px;
-}
-
-.label:focus-within  {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  overflow: hidden;
+  outline: 1px solid red !important;
 }
 
 .label {
+  outline: 1px solid red !important;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -47,11 +46,6 @@
 .input[disabled] {
   background-color: #eee;
   border-radius: none;
-}
-
-input, input:focus {
-  border: none;
-  outline: none;
 }
 
 input::placeholder {
