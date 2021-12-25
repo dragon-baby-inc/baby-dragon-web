@@ -1,6 +1,5 @@
 import React from 'react';
-import { themeColors, userImageUrls as imageUrls } from '../../../constants'
-import { FontAwesomeIcon } from '../../index'
+import { userImageUrls as imageUrls } from '../../../constants'
 import styles from './Image.module.scss'
 
 const Image = ({

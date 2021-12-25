@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie';
 import "../../../styleSheets/Checkbox.scss";
 import "../../../styleSheets/CustomInput.scss";
 import "../../../styleSheets/userSummaryLabel.scss";
-import UserSummaryCollapse from '../UserSummaryCollapse/userSummaryCollapse'
 import { Separater } from '../../../components/FormElements'
 import { Image } from '../../../components'
 import {
@@ -18,6 +17,7 @@ const UserSummaryLabel = (props) => {
   const { navigateTo } = useHistory();
   let object = props.object
   let activeClass = collapseOpen ? 'active' : ''
+  /* eslint-disable no-unused-vars */
   const [cookies, setCookie] = useCookies(['name']);
 
   const handlePaidBackClick = (object, allo) => {

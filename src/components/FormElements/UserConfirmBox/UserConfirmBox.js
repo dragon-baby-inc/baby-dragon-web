@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, ConfirmBox, IconSwappableView } from '../../index'
-import { themeColors, imageUrls } from '../../../constants'
+import { imageUrls } from '../../../constants'
 
 const UserConfirmBox = ({
   title,

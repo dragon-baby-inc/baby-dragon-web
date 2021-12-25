@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CheckboxLabel.module.scss'
-import { Image, Checkbox } from '../index'
+import { Checkbox } from '../index'
 
 const CheckboxLabel = ({
   children,

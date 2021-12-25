@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './UserCheckboxSelectLabel.module.scss'
 import {
-  CheckboxSelect,
-  useSearchLabel,
   FontAwesomeIcon,
   Drawer,
   Image,
-  DrawerCheckboxSelect
 } from '../../../components'
 import {
-  useUsersSelect,
   useUsersFilterSelect
 } from '../../../hooks'
-import {
-  createUserCheckbokLabel
-} from '../../../generators/labelGenerator'
 
 const UserCheckboxSelectLabel = ({
   users,

@@ -4,9 +4,7 @@ import {
   CheckboxLabel,
   Separater,
   UserCreateLabel,
-  handleAddUser,
-  Warning,
-  Image
+  Warning
 } from '../index'
 
 const CheckboxSelect = ({

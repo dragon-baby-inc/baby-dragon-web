@@ -4,13 +4,9 @@ import {
   FontAwesomeIcon,
   Drawer,
   Image,
-  DrawerRadioSelect,
   RadioFilterSelect,
   TextInput
 } from '../../../components'
-import {
-  useUserRadioSelect
-} from '../../../hooks'
 import {
   createUserRadioLabel
 } from '../../../generators/labelGenerator'
@@ -89,7 +85,7 @@ const UserRadioSelectAmountLabel = ({
           name="金額"
           faicon="farCreditCard"
           style={inlineStyles.amountLabel}
-          value={amount}
+          value={amount ? amount : ''}
           invalidFeedback={'不可為空'}
           valid={true}
           placeholder='輸入金額'

@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styles from './PaymentsHeader.module.scss'
-import { themeColors } from '../../../constants'
-import { TopLeftIcon, TopRightIcon } from '../../index'
-import { DisclaimerBox, PageHeader, FontAwesomeIcon, Image, Star } from '../../index'
-
-const inlineStyles = {
-  topLeft: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    color: 'white',
-    textDecoration: "none",
-    padding: '20px',
-  }
-}
+import { DisclaimerBox, Image } from '../../index'
 
 function PaymentsHeader({
   paymentSize,
@@ -25,8 +12,6 @@ function PaymentsHeader({
   accountingBookDetails,
   loading
 }){
-  let timer = null
-
   const [showDisclamier, setShowDisclaimer] = useState(false)
 
   useEffect(() => {
@@ -41,8 +26,6 @@ function PaymentsHeader({
   }
 
   let classes = [styles.header]
-  let iconClasses = [styles.icon, styles.barsIcon]
-  let nameClasses = [styles.name]
   let innerBlockClasses = [styles.innerBlock]
 
   return(

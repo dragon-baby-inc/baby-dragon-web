@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './RadioLabel.module.scss'
-import { Image, Radio } from '../index'
+import { Radio } from '../index'
 
 const CheckboxLabel = ({
   children,

@@ -13,17 +13,7 @@ import {
 } from '../../../components'
 
 const UserSummaryLabel = (props) => {
-  const [ collapseOpen , setCollapseOpen ] = useState(true)
   let object = props.object
-  let activeClass = collapseOpen ? 'active' : ''
-
-  const handleLabelOnCheck = (e) => {
-    if (e.target.checked) {
-      setCollapseOpen(true)
-    } else {
-      setCollapseOpen(false)
-    }
-  }
 
   let faIcon;
   let color;

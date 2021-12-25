@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './UserCheckboxSelectLabel.module.scss'
 import {
-  CheckboxSelect,
-  useSearchLabel,
   FontAwesomeIcon,
   Drawer,
   Image,
-  DrawerCheckboxSelect
 } from '../../../components'
 import {
-  useUsersSelect,
   useOwersFilterSelect
 } from '../../../hooks'
 
@@ -57,6 +53,7 @@ const OwerCheckboxSelectLabel = ({
         borderRadius: '50%',
         zIndex: i
       }}
+        key={i}
         size='40px'
         imageUrl={u.imageURL} />
     )

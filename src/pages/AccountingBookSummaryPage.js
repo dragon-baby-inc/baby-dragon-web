@@ -1,8 +1,6 @@
 import React from "react"
 import { useAccountingBookSummary } from '../hooks'
-import useScrollInfo from 'react-element-scroll-hook';
-import { PageHeader, TopLeftIcon, Loading, EmptyResult, UserSummaryLabel } from '../components'
-import { themeColors } from '../constants'
+import { Loading, EmptyResult, UserSummaryLabel } from '../components'
 
 const styles = {
   summary: {

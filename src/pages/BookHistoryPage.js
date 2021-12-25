@@ -5,7 +5,6 @@ import {
   Separater,
   PageHeader,
   Loading,
-  TopLeftIcon,
   EmptyResult,
   LogMessageLabel
 } from '../components'

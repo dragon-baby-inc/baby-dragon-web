@@ -1,47 +1,29 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 import styles from './PaidBackForm.module.scss'
-import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
 import { Context as PaymentContext } from '../../../contexts/PaymentContext'
 import { Context as AuthContext } from '../../../contexts/AuthContext'
 import {
   Section,
-  Footer,
   DatePickerInput,
   Button,
   TextInput,
-  ColumnSwappableView,
-  UserCheckboxSelectLabel,
-  OwerCheckboxSelectLabel,
 } from '../../../components'
 import {
   useHistory,
-  useUserRadioSelectAmountLabel,
   useUserRadioSelectLabel,
-  useAccountingBook,
-  useUsersSelect,
 } from '../../../hooks'
 
 const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const { group_id, accounting_book_id } = useParams()
   const { state: authState } = useContext(AuthContext)
+  /* eslint-disable no-unused-vars */
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const history = useHistory();
   const {
     state,
-    setName,
-    setAmount,
-    setPayer,
     setBuilder,
-    setOwers,
-    setManualOwers,
-    setCreationDate,
-    setAllocationType,
-    setShowRadioSelect,
-    setAccountingBookDetails,
-    setShowCheckboxSelect,
-    setShowPopUpForm,
     validateForm,
     createPayment,
     resetForm
@@ -55,7 +37,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
   const [_payer, _setPayer] = useState({ value: null, valid: true })
   const [_ower, _setOwer] = useState({ value: null, valid: true })
-  const [alertMessage, setAlertMessage] = useState(null)
 
   useEffect(() => {
     if (payment) {
@@ -75,6 +56,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       _setPayer({ value: payer, valid: true })
       _setOwer({ value: ower, valid: true })
     }
+  /* eslint-disable react-hooks/exhaustive-deps */
   }, [payment, users, authState])
 
   const [payer, payerLabel] = useUserRadioSelectLabel({
@@ -124,7 +106,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
   const selectUser = () => {
     let existing = []
-    _manualOwers.value.reduce((prev, ower) => {
+    _manualOwers.value.forEach((ower) => {
       if (ower.user) {
         existing.push(ower.user.id)
       }
@@ -188,7 +170,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     <div className={styles.container}>
       <div className={styles.stepContainer}>
         { nameInput }
-        { alertMessage }
         { amountInput }
         { datePickerInput }
         <Section name="還款者"/>

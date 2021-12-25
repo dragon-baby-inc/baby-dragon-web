@@ -5,7 +5,6 @@ import {
   SearchInput,
   CheckboxLabel,
   Separater,
-  Image
 } from '../index'
 
 const CheckboxFilterSelect = ({

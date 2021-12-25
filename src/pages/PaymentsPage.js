@@ -1,6 +1,5 @@
 import React, { useCallback, useRef, useEffect, useState, useContext } from "react"
-import { useRouteMatch, Switch, Route } from 'react-router-dom';
-import useScrollInfo from 'react-element-scroll-hook';
+import { useRouteMatch  } from 'react-router-dom';
 import AccountingBookSummaryPage from '../pages/AccountingBookSummaryPage'
 import { useHistory } from "react-router-dom";
 import axios from '../api/dragonBabyApi'
@@ -11,28 +10,29 @@ import { useScrollRef, usePayments, useAccountingBook, useAccountingBookSummary 
 import {
   PaymentInfoHeader,
   UserSummaryLabel,
-  DisclaimerBox,
   ConfirmBox,
   ColumnSwappableView,
   PaymentsHeader,
   Loading,
   EmptyResult,
   CircleFloatingIcon,
-  Views,
   PaymentCheckboxLabel,
 } from '../components'
 
 const PaymentsPage = (props) => {
-  const { url } = useRouteMatch();
   const history = useHistory();
+  /* eslint-disable no-unused-vars */
   const [ editMode, setEditMode ] = useState(false)
   const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
   const { state: authState } = useContext(AuthContext)
+  /* eslint-disable no-unused-vars */
   const [ small, setSmall ] = useState(false)
+  /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, accountingBookLoading] = useAccountingBook()
   const [payments, paymentLoading, getPayments] = usePayments('')
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
+  /* eslint-disable no-unused-vars */
   const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(group_id, accounting_book_id)
   const [index, setIndex] = useState(0)
 

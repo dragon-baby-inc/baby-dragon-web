@@ -1,29 +1,21 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useParams } from 'react-router-dom';
-import axios from '../api/dragonBabyApi'
 import { dragonBabyApi } from '../api/dragonBabyApi'
-import { themeColors, imageUrls } from '../constants'
+import { themeColors } from '../constants'
 import { normalizeGroupUser } from '../normalizers'
 import { useHistory, useAccountingBook, useUsersSelect } from '../hooks'
 import {
   UserConfirmBox,
-  Image,
-  IconSwappableView,
-  TextInput,
-  Radio,
-  CheckboxLabel,
   Separater,
   PageHeader,
   Backdrop,
   UserForm,
-  CheckboxSelect,
   TopRightIcon,
-  ConfirmBox
 } from '../components'
 
 const AccountingBookUsersPage = (props) => {
-  const [ editMode, setEditMode ] = useState(false)
   const history = useHistory();
+  /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, loading, _err, setUsers] = useAccountingBook()
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)

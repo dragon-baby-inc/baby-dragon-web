@@ -23,6 +23,7 @@ const RadioSelect = ({
     setDisplayObjects(newObjects)
   }
 
+  /* eslint-disable no-unused-vars */
   const [searchValue, searchLabel] = useSearchLabel({
     reset: () => { setDisplayObjects(objects) },
     changed: handleFilter

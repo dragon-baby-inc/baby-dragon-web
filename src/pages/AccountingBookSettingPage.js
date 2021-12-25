@@ -3,11 +3,9 @@ import { themeColors } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import {
   FontAwesomeIcon,
-  Toggle,
   ToggleLabel,
   NavigationLabel,
   ActionLabel,
-  TopLeftIcon,
   AccountingBookSettingsHeader,
   AccountingBookInfo,
   Separater,
@@ -16,7 +14,6 @@ import {
   ConfirmBox
 } from '../components'
 import { useHistory, useAccountingBook } from '../hooks'
-import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 import { dragonBabyApi } from '../api/dragonBabyApi'
 

@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styles from './PaymentsHeader.module.scss'
-import { themeColors } from '../../../constants'
-import { TopLeftIcon, TopRightIcon } from '../../index'
-import { PageHeader, FontAwesomeIcon, Image, Star } from '../../index'
-
-const inlineStyles = {
-  topLeft: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    color: 'white',
-    textDecoration: "none",
-    padding: '20px',
-  }
-}
+import { TopRightIcon } from '../../index'
+import { PageHeader, Star } from '../../index'
 
 function PaymentsHeader({
   paymentSize,
@@ -25,8 +13,7 @@ function PaymentsHeader({
   handleSmallChange,
   loading
 }){
-  let timer = null
-
+  /* eslint-disable no-unused-vars */
   const [showDisclamier, setShowDisclaimer] = useState(false)
 
   useEffect(() => {

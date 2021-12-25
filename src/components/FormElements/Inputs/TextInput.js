@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { themeColors } from '../../../constants'
 import styles from './TextInput.module.scss'
 import { FontAwesomeIcon } from '../../../components'

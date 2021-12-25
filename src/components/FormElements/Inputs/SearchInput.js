@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from "./SearchInput.module.scss"
-import { themeColors } from '../../../constants/globalColors'
 import { FontAwesomeIcon } from '../../../components'
 
 const SearchInput = (props) => {
@@ -9,7 +8,7 @@ const SearchInput = (props) => {
       <div className={styles.searchGroup}>
         <label className={styles.label}>
           <div className={styles.faSearch}>
-            <FontAwesomeIcon size="14" faicon={"faSearch"}/>
+            <FontAwesomeIcon faicon={"faSearch"}/>
           </div>
           <input
             type="text"

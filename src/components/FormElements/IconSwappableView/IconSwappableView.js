@@ -17,7 +17,6 @@ const _styles = {
     height: '100%',
   },
   activeSlide: {
-    height: '100%',
     margin: 0,
     overflow: 'hidden',
     height: '100%',

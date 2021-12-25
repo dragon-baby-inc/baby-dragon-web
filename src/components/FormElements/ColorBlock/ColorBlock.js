@@ -1,6 +1,4 @@
 import React from 'react';
-import { themeColors } from '../../../constants'
-import { FontAwesomeIcon } from '../../index'
 import styles from './ColorBlock.module.scss'
 
 const ColorBlock = ({

@@ -4,24 +4,19 @@ import styles from './PaymentForm.module.scss'
 import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
 import { Context as PaymentContext } from '../../../contexts/PaymentContext'
-import { Context as AuthContext } from '../../../contexts/AuthContext'
 import {
   Section,
-  Footer,
   DatePickerInput,
   FontAwesomeIcon,
   Button,
   TextInput,
   ColumnSwappableView,
-  UserCheckboxSelectLabel,
   OwerCheckboxSelectLabel,
   UserRadioSelectAmountLabel,
 } from '../../../components'
 import {
   useHistory,
-  useUserRadioSelectAmountLabel,
   useUserRadioSelectLabel,
-  useAccountingBook,
   useUsersSelect,
 } from '../../../hooks'
 
@@ -30,29 +25,19 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   const history = useHistory();
   const {
     state,
-    setName,
-    setAmount,
-    setPayer,
-    setBuilder,
-    setOwers,
-    setManualOwers,
-    setCreationDate,
-    setAllocationType,
-    setShowRadioSelect,
-    setAccountingBookDetails,
-    setShowCheckboxSelect,
-    setShowPopUpForm,
     validateForm,
     createPayment,
     resetForm
   } = useContext(PaymentContext)
 
+  /* eslint-disable no-unused-vars */
   const [_allocationType, _setAllocationType] = useState('evenly')
   const [_name, _setName] = useState({ value: '', valid: true })
-  const [_amount, _setAmount] = useState({ value: null, valid: true })
+  const [_amount, _setAmount] = useState({ value: '', valid: true })
   const [_creation_date, _setCreationDate] = useState({ value: null, valid: true })
   const [_owers, _setOwers] = useState({ value: [], valid: true })
   const [_manualOwers, _setManualOwers] = useState({ value: [], valid: true })
+  /* eslint-disable no-unused-vars */
   const [_payer, _setPayer] = useState({ value: null, valid: true })
   const [alertMessage, setAlertMessage] = useState(null)
   const [_users, setUsers] = useState(users)
@@ -61,7 +46,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     if (users) {
       setUsers(users)
     }
-  }, [users])
+  }, [users, setUsers])
 
   useEffect(() => {
     if (payment) {
@@ -70,7 +55,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       _setCreationDate({ value: payment.paid_at, valid: true })
       _setAllocationType(payment.allocation_type)
     }
-  }, [payment])
+  }, [payment, _setName, _setAmount, _setCreationDate, _setAllocationType])
 
   const [payer, payerLabel] = useUserRadioSelectLabel({
     users: users,
@@ -175,13 +160,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
   const handleAddOwer = () => {
     let newOwers = [..._manualOwers.value]
-    newOwers.push({ user: selectUser(), amount: null })
+    newOwers.push({ user: selectUser(), amount: '' })
     _setManualOwers({ value: newOwers, valid: true })
   }
 
   const selectUser = () => {
     let existing = []
-    _manualOwers.value.reduce((prev, ower) => {
+    _manualOwers.value.forEach((ower) => {
       if (ower.user) {
         existing.push(ower.user.id)
       }

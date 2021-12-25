@@ -1,15 +1,10 @@
 import React from "react"
-import { Switch, Route } from 'react-router-dom';
-import { IconsList } from '../components'
-import useAccountingBook from '../hooks/useAccountingBook'
+import { Route } from 'react-router-dom';
 import BookHistoryPage from './BookHistoryPage'
 import PaymentsPage from './PaymentsPage'
 import AccountingBookSettingPage from './AccountingBookSettingPage'
 import AccountingBookEditPage from './AccountingBookEditPage'
-import GroupUsersPage from './GroupUsersPage'
 import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
-import { PaymentForm } from '../components'
-import AccountingBookSummaryPage from './AccountingBookSummaryPage'
 import {
   PaymentEditPage,
   AccountingBookCurrencyPage,

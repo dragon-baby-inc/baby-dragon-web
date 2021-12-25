@@ -1,8 +1,9 @@
-import React, { useCallback, useState, useRef, useEffect } from "react"
+import { useCallback, useState, useRef, useEffect } from "react"
 
 const useScrollRef = () => {
   const ref = useRef()
   let prev;
+  /* eslint-disable no-unused-vars */
   const [prevScrollInfo, setPrevScrollInfo] = useState({ x: { value: 0 }, y: { value: 0 } })
   const [scrollInfo, setScrollInfo] = useState({ x: { value: 0 }, y: { value: 0 } })
   const [dir, setdir] = useState({ x: null, y: null })

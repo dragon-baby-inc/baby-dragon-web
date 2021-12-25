@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useParams } from 'react-router-dom';
-import axios from '../../api/dragonBabyApi'
 import { dragonBabyApi } from '../../api/dragonBabyApi'
 import { themeColors } from '../../constants'
 import { useHistory, useAccountingBook, useCurrencySelect } from '../../hooks'
 import {
-  Image,
-  Radio,
   Separater,
   PageHeader,
   Backdrop,
   UserForm,
-  RadioSelect,
-  RadioLabel,
   TopRightIcon
 } from '../../components'
 
 const AccountingBookCurrencyPage = (props) => {
-  const [ editMode, setEditMode ] = useState(false)
+  /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, loading] = useAccountingBook()
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams();

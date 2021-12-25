@@ -20,13 +20,11 @@ const StepsWidget = ({
 
   const defaultStyles = {
     root: {
-      height: '100%',
       margin: 0,
       height: height,
       overflow: 'hidden',
     },
     slideContainer: {
-      height: '100%',
       margin: 0,
       height: '100%',
     },

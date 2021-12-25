@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { useUsers } from './'
 import {
-  CheckboxSelect,
-  CheckboxLabel,
   CheckboxFilterSelect,
-  Image
 } from '../components'
 import {
   createOwerCheckbokLabel
@@ -57,11 +53,3 @@ const useOwersFilterSelect = ({
 }
 
 export default useOwersFilterSelect;
-
-const styles = {
-  label: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-}

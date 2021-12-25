@@ -7,7 +7,6 @@ import styles from '../PaymentCreationPage/PaymentCreationPage.module.scss'
 import { themeColors } from '../../constants'
 import {
   useHistory,
-  usePayment,
   useAccountingBook,
 } from '../../hooks'
 import {
@@ -19,22 +18,8 @@ import {
 
 const PaymentPaidBackPage = () => {
   const {
-    state,
-    setName,
-    setAmount,
-    setPayer,
-    setBuilder,
-    setOwers,
-    setManualOwers,
-    setId,
-    setCreationDate,
-    setAllocationType,
-    setShowRadioSelect,
     setAccountingBookDetails,
-    setShowCheckboxSelect,
-    setShowPopUpForm,
-    validateForm,
-    createPayment,
+    setBuilder,
     resetForm,
   } = useContext(PaymentContext)
 
@@ -55,6 +40,10 @@ const PaymentPaidBackPage = () => {
 
   useEffect(() => {
     if (!loading) {
+
+      let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      if (!builder) { builder = users[0] }
+      setBuilder(builder)
 
       setAccountingBookDetails(accountingBookDetails)
       setDisableForm(false)

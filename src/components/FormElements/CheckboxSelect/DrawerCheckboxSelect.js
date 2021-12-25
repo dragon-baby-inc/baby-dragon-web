@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styles from '../CheckboxSelect/DrawerCheckboxSelect.module.scss'
-import { CheckboxLabel, Separater, Image } from '../index'
+import { CheckboxLabel, Separater } from '../index'
 import {
   useSearchLabel
 } from '../../../hooks'
@@ -20,7 +20,7 @@ const DrawerCheckboxSelect = ({
     setMount(true)
     setSelectAll(objects.length === selectedObjects.length)
     setDisplayObjects(objects)
-  }, [objects])
+  }, [objects, setSelectAll, setDisplayObjects, setMount])
 
   const handleFilter = (searchTerm) => {
     let filter = searchTerm.toUpperCase();

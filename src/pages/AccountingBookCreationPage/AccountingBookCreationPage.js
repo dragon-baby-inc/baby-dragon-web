@@ -6,30 +6,18 @@ import { Context as AccountingBookContext} from '../../contexts/AccountingBookCo
 import { normalizeGroupUser } from '../../normalizers'
 import {
   UserConfirmBox,
-  UserCreateLabel,
-  Warning,
   Footer,
-  ConfirmBox,
-  Image,
   StepsWidget,
   TopRightIcon,
   CircleIcon,
   IconSwappableView,
   PageHeader,
-  FontAwesomeIcon,
   Separater,
-  SeparaterLabel,
-  FloatingIcon,
   TextInput,
-  Loading,
   Button,
-  CheckboxSelect,
-  CheckboxLabel,
-  CircleFloatingIcon,
 } from '../../components'
 import {
   useHistory,
-  useAccountingBook,
   useUsersSelect,
   useCurrencySelect
 } from '../../hooks'

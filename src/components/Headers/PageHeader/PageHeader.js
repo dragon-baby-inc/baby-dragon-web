@@ -1,6 +1,6 @@
 import React from "react"
 import styles from './PageHeader.module.scss'
-import { TopLeftIcon, FontAwesomeIcon } from '../../index'
+import { TopLeftIcon } from '../../index'
 
 const inlineStyles = {
   icon: {

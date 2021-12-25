@@ -3,13 +3,10 @@ import FormatString from '../../../utilities/FormatString'
 import { useCookies } from 'react-cookie';
 import styles from './paymentCheckboxLabel.module.scss'
 import { useParams } from 'react-router-dom';
-import Button from '../Button/Button'
 import Checkbox from  '../Inputs/Checkbox'
-import { Image, Separater } from '../../index'
+import { Image } from '../../index'
 import { Collapse } from '../../index'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/fontawesome-free-solid'
 import {
   useHistory
 } from '../../../hooks'
@@ -17,7 +14,8 @@ import {
 const PaymentCheckboxLabel = (props) => {
   const [ collapseOpen , setCollapseOpen ] = useState(false)
   const { navigateTo, navigate } = useHistory();
-  const [cookies, setCookie] = useCookies([]);
+  /* eslint-disable no-unused-vars */
+  const [_, setCookie] = useCookies([]);
   const { group_id, accounting_book_id } = useParams();
   const open = collapseOpen && !props.editMode
   const [ isChecked, setIsChecked ] = useState(props.checked)

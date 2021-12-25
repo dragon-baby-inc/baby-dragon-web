@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './SelectLabel.module.scss'
 import {
   FontAwesomeIcon,
@@ -6,9 +6,6 @@ import {
   Image,
   DrawerRadioSelect
 } from '../../../components'
-import {
-  useUserRadioSelect
-} from '../../../hooks'
 import {
   createUserRadioLabel
 } from '../../../generators/labelGenerator'

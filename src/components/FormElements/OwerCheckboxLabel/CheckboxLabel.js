@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './CheckboxLabel.module.scss'
-import { Image, Checkbox } from '../index'
+import { Checkbox } from '../index'
 import { FontAwesomeIcon } from '../../index'
 import { themeColors } from '../../../constants'
 

@@ -15,6 +15,7 @@ const DrawerRadioSelect = ({
   closed
 }) => {
   const [displayObjects, setDisplayObjects] = useState(objects)
+  /* eslint-disable no-unused-vars */
   const [_selectedObject, setSelectedObject] = useState(selectedObject)
 
   const handleFilter = (searchTerm) => {
@@ -26,7 +27,8 @@ const DrawerRadioSelect = ({
     setDisplayObjects(newObjects)
   }
 
-  const [searchValue, searchLabel] = useSearchLabel({
+  /* eslint-disable no-unused-vars */
+  const [_, searchLabel] = useSearchLabel({
     reset: () => { setDisplayObjects(objects) },
     changed: handleFilter,
     closed: closed

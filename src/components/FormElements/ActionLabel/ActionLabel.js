@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './ActionLabel.module.scss';
-import { FontAwesomeIcon } from '../../index'
-import { themeColors } from '../../../constants'
 
 const actionLabel = ({
   clicked,

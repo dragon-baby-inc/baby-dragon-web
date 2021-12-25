@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import { useParams } from 'react-router-dom';
 import styles from './AccountingBookSettingsHeader.module.scss';
-import { themeColors } from '../../../constants';
 import PageHeader from '../PageHeader/PageHeader';
 
 function AccountingBookSettingsHeader({ scrollInfo, group }){

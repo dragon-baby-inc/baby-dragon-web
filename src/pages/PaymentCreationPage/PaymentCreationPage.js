@@ -17,6 +17,7 @@ import {
 
 const PaymentCreationPage = () => {
   const { group_id, accounting_book_id } = useParams()
+  /* eslint-disable no-unused-vars */
   const [disableForm, setDisableForm] = useState(true)
   const history = useHistory();
   const [users, accountingBookDetails, loading] = useAccountingBook()
@@ -24,20 +25,11 @@ const PaymentCreationPage = () => {
   const [payer, _setPayer] = useState(null)
   const {
     state,
-    setName,
-    setAmount,
     setPayer,
     setBuilder,
     setOwers,
     setManualOwers,
-    setCreationDate,
-    setAllocationType,
-    setShowRadioSelect,
     setAccountingBookDetails,
-    setShowCheckboxSelect,
-    setShowPopUpForm,
-    validateForm,
-    createPayment,
     resetForm
   } = useContext(PaymentContext)
 

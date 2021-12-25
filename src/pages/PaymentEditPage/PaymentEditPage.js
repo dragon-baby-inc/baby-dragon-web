@@ -28,16 +28,12 @@ const PaymentEditPage = () => {
     setId,
     setCreationDate,
     setAllocationType,
-    setShowRadioSelect,
     setAccountingBookDetails,
-    setShowCheckboxSelect,
-    setShowPopUpForm,
-    validateForm,
-    createPayment,
     resetForm,
   } = useContext(PaymentContext)
 
   const { group_id, accounting_book_id } = useParams()
+  /* eslint-disable no-unused-vars */
   const [disableForm, setDisableForm] = useState(true)
   const [payment, paymentLoading] = usePayment()
   const history = useHistory();
