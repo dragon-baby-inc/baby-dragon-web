@@ -3,9 +3,11 @@
 .container {
   margin-bottom: 12px;
 }
+
 .invalid {
   border: 1px solid red;
   border-radius: 16px;
+  margin-bottom: 0px;
 }
 
 .label {
@@ -42,4 +44,15 @@
   letter-spacing: 0px;
   color: $gray900;
   text-align: left;
+}
+
+.invalidFeedback {
+  color: red;
+  font-size: 12px;
+  border-radius: 0;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: right;
 }

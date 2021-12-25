@@ -86,7 +86,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     changed={(v) => _setName({ value: v, valid: v.length > 0 })}
     value={_name.value}
     valid={_name.valid}
-    invalidFeedback="*不可為空白，12字內"
+    invalidFeedback="內容不可為空，12字內"
     type='text'
   />
 
@@ -107,7 +107,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     changed={(v) => _setAmount({ value: v, valid: v.length > 0 })}
     value={_amount.value}
     valid={_amount.valid}
-    invalidFeedback="*不可為空白，12字內"
+    invalidFeedback="內容不可為空，小於100000000"
     type='number'
   />
   const handleAddCoverCostUser = (id) => {
@@ -167,13 +167,14 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
         amount={ower.amount}
         user={ower.user}
         callback={handleManualOwersChanged}
+        invalidFeedback="內容不可為空，小於100000000"
       />
     )
   })
 
   const handleAddOwer = () => {
     let newOwers = [..._manualOwers.value]
-    newOwers.push({ user: selectUser(), amount: true })
+    newOwers.push({ user: selectUser(), amount: null })
     _setManualOwers({ value: newOwers, valid: true })
   }
 
@@ -261,7 +262,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       allocation_type: _allocationType
     }
 
-    let valid = validateForm(newState, form[state.allocation_type], validate)
+    let valid = validateForm(newState, form[_allocationType], validate)
     if (!valid) { return }
     createPayment(newState, () => {
       resetForm()

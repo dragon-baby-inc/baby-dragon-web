@@ -26,6 +26,8 @@ const UserRadioSelectAmountLabel = ({
   forceDrawerActive,
   deleted,
   deleteActive,
+  invalidFeedback,
+  invalidFeedbackStyle
 }) => {
   const [drawerActive, setDrawerActive] = useState(forceDrawerActive)
   const [_valid, setValid] = useState(true)
@@ -97,6 +99,11 @@ const UserRadioSelectAmountLabel = ({
           deleteActive={deleteActive}
         />
       </div>
+      {
+        (_valid === false) ?
+          <div style={invalidFeedbackStyle} className={styles.invalidFeedback}>{invalidFeedback}</div> :
+          null
+      }
 
       <Drawer
         open={drawerActive}

@@ -1,4 +1,12 @@
 class Validator {
+  validAmount(value) {
+    if (value > 0 && value < 100000000) {
+      return true
+    }
+
+    return false
+  }
+
   isString(value) {
     if (typeof value === 'string') {
       return true;

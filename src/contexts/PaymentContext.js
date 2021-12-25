@@ -183,7 +183,7 @@ const setHidden = dispatch => () => {
 
 const validations = {
   name: ['isString', 'isNotEmpty'],
-  amount: ['isNotEmpty'],
+  amount: ['isNotEmpty', 'validAmount'],
   payer: ['isNotEmpty'],
   ower: ['isNotEmpty'],
   owers: ['isNotEmpty', 'atLeastOne'],
