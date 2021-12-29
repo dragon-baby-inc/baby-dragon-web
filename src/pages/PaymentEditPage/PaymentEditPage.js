@@ -34,11 +34,11 @@ const PaymentEditPage = () => {
 
   const { group_id, accounting_book_id } = useParams()
   /* eslint-disable no-unused-vars */
-  const [disableForm, setDisableForm] = useState(true)
-  const [payment, paymentLoading] = usePayment()
-  const history = useHistory();
-  const [users, accountingBookDetails, loading] = useAccountingBook()
   const { state: authState } = useContext(AuthContext)
+  const [disableForm, setDisableForm] = useState(true)
+  const [payment, paymentLoading] = usePayment(authState)
+  const history = useHistory();
+  const [users, accountingBookDetails, loading] = useAccountingBook(authState)
   const [index, setIndex] = useState(0);
   const [_manualOwers, _setManualOwers] = useState([])
   const [_owers, _setOwers] = useState([])
@@ -101,7 +101,7 @@ const PaymentEditPage = () => {
       <Separater style={{ margin: 0 }}/>
       {
         _manualOwers ?
-          <PaymentForm index={index} users={users} manualOwers={_manualOwers} owers={_owers} payment={payment}/> : null
+          <PaymentForm authState={authState} index={index} users={users} manualOwers={_manualOwers} owers={_owers} payment={payment}/> : null
       }
     </>
 

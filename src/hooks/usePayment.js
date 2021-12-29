@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { dragonBabyApi } from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
-const usePayment =  (query_params) => {
+const usePayment =  (authState) => {
   const { group_id, accounting_book_id, payment_id } = useParams();
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -25,9 +25,8 @@ const usePayment =  (query_params) => {
   let stub = false
   const getPayment = async () => {
     setLoading(true)
-    await dragonBabyApi.getPayment(group_id, accounting_book_id, payment_id)
+    await authState.api.getPayment(group_id, accounting_book_id, payment_id)
       .then(function (response) {
-        console.log(response.data)
         setPayment(response.data)
       })
       .catch(function (error) {
@@ -42,9 +41,11 @@ const usePayment =  (query_params) => {
       return
     }
 
-    getPayment();
+    if (authState && authState.api) {
+      getPayment();
+    }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [])
+  }, [authState.api])
 
   return [payment, loading, err];
 }

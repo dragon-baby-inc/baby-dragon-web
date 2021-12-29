@@ -1,13 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react";
+import { Context as AuthContext } from '../../../contexts/AuthContext'
 import styles from './UserForm.module.scss'
 import { useParams } from 'react-router-dom';
-import axios from '../../../api/dragonBabyApi'
 import { Button, TextInput } from '../../FormElements'
 
 const UserForm = ({
   group,
   changed
 }) => {
+  const { state: authState } = useContext(AuthContext)
   const [name, setName] = useState("")
   const [valid, setVaid] = useState(null)
   const { group_id } = useParams();
@@ -25,7 +26,7 @@ const UserForm = ({
       return
     }
 
-    axios.post(`api/v1/groups/${group_id}/users`, { name: name })
+    authState.api.createUser(group_id, { name: name })
       .then((res) => {
         window.location.reload();
       })

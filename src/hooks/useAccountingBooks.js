@@ -3,7 +3,7 @@ import { imageUrls } from '../constants'
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
-const useAccountingBooks =  () => {
+const useAccountingBooks =  (authState) => {
   const { group_id } = useParams();
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,8 @@ const useAccountingBooks =  () => {
 
   const getAccountingBook = async () => {
     setLoading(true)
-    await axios.get(`api/v1/groups/${group_id}/accounting_books`)
+
+    await authState.api.getAccountingBooks(group_id)
       .then(function (response) {
         const books = response.data.accounting_books.map(b => {
           return { imageUrl: imageUrls[b.image_id], ...b }
@@ -31,8 +32,10 @@ const useAccountingBooks =  () => {
 
   useEffect(() => {
     /* eslint-disable react-hooks/exhaustive-deps */
-    getAccountingBook();
-  }, [])
+    if (authState && authState.api) {
+      getAccountingBook();
+    }
+  }, [authState])
 
   return [books, group, loading, currentBook, setCurrentBook, err];
 }

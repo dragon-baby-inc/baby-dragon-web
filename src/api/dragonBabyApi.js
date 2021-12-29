@@ -6,12 +6,12 @@ const axiosClient = axios.create({
 })
 
 class DragonBabyApi {
-  constructor() {
+  constructor(access_token) {
     this.api = axios.create({
       baseURL: process.env.REACT_APP_BACKEND_URI,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': process.env.DRAGONBABY_API_SECRET
+        'Authorization': access_token
       }
     });
     ;
@@ -21,8 +21,16 @@ class DragonBabyApi {
     return this.api.post(`api/v1/tokens`, { ...data, access_token: token })
   }
 
+  getPayments(group_id, accounting_book_id, query) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments${query}`)
+  }
+
   getPayment(group_id, accounting_book_id, payment_id) {
     return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${payment_id}`)
+  }
+
+  deletePayments(group_id, accounting_book_id, body) {
+    return this.api.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, body)
   }
 
   createPayment(group_id, accounting_book_id, params) {
@@ -45,8 +53,16 @@ class DragonBabyApi {
     return this.api.get(`api/v1/groups/${group_id}/users`)
   }
 
+  getAccountingBookSummary(group_id, accounting_book_id) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/summary`)
+  }
+
   getAccountingBook(group_id, accounting_book_id) {
     return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}`)
+  }
+
+  getAccountingBooks(group_id) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books`)
   }
 
   createAccountingBook(group_id, params) {
@@ -58,7 +74,7 @@ class DragonBabyApi {
   }
 
   updateCurrentAccountingBook(group_id, accounting_book_id) {
-    return this.api.patch(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/set_as_current`)
+    return this.api.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/set_as_current`)
   }
 
   deleteAccountingBook(group_id, accounting_book_id) {
@@ -72,9 +88,16 @@ class DragonBabyApi {
   updateCoverCostUser(group_id, accounting_book_id, ids) {
     return this.api.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/user`, { accounting_book_user_ids: ids })
   }
+
+  getLogMessages(group_id, accounting_book_id) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/log_messages`)
+  }
 }
 
 const dragonBabyApi = new DragonBabyApi();
 
-export { dragonBabyApi };
-export default axiosClient;
+const createDragonBabyApi = (token) => {
+  return new DragonBabyApi(token);
+}
+
+export { createDragonBabyApi };

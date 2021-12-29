@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { Context as AuthContext } from '../contexts/AuthContext'
 import { useParams } from 'react-router-dom';
-import { dragonBabyApi } from '../api/dragonBabyApi'
 import { themeColors } from '../constants'
 import { normalizeGroupUser } from '../normalizers'
 import { useHistory, useAccountingBook, useUsersSelect } from '../hooks'
@@ -16,7 +16,8 @@ import {
 const AccountingBookUsersPage = (props) => {
   const history = useHistory();
   /* eslint-disable no-unused-vars */
-  const [users, accountingBookDetails, loading, _err, setUsers] = useAccountingBook()
+  const { state: authState } = useContext(AuthContext)
+  const [users, accountingBookDetails, loading, _err, setUsers] = useAccountingBook(authState)
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
 
@@ -52,7 +53,7 @@ const AccountingBookUsersPage = (props) => {
       }
     }
 
-    dragonBabyApi.updateUser(group_id, editObject.id, { name: name.value, image_url: imageId })
+    authState.api.updateUser(group_id, editObject.id, { name: name.value, image_url: imageId })
       .then(res => {
         let _users = [...users]
         let index = _users.findIndex((u) => u.id === editObject.id)
@@ -82,7 +83,7 @@ const AccountingBookUsersPage = (props) => {
   }
 
   const handleUserDelete = (e, object) => {
-    dragonBabyApi.deleteUser(group_id, object.id)
+    authState.api.deleteUser(group_id, object.id)
       .then(res => {
         console.log(res)
         let _users = [...users]
@@ -106,7 +107,7 @@ const AccountingBookUsersPage = (props) => {
   })
 
   const updateCoverCostUsers = () => {
-    dragonBabyApi.updateCoverCostUsers(group_id, accounting_book_id, value)
+    authState.api.updateCoverCostUsers(group_id, accounting_book_id, value)
       .then((res) => {
         history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
       })
@@ -136,7 +137,7 @@ const AccountingBookUsersPage = (props) => {
       return
     }
 
-    dragonBabyApi.createUser(group_id, { name: name.value, image_url: imageId })
+    authState.api.createUser(group_id, { name: name.value, image_url: imageId })
       .then(res => {
         let _users = [...users]
         _users.push(

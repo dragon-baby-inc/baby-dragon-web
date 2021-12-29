@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useEffect, useState, useContext } from "rea
 import { useRouteMatch  } from 'react-router-dom';
 import AccountingBookSummaryPage from '../pages/AccountingBookSummaryPage'
 import { useHistory } from "react-router-dom";
-import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 import { themeColors } from '../constants'
 import { Context as AuthContext } from '../contexts/AuthContext'
@@ -28,12 +27,12 @@ const PaymentsPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [ small, setSmall ] = useState(false)
   /* eslint-disable no-unused-vars */
-  const [users, accountingBookDetails, accountingBookLoading] = useAccountingBook()
-  const [payments, paymentLoading, getPayments] = usePayments('')
+  const [users, accountingBookDetails, accountingBookLoading] = useAccountingBook(authState)
+  const [payments, paymentLoading, getPayments] = usePayments(authState, '')
   const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
   /* eslint-disable no-unused-vars */
-  const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(group_id, accounting_book_id)
+  const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(authState)
   const [index, setIndex] = useState(0)
 
   const [paymentsScrollInfo, paymentsDir, paymentsRef] = useScrollRef()
@@ -113,7 +112,7 @@ const PaymentsPage = (props) => {
     </ConfirmBox>
 
   const deletePayment = (payment) => {
-    axios.post(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/destroy_all`, {
+    authState.api.deletePayments(group_id, accounting_book_id, {
       payment_ids: [payment.id],
       builder_id: authState.userLineIdToken
     }).then(function (response) {

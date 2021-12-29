@@ -4,7 +4,7 @@ import { dragonBabyApi } from '../api/dragonBabyApi'
 import { imageUrls } from '../constants'
 import { useParams } from 'react-router-dom';
 
-const useAccountingBook =  (callback) => {
+const useAccountingBook =  (authState) => {
   const { group_id, accounting_book_id } = useParams();
   const [err, setErr] = useState(null);
   const [accountingBook, setAccountingBook] = useState([]);
@@ -54,29 +54,31 @@ const useAccountingBook =  (callback) => {
       return
     }
 
-    setTimeout(() => {
-      dragonBabyApi.getAccountingBook(group_id, accounting_book_id)
-        .then(function (response) {
-          let users = response.data.users.map(u => {
-            return normalizeGroupUser(u)
+    if (authState && authState.api) {
+      setTimeout(() => {
+        authState.api.getAccountingBook(group_id, accounting_book_id)
+          .then(function (response) {
+            let users = response.data.users.map(u => {
+              return normalizeGroupUser(u)
+            })
+            setUsers(users)
+            setAccountingBook(
+              {
+                imageUrl: imageUrls[response.data.accounting_book.image_id],
+                ...response.data.accounting_book
+              }
+            )
+
           })
-          setUsers(users)
-          setAccountingBook(
-            {
-              imageUrl: imageUrls[response.data.accounting_book.image_id],
-              ...response.data.accounting_book
-            }
-          )
+          .catch(function (error) {
+            setErr(error);
 
-        })
-        .catch(function (error) {
-          setErr(error);
-
-        })
-      setLoading(false)
-    }, 0)
+          })
+        setLoading(false)
+      }, 0)
+    }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [])
+  }, [authState])
 
   return [users, accountingBook, loading, err, setUsers];
 }

@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react";
+import { Context as AuthContext } from '../../contexts/AuthContext'
 import { useParams } from 'react-router-dom';
 import { dragonBabyApi } from '../../api/dragonBabyApi'
 import { themeColors } from '../../constants'
@@ -12,13 +13,14 @@ import {
 } from '../../components'
 
 const AccountingBookCurrencyPage = (props) => {
+  const { state: authState } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
-  const [users, accountingBookDetails, loading] = useAccountingBook()
+  const [users, accountingBookDetails, loading] = useAccountingBook(authState)
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
   const sendUpdateRequest = () => {
-    dragonBabyApi.updateAccountingBook(group_id, accounting_book_id, { currency: currency })
+    authState.api.updateAccountingBook(group_id, accounting_book_id, { currency: currency })
       .then((res) => {
         history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
 

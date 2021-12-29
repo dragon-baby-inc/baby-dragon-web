@@ -28,8 +28,8 @@ const PaymentPaidBackPage = () => {
   const { group_id, accounting_book_id } = useParams()
   const [disableForm, setDisableForm] = useState(true)
   const history = useHistory();
-  const [users, accountingBookDetails, loading] = useAccountingBook()
   const { state: authState } = useContext(AuthContext)
+  const [users, accountingBookDetails, loading] = useAccountingBook(authState)
   const [index, setIndex] = useState(0);
   const [_manualOwers, _setManualOwers] = useState([])
   const [_owers, _setOwers] = useState([])

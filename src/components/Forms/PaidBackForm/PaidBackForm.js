@@ -143,7 +143,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
     let valid = validateForm(newState, owerForm, validate)
     if (!valid) { return }
-    createPayment(newState, () => {
+    createPayment(authState.api, newState, () => {
       resetForm()
       removeCookie('payment')
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })

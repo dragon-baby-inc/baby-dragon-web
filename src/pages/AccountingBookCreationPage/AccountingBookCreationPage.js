@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
+import { Context as AuthContext } from '../../contexts/AuthContext'
 import { useUsers } from '../../hooks'
 import _styles from './AccountingBookCreationPage.module.scss'
 import { themeColors, imageUrls } from '../../constants'
@@ -22,11 +23,11 @@ import {
   useCurrencySelect
 } from '../../hooks'
 import { useParams } from 'react-router-dom';
-import { dragonBabyApi } from '../../api/dragonBabyApi'
 
 const AccountingBookEditPage = (props) => {
   /* eslint-disable no-unused-vars */
   const history = useHistory();
+  const { state: authState } = useContext(AuthContext)
   const [stepStates, setStepStates] = useState([
     false,
     true,
@@ -37,7 +38,7 @@ const AccountingBookEditPage = (props) => {
   const [currentStep, setCurrentStep] = useState(0)
   const [selectObjectIds, setSelectObjectIds] = useState([])
   const { group_id, accounting_book_id } = useParams()
-  const [users, userLoading, _setUsers, getUsers] = useUsers()
+  const [users, userLoading, _setUsers, getUsers] = useUsers(authState)
   const defaultCurrency = "TWD"
   const {
     state,
@@ -92,7 +93,7 @@ const AccountingBookEditPage = (props) => {
 
     }
 
-    dragonBabyApi.updateUser(group_id, editObject.id, { name: userName.value, image_url: imageUserId })
+    authState.api.updateUser(group_id, editObject.id, { name: userName.value, image_url: imageUserId })
       .then(res => {
         let _users = [...users]
         let index = _users.findIndex((u) => u.id === editObject.id)
@@ -122,7 +123,7 @@ const AccountingBookEditPage = (props) => {
   }
 
   const handleUserDelete = (e, object) => {
-    dragonBabyApi.deleteUser(group_id, object.id)
+    authState.api.deleteUser(group_id, object.id)
       .then(res => {
         console.log(res)
         let _users = [...users]
@@ -175,7 +176,7 @@ const AccountingBookEditPage = (props) => {
       return
     }
 
-    dragonBabyApi.createUser(group_id, { name: userName.value, image_url: imageUserId })
+    authState.api.createUser(group_id, { name: userName.value, image_url: imageUserId })
       .then(res => {
         let _users = [...users]
         _users.push(
@@ -227,7 +228,7 @@ const AccountingBookEditPage = (props) => {
     let formValid = validateForm(state, ['name', 'users', 'imageId', 'currency'])
     if (!formValid) { return }
 
-    dragonBabyApi.createAccountingBook(group_id, buildParams())
+    authState.api.createAccountingBook(group_id, buildParams())
       .then((res) => {
         history.navigateTo("paymentIndexPage", { group_id, accounting_book_id: res.data.accounting_book.id })
       })

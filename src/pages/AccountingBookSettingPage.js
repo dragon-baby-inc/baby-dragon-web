@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
+import { Context as AuthContext } from '../contexts/AuthContext'
 import { themeColors } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import {
@@ -15,11 +16,11 @@ import {
 } from '../components'
 import { useHistory, useAccountingBook } from '../hooks'
 import { useParams } from 'react-router-dom';
-import { dragonBabyApi } from '../api/dragonBabyApi'
 
 const AccountingBookSettingPage = (props) => {
   /* eslint-disable no-unused-vars */
-  const [users, accountingBookDetails, loading] = useAccountingBook()
+  const { state: authState } = useContext(AuthContext)
+  const [users, accountingBookDetails, loading] = useAccountingBook(authState)
   const [pageLoading, setPageLoading] = useState(true)
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams()
@@ -38,11 +39,11 @@ const AccountingBookSettingPage = (props) => {
   }, [accountingBookDetails])
 
   const updateAccountingBook = (params) => {
-    return dragonBabyApi.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: params })
+    return authState.api.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: params })
   }
 
   const handleAccountingBookDeletion = (e) => {
-    dragonBabyApi.deleteAccountingBook(group_id, accounting_book_id)
+    authState.api.deleteAccountingBook(group_id, accounting_book_id)
       .then((res) => {
         history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`)
         seDeleteActive(false)
@@ -64,7 +65,7 @@ const AccountingBookSettingPage = (props) => {
     </ConfirmBox>
 
   const handleCurrentChange = (value, params, setState) => {
-    dragonBabyApi.updateAccountingBook(group_id, accounting_book_id, { accounting_book: params })
+    authState.api.updateAccountingBook(group_id, accounting_book_id, { accounting_book: params })
       .then((res) => {
         console.log(res)
         setState(value)

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context as AuthContext } from '../contexts/AuthContext'
 import { useParams } from 'react-router-dom';
 import { useHistory, useAccountingBooks } from '../hooks';
 import { themeColors } from '../constants/globalColors'
@@ -7,7 +8,6 @@ import {
   Loading,
   AccountingBookLabel,
   AccountingBooksHeader,
-  AccountingBookForm,
   Backdrop,
   AccountingBookAddLabel
 } from '../components';
@@ -38,11 +38,10 @@ const styles = {
 const AccountingBookSummaryPage = ({
   users,
 }) => {
-  const [books, group, loading, currentBook, setCurrentBook] = useAccountingBooks()
+  const { state: authState } = useContext(AuthContext)
+  const [books, group, loading, currentBook, setCurrentBook] = useAccountingBooks(authState)
   const history = useHistory();
   const { group_id } = useParams()
-  const [showForm, setShowForm] = useState(false)
-  console.log()
 
   const objects = books.map(book => {
     return <AccountingBookLabel
@@ -54,7 +53,7 @@ const AccountingBookSummaryPage = ({
 
   const handleSetAsCurrent = (uuid) => {
     if (uuid) {
-      axios.post(`api/v1/groups/${group.id}/accounting_books/${uuid}/set_as_current`)
+      authState.api.updateCurrentAccountingBook(group.id, uuid)
         .then((res) => {
           setCurrentBook({ uuid: res.data.accounting_book.uuid })
         })
@@ -67,15 +66,6 @@ const AccountingBookSummaryPage = ({
   return(
     <div style={styles.bg}>
       <AccountingBooksHeader group={group} title={'帳本列表'} color={themeColors.gray400}/>
-      {
-        showForm ?
-          <>
-            <AccountingBookForm />
-            <Backdrop icon="faTimes" clicked={() => setShowForm(false)}/>
-          </>
-          : null
-      }
-
       {
         loading ?
           <div style={styles.loading}> <Loading /> </div>

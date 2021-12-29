@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import liff from '@line/liff';
-import { dragonBabyApi } from '../../../api/dragonBabyApi'
 import styles from './PaymentForm.module.scss'
 import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
@@ -21,7 +20,7 @@ import {
   useUsersSelect,
 } from '../../../hooks'
 
-const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
+const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) => {
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const {
@@ -98,7 +97,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     type='number'
   />
   const handleAddCoverCostUser = (id) => {
-    dragonBabyApi.updateCoverCostUser(group_id, accounting_book_id, [id])
+    authState.api.updateCoverCostUser(group_id, accounting_book_id, [id])
 
     let newUsers = [..._users]
     let index = newUsers.findIndex(u => u.id === id)
@@ -347,7 +346,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     let valid = validateForm(newState, form[_allocationType], validate)
     if (!valid) { return }
 
-    createPayment(newState, (data) => {
+    createPayment(authState.api, newState, (data) => {
       if (data.send_liff_confirm_message === true) {
         if (liff.isInClient()) {
           let message = buildPaymentSuccessMessage(data.log_message_content, data.log_message_category, data.accounting_book_name)

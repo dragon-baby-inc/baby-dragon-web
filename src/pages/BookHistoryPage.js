@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useHistory, useLogMessages } from '../hooks'
+import { Context as AuthContext } from '../contexts/AuthContext'
 import { useParams } from 'react-router-dom';
 import {
   Separater,
@@ -62,7 +63,8 @@ const styles = {
 }
 
 const BookHistoryPage = () => {
-  const [logMessages, loading] = useLogMessages()
+  const { state: authState } = useContext(AuthContext)
+  const [logMessages, loading] = useLogMessages(authState)
   const { group_id, accounting_book_id } = useParams();
   const { routes } = useHistory();
 

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
+import { Context as AuthContext } from '../contexts/AuthContext'
 import { themeColors, imageUrls } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import {
@@ -13,11 +14,11 @@ import {
 } from '../components'
 import { useHistory, useAccountingBook } from '../hooks'
 import { useParams } from 'react-router-dom';
-import { dragonBabyApi } from '../api/dragonBabyApi'
 
 const AccountingBookEditPage = (props) => {
+  const { state: authState } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
-  const [users, accountingBookDetails, loading] = useAccountingBook()
+  const [users, accountingBookDetails, loading] = useAccountingBook(authState)
   const [pageLoading, setPageLoading] = useState(true)
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams()
@@ -43,7 +44,7 @@ const AccountingBookEditPage = (props) => {
       image_id: state.imageId.value
     }
 
-    dragonBabyApi.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: params })
+    authState.api.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: params })
       .then((res) => {
         history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
       })

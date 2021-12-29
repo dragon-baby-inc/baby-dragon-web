@@ -1,6 +1,6 @@
 import createDataContext from './CreateDataContext'
 import Validator from '../utilities/Validator'
-import { dragonBabyApi } from '../api/dragonBabyApi'
+import { dragonBabyApi, createDragonBabyApi } from '../api/dragonBabyApi'
 
 const paymentReducer = (state, action) => {
   let valid
@@ -230,7 +230,7 @@ const validateForm = dispatch => (state, formKeys, callback) => {
   return formValid
 }
 
-const createPayment = dispatch => (state, afterSubmit) => {
+const createPayment = dispatch => (api, state, afterSubmit) => {
   var moment = require('moment-timezone');
   let params = {
     id: state.id,
@@ -260,7 +260,7 @@ const createPayment = dispatch => (state, afterSubmit) => {
 
   let details = state.accounting_book_details
 
-  dragonBabyApi.createPayment(details.group_id, details.id, params)
+  api.createPayment(details.group_id, details.id, params)
     .then(function (response) {
       afterSubmit(response.data)
     })

@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import liff from '@line/liff';
-import { dragonBabyApi } from '../api/dragonBabyApi'
+import { createDragonBabyApi } from '../api/dragonBabyApi'
 
 const useLiff =  (callback) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let api = createDragonBabyApi(null)
 
   const stub = false
+
   useEffect(() => {
     if (stub) {
-      dragonBabyApi.exchangeToken("any", "any")
+      api.exchangeToken("any", "any")
         .then((res) => {
           callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
           setIsLoggedIn(true)
@@ -23,7 +25,7 @@ const useLiff =  (callback) => {
         if (!liff.getAccessToken()) {
           liff.login({ redirectUri: `https://baby-dragon-web.herokuapp.com${window.location.pathname}` })
         } else {
-          dragonBabyApi.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
+          api.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
             .then((res) => {
               callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
               setIsLoggedIn(true)
