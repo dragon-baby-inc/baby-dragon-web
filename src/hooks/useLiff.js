@@ -16,7 +16,7 @@ const useLiff =  (callback) => {
           dragonBabyApi.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
             .then((res) => {
               console.log(res)
-              callback({ userLineId: liff.getDecodedIDToken().sub, accessToken: res.data.token })
+              callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
               setIsLoggedIn(true)
             })
             .catch((err) => {

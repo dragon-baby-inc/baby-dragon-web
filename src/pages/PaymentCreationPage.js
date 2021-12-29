@@ -57,6 +57,7 @@ const PaymentCreationPage = (props) => {
 
   useEffect(() => {
     if (!loading) {
+      console.log(authState)
       let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       if (payer) { setPayer(payer) }
       setBuilder(users[0])
