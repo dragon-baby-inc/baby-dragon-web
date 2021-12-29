@@ -252,8 +252,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     amount: ['name', 'payer','manualOwers', 'creation_date'],
   }
 
-  const buildPaymentSuccessMessage = (message) => {
-    let accounting_book_name = 'test'
+  const buildPaymentSuccessMessage = (message, log_message_category, accounting_book_name) => {
     let contents = {
       "type": "bubble",
       "size": "mega",
@@ -267,7 +266,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
             "contents": [
               {
                 "type": "text",
-                "text": "成功加入款項 至",
+                "text": `${log_message_category} 至`,
                 "color": "#A58341",
                 "align": "start",
                 "size": "xs",
@@ -351,12 +350,10 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     createPayment(newState, (data) => {
       if (data.send_liff_confirm_message === true) {
         if (liff.isInClient()) {
-          let message = buildPaymentSuccessMessage(data.message)
+          let message = buildPaymentSuccessMessage(data.log_message_content, data.log_message_category, data.accounting_book_name)
           let messages = [message]
           liff.sendMessages(messages)
-            .then(() => {
-              liff.closeWindow()
-            })
+            .then(() => {})
         }
       }
       resetForm()
