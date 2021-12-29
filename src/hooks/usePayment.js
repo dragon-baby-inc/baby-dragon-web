@@ -28,11 +28,12 @@ const usePayment =  (authState) => {
     await authState.api.getPayment(group_id, accounting_book_id, payment_id)
       .then(function (response) {
         setPayment(response.data)
+        setLoading(false)
       })
       .catch(function (error) {
         setErr(error);
+        setLoading(false)
       })
-    setLoading(false)
   }
 
   useEffect(() => {

@@ -69,12 +69,12 @@ const useAccountingBook =  (authState) => {
               }
             )
 
+            setLoading(false)
           })
           .catch(function (error) {
             setErr(error);
-
+            setLoading(false)
           })
-        setLoading(false)
       }, 0)
     }
     /* eslint-disable react-hooks/exhaustive-deps */

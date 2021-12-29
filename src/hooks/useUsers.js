@@ -15,11 +15,12 @@ const useUsers =  (authState) => {
         setUsers(response.data.users.map((u) => {
           return normalizeGroupUser(u)
         }))
+        setLoading(false)
       })
       .catch(function (error) {
         console.log(error)
+        setLoading(false)
       })
-    setLoading(false)
   }
 
   useEffect(() => {

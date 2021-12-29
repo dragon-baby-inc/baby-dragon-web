@@ -46,7 +46,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     if (users) {
       setUsers(users)
     }
-  }, [users, setUsers])
+  }, [users])
 
   useEffect(() => {
     if (payment) {

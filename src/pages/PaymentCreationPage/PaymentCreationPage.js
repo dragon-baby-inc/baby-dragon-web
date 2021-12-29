@@ -43,7 +43,7 @@ const PaymentCreationPage = () => {
   }
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && authState && authState.api) {
       let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       if (!payer) { payer = users[0] }
       // if (!payer) { alert('未授權') }
@@ -62,7 +62,7 @@ const PaymentCreationPage = () => {
       setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [users, authState, accountingBookDetails, loading])
+  }, [authState, loading])
 
   const getUser = () => {
     let user = users.filter(u => u.id !== payer.id)[0]

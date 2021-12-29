@@ -22,12 +22,13 @@ const useAccountingBooks =  (authState) => {
         setBooks(books)
         setCurrentBook(response.data.accounting_books.filter((b) => b.current)[0])
         setGroup(response.data.group)
+        setLoading(false)
       })
       .catch(function (error) {
         console.log(error)
         setErr(error);
+        setLoading(false)
       })
-    setLoading(false)
   }
 
   useEffect(() => {

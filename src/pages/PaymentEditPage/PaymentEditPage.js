@@ -62,7 +62,6 @@ const PaymentEditPage = () => {
 
       if (payment.allocation_type === 'evenly') {
         let ower_ids = payment.allocations.map(a => a.ower_id)
-        console.log(users.filter(u => ower_ids.includes(u.id)))
         setOwers(users.filter(u => ower_ids.includes(u.id)))
         _setOwers(users.filter(u => ower_ids.includes(u.id)))
         setAllocationType(payment.allocation_type)
@@ -81,7 +80,7 @@ const PaymentEditPage = () => {
       setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [users, authState, paymentLoading, accountingBookDetails, loading])
+  }, [paymentLoading, loading])
 
   const handleBack = () => {
     resetForm()

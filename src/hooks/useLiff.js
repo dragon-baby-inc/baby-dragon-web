@@ -6,11 +6,11 @@ const useLiff =  (callback) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let api = createDragonBabyApi(null)
 
-  const stub = false
+  const stub = process.env.NODE_ENV === 'development'
 
   useEffect(() => {
     if (stub) {
-      api.exchangeToken("any", "any")
+      api.exchangeToken('', '')
         .then((res) => {
           callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
           setIsLoggedIn(true)
