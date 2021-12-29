@@ -17,6 +17,11 @@ class DragonBabyApi {
     ;
   }
 
+  exchangeToken(token, data) {
+    console.log({ ...data, access_token: token })
+    return this.api.post(`api/v1/token`, { ...data, access_token: token })
+  }
+
   getPayment(group_id, accounting_book_id, payment_id) {
     return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/payments/${payment_id}`)
   }
