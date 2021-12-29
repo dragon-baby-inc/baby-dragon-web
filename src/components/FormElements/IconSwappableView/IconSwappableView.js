@@ -81,10 +81,10 @@ const IconSwappableView = ({ styles, icons, initial, changed, imageSize }) => {
     )
   })
 
-
   return(
     <>
       <SwipeableViews
+        enableMouseEvents
         style={styles.root}
         index={index}
         slideStyle={styles.slideContainer}
