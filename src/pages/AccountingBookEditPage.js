@@ -121,7 +121,7 @@ const AccountingBookEditPage = (props) => {
 
 const styles = {
   bg: {
-    width: '100vw',
+    width: '100%',
     height: '100vh',
     overflow: 'hidden',
     maxHeight: '-webkit-fill-available',

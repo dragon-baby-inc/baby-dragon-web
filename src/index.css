@@ -80,12 +80,17 @@ input[disabled] {
 }
 html {
   height: -webkit-fill-available;
+  background-color: #0c533c;
 }
 
 #root {
+  background-color: #ffffff;
+  margin: auto;
+  position: relative;
    --app-height: 100%;
   width: 100vw;
   height: 100vh;
+  max-width: 650px;
 /*   height: calc(var(--vh, 1vh) * 100); */
   max-height: -webkit-fill-available;
   overflow: hidden;
@@ -103,3 +108,4 @@ html {
 label, div {
   -webkit-tap-highlight-color: transparent;
 }
+

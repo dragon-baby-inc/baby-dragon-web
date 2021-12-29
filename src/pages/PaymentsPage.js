@@ -224,7 +224,7 @@ const PaymentsPage = (props) => {
 
 const styles = {
   bg: {
-    width: '100vw',
+    width: '100%',
     height: 'calc(100vh)',
     overflow: 'hidden',
     display: 'flex',

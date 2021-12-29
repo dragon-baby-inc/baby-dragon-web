@@ -67,7 +67,6 @@ const AccountingBookSettingPage = (props) => {
   const handleCurrentChange = (value, params, setState) => {
     authState.api.updateAccountingBook(group_id, accounting_book_id, { accounting_book: params })
       .then((res) => {
-        console.log(res)
         setState(value)
       })
       .catch((res) => {
@@ -85,7 +84,6 @@ const AccountingBookSettingPage = (props) => {
       let updateTimer = setTimeout(() => {
         updateAccountingBook(params)
           .then((res) => {
-            console.log(res)
           })
       }, 2000)
       setTimer(updateTimer)
@@ -214,7 +212,7 @@ const styles = {
     fontSize: "15px"
   },
   bg: {
-    width: '100vw',
+    width: '100%',
     height: '100vh',
     overflow: 'hidden',
     maxHeight: '-webkit-fill-available',

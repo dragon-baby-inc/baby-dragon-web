@@ -5,7 +5,7 @@ import { Image } from '../../index'
 const _styles = {
   root: {
     margin: 0,
-    padding: '0 28vw',
+    padding: '0 28%',
     overflow: 'hidden',
   },
   slideContainer: {

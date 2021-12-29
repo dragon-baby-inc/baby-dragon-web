@@ -351,7 +351,7 @@ const AccountingBookEditPage = (props) => {
             index={currentStep} steps={steps}/>
           <Footer style={{
             position: 'absolute',
-            width: '100vw',
+            width: '100%',
             right: 0,
             bottom: 0,
             }}>
@@ -384,7 +384,7 @@ const AccountingBookEditPage = (props) => {
 
 const styles = {
   bg: {
-    width: '100vw',
+    width: '100%',
     height: '100vh',
     overflow: 'hidden',
     maxHeight: '-webkit-fill-available',

@@ -1,7 +1,7 @@
 @import "../../../styleSheets/globalColors.scss";
 
 .fixedHeader {
-  width: 100vw;
+  width: 100%;
   z-index: 105;
   transition: .4s;
   display: flex;
@@ -13,7 +13,7 @@
 
   height: 58px;
   top: 0;
-  width: 100vw;
+  width: 100%;
   align-items: center;
   z-index: 100;
   padding-left: 38px;
@@ -30,7 +30,7 @@
 }
 
 .header {
-  width: 100vw;
+  width: 100%;
   transition: .2s;
   display: flex;
   flex-flow: column;
@@ -47,7 +47,7 @@
   position: absolute;
   opacity: 0;
   top: -50px;
-  width: 100vw;
+  width: 100%;
   align-items: center;
   z-index: 100;
   padding-left: 0px;
