@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import liff from '@line/liff';
 import { dragonBabyApi } from '../../../api/dragonBabyApi'
 import styles from './PaymentForm.module.scss'
 import { themeColors } from '../../../constants'
@@ -251,6 +252,87 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     amount: ['name', 'payer','manualOwers', 'creation_date'],
   }
 
+  const buildPaymentSuccessMessage = (message) => {
+    let accounting_book_name = 'test'
+    let contents = {
+      "type": "bubble",
+      "size": "mega",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": "成功加入款項 至",
+                "color": "#A58341",
+                "align": "start",
+                "size": "xs",
+                "gravity": "center",
+                "weight": "bold",
+                "style": "normal",
+                "position": "relative",
+                "decoration": "none",
+                "wrap": true,
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": accounting_book_name,
+                "align": "start",
+                "size": "xs",
+                "gravity": "center",
+                "weight": "bold",
+                "style": "normal",
+                "position": "relative",
+                "decoration": "none",
+                "wrap": true,
+                "flex": 0,
+                "margin": "md"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": message,
+                "size": "sm",
+                "wrap": true
+              }
+            ],
+            "paddingTop": "xs"
+          }
+        ],
+        "backgroundColor": "#ffffff",
+        "paddingAll": "xl"
+      },
+      "styles": {
+        "header": {
+          "separator": true
+        },
+        "footer": {
+          "separator": true
+        }
+      }
+    }
+
+    let flex_message = {
+      "type": "flex",
+      "altText": '新增款項',
+      "contents": contents
+    }
+
+    return flex_message
+  }
+
+
+
   const handleSubmit = () => {
     let newState = {
       ...state,
@@ -265,7 +347,18 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
     let valid = validateForm(newState, form[_allocationType], validate)
     if (!valid) { return }
-    createPayment(newState, () => {
+
+    createPayment(newState, (data) => {
+      if (data.send_liff_confirm_message === true) {
+        if (liff.isInClient()) {
+          let message = buildPaymentSuccessMessage(data.message)
+          let messages = [message]
+          liff.sendMessages(messages)
+            .then(() => {
+              liff.closeWindow()
+            })
+        }
+      }
       resetForm()
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
     })

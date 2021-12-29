@@ -150,6 +150,12 @@ const AccountingBookSettingPage = (props) => {
             description="新增帳款指令"
             name="autoDetectPayment"
           />
+          <ToggleLabel
+            checked={state.lineNotification.value}
+            changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
+            description="傳送確認訊息到群組"
+            name="lineNotification"
+          />
         </div>
       </div>
       {
