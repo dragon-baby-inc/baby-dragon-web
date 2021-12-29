@@ -18,7 +18,6 @@ class DragonBabyApi {
   }
 
   exchangeToken(token, data) {
-    console.log({ ...data, access_token: token })
     return this.api.post(`api/v1/tokens`, { ...data, access_token: token })
   }
 
