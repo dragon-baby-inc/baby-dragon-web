@@ -53,7 +53,7 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
       <div>
         {
           object.fromLine ? null :
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ marginRight: '20px' }} onClick={(e) => handleEdit(e, object)}>
                 <Svg icon='edit' size='24' className='gray700'/>
               </div>
@@ -62,7 +62,7 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
                   null
                 :
                  <div style={{ marginRight: '20px' }} onClick={(e) => handleTrash(e, object)}>
-                   <Svg icon='edit' size='24' className='gray700'/>
+                   <Svg icon='delete' size='24' className='gray700'/>
                  </div>
               }
             </div>
