@@ -47,7 +47,7 @@ const AccountingBookLabel = (props) => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             { props.current ?
               <>
-                <div className={`col-4 group-menu-amount`} style={{ minWidth: '72px' }}>
+                <div className={`col-4 group-menu-amount`} style={{ minWidth: '76px' }}>
                   預設帳本
                   <Svg icon='favorateYes' size='24' clicked={handleSetAsCurrent}/>
                 </div>
