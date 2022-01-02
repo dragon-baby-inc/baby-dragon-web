@@ -59,7 +59,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
   }, [payment, _setName, _setAmount, _setCreationDate, _setAllocationType])
 
   const [payer, payerLabel] = useUserRadioSelectLabel({
-    users: users,
+    users: users ? users.filter(u => u.coverCost === true) : [],
     initialValue: state.payer.value,
   })
 
@@ -110,7 +110,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
 
   const owersLabel = <OwerCheckboxSelectLabel
     handleAddCoverCostUser={handleAddCoverCostUser}
-    users={_users}
+    users={_users ? _users.filter(u => u.coverCost === true) : []}
     callback={(ids) => _setOwers({ value: ids, valid: true })}
     valid={_owers.valid}
     selectedObjects={_owers.value}

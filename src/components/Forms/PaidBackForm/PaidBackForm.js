@@ -60,12 +60,12 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   }, [payment, users, authState])
 
   const [payer, payerLabel] = useUserRadioSelectLabel({
-    users: users,
+    users: users ? users.filter(u => u.coverCost === true) : [],
     initialValue: _payer.value
   })
 
   const [ower, owerLabel] = useUserRadioSelectLabel({
-    users: users,
+    users: users ? users.filter(u => u.coverCost === true) : [],
     initialValue: _ower.value
   })
 
@@ -87,12 +87,12 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
     name='日期'
     changed={(v) => _setCreationDate({ value: v, valid: true })}
     value={_creation_date.value}
-    faicon="farCreditCard"
+    faicon="fasCalendarAlt"
     />
 
   const amountInput = <TextInput
     key='amount'
-    faicon="farCreditCard"
+    faicon="fasDollarSign"
     disabled={false}
     placeholder='輸入金額'
     name='金額'
