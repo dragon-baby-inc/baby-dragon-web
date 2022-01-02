@@ -7,31 +7,31 @@ import {
 import "../../../styleSheets/userSummaryLabel.scss";
 import styles from './LogMessageLabel.module.scss'
 import {
+  Svg,
   ColorBlock,
   Image,
-  FontAwesomeIcon
 } from '../../../components'
 
 const UserSummaryLabel = (props) => {
   let object = props.object
 
-  let faIcon;
+  let icon;
   let color;
   switch(object.category) {
     case 'create_payment':
-      faIcon = 'faPlus'
+      icon = 'add'
       color = 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'
       break;
     case 'create_paid_back_payment':
-      faIcon = 'faPlus'
+      icon = 'add'
       color = 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'
       break;
     case 'update_payment':
-      faIcon = 'faEdit'
+      icon = 'edit'
       color = 'linear-gradient(92.29deg, #88631C 0%, #C5AF85 100%)'
       break;
     case 'delete_payment':
-      faIcon = 'faTrash'
+      icon = 'delete'
       color = 'linear-gradient(133.78deg, #D65C5C 2.04%, #BE2323 100%)'
       break;
     default:
@@ -53,7 +53,7 @@ const UserSummaryLabel = (props) => {
               top: 38,
               right: 0,
             }}>
-            <FontAwesomeIcon faicon={faIcon} style={{ fontSize: '11px', color: 'ffffff' }}/>
+            <Svg icon={icon} size='16' className='white'/>
           </ColorBlock>
         </div>
         <div className={styles.content}>
