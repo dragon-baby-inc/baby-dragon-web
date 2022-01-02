@@ -1,7 +1,7 @@
 import React from "react"
 import { useParams } from 'react-router-dom';
 import styles from './AccountingBookInfo.module.scss';
-import { Image, FontAwesomeIcon } from '../../'
+import { Image, Svg } from '../../'
 import { themeColors } from '../../../constants';
 import { useHistory } from '../../../hooks'
 
@@ -24,10 +24,7 @@ function AccountingBookInfo({
           <Image size='80px' circle imageUrl={accountingBookDetails.imageUrl} defaultImage="accountingBook"/>
           <div className={styles.label}>
             {accountingBookDetails.name}
-            <FontAwesomeIcon
-              style={{ fontSize: "15px", margin: "0px 0px" }}
-              faicon='faChevronRight'
-              color={themeColors.gray900}/>
+            <Svg icon='rightArrow' size='24' className='gray900'/>
           </div>
         </label>
         :

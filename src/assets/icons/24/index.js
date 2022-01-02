@@ -9,6 +9,7 @@ import { ReactComponent as Setting } from './setting.svg';
 import { ReactComponent as Time } from './time.svg';
 import { ReactComponent as FavorateYes } from './favorate-yes.svg';
 import { ReactComponent as FavorateNo } from './favorate-no.svg';
+import { ReactComponent as Cancel } from './cancel.svg';
 
 export {
   Add,
@@ -22,4 +23,5 @@ export {
   FavorateYes,
   FavorateNo,
   LeftArrow,
+  Cancel,
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./SearchInput.module.scss"
-import { FontAwesomeIcon } from '../../../components'
+import { FontAwesomeIcon, Svg } from '../../../components'
 
 const SearchInput = (props) => {
   return (
@@ -30,7 +30,7 @@ const SearchInput = (props) => {
           </div>
           :
         <div className={styles.close} onClick={props.closed}>
-          <FontAwesomeIcon faicon={"faTimes"}/>
+          <Svg icon='cancel' size='24' className='gray900'/>
         </div>
       }
     </div>

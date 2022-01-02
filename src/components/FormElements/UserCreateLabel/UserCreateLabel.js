@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './UserCreateLabel.module.scss'
 import {  ColorBlock } from '../index'
-import { FontAwesomeIcon } from '../../index'
+import { Svg } from '../../index'
 import { themeColors } from '../../../constants'
 
 const UserCreateLabel = ({
@@ -18,7 +18,7 @@ const UserCreateLabel = ({
           </div>
           新增虛擬成員
         </div>
-        <FontAwesomeIcon faicon="faPlus" color={themeColors.gold700} style={{ fontSize: '18px' }}></FontAwesomeIcon>
+        <Svg size='24' icon='add' className='gold700'/>
       </label>
     </>
   )

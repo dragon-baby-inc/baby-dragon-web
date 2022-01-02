@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, ConfirmBox, IconSwappableView } from '../../index'
+import { Svg, TextInput, ConfirmBox, IconSwappableView } from '../../index'
 import { imageUrls } from '../../../constants'
 
 const UserConfirmBox = ({
@@ -36,7 +36,7 @@ const UserConfirmBox = ({
         <div style={{ padding: '24px 16px' }}>
           <TextInput
             key='name'
-            faicon="farCreditCard"
+            svg={ <Svg icon='person' size='24' className='gold900'/> }
             disabled={false}
             placeholder={'輸入名稱'}
             name={'名稱'}

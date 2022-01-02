@@ -12,15 +12,18 @@ const styles = {
     textDecoration: "none",
     fontSize: '20px',
     height: '58px',
-    padding: '18px 20px 22px',
-    alignItems: 'center',
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }
 
 function TopLeftIcon({ children, clicked, link, color, faicon, style }){
   let addtionalStyle = {}
   if (style) { addtionalStyle = style }
+
+  let icon = faicon ?  <FontAwesomeIcon faicon={faicon} color={color}/> : <div className={classStyles.container}> {children} </div>
+
   return(
     <>
       {
@@ -28,18 +31,11 @@ function TopLeftIcon({ children, clicked, link, color, faicon, style }){
           <NavLink
             style={{ ...styles.back,  ...addtionalStyle}}
             to={link}>
-            <FontAwesomeIcon faicon={faicon} color={color}/>
+            {icon}
           </NavLink> :
-          <div onClick={clicked} style={{ ...styles.back,  ...addtionalStyle}} >
-            {
-              faicon ?
-                <FontAwesomeIcon faicon={faicon} color={color}/>
-                :
-                <div className={classStyles.container}>
-                  {children}
-                </div>
-            }
-          </div>
+            <div onClick={clicked} style={{ ...styles.back,  ...addtionalStyle}} >
+              {icon}
+            </div>
       }
     </>
   )

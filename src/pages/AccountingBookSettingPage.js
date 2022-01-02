@@ -3,7 +3,7 @@ import { Context as AuthContext } from '../contexts/AuthContext'
 import { themeColors } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import {
-  FontAwesomeIcon,
+  Svg,
   ToggleLabel,
   NavigationLabel,
   ActionLabel,

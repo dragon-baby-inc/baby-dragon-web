@@ -1,6 +1,6 @@
 import React from "react"
 import styles from './PageHeader.module.scss'
-import { TopLeftIcon } from '../../index'
+import { TopLeftIcon, Svg } from '../../index'
 
 const inlineStyles = {
   icon: {
@@ -8,7 +8,7 @@ const inlineStyles = {
     fontSize: '15px',
     color: 'black',
     textDecoration: "none",
-    padding: '18px 20px 22px',
+    padding: '18px 14px 22px',
     top: '1px',
   },
   header: {
@@ -33,13 +33,14 @@ function PageHeader({
             <TopLeftIcon
               link={link}
               style={inlineStyles.icon}
-              color={color}
-              faicon={faicon}/> : null
+              color={color}>
+              <Svg icon='leftArrow' size='24' className='gray900'/>
+            </TopLeftIcon>
+
+              : null
         }
-        <div>
-          <div className={styles.name}>
-            {children}
-          </div>
+        <div className={styles.name}>
+          {children}
         </div>
       </div>
     </div>

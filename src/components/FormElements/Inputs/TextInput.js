@@ -11,6 +11,7 @@ const TextInput = ({
   type,
   valid,
   faicon,
+  svg,
   invalidFeedback,
   disabled,
   style,
@@ -42,7 +43,10 @@ const TextInput = ({
       <label className={labelClasses.join(' ')} >
         <div className={styles.labelName}>
           <div className={styles.faIcon}>
-          <FontAwesomeIcon faicon={faicon}/>
+            {
+              faicon ?
+                <FontAwesomeIcon faicon={faicon}/> : svg
+            }
           </div>
           <div className={styles.name}>{name}</div>
         </div>

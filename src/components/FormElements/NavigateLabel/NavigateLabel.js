@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './NavigateLabel.module.scss';
-import { FontAwesomeIcon } from '../../index'
+import { Svg } from '../../index'
 import { themeColors } from '../../../constants'
 
 const navigateLabel = ({
@@ -18,10 +18,7 @@ const navigateLabel = ({
         {
           hideIcon ?
             null:
-            <FontAwesomeIcon
-              style={{ fontSize: "15px", margin: "0px 15px", marginRight: "0px" }}
-              faicon='faChevronRight'
-              color={themeColors.gray900}/>
+            <Svg icon='rightArrow' size='24' className='gray900'/>
         }
       </div>
     </label>

@@ -12,6 +12,7 @@ import {
   FavorateYes,
   FavorateNo,
   LeftArrow,
+  Cancel,
 } from './../../assets/icons/index'
 
 const icons = {
@@ -26,6 +27,7 @@ const icons = {
   leftArrow: LeftArrow,
   favorateYes: FavorateYes,
   favorateNo: FavorateNo,
+  cancel: Cancel,
 }
 
 const Svg = (
