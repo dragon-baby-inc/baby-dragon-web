@@ -1,7 +1,7 @@
 import React from "react"
 import { themeColors } from '../../../constants'
 import styles from './TextInput.module.scss'
-import { FontAwesomeIcon } from '../../../components'
+import { FontAwesomeIcon, Svg } from '../../../components'
 
 const TextInput = ({
   name,
@@ -31,7 +31,7 @@ const TextInput = ({
   let deleteIcon = null
   if (deleted) {
     if (deleteActive) {
-      deleteIcon = <FontAwesomeIcon faicon="faTrash" onClick={handleDelete} style={{ color: themeColors.invalid }}/>
+      deleteIcon = <Svg icon='delete' size='24' className='red' clicked={handleDelete}/>
     } else {
       deleteIcon = null
     }

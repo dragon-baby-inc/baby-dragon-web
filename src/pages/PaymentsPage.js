@@ -6,7 +6,9 @@ import { useParams } from 'react-router-dom';
 import { themeColors } from '../constants'
 import { Context as AuthContext } from '../contexts/AuthContext'
 import { useScrollRef, usePayments, useAccountingBook, useAccountingBookSummary } from '../hooks'
+
 import {
+  Svg,
   PaymentInfoHeader,
   UserSummaryLabel,
   ConfirmBox,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SelectLabel.module.scss'
 import {
+  Svg,
   FontAwesomeIcon,
   Drawer,
   Image,
@@ -55,9 +56,16 @@ const UserRadioSelectLabel = ({
           {getUserName()}
         </div>
         <div className={styles.icon}>
-          <FontAwesomeIcon
-            style={{ fontSize: '14px' }}
-            faicon="faChevronDown"
+          <Svg
+            icon='edit'
+            size='24'
+            className='gray700'
+            style={{ paddingRight: '12px' }}
+          />
+          <Svg
+            className='black'
+            icon='downArrow'
+            size='24'
           />
         </div>
       </label>

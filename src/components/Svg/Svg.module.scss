@@ -1,0 +1,31 @@
+@import '../../styleSheets/globalColors.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gray700 {
+  path {
+    fill: $gray700;
+  }
+}
+
+.black {
+  path {
+    fill: $black;
+  }
+}
+
+.green500 {
+  path {
+    fill: $green500;
+  }
+}
+
+.red {
+  path {
+    fill: $red;
+  }
+}

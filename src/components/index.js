@@ -7,6 +7,7 @@ import ColumnSwappableView from './ColumnSwappableView/ColumnSwappableView'
 import Footer from './Footer/Footer'
 import DisclaimerBox from './DisclaimerBox/DisclaimerBox'
 import Collapse from './Collapse/Collapse'
+import Svg from './Svg/Svg'
 
 export {
   EmptyResult,
@@ -17,7 +18,8 @@ export {
   StepsWidget,
   ColumnSwappableView,
   Collapse,
-  DisclaimerBox
+  DisclaimerBox,
+  Svg,
 };
 
 export * from './FormElements'

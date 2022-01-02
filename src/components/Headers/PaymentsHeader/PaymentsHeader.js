@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styles from './PaymentsHeader.module.scss'
-import { TopRightIcon } from '../../index'
+import { TopRightIcon, Svg } from '../../index'
 import { PageHeader, Star } from '../../index'
 
 function PaymentsHeader({
@@ -42,14 +42,21 @@ function PaymentsHeader({
 
         <TopRightIcon
           style={{ fontSize: '20px', right: 58 }}
-          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/log_messages`}
-          color={"black"}
-          faicon='farFaClock'/>
+          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/log_messages`} >
+          <Svg
+            icon='time'
+            size='24'
+            className='black' />
+        </TopRightIcon>
         <TopRightIcon
           style={{ fontSize: '20px', right: 20 }}
-          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/settings`}
-          color={"black"}
-          faicon='faCog'/>
+          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/settings`}>
+          <Svg
+            icon='setting'
+            size='24'
+            className='black' />
+        </TopRightIcon>
+
       </PageHeader>
     </div>
   )

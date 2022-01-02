@@ -1,4 +1,8 @@
 class FormatString {
+  static capitalize(s) {
+    return s && s[0].toUpperCase() + s.slice(1);
+  }
+
   static sliceToLength(string, maxLength, sub) {
     let str = string.toString()
     if (FormatString.halfLength(str) > maxLength) {

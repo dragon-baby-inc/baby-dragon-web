@@ -7,6 +7,7 @@ import { Context as PaymentContext } from '../../../contexts/PaymentContext'
 import {
   Section,
   DatePickerInput,
+  Svg,
   FontAwesomeIcon,
   Button,
   TextInput,
@@ -228,14 +229,14 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
             <div className={styles.sectionSpan}>
               {_manualOwers.value.length}
             </div>
-            <FontAwesomeIcon
-              faicon="farUser"
+            <Svg
               style={{
-                color: themeColors.green500,
                 margin: '0px 4px',
                 fontSize: '15px'
               }}
-            />
+              icon='person'
+              className='green500'
+              size='24'/>
           </div>
         </div>
         { radioAmountLabels }

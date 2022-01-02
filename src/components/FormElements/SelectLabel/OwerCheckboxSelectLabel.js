@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './UserCheckboxSelectLabel.module.scss'
 import {
-  FontAwesomeIcon,
+  Svg,
   Drawer,
   Image,
 } from '../../../components'
@@ -72,13 +72,13 @@ const OwerCheckboxSelectLabel = ({
               <div className={styles.count}>
                 {value ? value.length : 0}
               </div>
-              <FontAwesomeIcon
-                faicon="farUser"
+              <Svg
                 style={{
                   marginLeft: '4px',
                   fontSize: '15px'
                 }}
-              />
+                icon='person'
+                size='24'/>
             </div>
           </div>
         </div>
