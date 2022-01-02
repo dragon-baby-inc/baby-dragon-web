@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './SelectLabel.module.scss'
 import {
-  FontAwesomeIcon,
+  Svg,
   Drawer,
   Image,
   RadioFilterSelect,
@@ -74,10 +74,7 @@ const UserRadioSelectAmountLabel = ({
             {getUserName()}
           </div>
           <div className={styles.icon}>
-            <FontAwesomeIcon
-              style={{ fontSize: '14px' }}
-              faicon="faChevronDown"
-            />
+            <Svg icon='downArrow' size='24'/>
           </div>
         </label>
 

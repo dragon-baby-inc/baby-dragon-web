@@ -8,6 +8,10 @@ import {
   DownArrow,
   Setting,
   Time,
+  RightArrow,
+  FavorateYes,
+  FavorateNo,
+  LeftArrow,
 } from './../../assets/icons/index'
 
 const icons = {
@@ -17,7 +21,11 @@ const icons = {
   person: Person,
   downArrow: DownArrow,
   setting: Setting,
-  time: Time
+  time: Time,
+  rightArrow: RightArrow,
+  leftArrow: LeftArrow,
+  favorateYes: FavorateYes,
+  favorateNo: FavorateNo,
 }
 
 const Svg = (

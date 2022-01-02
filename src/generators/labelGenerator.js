@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Svg,
   RadioLabel,
   CheckboxLabel,
   FontAwesomeIcon,
@@ -54,14 +55,14 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
           object.fromLine ? null :
             <div style={{ display: 'flex' }}>
               <div style={{ marginRight: '20px' }} onClick={(e) => handleEdit(e, object)}>
-                <FontAwesomeIcon faicon="faEdit" style={{color: '#6F6F6F'}}/>
+                <Svg icon='edit' size='24' className='gray700'/>
               </div>
               {
                 object.restrictedDestroy || !handleTrash ?
                   null
                 :
                  <div style={{ marginRight: '20px' }} onClick={(e) => handleTrash(e, object)}>
-                   <FontAwesomeIcon faicon="faTrash" style={{color: '#6F6F6F'}}/>
+                   <Svg icon='edit' size='24' className='gray700'/>
                  </div>
               }
             </div>

@@ -6,6 +6,7 @@ import { themeColors, imageUrls } from '../../constants'
 import { Context as AccountingBookContext} from '../../contexts/AccountingBookContext.js'
 import { normalizeGroupUser } from '../../normalizers'
 import {
+  Svg,
   UserConfirmBox,
   Footer,
   StepsWidget,
@@ -357,11 +358,13 @@ const AccountingBookEditPage = (props) => {
             }}>
             <CircleIcon
               color='green'
-              faicon='faChevronLeft'
               clicked={handlePreviousStep}
               disabled={currentStep === 0}
-              style={currentStep === 0 ? { opacity: 0, marginRight: '5px' }: {marginRight: '5px'}}
-            />
+              style={currentStep === 0 ? { opacity: 0, marginRight: '5px' }: {marginRight: '5px'}} >
+              <Svg icon='leftArrow' size='24' className='strokeWhite'/>
+            </CircleIcon>
+
+
             <Button
               clicked={handleSubmit}
               disabled={currentStep !== steps.length - 1}
@@ -371,8 +374,10 @@ const AccountingBookEditPage = (props) => {
               color='green'
               clicked={handleNextStep}
               disabled={currentStepValid()}
-              faicon='faChevronRight'
-              style={currentStep === steps.length - 1 ? { display: 'none' } : {marginLeft: '5px'}} />
+              style={currentStep === steps.length - 1 ? { display: 'none' } : {marginLeft: '5px'}} >
+              <Svg icon='rightArrow' size='24' className='strokeWhite'/>
+            </CircleIcon>
+
           </Footer>
         </div>
       </div>

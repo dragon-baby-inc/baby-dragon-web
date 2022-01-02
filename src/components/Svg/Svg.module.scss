@@ -6,6 +6,17 @@
   align-items: center;
 }
 
+.strokeWhite {
+  path {
+    stroke: $white;
+  }
+}
+
+.white {
+  path {
+    fill: $white;
+  }
+}
 .gray700 {
   path {
     fill: $gray700;

@@ -4,7 +4,7 @@ import "../../../styleSheets/CustomInput.scss";
 import './accountingBookLabel.scss'
 import { useHistory } from "react-router-dom";
 import { themeColors } from '../../../constants/globalColors'
-import { FontAwesomeIcon, Image, Star } from '../../index'
+import { FontAwesomeIcon, Image, Star, Svg } from '../../index'
 import Moment from 'react-moment';
 import 'moment/locale/zh-tw';
 
@@ -44,19 +44,21 @@ const AccountingBookLabel = (props) => {
               建立日期：<Moment calendar={calendar} local locale="zh-tw">{object.created_at}</Moment>
             </div>
           </div>
-          { props.current ?
-            <>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            { props.current ?
+              <>
+                <div className={`col-4 group-menu-amount`} style={{ minWidth: '72px' }}>
+                  預設帳本
+                  <Svg icon='favorateYes' size='24' clicked={handleSetAsCurrent}/>
+                </div>
+              </>
+              :
               <div className={`col-4 group-menu-amount`}>
-                預設帳本
-                <Star solid clicked={handleSetAsCurrent} />
+                <Svg icon='favorateNo' size='24' clicked={handleSetAsCurrent}/>
               </div>
-            </>
-            :
-            <div className={`col-4 group-menu-amount`}>
-              <Star clicked={handleSetAsCurrent} />
-            </div>
-          }
-          <FontAwesomeIcon style={{ fontSize: "15px", margin: "0px 10px" }} faicon='faChevronRight' color={themeColors.gray900}/>
+            }
+            <Svg icon='rightArrow' color='black'size='24' style={{ marginLeft: '10px' }}/>
+          </div>
         </div>
       </label>
     </>

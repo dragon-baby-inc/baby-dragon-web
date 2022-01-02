@@ -87,6 +87,7 @@ label.group-menu-label.group-menu-accounting-book {
     padding: 0px 13px;
     text-align: left;
     flex-shrink: 1;
+    flex-grow: 1;
 
     .description {
       padding-bottom: 4px;
@@ -112,7 +113,6 @@ label.group-menu-label.group-menu-accounting-book {
     color: $green300;
     flex-grow: 1;
     text-align: right;
-    width: 70px;
     text-overflow: ellipsis;
     display: flex;
     justify-content: flex-end;

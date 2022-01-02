@@ -8,6 +8,7 @@ function CircleFloatingIcon({
   scrollInfo,
   accountingBookDetails,
   containerInlineStyle,
+  children,
   iconInlineStyle,
   faColor,
   disabled,
@@ -42,7 +43,11 @@ function CircleFloatingIcon({
       containerStyle={styles.floatingIcon}
       avatarStyle={avatarClasses.join(' ')} >
       <div style={disabled ? _styles.disabled : iconInlineStyle} className={iconClasses.join(' ')} onClick={handleClicked} >
-        <FontAwesomeIcon faicon={faicon} color={faColor}/>
+        {
+          children ?
+            children :
+            <FontAwesomeIcon faicon={faicon} color={faColor}/>
+        }
       </div>
     </FloatingIcon >
   )

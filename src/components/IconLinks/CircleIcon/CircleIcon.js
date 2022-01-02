@@ -9,6 +9,7 @@ function CircleIcon({
   disabled,
   color,
   faicon,
+  children,
   size,
 }){
 
@@ -40,7 +41,11 @@ function CircleIcon({
   return(
     <div style={{ ..._styles.container, ...style }} className={styles.container} onClick={handleClicked}>
       <div style={_styles.icon} className={styles.Icon}>
-        <FontAwesomeIcon faicon={faicon} color={'white'}/>
+        {
+          children ?
+            children :
+            <FontAwesomeIcon faicon={faicon} color={'white'}/>
+        }
       </div>
     </div>
   )
