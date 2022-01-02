@@ -330,8 +330,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     return flex_message
   }
 
-
-
   const handleSubmit = () => {
     let newState = {
       ...state,

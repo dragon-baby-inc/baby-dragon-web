@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import liff from '@line/liff';
 import { useCookies } from 'react-cookie';
 import styles from './PaidBackForm.module.scss'
 import { useParams } from 'react-router-dom';
@@ -128,6 +129,84 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
   const owerForm = ['name', 'payer','ower', 'creation_date']
 
+  const buildPaymentSuccessMessage = (message, log_message_category, accounting_book_name) => {
+    let contents = {
+      "type": "bubble",
+      "size": "mega",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": `${log_message_category} 至`,
+                "color": "#A58341",
+                "align": "start",
+                "size": "xs",
+                "gravity": "center",
+                "weight": "bold",
+                "style": "normal",
+                "position": "relative",
+                "decoration": "none",
+                "wrap": true,
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": accounting_book_name,
+                "align": "start",
+                "size": "xs",
+                "gravity": "center",
+                "weight": "bold",
+                "style": "normal",
+                "position": "relative",
+                "decoration": "none",
+                "wrap": true,
+                "flex": 0,
+                "margin": "md"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": message,
+                "size": "sm",
+                "wrap": true
+              }
+            ],
+            "paddingTop": "xs"
+          }
+        ],
+        "backgroundColor": "#ffffff",
+        "paddingAll": "xl"
+      },
+      "styles": {
+        "header": {
+          "separator": true
+        },
+        "footer": {
+          "separator": true
+        }
+      }
+    }
+
+    let flex_message = {
+      "type": "flex",
+      "altText": '新增款項',
+      "contents": contents
+    }
+
+    return flex_message
+  }
+
   const handleSubmit = () => {
     let newState = {
       ...state,
@@ -143,7 +222,16 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
     let valid = validateForm(newState, owerForm, validate)
     if (!valid) { return }
-    createPayment(authState.api, newState, () => {
+    createPayment(authState.api, newState, (data) => {
+      if (data.send_liff_confirm_message === true) {
+        if (liff.isInClient()) {
+          let message = buildPaymentSuccessMessage(data.log_message_content, data.log_message_category, data.accounting_book_name)
+          let messages = [message]
+          liff.sendMessages(messages)
+            .then(() => {})
+        }
+      }
+
       resetForm()
       removeCookie('payment')
       history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
