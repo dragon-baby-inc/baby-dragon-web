@@ -184,7 +184,7 @@ const AccountingBookUsersPage = (props) => {
       <div style={styles.bg}>
         <PageHeader
           faicon='faChevronLeft'
-          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accounting_book_id}/settings`}
+          link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/settings`}
           color={themeColors.black}>
           分帳成員
         </PageHeader>

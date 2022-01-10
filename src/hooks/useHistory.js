@@ -8,7 +8,9 @@ const Hook =  () => {
   }
 
   const navigateTo = (page, args) => {
-    navigate(routes[page](args))
+    if (args.group_id !== undefined) {
+      navigate(routes[page](args))
+    }
   }
 
   const routes = {

@@ -23,7 +23,6 @@ function PageHeader({
   title,
   link
 }){
-
   let classes = [styles.header]
   return(
     <div className={classes.join(' ')} style={faicon ? inlineStyles.header : {}}>

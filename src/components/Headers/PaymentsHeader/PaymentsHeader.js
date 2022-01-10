@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom';
 import styles from './PaymentsHeader.module.scss'
 import { TopRightIcon, Svg } from '../../index'
 import { PageHeader, Star } from '../../index'
@@ -15,6 +16,7 @@ function PaymentsHeader({
 }){
   /* eslint-disable no-unused-vars */
   const [showDisclamier, setShowDisclaimer] = useState(false)
+  const { group_id, accounting_book_id } = useParams()
 
   useEffect(() => {
     if (accountingBookDetails.current !== undefined) {
@@ -35,14 +37,14 @@ function PaymentsHeader({
     <div>
       <PageHeader
         faicon='faChevronLeft'
-        link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books`}
+        link={`/liff_entry/groups/${group_id}/accounting_books`}
       >
         {accountingBookDetails.name}
         <Star solid={accountingBookDetails.current} style={{ paddingLeft: '4px', position: 'relative', bottom: '1px' }}/>
 
         <TopRightIcon
           style={{ fontSize: '20px', right: 58 }}
-          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/log_messages`} >
+          link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/log_messages`} >
           <Svg
             icon='time'
             size='24'
@@ -50,7 +52,7 @@ function PaymentsHeader({
         </TopRightIcon>
         <TopRightIcon
           style={{ fontSize: '20px', right: 20 }}
-          link={`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/settings`}>
+          link={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/settings`}>
           <Svg
             icon='setting'
             size='24'
