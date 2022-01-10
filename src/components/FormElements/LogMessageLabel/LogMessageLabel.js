@@ -50,7 +50,7 @@ const UserSummaryLabel = (props) => {
             imageSize='24px'
             blockStyle={{
               position: 'absolute',
-              top: 38,
+              top: 33,
               right: 0,
             }}>
             <Svg icon={icon} size='16' className='white'/>
