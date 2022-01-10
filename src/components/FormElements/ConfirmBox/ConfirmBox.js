@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './ConfirmBox.module.scss'
 import {
   Backdrop,
@@ -13,12 +13,16 @@ const ConfirmBox = ({
   confirm_text,
   cancel_text,
 }) => {
+  const [disableForm, setDisableForm] = useState(false)
+
   const handleCanceled = (e) => {
     canceled()
     e.preventDefault()
+    setDisableForm(true)
   }
   const handleConfirmed = () => {
     confirmed()
+    setDisableForm(true)
   }
   return (
     <>
@@ -31,10 +35,10 @@ const ConfirmBox = ({
         </div>
         <Separater style={{margin: "0px"}}/>
         <div className={styles.btnGroup}>
-          <button className={[styles.button, styles.cancel].join(" ")} onClick={handleCanceled}>
+          <button disabled={disableForm} className={[styles.button, styles.cancel].join(" ")} onClick={handleCanceled}>
             {cancel_text ? cancel_text: "取消"}
           </button>
-          <button className={[styles.button, styles.confirm].join(" ")} onClick={handleConfirmed}>
+          <button disabled={disableForm} className={[styles.button, styles.confirm].join(" ")} onClick={handleConfirmed}>
             {confirm_text ? confirm_text: "確認"}
           </button>
         </div>

@@ -10,6 +10,7 @@ import {
   useAccountingBook,
 } from '../../hooks'
 import {
+  FullPageLoader,
   PageHeader,
   TopRightIcon,
   PaidBackForm,
@@ -68,14 +69,20 @@ const PaymentPaidBackPage = () => {
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
       {
-        _manualOwers ?
-          <PaidBackForm
-            index={index}
-            users={users}
-            manualOwers={_manualOwers}
-            owers={_owers}
-            payment={payment}
-          /> : null
+        loading ?
+          <FullPageLoader /> :
+          <>
+            {
+              _manualOwers ?
+                <PaidBackForm
+                  index={index}
+                  users={users}
+                  manualOwers={_manualOwers}
+                  owers={_owers}
+                  payment={payment}
+                /> : null
+            }
+          </>
       }
     </>
 

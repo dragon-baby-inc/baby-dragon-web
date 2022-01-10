@@ -1,6 +1,6 @@
 import React from "react"
 import { BulletList  } from 'react-content-loader'
-// import Loader from "react-spinners/SyncLoader";
+import Loader from "react-spinners/SyncLoader";
 
 const styles = {
   bg: {

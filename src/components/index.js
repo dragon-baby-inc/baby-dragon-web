@@ -8,6 +8,7 @@ import Footer from './Footer/Footer'
 import DisclaimerBox from './DisclaimerBox/DisclaimerBox'
 import Collapse from './Collapse/Collapse'
 import Svg from './Svg/Svg'
+import FullPageLoader from './FullPageLoader/FullPageLoader'
 
 export {
   EmptyResult,
@@ -20,6 +21,7 @@ export {
   Collapse,
   DisclaimerBox,
   Svg,
+  FullPageLoader,
 };
 
 export * from './FormElements'

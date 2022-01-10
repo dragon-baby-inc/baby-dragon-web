@@ -5,6 +5,7 @@ import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
 import { Context as PaymentContext } from '../../../contexts/PaymentContext'
 import {
+  FullPageLoader,
   Section,
   DatePickerInput,
   Svg,
@@ -379,18 +380,23 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
   }
 
   return(
-    <div className={styles.container}>
-      <ColumnSwappableView
-        styles={defaultStyles}
-        index={index ? index : 0}
-        key="PaymentCreationPage__ColumnSwappableView"
-        callback={(index) => { index === 0 ? _setAllocationType('evenly') : _setAllocationType('amount') }}
-        steps={steps} />
+    <>
+      <div className={styles.container}>
+        <ColumnSwappableView
+          styles={defaultStyles}
+          index={index ? index : 0}
+          key="PaymentCreationPage__ColumnSwappableView"
+          callback={(index) => { index === 0 ? _setAllocationType('evenly') : _setAllocationType('amount') }}
+          steps={steps} />
 
-      <div className={styles.footer}>
-        <Button clicked={handleSubmit} disabled={disableForm}>建立帳款</Button>
+        <div className={styles.footer}>
+          <Button clicked={handleSubmit} disabled={disableForm}>建立帳款</Button>
+        </div>
       </div>
-    </div>
+      {
+        disableForm ? <FullPageLoader /> : null
+      }
+    </>
   )
 }
 

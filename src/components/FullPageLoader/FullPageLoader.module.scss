@@ -1,0 +1,16 @@
+.container {
+  position: absolute; /* or absolute */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  z-index: 60;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: calc(100% - 48px - 48px);
+  background-color: #fff;
+  border-radius: 16px;
+  text-align: center;
+}
+

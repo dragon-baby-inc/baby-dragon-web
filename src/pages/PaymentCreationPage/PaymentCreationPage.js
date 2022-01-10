@@ -9,6 +9,7 @@ import {
   useAccountingBook,
 } from '../../hooks'
 import {
+  FullPageLoader,
   PageHeader,
   TopRightIcon,
   PaymentForm,
@@ -82,8 +83,14 @@ const PaymentCreationPage = () => {
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
       {
-        payer ?
-          <PaymentForm authState={authState} users={users} manualOwers={[ {user: getUser(), amount: null} ]} owers={users.filter(u => u.coverCost === true)}/> : null
+        loading ?
+          <FullPageLoader /> :
+          <>
+            {
+              payer ?
+                <PaymentForm authState={authState} users={users} manualOwers={[ {user: getUser(), amount: null} ]} owers={users.filter(u => u.coverCost === true)}/> : null
+            }
+          </>
       }
     </>
   )

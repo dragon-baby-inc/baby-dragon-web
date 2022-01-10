@@ -26,6 +26,7 @@ import {
 import { useParams } from 'react-router-dom';
 
 const AccountingBookEditPage = (props) => {
+  const [disableForm, setDisableForm] = useState(true)
   /* eslint-disable no-unused-vars */
   const history = useHistory();
   const { state: authState } = useContext(AuthContext)
@@ -155,6 +156,7 @@ const AccountingBookEditPage = (props) => {
     resetContext()
     setImageId(0)
     setCurrency({ value: defaultCurrency, valid: true })
+    setDisableForm(false)
   }, [])
 
   useEffect(() => {
@@ -325,6 +327,7 @@ const AccountingBookEditPage = (props) => {
 
   const handleSubmit = () => {
     createAccountingBook()
+    setDisableForm(true)
   }
 
   return(
@@ -367,7 +370,7 @@ const AccountingBookEditPage = (props) => {
 
             <Button
               clicked={handleSubmit}
-              disabled={currentStep !== steps.length - 1}
+              disabled={disableForm || currentStep !== steps.length - 1}
               style={currentStep === steps.length - 1 ? {} : { opacity: 0 }}
             btnClass={_styles.button}>建立帳本</Button>
             <CircleIcon
