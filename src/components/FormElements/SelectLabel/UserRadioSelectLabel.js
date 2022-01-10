@@ -57,12 +57,6 @@ const UserRadioSelectLabel = ({
         </div>
         <div className={styles.icon}>
           <Svg
-            icon='edit'
-            size='24'
-            className='gray700'
-            style={{ paddingRight: '12px' }}
-          />
-          <Svg
             className='black'
             icon='downArrow'
             size='24'
