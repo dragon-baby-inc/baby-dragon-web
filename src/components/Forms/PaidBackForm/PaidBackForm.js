@@ -17,6 +17,7 @@ import {
 } from '../../../hooks'
 
 const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
+  const [disableForm, setDisableForm] = useState(true)
   const { group_id, accounting_book_id } = useParams()
   const { state: authState } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
@@ -56,6 +57,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
       _setPayer({ value: payer, valid: true })
       _setOwer({ value: ower, valid: true })
+      setDisableForm(false)
     }
   /* eslint-disable react-hooks/exhaustive-deps */
   }, [payment, users, authState])
@@ -222,6 +224,8 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
     let valid = validateForm(newState, owerForm, validate)
     if (!valid) { return }
+
+    setDisableForm(true)
     createPayment(authState.api, newState, (data) => {
       if (data.send_liff_confirm_message === true) {
         if (liff.isInClient()) {
@@ -267,7 +271,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       </div>
 
       <div className={styles.footer}>
-        <Button clicked={handleSubmit}>建立還款</Button>
+        <Button clicked={handleSubmit} disabled={disableForm}>建立還款</Button>
       </div>
     </div>
   )

@@ -21,6 +21,7 @@ import {
 } from '../components'
 
 const PaymentsPage = (props) => {
+  const { group_id, accounting_book_id } = useParams();
   const history = useHistory();
   /* eslint-disable no-unused-vars */
   const [ editMode, setEditMode ] = useState(false)
@@ -31,7 +32,6 @@ const PaymentsPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [users, accountingBookDetails, accountingBookLoading] = useAccountingBook(authState)
   const [payments, paymentLoading, getPayments] = usePayments(authState, '')
-  const { group_id, accounting_book_id } = useParams();
   const [selectAll, setSelectAll] = useState(false)
   /* eslint-disable no-unused-vars */
   const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(authState)

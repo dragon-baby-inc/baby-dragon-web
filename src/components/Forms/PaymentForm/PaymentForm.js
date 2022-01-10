@@ -22,6 +22,7 @@ import {
 } from '../../../hooks'
 
 const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) => {
+  const [disableForm, setDisableForm] = useState(true)
   const { group_id, accounting_book_id } = useParams()
   const history = useHistory();
   const {
@@ -46,6 +47,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
   useEffect(() => {
     if (users) {
       setUsers(users)
+      setDisableForm(false)
     }
   }, [users])
 
@@ -344,6 +346,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
 
     let valid = validateForm(newState, form[_allocationType], validate)
     if (!valid) { return }
+    setDisableForm(true)
 
     createPayment(authState.api, newState, (data) => {
       if (data.send_liff_confirm_message === true) {
@@ -385,7 +388,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
         steps={steps} />
 
       <div className={styles.footer}>
-        <Button clicked={handleSubmit}>建立帳款</Button>
+        <Button clicked={handleSubmit} disabled={disableForm}>建立帳款</Button>
       </div>
     </div>
   )

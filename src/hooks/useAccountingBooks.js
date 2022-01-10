@@ -6,14 +6,12 @@ import { useParams } from 'react-router-dom';
 const useAccountingBooks =  (authState) => {
   const { group_id } = useParams();
   const [err, setErr] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [group, setGroup] = useState([]);
   const [currentBook, setCurrentBook] = useState({ uuid: null })
 
   const getAccountingBook = async () => {
-    setLoading(true)
-
     await authState.api.getAccountingBooks(group_id)
       .then(function (response) {
         const books = response.data.accounting_books.map(b => {

@@ -18,7 +18,6 @@ const styles = {
     height: '100vh',
     maxHeight: '-webkit-fill-available',
     overflow: 'hidden',
-    background: `linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%)`,
   },
   books: {
     paddingBottom: '100px',
@@ -31,7 +30,6 @@ const styles = {
     height: 'calc(100vh - 60px)',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'white',
   }
 }
 
@@ -68,7 +66,7 @@ const AccountingBookSummaryPage = ({
       <AccountingBooksHeader group={group} title={'帳本列表'} color={themeColors.gray400}/>
       {
         loading ?
-          <div style={styles.loading}> <Loading /> </div>
+          <Loading />
           :
           <div style={styles.books}>
             {objects}

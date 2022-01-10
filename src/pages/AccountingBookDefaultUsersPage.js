@@ -9,6 +9,7 @@ import {
   Separater,
   PageHeader,
   Backdrop,
+  Loading,
   UserForm,
   TopRightIcon,
 } from '../components'
@@ -197,7 +198,10 @@ const AccountingBookUsersPage = (props) => {
         <Separater style={{ margin: "0px" }}/>
         {
           loading ?
-            null : select
+            <>
+              <Loading/>
+            </>
+            : select
         }
       {
         showForm ?
