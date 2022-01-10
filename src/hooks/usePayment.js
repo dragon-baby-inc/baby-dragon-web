@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const usePayment =  (authState) => {
   const { group_id, accounting_book_id, payment_id } = useParams();
   const [err, setErr] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [payment, setPayment] = useState(null);
 
   let stubPayment = {
@@ -24,7 +24,6 @@ const usePayment =  (authState) => {
 
   let stub = false
   const getPayment = async () => {
-    setLoading(true)
     await authState.api.getPayment(group_id, accounting_book_id, payment_id)
       .then(function (response) {
         setPayment(response.data)
