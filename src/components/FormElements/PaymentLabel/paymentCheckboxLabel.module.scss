@@ -224,13 +224,12 @@
 .allocation::before {
   content: '';
   padding-right: 2px;
-  background-color: #eee;
   display: inline-block;
   position: relative;
   top: 5px;
   width: 12px;
   height: 1px;
-  border-bottom: 0px solid $gray400;
+  border-bottom: 0px solid transparent;
 }
 
 .allocation {

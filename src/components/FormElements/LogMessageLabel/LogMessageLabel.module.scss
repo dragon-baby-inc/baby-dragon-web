@@ -1,6 +1,6 @@
 .label {
   display: flex;
-  padding: 16px 0px;
+  padding-top: 16px;
 }
 
 .img {
@@ -9,8 +9,10 @@
 }
 
 .content {
+  padding-bottom: 16px;
   display: flex;
   flex-flow: column;
+  border-bottom: 2px solid #eeeeee;
 }
 
 .category {
