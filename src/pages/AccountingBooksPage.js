@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context as AuthContext } from '../contexts/AuthContext'
 import { useParams } from 'react-router-dom';
 import { useHistory, useAccountingBooks } from '../hooks';
@@ -37,12 +37,20 @@ const AccountingBookSummaryPage = ({
   users,
 }) => {
   const { state: authState } = useContext(AuthContext)
+  const [disableForm, setDisableForm] = useState(true)
   const [books, group, loading, currentBook, setCurrentBook] = useAccountingBooks(authState)
   const history = useHistory();
   const { group_id } = useParams()
 
+  useEffect(() => {
+    if (!loading) {
+      setDisableForm(false)
+    }
+  }, [loading])
+
   const objects = books.map(book => {
     return <AccountingBookLabel
+      disabled={disableForm}
       current={currentBook ? currentBook.uuid === book.uuid : false}
       handleSetCurrent={(id) => handleSetAsCurrent(id)}
       key={book.uuid}
@@ -50,13 +58,16 @@ const AccountingBookSummaryPage = ({
   })
 
   const handleSetAsCurrent = (uuid) => {
+    setDisableForm(true)
     if (uuid) {
       authState.api.updateCurrentAccountingBook(group.id, uuid)
         .then((res) => {
           setCurrentBook({ uuid: res.data.accounting_book.uuid })
+          setDisableForm(false)
         })
         .catch((res) => {
           console.log(res.response)
+          setDisableForm(false)
         })
     }
   }

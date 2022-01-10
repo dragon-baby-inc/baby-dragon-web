@@ -25,8 +25,10 @@ const AccountingBookLabel = (props) => {
   }
 
   const handleSetAsCurrent = (e) => {
-    props.handleSetCurrent(object.uuid)
-    e.stopPropagation()
+    if (!props.disabled) {
+      props.handleSetCurrent(object.uuid)
+      e.stopPropagation()
+    }
     e.preventDefault()
     return false
   }
