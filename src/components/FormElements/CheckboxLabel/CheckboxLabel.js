@@ -5,6 +5,7 @@ import { Checkbox } from '../index'
 const CheckboxLabel = ({
   children,
   hideCheckbox,
+  disabled,
   changed,
   checked,
   value
@@ -16,6 +17,7 @@ const CheckboxLabel = ({
       hideCheckbox ?
           null:
           <Checkbox
+            disabled={disabled}
             value={value}
             changed={changed}
             checked={checked}

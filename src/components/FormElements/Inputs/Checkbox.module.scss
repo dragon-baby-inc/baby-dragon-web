@@ -43,6 +43,12 @@
   border: 2px solid $gold700;
 }
 
+.label input:disabled ~ .checkmark {
+  background-color: $gold700;
+  border: 2px solid $gold700;
+  opacity: .3;
+}
+
 .label input:checked ~ .checkmark:after {
   display: block;
 }

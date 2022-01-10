@@ -40,6 +40,7 @@ const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handle
 
 const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, handleChange, selectedObjects }) => {
   return <CheckboxLabel
+    disabled={object.coverCost}
     key={object.id}
     object={object}
     changed={handleChange}
