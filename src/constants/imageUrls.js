@@ -8,7 +8,9 @@ export const imageUrls = [
   "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v2-7.png",
 ]
 export const userImageUrls = [
-  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v1-0.jpg",
-  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v1-1.jpg",
-  "https://storage.googleapis.com/baby-dragon/public/AccountingBookIcon/AccoutingBookIcon-v1-2.jpg",
+  "https://storage.googleapis.com/baby-dragon/public/user_icon/person_01.png",
+  "https://storage.googleapis.com/baby-dragon/public/user_icon/person_02.png",
+  "https://storage.googleapis.com/baby-dragon/public/user_icon/person_03.png",
+  "https://storage.googleapis.com/baby-dragon/public/user_icon/person_04.png",
+  "https://storage.googleapis.com/baby-dragon/public/user_icon/person_05.png",
 ]
