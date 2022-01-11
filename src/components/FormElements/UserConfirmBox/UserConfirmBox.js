@@ -1,6 +1,6 @@
 import React from 'react'
 import { Svg, TextInput, ConfirmBox, IconSwappableView } from '../../index'
-import { imageUrls } from '../../../constants'
+import { userImageUrls } from '../../../constants'
 
 const UserConfirmBox = ({
   title,
@@ -32,7 +32,7 @@ const UserConfirmBox = ({
           styles={_styles}
           changed={setUserImageId}
           initial={imageUserId}
-          icons={imageUrls}/>
+          icons={userImageUrls}/>
         <div style={{ padding: '24px 16px' }}>
           <TextInput
             key='name'
