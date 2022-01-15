@@ -95,13 +95,14 @@ const AccountingBookEditPage = (props) => {
 
     }
 
-    authState.api.updateUser(group_id, editObject.id, { name: userName.value, image_url: imageUserId })
+    authState.api.updateUser(group_id, editObject.id, { name: userName.value, image_id: imageUserId })
       .then(res => {
         let _users = [...users]
         let index = _users.findIndex((u) => u.id === editObject.id)
         let newUser = _users[index]
         newUser.displayName = res.data.user.display_name
         newUser.imageURL = res.data.user.image_url
+        newUser.imageId = res.data.user.image_id
         _users[index] = newUser
         setUsers({ value: _users, valid: true })
         resetConfirmBox()
@@ -179,7 +180,7 @@ const AccountingBookEditPage = (props) => {
       return
     }
 
-    authState.api.createUser(group_id, { name: userName.value, image_url: imageUserId })
+    authState.api.createUser(group_id, { name: userName.value, image_id: imageUserId })
       .then(res => {
         let _users = [...users]
         _users.push(

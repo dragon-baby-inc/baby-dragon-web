@@ -7,6 +7,9 @@ import {
   OwerCheckboxLabel,
   Image
 } from '../components'
+import {
+  userImageUrls
+} from '../constants'
 
 const createUserRadioLabel = ({ object, handleChange, selectedObject }) => {
   return <RadioLabel
@@ -39,6 +42,11 @@ const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handle
 }
 
 const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, handleChange, selectedObjects }) => {
+  let imageUrl = object.imageURL
+  if (!imageUrl) {
+    imageUrl = userImageUrls[object.imageId]
+  }
+
   return <CheckboxLabel
     disabled={object.coverCost}
     key={object.id}
@@ -48,7 +56,7 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
     checked={selectedObjects.map(el => el.id).includes(object.id)} >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Image style={{ paddingRight: '12px' }} imageUrl={object.imageURL} size='56px' defaultImage='user'/>
+        <Image style={{ paddingRight: '12px' }} imageUrl={imageUrl} size='56px' defaultImage='user'/>
         {object.displayName}
       </div>
       <div>
