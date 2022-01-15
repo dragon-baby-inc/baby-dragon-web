@@ -6,7 +6,8 @@ const normalizeGroupUser = (user) => {
     imageId: user.image_id,
     fromLine: user.from_line,
     coverCost: user.cover_cost,
-    restrictedDestroy: user.restricted_destroy
+    restrictedDestroy: user.restricted_destroy,
+    restrictedCoverCost: user.restricted_cover_cost
   }
 }
 

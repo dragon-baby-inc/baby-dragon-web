@@ -202,8 +202,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     _setOwers({ value: owers, valid: true })
   }, [payer])
 
-  const [value, select] = useUsersSelect({ users, buildSelectUsers, selectAll: true })
-
   const steps = [
     {
       name: '平分',

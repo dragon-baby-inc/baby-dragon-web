@@ -25,6 +25,10 @@ import {
 } from '../../hooks'
 import { useParams } from 'react-router-dom';
 
+import {
+  createFreeUserCheckbokLabel
+} from '../../generators/labelGenerator'
+
 const AccountingBookEditPage = (props) => {
   const [disableForm, setDisableForm] = useState(true)
   /* eslint-disable no-unused-vars */
@@ -146,6 +150,7 @@ const AccountingBookEditPage = (props) => {
     warning: true,
     handleAddUser: () => { setCreateBoxActive(true) },
     selectAll: true,
+    createLabel: createFreeUserCheckbokLabel,
     users,
     handleEdit: handleUserEdit,
     handleTrash: handleUserDelete,

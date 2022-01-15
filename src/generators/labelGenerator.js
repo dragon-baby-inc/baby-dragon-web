@@ -56,7 +56,46 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
   }
 
   return <CheckboxLabel
-    disabled={object.coverCost}
+    disabled={object.restrictedCoverCost}
+    key={object.id}
+    object={object}
+    changed={handleChange}
+    value={object.id}
+    checked={selectedObjects.map(el => el.id).includes(object.id)} >
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Image style={{ paddingRight: '12px' }} imageUrl={imageUrl} size='56px' defaultImage='user'/>
+        {object.displayName}
+      </div>
+      <div>
+        {
+          object.fromLine ? null :
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ marginRight: '20px' }} onClick={(e) => handleEdit(e, object)}>
+                <Svg icon='edit' size='24' className='gray700'/>
+              </div>
+              {
+                object.restrictedDestroy || !handleTrash ?
+                  null
+                :
+                 <div style={{ marginRight: '20px' }} onClick={(e) => handleTrash(e, object)}>
+                   <Svg icon='delete' size='24' className='gray700'/>
+                 </div>
+              }
+            </div>
+        }
+      </div>
+    </div>
+  </CheckboxLabel>
+}
+
+const createFreeUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, handleChange, selectedObjects }) => {
+  let imageUrl = object.imageURL
+  if (!imageUrl) {
+    imageUrl = userImageUrls[object.imageId]
+  }
+
+  return <CheckboxLabel
     key={object.id}
     object={object}
     changed={handleChange}
@@ -92,5 +131,6 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
 export {
   createUserRadioLabel,
   createUserCheckbokLabel,
-  createOwerCheckbokLabel
+  createOwerCheckbokLabel,
+  createFreeUserCheckbokLabel,
 }

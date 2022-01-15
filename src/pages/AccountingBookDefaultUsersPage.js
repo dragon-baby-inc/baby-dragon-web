@@ -13,6 +13,9 @@ import {
   UserForm,
   TopRightIcon,
 } from '../components'
+import {
+  createUserCheckbokLabel
+} from '../generators/labelGenerator'
 
 const AccountingBookUsersPage = (props) => {
   const history = useHistory();
@@ -100,9 +103,16 @@ const AccountingBookUsersPage = (props) => {
     e.preventDefault()
   }
 
+  const filterDisabled = (users) => {
+    return users.filter(u => u.restrictedCoverCost)
+  }
+
+
   const [value, select] = useUsersSelect({
     users,
     buildSelectUsers,
+    createLabel: createUserCheckbokLabel,
+    filterDisabled,
     handleAddUser: () => { setCreateBoxActive(true) },
     selectAll: true,
     handleEdit: handleUserEdit,

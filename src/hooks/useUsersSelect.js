@@ -17,6 +17,8 @@ const useUsersSelect = ({
   labelsHeight,
   warning,
   buildSelectUsers,
+  createLabel,
+  filterDisabled,
   style,
   selectAll,
   callback
@@ -38,7 +40,8 @@ const useUsersSelect = ({
     labelsHeight={labelsHeight}
     handleAddUser={handleAddUser}
     warning={warning}
-    createLabel={createUserCheckbokLabel({ handleEdit, handleTrash })}
+    filterDisabled={filterDisabled}
+    createLabel={createLabel({ handleEdit, handleTrash })}
     selectAll={selectAll}
     objects={users}
     style={style}

@@ -13,6 +13,7 @@ const CheckboxSelect = ({
   selected_object_ids,
   labelsHeight,
   handleAddUser,
+  filterDisabled,
   style,
   createLabel,
   selectAll,
@@ -50,6 +51,13 @@ const CheckboxSelect = ({
     return createLabel({ object, handleChange, selectedObjects })
   })
 
+
+  if (!filterDisabled) {
+    filterDisabled = () => {
+      return []
+    }
+  }
+
   const handleSelectAll = (e) => {
     setSelectAll(e.target.checked)
 
@@ -57,8 +65,10 @@ const CheckboxSelect = ({
       setSelectedObjects(displayObjects)
       changed(displayObjects)
     } else {
-      setSelectedObjects([])
-      changed([])
+      let disabled = filterDisabled(displayObjects)
+      console.log(disabled)
+      setSelectedObjects(disabled)
+      changed(disabled)
     }
   }
 
@@ -76,6 +86,7 @@ const CheckboxSelect = ({
       {
         selectAll ?
           <CheckboxLabel
+            disabled={filterDisabled(objects).length > 0 && objects.length === filterDisabled(objects).length}
             value="select-all"
             changed={handleSelectAll}
             checked={_selectAll}
