@@ -45,12 +45,15 @@ const PaymentCreationPage = () => {
 
   useEffect(() => {
     if (!loading && authState && authState.api) {
-      let payer = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      setBuilder(builder)
+
+      let payer = builder
       if (!payer) { payer = users[0] }
-      // if (!payer) { alert('未授權') }
+
       setPayer(payer)
       setAccountingBookDetails(accountingBookDetails)
-      setBuilder(payer)
+
       setOwers(users.filter((u) => u.coverCost))
       _setPayer(payer)
 

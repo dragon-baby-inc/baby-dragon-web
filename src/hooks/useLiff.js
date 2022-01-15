@@ -21,7 +21,6 @@ const useLiff =  (callback) => {
 
     liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
       .then(() => {
-        setIsLoggedIn(true)
         if (!liff.getAccessToken()) {
           liff.login({ redirectUri: `${process.env.REACT_APP_WEB_HOST}${window.location.pathname}` })
         } else {

@@ -55,7 +55,7 @@ const PaymentEditPage = () => {
       setPayer(payer)
 
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
-      setBuilder(users[0])
+      setBuilder(builder)
       // if (!payer) { alert('未授權') }
       setAmount(parseFloat(payment.amount))
       setName(payment.description)
@@ -81,7 +81,7 @@ const PaymentEditPage = () => {
       setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [paymentLoading, loading])
+  }, [paymentLoading, loading, authState.userLineIdToken])
 
   const handleBack = () => {
     resetForm()
