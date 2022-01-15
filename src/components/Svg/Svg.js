@@ -18,6 +18,10 @@ import {
   JpFlag,
   HkFlag,
   EuFlag,
+  Payment,
+  Money,
+  Date,
+  AccountingBook,
 } from './../../assets/icons/index'
 
 const icons = {
@@ -38,6 +42,10 @@ const icons = {
   JpFlag: JpFlag,
   HkFlag: HkFlag,
   EuFlag: EuFlag,
+  Payment: Payment,
+  Money: Money,
+  Date: Date,
+  AccountingBook: AccountingBook,
 }
 
 const Svg = (

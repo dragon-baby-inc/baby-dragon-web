@@ -69,7 +69,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
   const nameInput = <TextInput
     style={{ paddingTop: '16px' }}
     key='name'
-    faicon="farCreditCard"
+    svg={<Svg icon='Payment' size='24' className='gold900'/> }
     disabled={false}
     placeholder='輸入名稱'
     name={'名稱'}
@@ -84,12 +84,12 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     name='日期'
     changed={(v) => _setCreationDate({ value: v, valid: true })}
     value={_creation_date.value}
-    faicon="fasCalendarAlt"
+    svg={<Svg icon='Date' size='24' className='gold900'/> }
     />
 
   const amountInput = <TextInput
     key='amount'
-    faicon="fasDollarSign"
+    svg={<Svg icon='Money' size='24' className='gold900'/> }
     disabled={false}
     placeholder='輸入金額'
     name='金額'

@@ -7,6 +7,7 @@ import {
   IconSwappableView,
   PageHeader,
   FontAwesomeIcon,
+  Svg,
   Separater,
   SeparaterLabel,
   TextInput,
@@ -100,7 +101,7 @@ const AccountingBookEditPage = (props) => {
                 <TextInput
                   key='name'
                   disabled={false}
-                  faicon="farCreditCard"
+                  svg={<Svg icon='AccountingBook' size='24' className='accountingGold'/> }
                   placeholder={'輸入名稱'}
                   name={'名稱'}
                   labelStyle={styles.labelStyle}

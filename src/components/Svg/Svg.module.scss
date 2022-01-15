@@ -24,6 +24,24 @@
   }
 }
 
+.accountingGold {
+
+  path {
+  }
+
+  path {
+    fill: $gold900;
+  }
+
+  path ~ path {
+    stroke: $gold900;
+    fill: transparent;
+  }
+
+  rect, circle {
+    stroke: $gold900;
+  }
+}
 .gold900 {
   path {
     fill: $gold900;

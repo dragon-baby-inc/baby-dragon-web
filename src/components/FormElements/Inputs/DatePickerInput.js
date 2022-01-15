@@ -10,6 +10,7 @@ const DatePickerInput = ({
   name,
   labelStyle,
   changed,
+  svg,
   value,
   placeholder,
   faicon,
@@ -42,7 +43,10 @@ const DatePickerInput = ({
         className={labelStyles.join(' ')} style={labelStyle} >
         <div className={styles.labelName}>
           <div className={styles.faIcon}>
-            <FontAwesomeIcon faicon={faicon}/>
+            {
+            faicon ?
+              <FontAwesomeIcon faicon={faicon}/> : svg
+            }
           </div>
           <div className={styles.name}>{name}</div>
         </div>
