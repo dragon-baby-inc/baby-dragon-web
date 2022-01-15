@@ -42,7 +42,9 @@ const PaymentPaidBackPage = () => {
   useEffect(() => {
     if (!loading) {
 
+      console.log(authState.userLineIdToken)
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      console.log(builder)
       if (!builder) { builder = users[0] }
       setBuilder(builder)
 

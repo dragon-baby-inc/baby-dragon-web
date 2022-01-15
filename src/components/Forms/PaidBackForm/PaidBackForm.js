@@ -48,10 +48,10 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
       _setCreationDate({ value: payment.paid_at, valid: true })
       _setAllocationType(payment.allocation_type)
 
+      console.log(authState.userLineIdToken)
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       if (!builder) { builder = users[0] }
       setBuilder(builder)
-      // if (!builder) { alert('未授權') }
 
       let payer = users.filter(u => u.id === payment.payer_id)[0]
       let ower = users.filter(u => u.id === payment.ower_id)[0]

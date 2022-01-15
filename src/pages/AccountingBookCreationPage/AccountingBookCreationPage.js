@@ -287,7 +287,7 @@ const AccountingBookEditPage = (props) => {
         <div style={styles.nameInput}>
           <TextInput
             key='name'
-            faicon="farCreditCard"
+            svg={<Svg icon='AccountingBook' size='24' className='accountingGold'/> }
             disabled={false}
             placeholder={'輸入名稱'}
             name={'名稱'}
