@@ -118,6 +118,16 @@ const AccountingBookSettingPage = (props) => {
     }
   }
 
+  const handleSupport = () => {
+    if (liff.isInClient()) {
+      let messages =  [{ type: 'text', text: '贊助龍寶寶' }]
+      liff.sendMessages(messages)
+        .then(() => {
+          liff.closeWindow()
+        })
+    }
+  }
+
   if (pageLoading) {
     return <>
       <AccountingBookSettingsHeader/>
@@ -188,6 +198,11 @@ const AccountingBookSettingPage = (props) => {
             hideIcon={true}
             description="匯出帳款"
             clicked={handlePaymentExport}
+          />
+          <NavigationLabel
+            hideIcon={true}
+            description="贊助龍寶寶"
+            clicked={handleSupport}
           />
         </div>
       </div>
