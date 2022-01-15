@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { RadioSelect, Image, RadioLabel } from '../components'
+import { RadioSelect, Image, RadioLabel, Svg } from '../components'
 
 const currencies = [
-  { id: "TWD", name: "TWD", displayName: "台幣" },
-  { id: 'USD', name: "USD", displayName: "美金" },
-  { id: 'HKD', name: "HKD", displayName: "港幣" },
-  { id: 'JPY', name: "JPY", displayName: "日幣" },
-  { id: 'EUR', name: "EUR", displayName: "歐元" },
+  { id: "TWD", name: "TWD", displayName: "台幣", src: 'TwFlag' },
+  { id: 'USD', name: "USD", displayName: "美金", src: 'UsFlag' },
+  { id: 'HKD', name: "HKD", displayName: "港幣", src: 'HkFlag' },
+  { id: 'JPY', name: "JPY", displayName: "日幣", src: 'JpFlag' },
+  { id: 'EUR', name: "EUR", displayName: "歐元", src: 'EuFlag'  },
 ]
 
 const useCurrencySelect = ({
@@ -32,7 +32,11 @@ const useCurrencySelect = ({
       checked={value === String(object.id)}
       changed={handleChange}>
       <div style={styles.label}>
-        <Image style={{ paddingRight: '12px' }}/>
+        <div style={{ paddingRight: '12px' }}>
+          <div style={{ width: '40px', height: '40px', overflow: 'hidden', borderRadius: '50%' }}>
+            <Svg icon={object.src} size='40'/>
+          </div>
+        </div>
         {object.name}
       </div>
     </RadioLabel>

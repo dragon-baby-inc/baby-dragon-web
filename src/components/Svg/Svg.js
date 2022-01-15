@@ -13,6 +13,11 @@ import {
   FavorateNo,
   LeftArrow,
   Cancel,
+  TwFlag,
+  UsFlag,
+  JpFlag,
+  HkFlag,
+  EuFlag,
 } from './../../assets/icons/index'
 
 const icons = {
@@ -28,6 +33,11 @@ const icons = {
   favorateYes: FavorateYes,
   favorateNo: FavorateNo,
   cancel: Cancel,
+  TwFlag: TwFlag,
+  UsFlag: UsFlag,
+  JpFlag: JpFlag,
+  HkFlag: HkFlag,
+  EuFlag: EuFlag,
 }
 
 const Svg = (
