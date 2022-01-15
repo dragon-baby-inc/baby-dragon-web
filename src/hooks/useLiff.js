@@ -23,7 +23,7 @@ const useLiff =  (callback) => {
       .then(() => {
         setIsLoggedIn(true)
         if (!liff.getAccessToken()) {
-          liff.login({ redirectUri: `${process.env.WEB_HOST}${window.location.pathname}` })
+          liff.login({ redirectUri: `${process.env.REACT_APP_WEB_HOST}${window.location.pathname}` })
         } else {
           api.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
             .then((res) => {
