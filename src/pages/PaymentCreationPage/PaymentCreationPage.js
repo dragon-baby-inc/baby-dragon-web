@@ -44,10 +44,16 @@ const PaymentCreationPage = () => {
   }
 
   useEffect(() => {
-    if (!loading && authState && authState.api) {
+    if (users && authState.userLineIdToken) {
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       setBuilder(builder)
+    }
+  }, [authState.userLineIdToken, users])
 
+  useEffect(() => {
+    if (!loading && authState && authState.api) {
+
+      let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       let payer = builder
       if (!payer) { payer = users[0] }
 
@@ -66,7 +72,7 @@ const PaymentCreationPage = () => {
       setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [authState, loading])
+  }, [loading, users, accountingBookDetails])
 
   const getUser = () => {
     let user = users.filter(u => u.id !== payer.id)[0]

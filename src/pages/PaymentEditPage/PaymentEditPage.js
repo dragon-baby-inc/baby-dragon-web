@@ -49,13 +49,18 @@ const PaymentEditPage = () => {
   }, [])
 
   useEffect(() => {
+    if (users && authState.userLineIdToken) {
+      let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
+      setBuilder(builder)
+    }
+  }, [authState.userLineIdToken, users])
+
+  useEffect(() => {
     if (!loading && !paymentLoading) {
       setId(payment.id)
       let payer = users.filter(u => String(u.id) === payment.payer_id)[0]
       setPayer(payer)
 
-      let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
-      setBuilder(builder)
       // if (!payer) { alert('未授權') }
       setAmount(parseFloat(payment.amount))
       setName(payment.description)
@@ -81,7 +86,7 @@ const PaymentEditPage = () => {
       setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [paymentLoading, loading, authState.userLineIdToken])
+  }, [paymentLoading, loading, users, accountingBookDetails])
 
   const handleBack = () => {
     resetForm()
