@@ -10,6 +10,9 @@ import {
 import {
   createUserRadioLabel
 } from '../../../generators/labelGenerator'
+import {
+  userImageUrls
+} from '../../../constants'
 
 const UserRadioSelectAmountLabel = ({
   users,
@@ -59,7 +62,11 @@ const UserRadioSelectAmountLabel = ({
 
   const getUserImage = () => {
     if (!user) { return null }
-    return user.imageURL
+    if (!user.fromLine) {
+      return userImageUrls[user.imageId]
+    } {
+      return user.imageURL
+    }
   }
 
   return (

@@ -8,6 +8,9 @@ import {
 import {
   useOwersFilterSelect
 } from '../../../hooks'
+import {
+  userImageUrls
+} from '../../../constants'
 
 const OwerCheckboxSelectLabel = ({
   users,
@@ -44,6 +47,11 @@ const OwerCheckboxSelectLabel = ({
   const displayCount = selected.length > 5 ? 5 : selected.length
   const displayUsers = [...selected].slice(0, displayCount)
   const images = displayUsers.map(u => {
+    let imageUrl = u.imageURL
+    if (!imageUrl) {
+      imageUrl = userImageUrls[u.imageId]
+    }
+
     i++
     return(
       <Image style={{
@@ -55,7 +63,7 @@ const OwerCheckboxSelectLabel = ({
       }}
         key={i}
         size='40px'
-        imageUrl={u.imageURL} />
+        imageUrl={imageUrl} />
     )
   })
 
