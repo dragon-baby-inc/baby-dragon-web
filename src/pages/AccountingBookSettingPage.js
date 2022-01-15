@@ -91,6 +91,16 @@ const AccountingBookSettingPage = (props) => {
     }
   }
 
+  const downloadURI = (uri, name) => {
+    let link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+
   const handlePaymentExport = () => {
     if (liff.isInClient()) {
       let messages =  [{ type: 'text', text: '匯出帳款' }]
@@ -98,6 +108,13 @@ const AccountingBookSettingPage = (props) => {
         .then(() => {
           liff.closeWindow()
         })
+    } else {
+      authState.api.exportPayments(group_id, accounting_book_id)
+        .then((res) => {
+          console.log(res.data.url)
+          downloadURI(res.data.url)
+        })
+
     }
   }
 
@@ -139,6 +156,7 @@ const AccountingBookSettingPage = (props) => {
           <NavigationLabel
             hideIcon={true}
             description="帳本幣別"
+            disabled={true}
             selectedOptionName={accountingBookDetails.currency}
             clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
           />
@@ -169,7 +187,6 @@ const AccountingBookSettingPage = (props) => {
           <NavigationLabel
             hideIcon={true}
             description="匯出帳款"
-            selectedOptionName={accountingBookDetails.currency}
             clicked={handlePaymentExport}
           />
         </div>

@@ -5,13 +5,14 @@ import { themeColors } from '../../../constants'
 
 const navigateLabel = ({
   clicked,
+  disabled,
   hideIcon,
   description,
   selectedOptionName,
   name
 }) => {
   return (
-    <label className={styles.label} onClick={hideIcon ? () => {} : clicked}>
+    <label className={styles.label} onClick={disabled ? () => {} : clicked}>
       {description}
       <div className={styles.rightContainer}>
         {selectedOptionName}
