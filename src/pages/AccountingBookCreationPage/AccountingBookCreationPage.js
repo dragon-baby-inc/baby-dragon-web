@@ -81,8 +81,9 @@ const AccountingBookEditPage = (props) => {
     setUserName({ value: '', valid: true })
   }
 
-  const handleEditUserConfirm = () => {
+  const handleEditUserConfirm = (setDisableForm) => {
     if(!userName.valid) {
+      setDisableForm(false)
       return
     }
 
@@ -90,9 +91,9 @@ const AccountingBookEditPage = (props) => {
     if (sameUser.length > 0) {
       if (editObject.id !== sameUser[0].id) {
         setUserName({ value: userName.value, valid: false })
+        setDisableForm(false)
         return
       }
-
     }
 
     authState.api.updateUser(group_id, editObject.id, { name: userName.value, image_id: imageUserId })
@@ -168,15 +169,17 @@ const AccountingBookEditPage = (props) => {
     }
   }, [users])
 
-  const handleCreateUserConfirm = () => {
+  const handleCreateUserConfirm = (setDisableForm) => {
     if (userName.value.length < 1) {
       setUserName({ value: userName.value, valid: false })
+      setDisableForm(false)
       return
     }
 
     let sameUser = users.filter(u => u.displayName === userName.value)
     if (sameUser.length > 0) {
       setUserName({ value: userName.value, valid: false })
+      setDisableForm(false)
       return
     }
 

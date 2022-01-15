@@ -21,8 +21,8 @@ const ConfirmBox = ({
     setDisableForm(true)
   }
   const handleConfirmed = () => {
-    confirmed()
     setDisableForm(true)
+    confirmed(setDisableForm)
   }
   return (
     <>
