@@ -12,7 +12,8 @@
   padding-bottom: 16px;
   display: flex;
   flex-flow: column;
-  border-bottom: 2px solid #eeeeee;
+  flex-grow: 1;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .category {
