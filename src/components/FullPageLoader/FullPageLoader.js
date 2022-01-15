@@ -6,7 +6,7 @@ import styles from './FullPageLoader.module.scss'
 function FullPageLoader(){
   return(
     <div className={styles.container}>
-      <Loader color={themeColors.gray500}/>
+      <Loader color={themeColors.gray500} css={{ background: 'transparent', backgroundColor: 'transparent' }}/>
     </div>
   )
 }
