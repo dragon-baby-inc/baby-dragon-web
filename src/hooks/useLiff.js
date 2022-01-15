@@ -23,7 +23,7 @@ const useLiff =  (callback) => {
       .then(() => {
         setIsLoggedIn(true)
         if (!liff.getAccessToken()) {
-          liff.login({ redirectUri: `https://baby-dragon-web.herokuapp.com${window.location.pathname}` })
+          liff.login({ redirectUri: `https://www.dragonbaby.net${window.location.pathname}` })
         } else {
           api.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
             .then((res) => {
