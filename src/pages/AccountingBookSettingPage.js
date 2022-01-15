@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
+import liff from '@line/liff';
 import { Context as AuthContext } from '../contexts/AuthContext'
 import { themeColors } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
@@ -90,6 +91,16 @@ const AccountingBookSettingPage = (props) => {
     }
   }
 
+  const handlePaymentExport = () => {
+    if (liff.isInClient()) {
+      let messages =  [{ type: 'text', text: '匯出帳款' }]
+      liff.sendMessages(messages)
+        .then(() => {
+          liff.closeWindow()
+        })
+    }
+  }
+
   if (pageLoading) {
     return <>
       <AccountingBookSettingsHeader/>
@@ -154,6 +165,12 @@ const AccountingBookSettingPage = (props) => {
             changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
             description="傳送確認訊息到群組"
             name="lineNotification"
+          />
+          <NavigationLabel
+            hideIcon={true}
+            description="匯出帳款"
+            selectedOptionName={accountingBookDetails.currency}
+            clicked={handlePaymentExport}
           />
         </div>
       </div>
