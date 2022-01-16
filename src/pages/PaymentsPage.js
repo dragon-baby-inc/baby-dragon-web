@@ -35,7 +35,7 @@ const PaymentsPage = (props) => {
   const [selectAll, setSelectAll] = useState(false)
   /* eslint-disable no-unused-vars */
   const [summary, loading, err, getAccountingBook] = useAccountingBookSummary(authState)
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(props.index)
 
   const [paymentsScrollInfo, paymentsDir, paymentsRef] = useScrollRef()
   const [paymentContainerScrollInfo, paymentContainerDir, paymentContainerRef] = useScrollRef()

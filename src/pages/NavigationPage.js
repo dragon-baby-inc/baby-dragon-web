@@ -28,8 +28,11 @@ const NavigationPage = (props) => {
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/:payment_id/edit">
         <PaymentEditPage />
       </Route>
+      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary">
+        <PaymentsPage index={1}/>
+      </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index">
-        <PaymentsPage />
+        <PaymentsPage index={0}/>
       </Route>
       <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/edit/index">
         <AccountingBookEditPage />
