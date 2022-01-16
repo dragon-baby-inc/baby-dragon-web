@@ -50,7 +50,10 @@ const AccountingBookSettingPage = (props) => {
         seDeleteActive(false)
       })
       .catch(err => {
-        console.log(err)
+        if (err.response.data) {
+          alert(err.response.data.error_message)
+          seDeleteActive(false)
+        }
       })
   }
 
