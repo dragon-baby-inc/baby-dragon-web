@@ -44,8 +44,9 @@ const AccountingBookUsersPage = (props) => {
     setEditBoxActive(false)
   }
 
-  const handleEditUserConfirm = () => {
+  const handleEditUserConfirm = (setDisableForm) => {
     if(!name.valid) {
+      setDisableForm(false)
       return
     }
 
@@ -53,6 +54,7 @@ const AccountingBookUsersPage = (props) => {
     if (sameUser.length > 0) {
       if (editObject.id !== sameUser[0].id) {
         setName({ value: name.value, valid: false })
+        setDisableForm(false)
         return
       }
     }
@@ -139,15 +141,17 @@ const AccountingBookUsersPage = (props) => {
     },
   };
 
-  const handleCreateUserConfirm = () => {
+  const handleCreateUserConfirm = (setDisableForm) => {
     if (name.value.length < 1) {
       setName({ value: name.value, valid: false })
+      setDisableForm(false)
       return
     }
 
     let sameUser = users.filter(u => u.displayName === name.value)
     if (sameUser.length > 0) {
       setName({ value: name.value, valid: false })
+      setDisableForm(false)
       return
     }
 

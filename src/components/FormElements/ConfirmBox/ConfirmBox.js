@@ -16,9 +16,9 @@ const ConfirmBox = ({
   const [disableForm, setDisableForm] = useState(false)
 
   const handleCanceled = (e) => {
-    canceled()
     e.preventDefault()
     setDisableForm(true)
+    canceled(setDisableForm)
   }
   const handleConfirmed = () => {
     setDisableForm(true)
