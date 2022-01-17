@@ -12,6 +12,7 @@ import {
   AccountingBookInfo,
   Separater,
   SeparaterLabel,
+  FullPageLoader,
   Loading,
   ConfirmBox
 } from '../components'
@@ -135,7 +136,7 @@ const AccountingBookSettingPage = (props) => {
     return <>
       <AccountingBookSettingsHeader/>
       <Separater style={{ margin: "0px" }}/>
-      <Loading />
+      <FullPageLoader />
     </>
   }
 
