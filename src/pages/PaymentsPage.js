@@ -8,6 +8,7 @@ import { Context as AuthContext } from '../contexts/AuthContext'
 import { useScrollRef, usePayments, useAccountingBook, useAccountingBookSummary } from '../hooks'
 
 import {
+  FullPageLoader,
   Svg,
   PaymentInfoHeader,
   UserSummaryLabel,
@@ -26,6 +27,7 @@ const PaymentsPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [ editMode, setEditMode ] = useState(false)
   const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
+  const [fullPageLoad, setFullPageLoad] = useState(true)
   const { state: authState } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
   const [ small, setSmall ] = useState(false)
@@ -114,6 +116,8 @@ const PaymentsPage = (props) => {
     </ConfirmBox>
 
   const deletePayment = (payment) => {
+    setFullPageLoad(true)
+
     authState.api.deletePayments(group_id, accounting_book_id, {
       payment_ids: [payment.id],
       builder_id: authState.userLineIdToken
@@ -121,11 +125,13 @@ const PaymentsPage = (props) => {
       getPayments()
       getAccountingBook()
       seDeleteActive(null)
+      setFullPageLoad(false)
     })
       .catch(function (error) {
         console.log(error)
         alert('刪除失敗')
         seDeleteActive(null)
+        setFullPageLoad(false)
       })
   }
 
@@ -223,6 +229,10 @@ const PaymentsPage = (props) => {
       </CircleFloatingIcon>
 
       { deleteActive ? deleteConfirmBox : null }
+      {
+        fullPageLoad ? <FullPageLoader /> : null
+      }
+
     </>
   )
 }
