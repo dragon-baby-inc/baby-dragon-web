@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom';
 import styles from './PaymentsHeader.module.scss'
 import { DisclaimerBox, Image } from '../../index'
+import {
+  useHistory
+} from '../../../hooks'
 
 function PaymentsHeader({
   paymentSize,
@@ -13,6 +17,8 @@ function PaymentsHeader({
   loading
 }){
   const [showDisclamier, setShowDisclaimer] = useState(false)
+  const { group_id, accounting_book_id } = useParams()
+  const history = useHistory();
 
   useEffect(() => {
     if (accountingBookDetails.current !== undefined) {
@@ -39,7 +45,7 @@ function PaymentsHeader({
         }
         <div className={innerBlockClasses.join(" ")}>
           <div>
-            <div>
+            <div onClick={ () => { history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id }) } }>
               <Image defaultImage="accountingBook" imageUrl={accountingBookDetails.imageUrl} size='80px' circle/>
             </div>
           </div>
