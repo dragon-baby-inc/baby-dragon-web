@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Context as PaymentContext } from '../../../contexts/PaymentContext'
 import { Context as AuthContext } from '../../../contexts/AuthContext'
 import {
+  FullPageLoader,
   Svg,
   Section,
   DatePickerInput,
@@ -255,21 +256,24 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
   }
 
   return(
-    <div className={styles.container}>
-      <div className={styles.stepContainer}>
-        { nameInput }
-        { amountInput }
-        { datePickerInput }
-        <Section name="還款者"/>
-        { payerLabel }
-        <Section name="還給" style={{ marginTop: '16px' }}/>
-        { owerLabel }
-      </div>
+    <>
+      <div className={styles.container}>
+        <div className={styles.stepContainer}>
+          { nameInput }
+          { amountInput }
+          { datePickerInput }
+          <Section name="還款者"/>
+          { payerLabel }
+          <Section name="還給" style={{ marginTop: '16px' }}/>
+          { owerLabel }
+        </div>
 
-      <div className={styles.footer}>
-        <Button clicked={handleSubmit} disabled={disableForm}>建立還款</Button>
+        <div className={styles.footer}>
+          <Button clicked={handleSubmit} disabled={disableForm}>建立還款</Button>
+        </div>
       </div>
-    </div>
+      { disableForm ? <FullPageLoader /> : null }
+    </>
   )
 }
 

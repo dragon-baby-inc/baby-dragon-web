@@ -27,7 +27,7 @@ const PaymentsPage = (props) => {
   /* eslint-disable no-unused-vars */
   const [ editMode, setEditMode ] = useState(false)
   const [ selectedPaymentIds, setSelectedPaymentIds ] = useState([])
-  const [fullPageLoad, setFullPageLoad] = useState(true)
+  const [fullPageLoad, setFullPageLoad] = useState(false)
   const { state: authState } = useContext(AuthContext)
   /* eslint-disable no-unused-vars */
   const [ small, setSmall ] = useState(false)
