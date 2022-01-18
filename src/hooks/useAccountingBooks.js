@@ -15,7 +15,7 @@ const useAccountingBooks =  (authState) => {
     await authState.api.getAccountingBooks(group_id)
       .then(function (response) {
         const books = response.data.accounting_books.map(b => {
-          return { imageUrl: imageUrls[b.image_id], ...b }
+          return { imageUrl: imageUrls[b.image_id ? b.image_id : 0], ...b }
         })
         setBooks(books)
         setCurrentBook(response.data.accounting_books.filter((b) => b.current)[0])
