@@ -132,6 +132,10 @@ const AccountingBookSettingPage = (props) => {
     }
   }
 
+  const handleCommunity = () => {
+    window.location.assign("https://reurl.cc/qmZLaq");
+  }
+
   if (pageLoading) {
     return <>
       <AccountingBookSettingsHeader/>
@@ -207,6 +211,11 @@ const AccountingBookSettingPage = (props) => {
             hideIcon={true}
             description="贊助龍寶寶"
             clicked={handleSupport}
+          />
+          <NavigationLabel
+            hideIcon={true}
+            description="加入社群"
+            clicked={handleCommunity}
           />
         </div>
       </div>
