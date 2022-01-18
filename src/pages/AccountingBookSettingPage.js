@@ -106,6 +106,8 @@ const AccountingBookSettingPage = (props) => {
 
 
   const handlePaymentExport = () => {
+    setPageLoading(true)
+
     if (liff.isInClient()) {
       authState.api.exportPayments(group_id, accounting_book_id)
         .then((res) => {
@@ -114,14 +116,15 @@ const AccountingBookSettingPage = (props) => {
             .then(() => {
               liff.closeWindow()
             })
+          setPageLoading(false)
         })
     } else {
       authState.api.exportPayments(group_id, accounting_book_id)
         .then((res) => {
           console.log(res.data.url)
           downloadURI(res.data.url)
+          setPageLoading(false)
         })
-
     }
   }
 
