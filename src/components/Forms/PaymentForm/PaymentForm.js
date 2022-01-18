@@ -190,7 +190,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     clicked={handleAddOwer}
     style={{
       color: themeColors.gold900
-    }}> 新增</Button>
+    }}> 新增欠款者</Button>
 
 
   const buildSelectUsers = (users) => {

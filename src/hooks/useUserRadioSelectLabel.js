@@ -7,6 +7,7 @@ const useUserRadioSelectLabel = ({
   users,
   initialValue,
   callback,
+  style,
   valid,
   key
 }) => {
@@ -22,6 +23,7 @@ const useUserRadioSelectLabel = ({
   }
 
   const selectLabel = <UserRadioSelectLabel
+    style={style}
     key={key}
     users={users}
     callback={handleUserSelect}

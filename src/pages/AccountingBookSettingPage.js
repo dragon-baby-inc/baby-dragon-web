@@ -149,74 +149,76 @@ const AccountingBookSettingPage = (props) => {
       <div style={styles.bg}>
         <AccountingBookSettingsHeader/>
         <Separater style={{ margin: "0px" }}/>
+        <div style={{ overflow: 'auto', height: 'calc(100vh - 58px)' }}>
         <SeparaterLabel style={{ paddingTop: '19px' }} name="帳本設定"/>
         <AccountingBookInfo style={{ paddingTop: "19px", paddingBottom: "19px" }} accountingBookDetails={accountingBookDetails}/>
-        <div style={styles.settings}>
-          {
-            true ?
-              null:
-              <label style={styles.label}>
-                <span style={styles.description}>
-                  帳本名稱
-                </span>
-                {
-                  loading ?
-                    null :
-                    <input
-                      style={styles.textInput}
-                      type="text"
-                      value={state.name.value === undefined ? '' : state.name.value}
-                      onChange={(e) => handlInputChange(e.target.value, { name: e.target.value }, setName)}
-                    />
-                }
-              </label>
-          }
-          <NavigationLabel
-            hideIcon={true}
-            description="帳本幣別"
-            disabled={true}
-            selectedOptionName={accountingBookDetails.currency}
-            clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
-          />
-          <NavigationLabel
-            description="分帳成員"
-            selectedOptionName={`${accountingBookDetails.cover_cost_users_size ? accountingBookDetails.cover_cost_users_size : '-'} 人`}
-            clicked={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/default_users`) }}
-          />
-          <ActionLabel
-            style={{ color: "#D65C5C" }}
-            description="永久刪除帳本"
-            clicked={() => seDeleteActive(true)}
-          />
-          <Separater />
-          <SeparaterLabel name="LINEBOT"/>
-          <ToggleLabel
-            checked={state.autoDetectPayment.value}
-            changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
-            description="自動偵測新增帳款指令"
-            name="autoDetectPayment"
-          />
-          <ToggleLabel
-            checked={state.lineNotification.value}
-            changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
-            description="傳送確認訊息到群組"
-            name="lineNotification"
-          />
-          <NavigationLabel
-            hideIcon={true}
-            description="匯出帳款"
-            clicked={handlePaymentExport}
-          />
-          <NavigationLabel
-            hideIcon={true}
-            description="贊助龍寶寶"
-            clicked={handleSupport}
-          />
-          <NavigationLabel
-            hideIcon={true}
-            description="加入社群問問題"
-            clicked={handleCommunity}
-          />
+          <div style={styles.settings}>
+            {
+              true ?
+                null:
+                <label style={styles.label}>
+                  <span style={styles.description}>
+                    帳本名稱
+                  </span>
+                  {
+                    loading ?
+                      null :
+                      <input
+                        style={styles.textInput}
+                        type="text"
+                        value={state.name.value === undefined ? '' : state.name.value}
+                        onChange={(e) => handlInputChange(e.target.value, { name: e.target.value }, setName)}
+                      />
+                  }
+                </label>
+            }
+            <NavigationLabel
+              hideIcon={true}
+              description="帳本幣別"
+              disabled={true}
+              selectedOptionName={accountingBookDetails.currency}
+              clicked={() => { history.navigateTo("accountingBookCurrencyPage", { group_id, accounting_book_id }) }}
+            />
+            <NavigationLabel
+              description="分帳成員"
+              selectedOptionName={`${accountingBookDetails.cover_cost_users_size ? accountingBookDetails.cover_cost_users_size : '-'} 人`}
+              clicked={() => { history.navigate(`/liff_entry/groups/${accountingBookDetails.group_id}/accounting_books/${accountingBookDetails.id}/default_users`) }}
+            />
+            <ActionLabel
+              style={{ color: "#D65C5C" }}
+              description="永久刪除帳本"
+              clicked={() => seDeleteActive(true)}
+            />
+            <Separater />
+            <SeparaterLabel name="LINEBOT"/>
+            <ToggleLabel
+              checked={state.autoDetectPayment.value}
+              changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
+              description="自動偵測新增帳款指令"
+              name="autoDetectPayment"
+            />
+            <ToggleLabel
+              checked={state.lineNotification.value}
+              changed={(e) => handleCurrentChange(e.target.checked, { send_liff_confirm_message: e.target.checked }, setLineNotification)}
+              description="傳送確認訊息到群組"
+              name="lineNotification"
+            />
+            <NavigationLabel
+              hideIcon={true}
+              description="匯出帳款"
+              clicked={handlePaymentExport}
+            />
+            <NavigationLabel
+              hideIcon={true}
+              description="贊助龍寶寶"
+              clicked={handleSupport}
+            />
+            <NavigationLabel
+              hideIcon={true}
+              description="加入社群問問題"
+              clicked={handleCommunity}
+            />
+          </div>
         </div>
       </div>
       {

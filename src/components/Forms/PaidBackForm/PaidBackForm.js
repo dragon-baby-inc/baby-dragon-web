@@ -66,6 +66,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment }) => {
 
   const [ower, owerLabel] = useUserRadioSelectLabel({
     users: users ? users.filter(u => u.coverCost === true) : [],
+    style: { background: '#f6f6f6' },
     initialValue: _ower.value
   })
 

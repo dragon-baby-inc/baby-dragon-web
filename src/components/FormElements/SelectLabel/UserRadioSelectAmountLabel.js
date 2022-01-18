@@ -87,7 +87,7 @@ const UserRadioSelectAmountLabel = ({
 
         <TextInput
           name="金額"
-          faicon="farCreditCard"
+          svg={<Svg icon='Money' size='24' className='gold900'/> }
           style={inlineStyles.amountLabel}
           value={amount ? amount : ''}
           invalidFeedback={'不可為空'}
