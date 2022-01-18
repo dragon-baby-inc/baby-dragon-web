@@ -193,7 +193,7 @@ const AccountingBookSettingPage = (props) => {
           <ToggleLabel
             checked={state.autoDetectPayment.value}
             changed={(e) => handleCurrentChange(e.target.checked, { use_payment_auto_detection: e.target.checked }, setAutoDetectPayment)}
-            description="新增帳款指令"
+            description="自動偵測新增帳款指令"
             name="autoDetectPayment"
           />
           <ToggleLabel
@@ -214,7 +214,7 @@ const AccountingBookSettingPage = (props) => {
           />
           <NavigationLabel
             hideIcon={true}
-            description="加入社群"
+            description="加入社群問問題"
             clicked={handleCommunity}
           />
         </div>
