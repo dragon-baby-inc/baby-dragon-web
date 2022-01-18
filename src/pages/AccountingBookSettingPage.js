@@ -107,10 +107,13 @@ const AccountingBookSettingPage = (props) => {
 
   const handlePaymentExport = () => {
     if (liff.isInClient()) {
-      let messages =  [{ type: 'text', text: '匯出帳款' }]
-      liff.sendMessages(messages)
-        .then(() => {
-          liff.closeWindow()
+      authState.api.exportPayments(group_id, accounting_book_id)
+        .then((res) => {
+          let messages =  [{ type: 'text', text: `建議使用電腦下載手機可能會有亂碼！ 為了避免龍寶寶因為雲端空間餓死，檔案在30分鐘內會刪除喔！${res.data.url}` }]
+          liff.sendMessages(messages)
+            .then(() => {
+              liff.closeWindow()
+            })
         })
     } else {
       authState.api.exportPayments(group_id, accounting_book_id)
