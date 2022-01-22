@@ -69,7 +69,6 @@ const AccountingBookUsersPage = (props) => {
         newUser.imageId = res.data.user.image_id
         _users[index] = newUser
 
-        console.log(res)
         setUsers(_users)
         resetConfirmBox()
         setEditBoxActive(false)
@@ -159,7 +158,10 @@ const AccountingBookUsersPage = (props) => {
       .then(res => {
         let _users = [...users]
         _users.push(
-          normalizeGroupUser(res.data.user)
+          {
+            ...normalizeGroupUser(res.data.user),
+            coverCost: true
+          }
         )
         setUsers(_users)
         resetConfirmBox()
