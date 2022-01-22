@@ -1,6 +1,7 @@
 @import '../../../styleSheets/globalColors.scss';
 
 .container {
+  display: flex;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -9,4 +10,12 @@
   text-align: left;
   margin-bottom: 8px;
   color: $gray900;
+}
+
+.lint {
+  padding-left: 8px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: $gold700;
 }
