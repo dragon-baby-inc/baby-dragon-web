@@ -371,12 +371,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     'name': _setName,
     'manualOwers': _setManualOwers,
     'amount': _setAmount,
+    'owers': _setOwers
   }
 
   const validate = (newState) => {
     if (!newState) { return }
 
-    ['name', 'manualOwers', 'amount'].forEach(el => {
+    ['name', 'manualOwers', 'amount', 'owers'].forEach(el => {
       if (newState[el] && !newState[el].valid) {
         setFunction[el]({ value: newState[el].value, valid: false })
       }

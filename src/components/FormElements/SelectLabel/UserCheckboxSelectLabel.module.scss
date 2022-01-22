@@ -32,6 +32,11 @@
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
+  color: black;
+}
+
+.invalid {
+  color: $invalid;
 }
 
 .images {

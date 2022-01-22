@@ -16,6 +16,7 @@ const OwerCheckboxSelectLabel = ({
   users,
   handleAddCoverCostUser,
   selectedObjects,
+  valid,
   callback
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
@@ -77,10 +78,11 @@ const OwerCheckboxSelectLabel = ({
             right: `${(displayCount - 1) * 10 - 8}px`
           }}>
             <div className={styles.countSection}>
-              <div className={styles.count}>
+              <div className={[styles.count, valid ? '' : styles.invalid].join(' ')}>
                 {value ? value.length : 0}
               </div>
               <Svg
+                className={valid ? null : 'invalid'}
                 style={{
                   marginLeft: '4px',
                   fontSize: '15px'
