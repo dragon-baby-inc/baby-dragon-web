@@ -67,7 +67,7 @@ const AccountingBookSettingPage = (props) => {
     confirm_text="確認"
     cancel_text="取消">
     <div style={{ paddingBottom: '4px' }}> 確認刪除此本帳本嗎?</div>
-    <div style={{ paddingBottom: '20px' }}> 此動作無法回覆喔！</div>
+    <div style={{ paddingBottom: '20px' }}> 此動作無法回復喔！</div>
     </ConfirmBox>
 
   const handleCurrentChange = (value, params, setState) => {
