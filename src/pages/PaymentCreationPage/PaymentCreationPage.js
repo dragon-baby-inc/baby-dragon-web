@@ -88,7 +88,7 @@ const PaymentCreationPage = () => {
         <div> 取消 </div>
       </TopRightIcon>
       <PageHeader color={themeColors.gray400}>
-        新增帳款
+        新增帳款至<span style={{ color: themeColors.green700, paddingLeft: '4px' }}>{ accountingBookDetails.name ? ` ${accountingBookDetails.name}` : '' }</span>
       </PageHeader>
       <Separater style={{ margin: 0 }}/>
       {
