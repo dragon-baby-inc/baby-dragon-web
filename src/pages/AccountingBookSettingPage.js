@@ -123,11 +123,19 @@ const AccountingBookSettingPage = (props) => {
             })
           setPageLoading(false)
         })
+        .catch(err => {
+          alert(err.response.data.error_message)
+          setPageLoading(false)
+        })
     } else {
       authState.api.exportPayments(group_id, accounting_book_id)
         .then((res) => {
           console.log(res.data.url)
           downloadURI(res.data.url)
+          setPageLoading(false)
+        })
+        .catch(err => {
+          alert(err.response.data.error_message)
           setPageLoading(false)
         })
     }
