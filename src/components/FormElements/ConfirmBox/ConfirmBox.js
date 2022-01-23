@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './ConfirmBox.module.scss'
 import {
   Backdrop,
+  FullPageLoader,
   Separater,
 } from '../../../components'
 
@@ -44,6 +45,10 @@ const ConfirmBox = ({
         </div>
       </div>
       <Backdrop clicked={handleCanceled}/>
+      {
+        disableForm ?
+          <FullPageLoader /> : null
+      }
     </>
   )
 }
