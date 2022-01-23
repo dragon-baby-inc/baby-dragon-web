@@ -24,10 +24,12 @@ const useUsersSelect = ({
   callback
 }) => {
   const [_selectObjectIds, setSelectObjectIds] = useState([])
+  const [lastUsersLength, setLastUsersLength] = useState(0)
 
   useEffect(() => {
-    if (_selectObjectIds.length === 0) {
+    if (_selectObjectIds.length === 0 || users.length != lastUsersLength) {
       setSelectObjectIds(buildSelectUsers(users))
+      setLastUsersLength(users.length)
     }
   }, [users])
 

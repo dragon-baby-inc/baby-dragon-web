@@ -71,8 +71,8 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     key='name'
     svg={<Svg icon='Payment' size='24' className='gold900'/> }
     disabled={false}
-    placeholder='輸入名稱'
-    name={'名稱'}
+    placeholder='輸入款項'
+    name={'款項'}
     changed={(v) => _setName({ value: v, valid: v.length > 0 })}
     value={_name.value}
     valid={_name.valid}
@@ -212,7 +212,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
         { datePickerInput }
         <Section name="付款者"/>
         { payerLabel }
-        <Section name="分款者" style={{ marginTop: '16px' }}/>
+        <Section name="分款者" style={{ marginTop: '16px' }}>
+          {
+
+            state.accounting_book_details && _amount.value > 0 && _owers.value.length > 0 ?
+              `平均 ${state.accounting_book_details.currency_symbol}${(_amount.value / _owers.value.length).toFixed(2)}` : ""
+          }
+        </Section>
         { owersLabel }
       </div>
     },
@@ -365,12 +371,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     'name': _setName,
     'manualOwers': _setManualOwers,
     'amount': _setAmount,
+    'owers': _setOwers
   }
 
   const validate = (newState) => {
     if (!newState) { return }
 
-    ['name', 'manualOwers', 'amount'].forEach(el => {
+    ['name', 'manualOwers', 'amount', 'owers'].forEach(el => {
       if (newState[el] && !newState[el].valid) {
         setFunction[el]({ value: newState[el].value, valid: false })
       }

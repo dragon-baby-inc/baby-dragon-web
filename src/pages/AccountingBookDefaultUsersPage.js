@@ -9,6 +9,7 @@ import {
   Separater,
   PageHeader,
   Backdrop,
+  FullPageLoader,
   Loading,
   UserForm,
   TopRightIcon,
@@ -24,6 +25,7 @@ const AccountingBookUsersPage = (props) => {
   const [users, accountingBookDetails, loading, _err, setUsers] = useAccountingBook(authState)
   const { group_id, accounting_book_id } = useParams();
   const [showForm, setShowForm] = useState(false)
+  const [fullPageLoad, setFullPageLoad] = useState(false)
 
   const buildSelectUsers = (users) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
@@ -69,7 +71,6 @@ const AccountingBookUsersPage = (props) => {
         newUser.imageId = res.data.user.image_id
         _users[index] = newUser
 
-        console.log(res)
         setUsers(_users)
         resetConfirmBox()
         setEditBoxActive(false)
@@ -123,11 +124,14 @@ const AccountingBookUsersPage = (props) => {
   })
 
   const updateCoverCostUsers = () => {
+    setFullPageLoad(true)
     authState.api.updateCoverCostUsers(group_id, accounting_book_id, value)
       .then((res) => {
+        setFullPageLoad(false)
         history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
       })
       .catch((res) => {
+        setFullPageLoad(false)
         window.location.reload();
       })
   }
@@ -159,7 +163,10 @@ const AccountingBookUsersPage = (props) => {
       .then(res => {
         let _users = [...users]
         _users.push(
-          normalizeGroupUser(res.data.user)
+          {
+            ...normalizeGroupUser(res.data.user),
+            coverCost: true
+          }
         )
         setUsers(_users)
         resetConfirmBox()
@@ -229,6 +236,7 @@ const AccountingBookUsersPage = (props) => {
           : null
       }
       </div>
+      { fullPageLoad ? <FullPageLoader/> : null }
       { editBoxActive ? editUserConfirmBox : null }
       { createBoxActive ? createUserConfirmBox : null }
     </>

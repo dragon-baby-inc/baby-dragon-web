@@ -12,8 +12,20 @@ const useLiff =  (callback) => {
     if (stub) {
       api.exchangeToken('', '')
         .then((res) => {
-          callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
-          setIsLoggedIn(true)
+          if (!res.data.message) {
+            callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
+            setIsLoggedIn(true)
+          } else {
+            alert(res.data.message)
+            liff.closeWindow()
+          }
+        })
+        .catch((err) => {
+          if (err.response) {
+            alert(err.response.data.message)
+            liff.closeWindow()
+          }
+          console.log(err)
         })
 
       return
@@ -26,10 +38,17 @@ const useLiff =  (callback) => {
         } else {
           api.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
             .then((res) => {
-              callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
-              setIsLoggedIn(true)
+              if (!res.data.message) {
+                callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
+                setIsLoggedIn(true)
+              } else {
+                alert(res.data.message)
+              }
             })
             .catch((err) => {
+              if (err.response) {
+                alert(err.response.data.message)
+              }
               console.log(err)
             })
         }

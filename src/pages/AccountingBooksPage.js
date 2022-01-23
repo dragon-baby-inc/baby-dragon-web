@@ -5,6 +5,7 @@ import { useHistory, useAccountingBooks } from '../hooks';
 import { themeColors } from '../constants/globalColors'
 import axios from '../api/dragonBabyApi'
 import {
+  FullPageLoader,
   Loading,
   AccountingBookLabel,
   AccountingBooksHeader,
@@ -73,18 +74,25 @@ const AccountingBookSummaryPage = ({
   }
 
   return(
-    <div style={styles.bg}>
-      <AccountingBooksHeader group={group} title={'帳本列表'} color={themeColors.gray400}/>
+    <>
+      <div style={styles.bg}>
+        <AccountingBooksHeader group={group} title={'帳本列表'} color={themeColors.gray400}/>
+        {
+          loading ?
+            <Loading />
+            :
+            <div style={styles.books}>
+              {objects}
+              <AccountingBookAddLabel clicked={() => { history.navigateTo("accountingBookCreationPage", { group_id }) }}></AccountingBookAddLabel>
+            </div>
+        }
+      </div>
       {
-        loading ?
-          <Loading />
-          :
-          <div style={styles.books}>
-            {objects}
-            <AccountingBookAddLabel clicked={() => { history.navigateTo("accountingBookCreationPage", { group_id }) }}></AccountingBookAddLabel>
-          </div>
+        disableForm ?
+          <FullPageLoader /> : null
+
       }
-    </div>
+    </>
   )
 }
 

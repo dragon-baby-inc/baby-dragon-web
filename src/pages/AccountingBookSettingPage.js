@@ -24,6 +24,7 @@ const AccountingBookSettingPage = (props) => {
   const { state: authState } = useContext(AuthContext)
   const [users, accountingBookDetails, loading] = useAccountingBook(authState)
   const [pageLoading, setPageLoading] = useState(true)
+  const [disableForm, setDisableForm] = useState(false)
   const history = useHistory();
   const { group_id, accounting_book_id } = useParams()
 
@@ -70,11 +71,15 @@ const AccountingBookSettingPage = (props) => {
     </ConfirmBox>
 
   const handleCurrentChange = (value, params, setState) => {
+    setDisableForm(true)
+
     authState.api.updateAccountingBook(group_id, accounting_book_id, { accounting_book: params })
       .then((res) => {
+        setDisableForm(false)
         setState(value)
       })
       .catch((res) => {
+        setDisableForm(false)
         console.log(res)
       })
   }
@@ -118,11 +123,19 @@ const AccountingBookSettingPage = (props) => {
             })
           setPageLoading(false)
         })
+        .catch(err => {
+          alert(err.response.data.error_message)
+          setPageLoading(false)
+        })
     } else {
       authState.api.exportPayments(group_id, accounting_book_id)
         .then((res) => {
           console.log(res.data.url)
           downloadURI(res.data.url)
+          setPageLoading(false)
+        })
+        .catch(err => {
+          alert(err.response.data.error_message)
           setPageLoading(false)
         })
     }
@@ -230,6 +243,10 @@ const AccountingBookSettingPage = (props) => {
       {
         deleteActive ?
           deleteConfirmBox : null
+      }
+      {
+        disableForm ?
+          <FullPageLoader /> : null
       }
     </>
   )
