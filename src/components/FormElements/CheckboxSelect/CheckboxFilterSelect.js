@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom';
 import styles from './CheckboxFilterSelect.module.scss'
 import {
   Warning,
@@ -12,6 +13,7 @@ const CheckboxFilterSelect = ({
   buildSelectUsers,
   selected_object_ids,
   handleAddCoverCostUser,
+  handleNavigateUsers,
   style,
   createLabel,
   selectAll,
@@ -23,6 +25,7 @@ const CheckboxFilterSelect = ({
   const [searchValue, setSearchValue] = useState('')
   const [selectedObjects, setSelectedObjects] = useState([])
   const [displayObjects, setDisplayObjects] = useState([])
+  const { group_id, accounting_book_id } = useParams()
 
   const handleFilter = (e) => {
     let searchTerm = e.target.value
@@ -99,7 +102,13 @@ const CheckboxFilterSelect = ({
   return(
     <div style={style ? style: {}} className={containerStyles.join(' ')}>
       { searchInput }
-      <Warning name="找不到成員？請他在Line群裡說說話喔！"/>
+      <Warning >
+        <>
+          找不到成員？去
+          <a style={{color: '#88631C', textDecoration: 'underline'}} href={`/liff_entry/groups/${group_id}/accounting_books/${accounting_book_id}/default_users`}>分帳成員</a>
+          設定看看喔！
+        </>
+      </Warning>
       {
         selectAll ?
           <>

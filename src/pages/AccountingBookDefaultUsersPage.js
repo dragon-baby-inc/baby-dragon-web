@@ -3,8 +3,9 @@ import { Context as AuthContext } from '../contexts/AuthContext'
 import { useParams } from 'react-router-dom';
 import { themeColors } from '../constants'
 import { normalizeGroupUser } from '../normalizers'
-import { useHistory, useAccountingBook, useUsersSelect } from '../hooks'
+import { useHistory, useAccountingBook, useDefaultUsersSelect } from '../hooks'
 import {
+  Warning,
   UserConfirmBox,
   Separater,
   PageHeader,
@@ -111,7 +112,7 @@ const AccountingBookUsersPage = (props) => {
   }
 
 
-  const [value, select] = useUsersSelect({
+  const [value, select] = useDefaultUsersSelect({
     users,
     buildSelectUsers,
     createLabel: createUserCheckbokLabel,
@@ -120,7 +121,7 @@ const AccountingBookUsersPage = (props) => {
     selectAll: true,
     handleEdit: handleUserEdit,
     handleTrash: handleUserDelete,
-    labelsHeight: "calc(100% - 44px - 1px - 58px)"
+    labelsHeight: "calc(100% - 44px - 1px - 58px - 36px)"
   })
 
   const updateCoverCostUsers = () => {

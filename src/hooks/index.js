@@ -11,6 +11,7 @@ import useToggle from './useToggle'
 import useUsers from './useUsers'
 import useCurrencySelect from './useCurrencySelect'
 import useUsersSelect from './useUsersSelect'
+import useDefaultUsersSelect from './useDefaultUsersSelect'
 import useTextInput from './useTextInput'
 import useDatePickerInput from './useDatePickerInput'
 import useUserRadioSelect from './useUserRadioSelect'
@@ -46,4 +47,5 @@ export {
   useUsersFilterSelect,
   useOwersFilterSelect,
   useScrollRef,
+  useDefaultUsersSelect,
 }

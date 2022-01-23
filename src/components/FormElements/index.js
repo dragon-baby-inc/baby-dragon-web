@@ -18,6 +18,7 @@ import CheckboxFilterSelect from './CheckboxSelect/CheckboxFilterSelect'
 import UserCheckboxSelectLabel from './SelectLabel/UserCheckboxSelectLabel'
 import DrawerCheckboxSelect from './CheckboxSelect/DrawerCheckboxSelect';
 import CheckboxSelect from './CheckboxSelect/CheckboxSelect'
+import DefaultUsersCheckboxSelect from './CheckboxSelect/DefaultUsersCheckboxSelect'
 import AccountingBookUserMenu from './SelectMenu/AccountingBookUserMenu';
 import CheckboxSelectMenu from './SelectMenu/CheckboxSelectMenu';
 import UserRadioSelectAmountLabel from './SelectLabel/UserRadioSelectAmountLabel'
@@ -120,4 +121,5 @@ export {
   UserCreateLabel,
   UserConfirmBox,
   OwerCheckboxLabel,
+  DefaultUsersCheckboxSelect,
 };
