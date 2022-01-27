@@ -287,6 +287,9 @@
 }
 
 .buttons.paidBack {
+  .btn {
+    margin-right: -8px;
+  }
   .btn.edit {
     color: $green500;
     margin-right: -8px;

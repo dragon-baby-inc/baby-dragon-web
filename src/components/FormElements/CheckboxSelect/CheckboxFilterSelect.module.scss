@@ -1,3 +1,5 @@
+@import '../../../styleSheets/globalColors.scss';
+
 .container {
   height: 100%;
   flex-flow: column;
@@ -7,5 +9,73 @@
 .labels {
   flex-shrink: 1;
   overflow: auto;
-  height: calc(100% - 44px - 72px);
+  flex-grow: 1;
+}
+
+.header {
+  max-height: 52px;
+  height: 52px;
+  padding: 17px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  white-space: nowrap;
+
+  .summaryAmount {
+    text-overflow: ellipsis;
+    padding-left: 8px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    color: $green500;
+  }
+}
+
+.headerLabel {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+  align-items: center;
+}
+
+.checkboxClose {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  color: $gold700;
+}
+
+.selectAll {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+}
+
+.remainAmount {
+  text-overflow: ellipsis;
+  padding-top: 1px;
+  padding-left: 4px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: $green500;
+}
+
+.summary {
+  overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
 }

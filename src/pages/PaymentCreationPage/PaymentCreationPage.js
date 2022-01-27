@@ -80,6 +80,16 @@ const PaymentCreationPage = () => {
     return user
   }
 
+  const getOwers = () => {
+    return users.map(user => {
+      return {
+        user: user,
+        amount: null,
+        touched: false
+      }
+    })
+  }
+
   return(
     <>
       <TopRightIcon
@@ -97,7 +107,11 @@ const PaymentCreationPage = () => {
           <>
             {
               payer ?
-                <PaymentForm authState={authState} users={users} manualOwers={[ {user: getUser(), amount: null} ]} owers={users.filter(u => u.coverCost === true)}/> : null
+                <PaymentForm
+                  authState={authState}
+                  users={users.filter(u => u.coverCost === true)}
+                  manualOwers={getOwers()}
+                  owers={users.filter(u => u.coverCost === true)}/> : null
             }
           </>
       }

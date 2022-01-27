@@ -29,6 +29,19 @@ const createUserRadioLabel = ({ object, handleChange, selectedObject }) => {
   </RadioLabel>
 }
 
+const createEditableOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handleInputChanged, amount }) => {
+  return <OwerCheckboxLabel
+    hideCheckbox={!object.coverCost}
+    amount={amount}
+    key={object.id}
+    object={object}
+    inputChanged={handleInputChanged}
+    changed={handleChange}
+    value={object.id}
+    checked={selectedObjects.map(el => el.id).includes(object.id)} >
+  </OwerCheckboxLabel>
+}
+
 const createOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handleAddCoverCostUser }) => {
   let imageUrl = object.imageURL
   if (!imageUrl) {
@@ -138,4 +151,5 @@ export {
   createUserCheckbokLabel,
   createOwerCheckbokLabel,
   createFreeUserCheckbokLabel,
+  createEditableOwerCheckbokLabel,
 }

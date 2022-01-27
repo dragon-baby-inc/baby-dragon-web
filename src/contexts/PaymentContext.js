@@ -217,9 +217,19 @@ const validateForm = dispatch => (state, formKeys, callback) => {
   })
 
   if (formKeys.includes('manualOwers')) {
-    let isKeyValid = state['manualOwers'].value.filter(o => o.amount > 0).length === state['manualOwers'].value.length
+    let summaryAmount = newState['manualOwers'].value.reduce(function (previousValue, ower) {
+      if (ower.amount) {
+        return previousValue + parseFloat(ower.amount)
+      } else {
+        return previousValue
+      }
+    }, 0).toFixed(state.accounting_book_details.exponent)
+
+    let isKeyValid = parseFloat(summaryAmount) === parseFloat(newState.amount.value)
+
     newState['manualOwers'] = { value: state['manualOwers'].value, valid: isKeyValid }
-    if (isKeyValid === false) {
+
+    if (!isKeyValid) {
       formValid = false
     }
   }

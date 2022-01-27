@@ -3,12 +3,13 @@ import styles from './Checkbox.module.scss'
 
 const Checkbox = ({
   changed,
+  style,
   checked,
   value,
   disabled
 }) => {
   return (
-    <div className={styles.label}>
+    <div style={ style ? style : {} } className={styles.label}>
       <input
         disabled={disabled}
         checked={checked}

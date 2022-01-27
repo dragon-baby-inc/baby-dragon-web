@@ -12,9 +12,11 @@ import Warning from './Warning/Warning'
 import SelectLabel from './SelectLabel/SelectLabel'
 import UserRadioSelectLabel from './SelectLabel/UserRadioSelectLabel'
 import OwerCheckboxSelectLabel from './SelectLabel/OwerCheckboxSelectLabel'
+import OwerEditableCheckboxSelectLabel from './SelectLabel/OwerEditableCheckboxSelectLabel'
 import OwerCheckboxLabel from './OwerCheckboxLabel/CheckboxLabel'
 import RadioFilterSelect from './RadioSelect/RadioFilterSelect'
 import CheckboxFilterSelect from './CheckboxSelect/CheckboxFilterSelect'
+import EditableCheckboxSelect from './CheckboxSelect/EditableCheckboxSelect'
 import UserCheckboxSelectLabel from './SelectLabel/UserCheckboxSelectLabel'
 import DrawerCheckboxSelect from './CheckboxSelect/DrawerCheckboxSelect';
 import CheckboxSelect from './CheckboxSelect/CheckboxSelect'
@@ -122,4 +124,6 @@ export {
   UserConfirmBox,
   OwerCheckboxLabel,
   DefaultUsersCheckboxSelect,
+  EditableCheckboxSelect,
+  OwerEditableCheckboxSelectLabel,
 };
