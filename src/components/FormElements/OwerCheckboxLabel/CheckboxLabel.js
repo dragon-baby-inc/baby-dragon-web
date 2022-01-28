@@ -162,16 +162,16 @@ const OwerCheckboxLabel = ({
 
   return (
     <div className={styles.label}>
-      <label>
+      <label style={{ display: 'flex', alignItems: 'center' }}>
         <Checkbox
           style={{ paddingRight: '12px' }}
           value={value}
           changed={handleCheckboxChanged}
           checked={checked}
         />
+        <Image style={{ paddingRight: '12px' }} imageUrl={imageUrl} defaultImage='user'/>
       </label>
       <div className={styles.flexCenter}>
-        <Image style={{ paddingRight: '12px' }} imageUrl={imageUrl} defaultImage='user'/>
         <div className={styles.flexColumn}>
           <div className={styles.displayName}>
             {object.displayName}
