@@ -26,12 +26,12 @@ const OwerEditableCheckboxSelectLabel = ({
   users,
   owers,
   selectedObjects,
-  valid,
   callback
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
   const [_selectObjectIds, setSelectObjectIds] = useState([])
   const [_owers, setOwers] = useState(owers)
+  const valid = true
 
   useEffect(() => {
     setOwers(owers)
