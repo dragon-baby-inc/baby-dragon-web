@@ -10,6 +10,8 @@ import {
 import { evaluate } from 'mathjs'
 
 const OwerCheckboxLabel = ({
+  fixedAmount,
+  valid,
   children,
   amount,
   object,
@@ -22,7 +24,15 @@ const OwerCheckboxLabel = ({
   const [showCheckbox, setShowCheckbox] = useState(true)
   const [_amount, setAmount] = useState(amount)
   const [settle, setSettle] = useState(true)
-  const [valid, setValid] = useState(true)
+  const [_valid, setValid] = useState(true)
+
+  useEffect(() => {
+    if (fixedAmount) {
+      if (_amount > fixedAmount) {
+        setValid(false)
+      }
+    }
+  }, [amount])
 
   useEffect(() => {
     if (amount) {
@@ -105,6 +115,10 @@ const OwerCheckboxLabel = ({
       value = _amount
     }
 
+    if (fixedAmount) {
+      value = value > fixedAmount ? parseFloat(fixedAmount) : value
+    }
+
     setAmount(value)
     inputChanged(null, object.id, value)
     setSettle(true)
@@ -126,7 +140,7 @@ const OwerCheckboxLabel = ({
           <div className={styles.displayName}>
             {object.displayName}
           </div>
-          <div className={[styles.inputWrapper, valid ? '' : styles.inputInValid].join(' ')}>
+          <div className={[styles.inputWrapper, _valid ? '' : styles.inputInValid].join(' ')}>
             <input
               onBlur={handeInputBlur}
               className={styles.input}
@@ -136,7 +150,7 @@ const OwerCheckboxLabel = ({
               onKeyPress={handleKeyUp}
               onChange={handleInputChanged}/>
             <Svg
-              className={valid ? 'gray700' : 'invalid'}
+              className={_valid ? 'gray700' : 'invalid'}
               style={{
                 marginBottom: '1px',
                 fontSize: '15px'

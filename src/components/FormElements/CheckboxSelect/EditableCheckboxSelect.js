@@ -74,11 +74,13 @@ const EditableCheckboxSelect = ({
     }
 
     setAmount(object_id, value)
+
     let newOwers = [..._owers.value]
 
     newOwers = newOwers.map(o => {
       if (o.user.id === object_id) {
         o.touched = true
+        o.valid = fixedAmount ? value <= fixedAmount : true
         o.amount = value
       }
       return o
@@ -136,6 +138,19 @@ const EditableCheckboxSelect = ({
         }
         return o
       })
+    } else if (remainAmount <= 0) {
+      newOwers = newOwers.map(o => {
+        if (unTouchedIds.includes(o.user.id)) {
+          o.amount = 0
+        }
+
+        if (!selectedObjects.map(o => o.id).includes(o.user.id)) {
+          o.amount = ''
+        }
+
+        return o
+      })
+
     }
 
     return newOwers
@@ -200,8 +215,8 @@ const EditableCheckboxSelect = ({
   }
 
   let objectLabels = objects.map(object => {
-    let amount = _owers.value.filter(o => o.user.id === object.id)[0].amount
-    return createLabel({ object, handleChange, selectedObjects, handleInputChanged, amount })
+    let ower = _owers.value.filter(o => o.user.id === object.id)[0]
+    return createLabel({ object, fixedAmount, handleChange, selectedObjects, handleInputChanged, amount: ower.amount, valid: ower.valid })
   })
 
   const handleSelectAll = (e) => {

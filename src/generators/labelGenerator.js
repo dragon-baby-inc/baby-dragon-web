@@ -29,10 +29,12 @@ const createUserRadioLabel = ({ object, handleChange, selectedObject }) => {
   </RadioLabel>
 }
 
-const createEditableOwerCheckbokLabel = ({ object, handleChange, selectedObjects, handleInputChanged, amount }) => {
+const createEditableOwerCheckbokLabel = ({ fixedAmount, object, handleChange, selectedObjects, handleInputChanged, amount, valid }) => {
   return <OwerCheckboxLabel
+    fixedAmount={fixedAmount}
     hideCheckbox={!object.coverCost}
     amount={amount}
+    valid={valid}
     key={object.id}
     object={object}
     inputChanged={handleInputChanged}
