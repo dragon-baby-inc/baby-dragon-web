@@ -104,13 +104,6 @@ const PaymentEditPage = () => {
   const getOwers = () => {
     return users.map(user => {
       let ower = _manualOwers.filter(o => o.user.id === user.id)[0]
-      let touched = false
-      if (ower) {
-        touched = true
-      }
-      if (payment.allocation_type) {
-        touched = false
-      }
       return {
         user: user,
         amount: ower ? ower.amount : '',
