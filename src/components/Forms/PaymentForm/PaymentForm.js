@@ -412,6 +412,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     })
   }
 
+  let disabled = true
+  if (!summaryValid) {
+    disabled = true
+  } else {
+    disabled = disableForm
+  }
+
   return(
     <>
       <div className={styles.container}>
@@ -433,7 +440,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
 
 
         <div className={styles.footer}>
-          <Button clicked={handleSubmit} disabled={disableForm}>建立帳款</Button>
+          <Button clicked={handleSubmit} disabled={disabled}>建立帳款</Button>
           <div style={{
             color: themeColors.invalid,
             fontSize: '12px',

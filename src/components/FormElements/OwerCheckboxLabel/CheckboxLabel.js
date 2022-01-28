@@ -53,6 +53,12 @@ const OwerCheckboxLabel = ({
       }
     }
 
+    if (fixedAmount) {
+      if (value > fixedAmount) {
+        setValid(false)
+      }
+    }
+
     setAmount(amount)
   }, [])
 
@@ -144,7 +150,9 @@ const OwerCheckboxLabel = ({
     }
 
     if (fixedAmount) {
-      value = value > fixedAmount ? parseFloat(fixedAmount) : value
+      if (value > fixedAmount) {
+        setValid(false)
+      }
     }
 
     if (value < 0) {

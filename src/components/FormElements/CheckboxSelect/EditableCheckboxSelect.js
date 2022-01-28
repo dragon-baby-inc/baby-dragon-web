@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
 import styles from './CheckboxFilterSelect.module.scss'
+import { themeColors } from '../../../constants'
 import { split_into } from '../../../utilities/Calculator';
 import {
   Warning,
@@ -287,6 +288,9 @@ const EditableCheckboxSelect = ({
   }
 
   const containerStyles = [styles.container]
+  const remainAmount =  fixedAmount - summaryAmount
+  console.log(remainAmount < 0)
+
   if (mount) { containerStyles.push(styles.mount) }
   return(
     <div style={style ? style: {}} className={containerStyles.join(' ')}>
@@ -304,8 +308,8 @@ const EditableCheckboxSelect = ({
                   </div>
                   {
                     fixedAmount > 0 ?
-                      <div className={styles.remainAmount}>
-                        剩餘：{ fixedAmount - summaryAmount }
+                      <div className={[styles.remainAmount, (remainAmount < 0) ? styles.invalid : ''].join(' ')} >
+                        剩餘：{remainAmount}
                       </div> : null
                   }
                 </div>
