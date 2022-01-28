@@ -25,6 +25,7 @@ const OwerCheckboxLabel = ({
   const [_amount, setAmount] = useState(amount)
   const [settle, setSettle] = useState(true)
   const [_valid, setValid] = useState(true)
+  const inputRef = useRef(null)
 
   useEffect(() => {
     if (fixedAmount) {
@@ -155,6 +156,10 @@ const OwerCheckboxLabel = ({
     setSettle(true)
   }
 
+  const handleEditClicked = () => {
+    inputRef.current.focus()
+  }
+
   return (
     <div className={styles.label}>
       <label>
@@ -173,6 +178,7 @@ const OwerCheckboxLabel = ({
           </div>
           <div className={[styles.inputWrapper, _valid ? '' : styles.inputInValid].join(' ')}>
             <input
+              ref={inputRef}
               onBlur={handeInputBlur}
               className={styles.input}
               type="text"
@@ -181,6 +187,7 @@ const OwerCheckboxLabel = ({
               onKeyPress={handleKeyUp}
               onChange={handleInputChanged}/>
             <Svg
+              clicked={handleEditClicked}
               className={_valid ? 'gray700' : 'invalid'}
               style={{
                 marginBottom: '1px',
