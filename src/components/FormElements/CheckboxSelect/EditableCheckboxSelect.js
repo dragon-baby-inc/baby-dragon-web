@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
 import styles from './CheckboxFilterSelect.module.scss'
+import { split_into } from '../../../utilities/Calculator';
 import {
   Warning,
   CheckboxLabel,
@@ -67,10 +68,17 @@ const EditableCheckboxSelect = ({
   }
 
   const handleInputChanged = (e, object_id, value) => {
-    if (!selectedObjects.map(o => o.id).includes(object_id)) {
+    let _selectedObjects = [...selectedObjects]
+
+    if (!_selectedObjects.map(o => o.id).includes(object_id)) {
       if (value && value > 0) {
         selectObject(object_id)
       }
+    }
+
+    if (value <= 0) {
+      deSelectObject(object_id)
+      _selectedObjects = _selectedObjects.filter(o => o.id !== object_id)
     }
 
     setAmount(object_id, value)
@@ -79,15 +87,22 @@ const EditableCheckboxSelect = ({
 
     newOwers = newOwers.map(o => {
       if (o.user.id === object_id) {
-        o.touched = true
-        o.valid = fixedAmount ? value <= fixedAmount : true
-        o.amount = value
+        if (value > 0) {
+          o.touched = true
+          o.valid = fixedAmount ? value <= fixedAmount : true
+          o.amount = value
+        } else {
+          o.touched = false
+          o.valid = false
+          o.amount = value
+        }
       }
+
       return o
     })
 
     if (fixedAmount) {
-      newOwers = setOwerAvergedTouchedAmount(newOwers, selectedObjects)
+      newOwers = setOwerAvergedTouchedAmount(newOwers, _selectedObjects)
     }
 
     setOwers({
@@ -102,7 +117,9 @@ const EditableCheckboxSelect = ({
 
     let touchedAmount = newOwers.reduce(function (previousValue, ower) {
       if (touchedIds.includes(ower.user.id)) {
-        if (ower.amount) {
+        if (ower.amount < 0) {
+          return previousValue
+        } else if (ower.amount) {
           return previousValue + parseFloat(ower.amount)
         } else {
           return previousValue
@@ -198,7 +215,7 @@ const EditableCheckboxSelect = ({
     newOwers = newOwers.map(o => {
       if (object_id === o.user.id) {
         o.touched = false
-        o.value = ''
+        o.amount = ''
       }
 
       return o

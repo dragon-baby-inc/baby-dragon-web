@@ -28,10 +28,19 @@ const OwerCheckboxLabel = ({
 
   useEffect(() => {
     if (fixedAmount) {
-      if (_amount > fixedAmount) {
+      if (amount > fixedAmount) {
         setValid(false)
       }
+    } else {
+      let [valid, _] = checkValid(amount)
+      setValid(valid)
     }
+
+    // try {
+    //   evaluate(amount)
+    // } catch {
+    //   setValid(false)
+    // }
   }, [amount])
 
   useEffect(() => {
@@ -46,21 +55,34 @@ const OwerCheckboxLabel = ({
     setAmount(amount)
   }, [])
 
+  const checkValid = (value) => {
+    let isValid = false
+
+    if (value === '' || value === null) {
+      isValid = true
+      return [isValid, 0]
+    }
+
+    try {
+      value = evaluate(value)
+      if (value >= 0 ) {
+        isValid = true
+      } else {
+        isValid = false
+      }
+    } catch {
+      value = ''
+      isValid = false
+    }
+
+    return [isValid, value]
+  }
+
   useEffect(() => {
     if (settle) {
       setAmount(amount)
-
-      if (amount === '' || amount === null) {
-        setValid(true)
-        return
-      }
-
-      try {
-        evaluate(amount)
-        setValid(true)
-      } catch {
-        setValid(false)
-      }
+      let [valid, _] = checkValid(amount)
+      setValid(valid)
     }
   }, [amount])
 
@@ -76,14 +98,19 @@ const OwerCheckboxLabel = ({
   const handleInputChanged = (e) => {
     setSettle(false)
 
-    let value
+    let [valid, value] = checkValid(e.target.value)
+    setValid(valid)
+    // try {
+    //   value = evaluate(e.target.value)
 
-    try {
-      value = evaluate(e.target.value)
-      setValid(true)
-    } catch {
-      value = ''
-    }
+    //   if (value >= 0 ) {
+    //     setValid(true)
+    //   } else {
+    //     setValid(false)
+    //   }
+    // } catch {
+    //   value = ''
+    // }
 
     setAmount(e.target.value)
     inputChanged(e, object.id, value)
@@ -112,11 +139,15 @@ const OwerCheckboxLabel = ({
       setValid(true)
     } catch {
       setValid(false)
-      value = _amount
+      value = 0
     }
 
     if (fixedAmount) {
       value = value > fixedAmount ? parseFloat(fixedAmount) : value
+    }
+
+    if (value < 0) {
+      value = 0
     }
 
     setAmount(value)
