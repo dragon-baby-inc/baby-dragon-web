@@ -41,7 +41,11 @@ const EditableCheckboxSelect = ({
     manualOwersHash[o.user.id] = o
   })
 
-  const debug = false
+  const objectsHash = {}
+  objects.forEach(o => {
+    objectsHash[o.id] = o
+  })
+
   const setOwers = (newOwers) => {
     _setManualOwers(newOwers)
     setManualOwers(newOwers)
@@ -64,7 +68,7 @@ const EditableCheckboxSelect = ({
       selectObject(e.target.value)
     } else {
       deSelectObject(e.target.value)
-      setAmount(e.target.value, null)
+      setAmount(e.target.value, '')
     }
   }
 
@@ -79,20 +83,17 @@ const EditableCheckboxSelect = ({
 
     if (!_selectedObjects.map(o => o.id).includes(object_id)) {
       if (value && value > 0) {
-        selectObject(object_id)
+        _selectedObjects = selectObject(object_id)
       }
     }
 
     if (value <= 0) {
-      deSelectObject(object_id)
-      _selectedObjects = _selectedObjects.filter(o => o.id !== object_id)
+      _selectedObjects = deSelectObject(object_id)
     }
 
     setAmount(object_id, value)
 
-    let newOwers = [..._manualOwers.value]
-
-    newOwers = newOwers.map(o => {
+    let newOwers = _manualOwers.value.map(o => {
       if (o.user.id === object_id) {
         if (value > 0) {
           o.touched = true
@@ -175,8 +176,8 @@ const EditableCheckboxSelect = ({
   }
 
   const selectObject = (object_id) => {
-    let selected_objects = selectedObjects
-    selected_objects.push(...objects.filter(object => String(object.id) === String(object_id)))
+    let selected_objects = [...selectedObjects]
+    selected_objects.push(objectsHash[object_id])
 
     setSelectedObjects(selected_objects)
     changed(selected_objects)
@@ -189,6 +190,8 @@ const EditableCheckboxSelect = ({
     } else {
       setManualOwersAmount(selected_objects, fixedAmount)
     }
+
+    return selected_objects
   }
 
   const deSelectObject = (object_id) => {
@@ -198,8 +201,7 @@ const EditableCheckboxSelect = ({
     setSelectedObjects(selected_objects)
     changed(selected_objects)
 
-    let newOwers = [..._manualOwers.value]
-    newOwers = newOwers.map(o => {
+    let newOwers = _manualOwers.value.map(o => {
       if (object_id === o.user.id) {
         o.touched = false
         o.amount = ''
@@ -211,11 +213,13 @@ const EditableCheckboxSelect = ({
     let touchedIds = getTouchedIds(newOwers, selected_objects)
 
     if (touchedIds.size > 0) {
-      let newOwers = setOwerAvergedTouchedAmount(_manualOwers.value, selected_objects)
+      newOwers = setOwerAvergedTouchedAmount(_manualOwers.value, selected_objects)
       setOwers({ value: newOwers, valid: true })
     } else {
       setManualOwersAmount(selected_objects, fixedAmount)
     }
+
+    return selected_objects
   }
 
   let objectLabels = objects.map(object => {
@@ -244,8 +248,7 @@ const EditableCheckboxSelect = ({
       setSelectedObjects([])
       changed([])
 
-      let newOwers = [...manualOwers.value]
-      newOwers = newOwers.map(o => {
+      let newOwers = manualOwers.value.map(o => {
         o.amount = ''
         return o
       })
