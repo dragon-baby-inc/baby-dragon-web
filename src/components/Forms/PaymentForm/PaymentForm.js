@@ -237,43 +237,14 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     _setManualOwers({ value: newOwers, valid: valid })
   }
 
-  const handleLabelDelete = (index) => {
-    let newOwers = [..._manualOwers.value]
-    if (newOwers.length === 1) {
-      return
-    }
-    newOwers.splice(index, 1)
-    _setManualOwers({ value: newOwers, valid: true})
-  }
-
-  const selectUser = () => {
-    let existing = []
-    _manualOwers.value.forEach((ower) => {
-      if (ower.user) {
-        existing.push(ower.user.id)
-      }
-    }, existing)
-
-    if (state.payer.value) {
-      existing.push(state.payer.value.id)
-    }
-
-    let newUsers = users.filter(u => !existing.includes(u.id))
-
-    return newUsers.length > 0 ? newUsers[0] : users[0]
-  }
-
   const buildSelectUsers = (users) => {
     return users.filter((u) => u.coverCost).map((u) => u.id)
   }
 
   useEffect(() => {
-    _setManualOwers({ value: manualOwers, valid: true })
-  }, [payer])
-
-  useEffect(() => {
     if (_owers.value.length === 0) {
       _setOwers({ value: owers, valid: true })
+      _setManualOwers({ value: manualOwers, valid: true })
     }
   }, [owers])
 
