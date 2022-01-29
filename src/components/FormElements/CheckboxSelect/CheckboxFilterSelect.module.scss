@@ -28,7 +28,6 @@
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    color: $green500;
   }
 }
 
@@ -61,12 +60,11 @@
 
 .remainAmount {
   text-overflow: ellipsis;
-  padding-top: 3px;
+  padding-top: 2px;
   padding-left: 4px;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
-  color: $green500;
 }
 
 .summary {
@@ -77,6 +75,7 @@
   display: flex;
   align-items: center;
   flex-grow: 1;
+  color: $green500;
   flex-shrink: 1;
 }
 

@@ -277,6 +277,11 @@ const EditableCheckboxSelect = ({
 
   const containerStyles = [styles.container]
   const remainAmount =  fixedAmount - summaryAmount
+  let valid = true
+  if (remainAmount > 0 || remainAmount < 0) {
+    valid = false
+  }
+  console.log(valid)
 
   if (mount) { containerStyles.push(styles.mount) }
   return(
@@ -285,18 +290,18 @@ const EditableCheckboxSelect = ({
         selectAll ?
           <>
             <div className={styles.header}>
-              <div className={styles.headerLabel}>
+              <div className={[styles.headerLabel].join(' ')}>
                 <div>
                   分款者
                 </div>
-                <div className={styles.summary}>
+                <div className={[styles.summary, valid ? '' : styles.invalid].join(' ')}>
                   <div className={styles.summaryAmount}>
-                    小計: {summaryAmount} { fixedAmount > 0 ? '/' : '' }
+                    小計 {`$${summaryAmount}`}
                   </div>
                   {
-                    fixedAmount > 0 ?
-                      <div className={[styles.remainAmount, (remainAmount < 0) ? styles.invalid : ''].join(' ')} >
-                        剩餘：{remainAmount}
+                    fixedAmount > 0 && !valid?
+                      <div className={[styles.remainAmount].join(' ')} >
+                        (差額{`${remainAmount < 0 ? '-' : ''}$${remainAmount < 0 ? -remainAmount: remainAmount}`})
                       </div> : null
                   }
                 </div>
