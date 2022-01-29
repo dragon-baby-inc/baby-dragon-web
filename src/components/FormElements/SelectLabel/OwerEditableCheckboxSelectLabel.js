@@ -24,18 +24,18 @@ const OwerEditableCheckboxSelectLabel = ({
   fixedAmount,
   getManualOwersAmount,
   users,
-  owers,
+  manualOwers,
   selectedObjects,
-  callback
+  selectChanged
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
   const [_selectObjectIds, setSelectObjectIds] = useState([])
-  const [_owers, setOwers] = useState(owers)
+  const [_manualOwers, _setManualOwers] = useState(manualOwers)
   const valid = true
 
   useEffect(() => {
-    setOwers(owers)
-  }, [owers])
+    _setManualOwers(manualOwers)
+  }, [manualOwers])
 
   useEffect(() => {
     if (selectedObjects.length === _selectObjectIds.length) {
@@ -53,7 +53,7 @@ const OwerEditableCheckboxSelectLabel = ({
 
   const handleSelectChanged = (objects) => {
     setSelectObjectIds(objects.map(obj => obj.id))
-    if (callback) { callback(objects) }
+    if (selectChanged) { selectChanged(objects) }
   }
 
   const handleClicked = () => {
@@ -67,7 +67,7 @@ const OwerEditableCheckboxSelectLabel = ({
     fixedAmount={fixedAmount}
     setOwerAmount={setOwerAmount}
     setManualOwers={setManualOwers}
-    owers={_owers}
+    manualOwers={_manualOwers}
     closed={() => setDrawerActive(false)}
     objects={users}
     createLabel={createEditableOwerCheckbokLabel}

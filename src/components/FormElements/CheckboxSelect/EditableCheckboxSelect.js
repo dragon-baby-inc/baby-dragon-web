@@ -17,7 +17,7 @@ const EditableCheckboxSelect = ({
   setManualOwers,
   getManualOwersAmount,
   setOwerAmount,
-  owers,
+  manualOwers,
   objects,
   fixedAmount,
   selected_object_ids,
@@ -33,12 +33,12 @@ const EditableCheckboxSelect = ({
   const [_selectAll, setSelectAll] = useState(true)
   const [selectedObjects, setSelectedObjects] = useState([])
   const { group_id, accounting_book_id } = useParams()
-  const [_owers, _setOwers] = useState(owers)
+  const [_manualOwers, _setManualOwers] = useState(manualOwers)
 
   const debug = false
   const setOwers = (newOwers) => {
     if (debug) { console.log(newOwers) }
-    _setOwers(newOwers)
+    _setManualOwers(newOwers)
     setManualOwers(newOwers)
   }
 
@@ -64,7 +64,7 @@ const EditableCheckboxSelect = ({
   }
 
   const setManualOwersAmount = (owers, totalAmount) => {
-    let newOwers = getManualOwersAmount(objects, owers, getUnTouchedIds(_owers.value, selectedObjects), totalAmount)
+    let newOwers = getManualOwersAmount(objects, owers, getUnTouchedIds(_manualOwers.value, selectedObjects), totalAmount)
     setOwers(newOwers.state)
   }
 
@@ -84,7 +84,7 @@ const EditableCheckboxSelect = ({
 
     setAmount(object_id, value)
 
-    let newOwers = [..._owers.value]
+    let newOwers = [..._manualOwers.value]
 
     newOwers = newOwers.map(o => {
       if (o.user.id === object_id) {
@@ -195,10 +195,10 @@ const EditableCheckboxSelect = ({
     setSelectedObjects(selected_objects)
     changed(selected_objects)
 
-    let touchedIds = getTouchedIds(_owers.value, selected_objects)
+    let touchedIds = getTouchedIds(_manualOwers.value, selected_objects)
 
     if (touchedIds.length > 0) {
-      let newOwers = setOwerAvergedTouchedAmount(_owers.value, selected_objects)
+      let newOwers = setOwerAvergedTouchedAmount(_manualOwers.value, selected_objects)
       setOwers({ value: newOwers, valid: true })
     } else {
       setManualOwersAmount(selected_objects, fixedAmount)
@@ -212,7 +212,7 @@ const EditableCheckboxSelect = ({
     setSelectedObjects(selected_objects)
     changed(selected_objects)
 
-    let newOwers = [..._owers.value]
+    let newOwers = [..._manualOwers.value]
     newOwers = newOwers.map(o => {
       if (object_id === o.user.id) {
         o.touched = false
@@ -225,7 +225,7 @@ const EditableCheckboxSelect = ({
     let touchedIds = getTouchedIds(newOwers, selected_objects)
 
     if (touchedIds.length > 0) {
-      let newOwers = setOwerAvergedTouchedAmount(_owers.value, selected_objects)
+      let newOwers = setOwerAvergedTouchedAmount(_manualOwers.value, selected_objects)
       setOwers({ value: newOwers, valid: true })
     } else {
       setManualOwersAmount(selected_objects, fixedAmount)
@@ -233,7 +233,7 @@ const EditableCheckboxSelect = ({
   }
 
   let objectLabels = objects.map(object => {
-    let ower = _owers.value.filter(o => o.user.id === object.id)[0]
+    let ower = _manualOwers.value.filter(o => o.user.id === object.id)[0]
     return createLabel({ object, fixedAmount, handleChange, selectedObjects, handleInputChanged, amount: ower.amount, valid: ower.valid })
   })
 
@@ -248,7 +248,7 @@ const EditableCheckboxSelect = ({
       setSelectedObjects([])
       changed([])
 
-      let newOwers = [...owers.value]
+      let newOwers = [...manualOwers.value]
       newOwers = newOwers.map(o => {
         o.amount = ''
         return o
@@ -261,7 +261,7 @@ const EditableCheckboxSelect = ({
     }
   }
 
-  let summaryAmount = _owers.value.reduce(function (previousValue, ower) {
+  let summaryAmount = _manualOwers.value.reduce(function (previousValue, ower) {
     try {
       if (evaluate(ower.amount) > 0) {
         if (ower.amount) {
@@ -280,7 +280,7 @@ const EditableCheckboxSelect = ({
   setSummaryAmount(summaryAmount)
 
   const handleClosed = () => {
-    let validManualOwersIds = _owers.value.filter(o => o.amount !== null && o.amount !== '' && o.amount > 0).map(o => o.user.id)
+    let validManualOwersIds = _manualOwers.value.filter(o => o.amount !== null && o.amount !== '' && o.amount > 0).map(o => o.user.id)
     let selected_objects = objects.filter(u => validManualOwersIds.includes(u.id))
     setSelectedObjects(selected_objects)
     changed(selected_objects)

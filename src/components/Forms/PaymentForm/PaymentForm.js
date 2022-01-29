@@ -215,8 +215,8 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     setOwerAmount={handleSetOwerAmount}
     fixedAmount={fixedAmount}
     users={_users ? _users.filter(u => u.coverCost === true) : []}
-    owers={_manualOwers}
-    callback={handleOwersChanged}
+    manualOwers={_manualOwers}
+    selectChanged={handleOwersChanged}
     setManualOwers={_setManualOwers}
     valid={summaryValid}
     selectedObjects={_owers.value}
