@@ -193,8 +193,8 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     style={{ borderRadius: '16px' }}
     changed={handleAmountChanged}
     value={_amount.value}
-    valid={_amount.valid}
-    invalidFeedback="內容不可為空，小於100000000"
+    valid={summaryValid && _amount.valid}
+    invalidFeedback={!summaryValid ?  "" : "內容不可為空，小於100000000"}
     type='number'
   />
 
@@ -390,7 +390,12 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
           <Section name="分款者" style={{ marginTop: '16px' }}>
             {
               state.accounting_book_details && summaryAmount > 0 ?
-                `小計： ${state.accounting_book_details.currency_symbol}${summaryAmount}` : ""
+                <div style={{ color: summaryValid ? themeColors.green700 : themeColors.invalid, fontFamily: 'Noto Sans TC' }}>
+                  {
+                    `小計： ${state.accounting_book_details.currency_symbol}${summaryAmount}`
+                  }
+                </div>
+                 : ""
             }
           </Section>
           { owersLabel }
