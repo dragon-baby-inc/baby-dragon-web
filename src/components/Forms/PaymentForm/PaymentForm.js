@@ -6,6 +6,7 @@ import { themeColors } from '../../../constants'
 import { useParams } from 'react-router-dom';
 import { Context as PaymentContext } from '../../../contexts/PaymentContext'
 import { evaluate } from 'mathjs'
+import { sumOwers } from '../../../utilities/PaymentFormHelper'
 import {
   FullPageLoader,
   Section,
@@ -167,18 +168,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     newOwers[index] = { user: newOwers[index].user, amount: value, touched: true }
 
     if (!fixedAmount) {
-      let sum = newOwers.reduce(function (previousValue, ower) {
-        try {
-          evaluate(ower.amount)
-          if (ower.amount) {
-            return previousValue + parseFloat(ower.amount)
-          } else {
-            return previousValue
-          }
-        } catch {
-          return previousValue
-        }
-      }, 0)
+      let sum = sumOwers(newOwers, state.accounting_book_details.exponent)
 
       _setAmount({ value: sum, valid: sum > 0 })
     }

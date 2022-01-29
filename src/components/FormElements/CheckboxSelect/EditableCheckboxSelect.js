@@ -9,7 +9,8 @@ import {
   Separater,
 } from '../index'
 
-import { evaluate } from 'mathjs'
+import { round, evaluate } from 'mathjs'
+import { sumOwers } from '../../../utilities/PaymentFormHelper'
 
 const EditableCheckboxSelect = ({
   setSummaryAmount,
@@ -238,7 +239,16 @@ const EditableCheckboxSelect = ({
 
   let objectLabels = objects.map(object => {
     let ower = _manualOwers.value.filter(o => o.user.id === object.id)[0]
-    return createLabel({ object, fixedAmount, handleChange, selectedObjects, handleInputChanged, amount: ower.amount, valid: ower.valid })
+    return createLabel({
+      object,
+      exponent,
+      fixedAmount,
+      handleChange,
+      selectedObjects,
+      handleInputChanged,
+      amount: ower.amount,
+      valid: ower.valid
+    })
   })
 
   const handleSelectAll = (e) => {
@@ -266,22 +276,7 @@ const EditableCheckboxSelect = ({
     }
   }
 
-  let summaryAmount = _manualOwers.value.reduce(function (previousValue, ower) {
-    try {
-      if (evaluate(ower.amount) > 0) {
-        if (ower.amount) {
-          return previousValue + ower.amount
-        } else {
-          return previousValue
-        }
-      } else {
-        return previousValue
-      }
-    } catch {
-      return previousValue
-    }
-  }, 0).toFixed(exponent)
-
+  let summaryAmount = sumOwers(_manualOwers.value, exponent)
   setSummaryAmount(summaryAmount)
 
   const handleClosed = () => {

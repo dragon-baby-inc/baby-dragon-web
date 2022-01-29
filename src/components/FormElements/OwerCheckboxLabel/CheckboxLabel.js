@@ -7,9 +7,10 @@ import {
   userImageUrls
 } from '../../../constants'
 
-import { evaluate } from 'mathjs'
+import { evaluate, round } from 'mathjs'
 
 const OwerCheckboxLabel = ({
+  exponent,
   fixedAmount,
   valid,
   children,
@@ -82,7 +83,7 @@ const OwerCheckboxLabel = ({
       isValid = false
     }
 
-    return [isValid, value]
+    return [isValid, round(value, exponent)]
   }
 
   useEffect(() => {
@@ -106,19 +107,8 @@ const OwerCheckboxLabel = ({
     setSettle(false)
 
     let [valid, value] = checkValid(e.target.value)
+
     setValid(valid)
-    // try {
-    //   value = evaluate(e.target.value)
-
-    //   if (value >= 0 ) {
-    //     setValid(true)
-    //   } else {
-    //     setValid(false)
-    //   }
-    // } catch {
-    //   value = ''
-    // }
-
     setAmount(e.target.value)
     inputChanged(e, object.id, value)
   }
@@ -158,6 +148,8 @@ const OwerCheckboxLabel = ({
     if (value < 0) {
       value = 0
     }
+
+    value = round(value, exponent)
 
     setAmount(value)
     inputChanged(null, object.id, value)
