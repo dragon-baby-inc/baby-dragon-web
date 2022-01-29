@@ -60,11 +60,6 @@ const PaymentEditPage = () => {
       let payer = users.filter(u => String(u.id) === payment.payer_id)[0]
       setPayer(payer)
 
-      // if (!payer) { alert('未授權') }
-      setAmount(parseFloat(payment.amount))
-      setName(payment.description)
-      setCreationDate(payment.paid_at)
-
       if (payment.allocation_type === 'evenly') {
         let ower_ids = payment.allocations.map(a => a.ower_id)
         setOwers(users.filter(u => ower_ids.includes(u.id)))
@@ -76,7 +71,6 @@ const PaymentEditPage = () => {
           return { user: user, amount: all.amount }
         })
 
-        setManualOwers({ owers, valid: true })
         _setManualOwers(owers)
       } else if (payment.allocation_type === 'amount'){
         let owers = payment.allocations.map(all => {
@@ -84,7 +78,6 @@ const PaymentEditPage = () => {
           return { user: user, amount: all.amount }
         })
 
-        setManualOwers({ owers, valid: true })
         _setManualOwers(owers)
         setAllocationType('amount')
       }

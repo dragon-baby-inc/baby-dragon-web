@@ -38,7 +38,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
   } = useContext(PaymentContext)
 
   /* eslint-disable no-unused-vars */
-  const [_allocationType, _setAllocationType] = useState('evenly')
   const [_name, _setName] = useState({ value: '', valid: true })
   const [_amount, _setAmount] = useState({ value: '', valid: true })
   const [_creation_date, _setCreationDate] = useState({ value: null, valid: true })
@@ -64,12 +63,11 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
       setFixedAmount(payment.amount)
       setSummaryAmount(payment.amount)
       _setCreationDate({ value: payment.paid_at, valid: true })
-      _setAllocationType(payment.allocation_type)
     }
-  }, [payment, _setName, _setAmount, _setCreationDate, _setAllocationType])
+  }, [payment, _setName, _setAmount, _setCreationDate])
 
   const [payer, payerLabel] = useUserRadioSelectLabel({
-    users: users ? users.filter(u => u.coverCost === true) : [],
+    users: _users,
     initialValue: state.payer.value,
   })
 
@@ -237,10 +235,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     _setManualOwers({ value: newOwers, valid: valid })
   }
 
-  const buildSelectUsers = (users) => {
-    return users.filter((u) => u.coverCost).map((u) => u.id)
-  }
-
   useEffect(() => {
     if (_owers.value.length === 0) {
       _setOwers({ value: owers, valid: true })
@@ -384,6 +378,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
   }
 
   let disabled = true
+
   if (!summaryValid) {
     disabled = true
   } else {

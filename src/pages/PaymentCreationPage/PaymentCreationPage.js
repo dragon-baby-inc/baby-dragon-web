@@ -28,8 +28,6 @@ const PaymentCreationPage = () => {
     state,
     setPayer,
     setBuilder,
-    setOwers,
-    setManualOwers,
     setAccountingBookDetails,
     resetForm
   } = useContext(PaymentContext)
@@ -52,33 +50,18 @@ const PaymentCreationPage = () => {
 
   useEffect(() => {
     if (!loading && authState && authState.api) {
-
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       let payer = builder
       if (!payer) { payer = users[0] }
 
       setPayer(payer)
       setAccountingBookDetails(accountingBookDetails)
-
-      setOwers(users.filter((u) => u.coverCost))
       _setPayer(payer)
 
-      let user = users[-1]
-      if (users.length > 1) {
-        user = users.filter(u => u.id !== payer.id)[0]
-      }
-
-      setManualOwers({ owers: [{ user: user, amount: null }], valid: true, first: true })
       setDisableForm(false)
     }
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [loading, users, accountingBookDetails])
-
-  const getUser = () => {
-    let user = users.filter(u => u.id !== payer.id)[0]
-    if (!user) { user = users[0] }
-    return user
-  }
 
   const coverCostUsers = users.filter(u => u.coverCost === true)
 
