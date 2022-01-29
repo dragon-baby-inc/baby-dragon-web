@@ -214,7 +214,7 @@ const PaymentsPage = (props) => {
 
 
           {
-            paymentLoading ? <div style={paymentStyle}><Loading /></div> :
+            (paymentLoading || loading) ? <div style={paymentStyle}><Loading /></div> :
               <ColumnSwappableView index={index} callback={handleIndexChanged} steps={steps} height={paymentsHeight}/>
           }
         </div>
