@@ -9,7 +9,6 @@ import {
   Separater,
 } from '../index'
 
-import { round, evaluate } from 'mathjs'
 import { sumOwers } from '../../../utilities/PaymentFormHelper'
 
 const EditableCheckboxSelect = ({
@@ -39,7 +38,6 @@ const EditableCheckboxSelect = ({
 
   const debug = false
   const setOwers = (newOwers) => {
-    if (debug) { console.log(newOwers) }
     _setManualOwers(newOwers)
     setManualOwers(newOwers)
   }
@@ -52,7 +50,6 @@ const EditableCheckboxSelect = ({
     }
 
     setSelectedObjects(objects.filter(el => selected_object_ids.has(el.id)))
-    console.log(objects.length === selected_object_ids.size)
     setSelectAll(objects.length === selected_object_ids.size)
   }, [objects, selected_object_ids])
 

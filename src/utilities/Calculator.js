@@ -20,6 +20,15 @@ function split_into(totalAmount, piece, exponent) {
   return ary
 }
 
+function round(amount, exponent) {
+  if (amount) {
+    return parseFloat(amount.toFixed(exponent))
+  } else {
+    return 0
+  }
+}
+
 export {
+  round,
   split_into
 }

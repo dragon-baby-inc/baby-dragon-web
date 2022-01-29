@@ -59,11 +59,13 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
 
   useEffect(() => {
     if (payment) {
+      setDisableForm(true)
       _setName({ value: payment.description, valid: true })
       _setAmount({ value: payment.amount, valid: true })
       setFixedAmount(payment.amount)
       setSummaryAmount(payment.amount)
       _setCreationDate({ value: payment.paid_at, valid: true })
+      setDisableForm(false)
     }
   }, [payment, _setName, _setAmount, _setCreationDate])
 

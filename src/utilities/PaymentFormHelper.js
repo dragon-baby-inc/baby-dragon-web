@@ -1,4 +1,5 @@
-import { evaluate, round } from 'mathjs'
+import { evaluate } from 'mathjs'
+import { round } from '../utilities/Calculator'
 
 function sumOwers(owers, exponent) {
   let summaryAmount = owers.reduce(function (previousValue, ower) {

@@ -7,7 +7,8 @@ import {
   userImageUrls
 } from '../../../constants'
 
-import { evaluate, round } from 'mathjs'
+import { evaluate } from 'mathjs'
+import { round } from '../../../utilities/Calculator'
 
 const OwerCheckboxLabel = ({
   exponent,
@@ -22,7 +23,6 @@ const OwerCheckboxLabel = ({
   handleAddCoverCostUser,
   value
 }) => {
-  const [showCheckbox, setShowCheckbox] = useState(true)
   const [_amount, setAmount] = useState(amount)
   const [settle, setSettle] = useState(true)
   const [_valid, setValid] = useState(true)
@@ -37,27 +37,11 @@ const OwerCheckboxLabel = ({
       let [valid, _] = checkValid(amount)
       setValid(valid)
     }
-
-    // try {
-    //   evaluate(amount)
-    // } catch {
-    //   setValid(false)
-    // }
   }, [amount])
 
   useEffect(() => {
-    if (amount) {
-      try {
-        evaluate(amount)
-      } catch {
-        setValid(false)
-      }
-    }
-
-    if (fixedAmount) {
-      if (value > fixedAmount) {
-        setValid(false)
-      }
+    if (fixedAmount && value > fixedAmount) {
+      setValid(false)
     }
 
     setAmount(amount)
@@ -79,7 +63,7 @@ const OwerCheckboxLabel = ({
         isValid = false
       }
     } catch {
-      value = ''
+      value = 0
       isValid = false
     }
 
@@ -118,10 +102,6 @@ const OwerCheckboxLabel = ({
       handeInputBlur()
     }
   }
-
-  useEffect(() => {
-    setShowCheckbox(object.coverCost)
-  }, object)
 
   let imageUrl = object.imageURL
   if (!imageUrl) {
@@ -183,7 +163,7 @@ const OwerCheckboxLabel = ({
               className={styles.input}
               type="text"
               placeholder="輸入算式或金額"
-              value={_amount}
+              value={_amount === undefined ? '': _amount}
               onKeyPress={handleKeyUp}
               onChange={handleInputChanged}/>
             <Svg
