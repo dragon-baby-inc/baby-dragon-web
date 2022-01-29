@@ -141,8 +141,8 @@ const OwerCheckboxLabel = ({
   }
 
   return (
-    <div className={styles.label}>
-      <label style={{ display: 'flex', alignItems: 'center' }}>
+    <div className={[styles.label, styles.owerLabel].join(' ')}>
+      <label style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
         <Checkbox
           style={{ paddingRight: '12px' }}
           value={value}
