@@ -38,10 +38,10 @@ const AccountingBookSummaryPage = ({
   users,
 }) => {
   const { state: authState } = useContext(AuthContext)
+  const { group_id } = useParams();
   const [disableForm, setDisableForm] = useState(true)
   const [books, group, loading, currentBook, setCurrentBook] = useAccountingBooks(authState)
   const history = useHistory();
-  const { group_id } = useParams()
 
   useEffect(() => {
     if (!loading) {

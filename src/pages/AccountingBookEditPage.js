@@ -59,7 +59,6 @@ const AccountingBookEditPage = (props) => {
 
   const [timer, setTimer] = useState(null)
   const handlInputChange = (value) => {
-    console.log(value)
     setName({ name: value, valid: value.length > 0 })
   }
 //   const handlInputChange = (value, params, setState) => {

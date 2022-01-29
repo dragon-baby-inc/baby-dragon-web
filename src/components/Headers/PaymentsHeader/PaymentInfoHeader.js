@@ -46,12 +46,12 @@ function PaymentsHeader({
         <div className={innerBlockClasses.join(" ")}>
           <div>
             <div onClick={ () => { history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id }) } }>
-              <Image defaultImage="accountingBook" imageUrl={accountingBookDetails.imageUrl} size='80px' circle/>
+              <Image defaultImage="accountingBook" imageUrl={accountingBookDetails ? accountingBookDetails.imageUrl : null} size='80px' circle/>
             </div>
           </div>
           <div className={styles.info}>
             <div className={styles.count}>
-              {loading ? "-" : accountingBookDetails.cover_cost_users_size}
+              {!accountingBookDetails ? "-" : accountingBookDetails.cover_cost_users_size}
             </div>
             <div className={styles.label}>
               分帳人數

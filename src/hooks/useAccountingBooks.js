@@ -6,10 +6,13 @@ import { useParams } from 'react-router-dom';
 const useAccountingBooks =  (authState) => {
   const { group_id } = useParams();
   const [err, setErr] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [books, setBooks] = useState([]);
+  const groupAccountingBooksCache = JSON.parse(localStorage.getItem(`groupAccountingBooks-${group_id}`))
+  const groupCurrentBookCache = JSON.parse(localStorage.getItem(`groupCurrentBook-${group_id}`))
+  const [books, setBooks] = useState(groupAccountingBooksCache ? groupAccountingBooksCache : []);
+  const [loading, setLoading] = useState(groupAccountingBooksCache ? false : true);
   const [group, setGroup] = useState([]);
-  const [currentBook, setCurrentBook] = useState({ uuid: null })
+  const [currentBook, setCurrentBook] = useState(groupCurrentBookCache ? groupCurrentBookCache : { uuid: null })
+
 
   const getAccountingBook = async () => {
     await authState.api.getAccountingBooks(group_id)
@@ -17,9 +20,17 @@ const useAccountingBooks =  (authState) => {
         const books = response.data.accounting_books.map(b => {
           return { imageUrl: imageUrls[b.image_id ? b.image_id : 0], ...b }
         })
+
         setBooks(books)
-        setCurrentBook(response.data.accounting_books.filter((b) => b.current)[0])
+        let currentBook = response.data.accounting_books.filter((b) => b.current)[0]
+        setCurrentBook(currentBook)
         setGroup(response.data.group)
+
+        try {
+          localStorage.setItem(`groupAccountingBooks-${group_id}`, JSON.stringify(books));
+          localStorage.setItem(`groupCurrentBook-${group_id}`, JSON.stringify(currentBook));
+        } catch {}
+
         setLoading(false)
       })
       .catch(function (error) {

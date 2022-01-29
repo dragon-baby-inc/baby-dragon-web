@@ -55,8 +55,13 @@ const createUserCheckbokLabel = ({ handleEdit, handleTrash }) => ({ object, hand
     imageUrl = userImageUrls[object.imageId]
   }
 
+  let restrictedCoverCost = object.restrictedCoverCost
+  if (object.restrictedCoverCost == true && object.coverCost == false) {
+    restrictedCoverCost = false
+  }
+
   return <CheckboxLabel
-    disabled={object.restrictedCoverCost}
+    disabled={restrictedCoverCost}
     key={object.id}
     object={object}
     changed={handleChange}

@@ -7,9 +7,11 @@ import { useParams } from 'react-router-dom';
 const useAccountingBook =  (authState) => {
   const { group_id, accounting_book_id } = useParams();
   const [err, setErr] = useState(null);
-  const [accountingBook, setAccountingBook] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const accountingBookCache = JSON.parse(localStorage.getItem(`accountingBook-${accounting_book_id}`))
+  const accountingBookUsersCache = JSON.parse(localStorage.getItem(`accountingBookUsers-${accounting_book_id}`))
+  const [accountingBook, setAccountingBook] = useState(accountingBookCache ? accountingBookCache : {});
+  const [users, setUsers] = useState(accountingBookUsersCache ? accountingBookUsersCache : []);
+  const [loading, setLoading] = useState(accountingBookCache ? false : true);
 
   const stubUsers = [
     {id: 'U4fb1cd3edb7c2552e2a25f286f5c102d', displayName: 'Yen-jung Chen', imageURL: null, fromLine: true, coverCost: true},
@@ -46,6 +48,7 @@ const useAccountingBook =  (authState) => {
   }
 
   let stub = false
+
   useEffect(() => {
     if (stub) {
       setUsers(stubUsers)
@@ -62,13 +65,16 @@ const useAccountingBook =  (authState) => {
               return normalizeGroupUser(u)
             })
             setUsers(users)
-            setAccountingBook(
-              {
-                imageUrl: imageUrls[response.data.accounting_book.image_id],
-                ...response.data.accounting_book
+            let accountingBookDetails = {
+              imageUrl: imageUrls[response.data.accounting_book.image_id],
+              ...response.data.accounting_book
               }
-            )
 
+            setAccountingBook(accountingBookDetails)
+            try {
+              localStorage.setItem(`accountingBook-${accounting_book_id}`, JSON.stringify(accountingBookDetails));
+              localStorage.setItem(`accountingBookUsers-${accounting_book_id}`, JSON.stringify(users));
+            } catch { }
             setLoading(false)
           })
           .catch(function (error) {
