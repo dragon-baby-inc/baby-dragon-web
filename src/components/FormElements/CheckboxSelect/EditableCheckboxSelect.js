@@ -30,6 +30,7 @@ const EditableCheckboxSelect = ({
   closed
 }) => {
   const [mount, setMount] = useState(false) /* eslint-disable no-unused-vars */
+  const [touched, setTouched] = useState(false)
   const [_selectAll, setSelectAll] = useState(true)
   const [selectedObjects, setSelectedObjects] = useState([])
   const { group_id, accounting_book_id } = useParams()
@@ -54,6 +55,7 @@ const EditableCheckboxSelect = ({
   }, [objects, selected_object_ids])
 
   let handleChange = (e) => {
+    setTouched(true)
     let selected_objects = selectedObjects
     if (e.target.checked) {
       selectObject(e.target.value)
@@ -69,6 +71,7 @@ const EditableCheckboxSelect = ({
   }
 
   const handleInputChanged = (e, object_id, value) => {
+    setTouched(true)
     let _selectedObjects = [...selectedObjects]
 
     if (!_selectedObjects.map(o => o.id).includes(object_id)) {
@@ -238,6 +241,7 @@ const EditableCheckboxSelect = ({
   })
 
   const handleSelectAll = (e) => {
+    setTouched(true)
     setSelectAll(e.target.checked)
 
     if (e.target.checked) {
@@ -280,6 +284,10 @@ const EditableCheckboxSelect = ({
   setSummaryAmount(summaryAmount)
 
   const handleClosed = () => {
+    if (!touched) {
+      closed()
+      return
+    }
     let validManualOwersIds = _manualOwers.value.filter(o => o.amount !== null && o.amount !== '' && o.amount > 0).map(o => o.user.id)
     let selected_objects = objects.filter(u => validManualOwersIds.includes(u.id))
     setSelectedObjects(selected_objects)
@@ -289,7 +297,6 @@ const EditableCheckboxSelect = ({
 
   const containerStyles = [styles.container]
   const remainAmount =  fixedAmount - summaryAmount
-  console.log(remainAmount < 0)
 
   if (mount) { containerStyles.push(styles.mount) }
   return(

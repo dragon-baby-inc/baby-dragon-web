@@ -125,7 +125,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     _setOwers({ value: objs, valid: true, touched: true })
 
     if (objs.length === 0 && !fixedAmount) {
-      _setAmount({ value: 0, valid: false })
+      _setAmount({ value: 0, valid: true })
     }
   }
 
@@ -194,6 +194,7 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     summaryValid = true
   }
 
+  console.log(_amount)
   const amountInput = <TextInput
     key='amount'
     svg={<Svg icon='Money' size='24' className='gold900'/> }
