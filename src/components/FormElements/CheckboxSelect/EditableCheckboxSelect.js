@@ -49,7 +49,7 @@ const EditableCheckboxSelect = ({
       return
     }
 
-    setSelectedObjects(objects.filter(el => selected_object_ids.includes(el.id)))
+    setSelectedObjects(objects.filter(el => selected_object_ids.has(el.id)))
     setSelectAll(objects.length === selected_object_ids.length)
   }, [objects, selected_object_ids])
 

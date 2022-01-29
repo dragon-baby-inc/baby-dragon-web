@@ -29,7 +29,7 @@ const OwerEditableCheckboxSelectLabel = ({
   selectChanged
 }) => {
   const [drawerActive, setDrawerActive] = useState(false)
-  const [_selectObjectIds, setSelectObjectIds] = useState([])
+  const [_selectObjectIds, setSelectObjectIds] = useState(new Set())
   const [_manualOwers, _setManualOwers] = useState(manualOwers)
   const valid = true
 
@@ -43,16 +43,14 @@ const OwerEditableCheckboxSelectLabel = ({
     }
 
     if (selectedObjects) {
-      setSelectObjectIds(users.filter(u => {
-      return selectedObjects.map(su => su.id).includes(u.id)
-      }).map(u => u.id))
+      setSelectObjectIds(new Set(selectedObjects.map(o => o.id)))
     } else {
-      setSelectObjectIds(users.map(u => u.id))
+      setSelectObjectIds(new Set(users.map(u => u.id)))
     }
   }, [users, selectedObjects])
 
   const handleSelectChanged = (objects) => {
-    setSelectObjectIds(objects.map(obj => obj.id))
+    setSelectObjectIds(new Set(objects.map(obj => obj.id)))
     if (selectChanged) { selectChanged(objects) }
   }
 
@@ -77,7 +75,7 @@ const OwerEditableCheckboxSelectLabel = ({
     />
 
   let i = 0
-  const selected = users.filter(o => _selectObjectIds.includes(o.id))
+  const selected = users.filter(o => _selectObjectIds.has(o.id))
   const displayCount = selected.length > 5 ? 5 : selected.length
   const displayUsers = [...selected].slice(0, displayCount)
   const images = displayUsers.map(u => {
