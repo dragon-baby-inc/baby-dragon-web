@@ -36,6 +36,11 @@ const EditableCheckboxSelect = ({
   const { group_id, accounting_book_id } = useParams()
   const [_manualOwers, _setManualOwers] = useState(manualOwers)
 
+  const manualOwersHash = {}
+  _manualOwers.value.forEach(o => {
+    manualOwersHash[o.user.id] = o
+  })
+
   const debug = false
   const setOwers = (newOwers) => {
     _setManualOwers(newOwers)
@@ -55,7 +60,6 @@ const EditableCheckboxSelect = ({
 
   let handleChange = (e) => {
     setTouched(true)
-    let selected_objects = selectedObjects
     if (e.target.checked) {
       selectObject(e.target.value)
     } else {
@@ -117,6 +121,7 @@ const EditableCheckboxSelect = ({
   const setOwerAvergedTouchedAmount = (newOwers, selectedObjects) => {
     let unTouchedIds = getUnTouchedIds(newOwers, selectedObjects)
     let touchedIds = getTouchedIds(newOwers, selectedObjects)
+    let selectedObjectIds = new Set(selectedObjects.map(o => o.id))
 
     let touchedAmount = sumOwers(newOwers.filter(ower => touchedIds.has(ower.user.id)), exponent)
     let remainAmount = fixedAmount - touchedAmount
@@ -132,7 +137,7 @@ const EditableCheckboxSelect = ({
           i++
         }
 
-        if (!selectedObjects.map(o => o.id).includes(o.user.id)) {
+        if (!selectedObjectIds.has(o.user.id)) {
           o.amount = ''
         }
         return o
@@ -143,7 +148,7 @@ const EditableCheckboxSelect = ({
           o.amount = 0
         }
 
-        if (!selectedObjects.map(o => o.id).includes(o.user.id)) {
+        if (!selectedObjectIds.has(o.user.id)) {
           o.amount = ''
         }
 
@@ -156,13 +161,13 @@ const EditableCheckboxSelect = ({
   }
 
   const getUnTouchedIds = (owers, selectedObjects) => {
-    let selectedObjectIds = selectedObjects.map(o => o.id)
-    return new Set(owers.filter(o => !o.touched).map(o => o.user.id).filter(id => selectedObjectIds.includes(id)))
+    let selectedObjectIds = new Set(selectedObjects.map(o => o.id))
+    return new Set(owers.filter(o => !o.touched).map(o => o.user.id).filter(id => selectedObjectIds.has(id)))
   }
 
   const getTouchedIds = (owers, selectedObjects) => {
-    let selectedObjectIds= selectedObjects.map(o => o.id)
-    return new Set(owers.filter(o => o.touched).map(o => o.user.id).filter(id => selectedObjectIds.includes(id)))
+    let selectedObjectIds = new Set(selectedObjects.map(o => o.id))
+    return new Set(owers.filter(o => o.touched).map(o => o.user.id).filter(id => selectedObjectIds.has(id)))
   }
 
   const setAmount = (object_id, value) => {
@@ -214,7 +219,7 @@ const EditableCheckboxSelect = ({
   }
 
   let objectLabels = objects.map(object => {
-    let ower = _manualOwers.value.filter(o => o.user.id === object.id)[0]
+    let ower = manualOwersHash[object.id]
     return createLabel({
       object,
       exponent,
