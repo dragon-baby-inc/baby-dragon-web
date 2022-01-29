@@ -68,7 +68,7 @@ const EditableCheckboxSelect = ({
   }
 
   const setManualOwersAmount = (owers, totalAmount) => {
-    let newOwers = getManualOwersAmount(objects, owers, getUnTouchedIds(_manualOwers.value, selectedObjects), totalAmount)
+    let newOwers = getManualOwersAmount(objects, owers, Array.from(getUnTouchedIds(_manualOwers.value, selectedObjects)), totalAmount)
     setOwers(newOwers.state)
   }
 
@@ -121,37 +121,16 @@ const EditableCheckboxSelect = ({
     let unTouchedIds = getUnTouchedIds(newOwers, selectedObjects)
     let touchedIds = getTouchedIds(newOwers, selectedObjects)
 
-    let touchedAmount = newOwers.reduce(function (previousValue, ower) {
-      if (touchedIds.includes(ower.user.id)) {
-        if (ower.amount < 0) {
-          return previousValue
-        } else if (ower.amount) {
-          return previousValue + parseFloat(ower.amount)
-        } else {
-          return previousValue
-        }
-      } else {
-        return previousValue
-      }
-    }, 0)
-
+    let touchedAmount = sumOwers(newOwers.filter(ower => touchedIds.has(ower.user.id)), exponent)
     let remainAmount = fixedAmount - touchedAmount
-    if (debug) {
-      console.log(`touchedAmount: ${touchedAmount}`)
-      console.log(`remainAmount: ${remainAmount}`)
-    }
 
     if (remainAmount > 0) {
-      let amountArray = getManualOwersAmount(
-        objects,
-        newOwers.filter(o => unTouchedIds.includes(o.user.id)).map(o => o.user.id),
-        unTouchedIds,
-        remainAmount
-      ).splits
+      let amountArray = split_into(remainAmount, unTouchedIds.size, exponent)
+
       let i = 0
 
       newOwers = newOwers.map(o => {
-        if (unTouchedIds.includes(o.user.id)) {
+        if (unTouchedIds.has(o.user.id)) {
           o.amount = amountArray[i]
           i++
         }
@@ -163,7 +142,7 @@ const EditableCheckboxSelect = ({
       })
     } else if (remainAmount <= 0) {
       newOwers = newOwers.map(o => {
-        if (unTouchedIds.includes(o.user.id)) {
+        if (unTouchedIds.has(o.user.id)) {
           o.amount = 0
         }
 
@@ -181,12 +160,12 @@ const EditableCheckboxSelect = ({
 
   const getUnTouchedIds = (owers, selectedObjects) => {
     let selectedObjectIds = selectedObjects.map(o => o.id)
-    return owers.filter(o => !o.touched).map(o => o.user.id).filter(id => selectedObjectIds.includes(id))
+    return new Set(owers.filter(o => !o.touched).map(o => o.user.id).filter(id => selectedObjectIds.includes(id)))
   }
 
   const getTouchedIds = (owers, selectedObjects) => {
     let selectedObjectIds= selectedObjects.map(o => o.id)
-    return owers.filter(o => o.touched).map(o => o.user.id).filter(id => selectedObjectIds.includes(id))
+    return new Set(owers.filter(o => o.touched).map(o => o.user.id).filter(id => selectedObjectIds.includes(id)))
   }
 
   const setAmount = (object_id, value) => {
@@ -202,7 +181,7 @@ const EditableCheckboxSelect = ({
 
     let touchedIds = getTouchedIds(_manualOwers.value, selected_objects)
 
-    if (touchedIds.length > 0) {
+    if (touchedIds.size > 0) {
       let newOwers = setOwerAvergedTouchedAmount(_manualOwers.value, selected_objects)
       setOwers({ value: newOwers, valid: true })
     } else {
@@ -229,7 +208,7 @@ const EditableCheckboxSelect = ({
 
     let touchedIds = getTouchedIds(newOwers, selected_objects)
 
-    if (touchedIds.length > 0) {
+    if (touchedIds.size > 0) {
       let newOwers = setOwerAvergedTouchedAmount(_manualOwers.value, selected_objects)
       setOwers({ value: newOwers, valid: true })
     } else {
