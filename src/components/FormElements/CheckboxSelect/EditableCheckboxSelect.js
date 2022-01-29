@@ -300,7 +300,7 @@ const EditableCheckboxSelect = ({
                   {
                     fixedAmount > 0 && !valid?
                       <div className={[styles.remainAmount].join(' ')} >
-                        (差額{`${remainAmount < 0 ? '-' : ''}$${remainAmount < 0 ? -remainAmount: remainAmount}`})
+                        ({`${remainAmount < 0 ? '多 ' : '少 '}$${remainAmount < 0 ? -remainAmount: remainAmount}`})
                       </div> : null
                   }
                 </div>

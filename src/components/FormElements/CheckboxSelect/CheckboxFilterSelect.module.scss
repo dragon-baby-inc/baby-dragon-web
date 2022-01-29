@@ -61,14 +61,16 @@
 .remainAmount {
   text-overflow: ellipsis;
   padding-top: 2px;
-  padding-left: 4px;
+  padding-left: 8px;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
 }
 
 .summary {
+  font-family: 'Noto Sans TC', sans-serif;
   overflow: hidden;
+  font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   flex-wrap: nowrap;
