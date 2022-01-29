@@ -3,6 +3,7 @@ import { Context as AuthContext } from '../contexts/AuthContext'
 import { themeColors, imageUrls } from '../constants'
 import { Context as AccountingBookContext} from '../contexts/AccountingBookContext.js'
 import {
+  FullPageLoader,
   TopRightIcon,
   IconSwappableView,
   PageHeader,
@@ -39,6 +40,7 @@ const AccountingBookEditPage = (props) => {
     if (!state.name.valid) {
       return
     }
+    setPageLoading(true)
 
     let params = {
       name: state.name.value,
@@ -48,6 +50,10 @@ const AccountingBookEditPage = (props) => {
     authState.api.updateAccountingBook(accountingBookDetails.group_id, accountingBookDetails.id, { accounting_book: params })
       .then((res) => {
         history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
+        setPageLoading(false)
+      })
+      .catch((err) => {
+        setPageLoading(true)
       })
   }
 
@@ -116,6 +122,10 @@ const AccountingBookEditPage = (props) => {
             <Loading />
         }
       </div>
+      {
+        pageLoading ?
+          <FullPageLoader /> : null
+      }
     </>
   )
 }
