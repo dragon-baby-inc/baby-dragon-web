@@ -119,8 +119,8 @@ const AccountingBookEditPage = (props) => {
 
   const handleUserEdit = (e, object) => {
     setEditObject(object)
-    if (object.imageURL && object.imageURL.length < 10) {
-      setUserImageId(object.imageURL)
+    if (object.imageId) {
+      setUserImageId(object.imageId)
     } else {
       setUserImageId(0)
     }
