@@ -194,7 +194,6 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     summaryValid = true
   }
 
-  console.log(_amount)
   const amountInput = <TextInput
     key='amount'
     svg={<Svg icon='Money' size='24' className='gold900'/> }

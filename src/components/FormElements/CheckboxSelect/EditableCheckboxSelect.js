@@ -45,13 +45,14 @@ const EditableCheckboxSelect = ({
 
   useEffect(() => {
     setMount(true)
-    if (selected_object_ids.length === selectedObjects.length) {
-      setSelectAll(objects.length === selected_object_ids.length)
+    if (selected_object_ids.size === selectedObjects.length) {
+      setSelectAll(objects.length === selected_object_ids.size)
       return
     }
 
     setSelectedObjects(objects.filter(el => selected_object_ids.has(el.id)))
-    setSelectAll(objects.length === selected_object_ids.length)
+    console.log(objects.length === selected_object_ids.size)
+    setSelectAll(objects.length === selected_object_ids.size)
   }, [objects, selected_object_ids])
 
   let handleChange = (e) => {

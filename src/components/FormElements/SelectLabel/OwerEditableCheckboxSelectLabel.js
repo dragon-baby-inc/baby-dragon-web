@@ -38,7 +38,7 @@ const OwerEditableCheckboxSelectLabel = ({
   }, [manualOwers])
 
   useEffect(() => {
-    if (selectedObjects.length === _selectObjectIds.length) {
+    if (selectedObjects.length === _selectObjectIds.size) {
       return
     }
 
@@ -110,7 +110,7 @@ const OwerEditableCheckboxSelectLabel = ({
           }}>
             <div className={styles.countSection}>
               <div className={[styles.count, valid ? '' : styles.invalid].join(' ')}>
-                {_selectObjectIds ? _selectObjectIds.length : 0}
+                {_selectObjectIds ? _selectObjectIds.size : 0}
               </div>
               <Svg
                 className={valid ? null : 'invalid'}
