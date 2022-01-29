@@ -281,7 +281,6 @@ const EditableCheckboxSelect = ({
   if (remainAmount > 0 || remainAmount < 0) {
     valid = false
   }
-  console.log(valid)
 
   if (mount) { containerStyles.push(styles.mount) }
   return(
