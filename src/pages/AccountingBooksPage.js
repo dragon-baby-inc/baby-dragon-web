@@ -59,16 +59,15 @@ const AccountingBookSummaryPage = ({
   })
 
   const handleSetAsCurrent = (uuid) => {
-    setDisableForm(true)
+    setCurrentBook({ uuid: uuid })
+
     if (uuid) {
       authState.api.updateCurrentAccountingBook(group.id, uuid)
         .then((res) => {
           setCurrentBook({ uuid: res.data.accounting_book.uuid })
-          setDisableForm(false)
         })
-        .catch((res) => {
-          console.log(res.response)
-          setDisableForm(false)
+        .catch((err) => {
+          console.log(err)
         })
     }
   }

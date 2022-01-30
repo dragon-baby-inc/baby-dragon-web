@@ -71,16 +71,15 @@ const AccountingBookSettingPage = (props) => {
     </ConfirmBox>
 
   const handleCurrentChange = (value, params, setState) => {
-    setDisableForm(true)
+    setState(value)
 
     authState.api.updateAccountingBook(group_id, accounting_book_id, { accounting_book: params })
       .then((res) => {
-        setDisableForm(false)
-        setState(value)
+        setLineNotification(res.data.accounting_book.send_liff_confirm_message)
+        setAutoDetectPayment(res.data.accounting_book.use_payment_auto_detection)
       })
-      .catch((res) => {
-        setDisableForm(false)
-        console.log(res)
+      .catch((err) => {
+        console.log(err)
       })
   }
 
