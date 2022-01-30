@@ -17,7 +17,6 @@ const useLiff =  (callback) => {
             setIsLoggedIn(true)
           } else {
             alert(res.data.message)
-            liff.closeWindow()
           }
         })
         .catch((err) => {
@@ -25,6 +24,7 @@ const useLiff =  (callback) => {
             alert(err.response.data.message)
             liff.closeWindow()
           }
+          window.location.href = "/sorry";
           console.log(err)
         })
 

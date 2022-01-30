@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useContext } from 'react'
+import { Provider as PaymentProvider } from '../contexts/PaymentContext'
+import { Provider as FilterPaymentProvider } from '../contexts/FilterPaymentContext'
+import { Provider as AccountingBookProvider } from '../contexts/AccountingBookContext'
+import { Context as AuthContext } from '../contexts/AuthContext'
 import { Route } from 'react-router-dom';
 import BookHistoryPage from './BookHistoryPage'
 import PaymentsPage from './PaymentsPage'
 import AccountingBookSettingPage from './AccountingBookSettingPage'
 import AccountingBookEditPage from './AccountingBookEditPage'
 import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
+import AccountingBooksPage from './AccountingBooksPage'
+import { useLiff } from '../hooks'
 import {
   PaymentEditPage,
   AccountingBookCurrencyPage,
@@ -14,41 +20,53 @@ import {
 } from './index'
 
 const NavigationPage = (props) => {
+  const { setLogin } = useContext(AuthContext)
+  /* eslint-disable no-unused-vars */
+  const [isLoggedIn] = useLiff(setLogin)
+
   return(
     <>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
-        <PaymentCreationPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/paid_back">
-        <PaymentPaidBackPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/new">
-        <AccountingBookCreationPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/:payment_id/edit">
-        <PaymentEditPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary">
-        <PaymentsPage index={1}/>
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index">
-        <PaymentsPage index={0}/>
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/edit/index">
-        <AccountingBookEditPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/currency">
-        <AccountingBookCurrencyPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/settings">
-        <AccountingBookSettingPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/default_users">
-        <AccountingBookDefaultUsersPage />
-      </Route>
-      <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/log_messages">
-        <BookHistoryPage/>
-      </Route>
+      <PaymentProvider>
+        <Route exact path="/liff_entry"> </Route>
+        <Route exact path="/liff_entry/groups/:group_id/accounting_books">
+          <AccountingBooksPage/>
+        </Route>
+        <AccountingBookProvider>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
+            <PaymentCreationPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/paid_back">
+            <PaymentPaidBackPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/new">
+            <AccountingBookCreationPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/:payment_id/edit">
+            <PaymentEditPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/summary">
+            <PaymentsPage index={1}/>
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/index">
+            <PaymentsPage index={0}/>
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/edit/index">
+            <AccountingBookEditPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/currency">
+            <AccountingBookCurrencyPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/settings">
+            <AccountingBookSettingPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/default_users">
+            <AccountingBookDefaultUsersPage />
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/log_messages">
+            <BookHistoryPage/>
+          </Route>
+        </AccountingBookProvider>
+      </PaymentProvider>
     </>
   )
 }
