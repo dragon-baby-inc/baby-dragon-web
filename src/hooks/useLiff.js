@@ -9,24 +9,6 @@ const useLiff =  (callback) => {
   const stub = process.env.NODE_ENV === 'development'
 
   useEffect(() => {
-    Object.keys(localStorage).forEach((key) => {
-      if (key.includes('groupAccountingBooks')) {
-        localStorage.removeItem(key);
-      }
-      if (key.includes('accountingBookUsers')) {
-        localStorage.removeItem(key);
-      }
-      if (key.includes('accountingBook')) {
-        localStorage.removeItem(key);
-      }
-      if (key.includes('groupCurrentBook')) {
-        localStorage.removeItem(key);
-      }
-    })
-  }, [])
-
-
-  useEffect(() => {
     if (stub) {
       api.exchangeToken('', '')
         .then((res) => {
