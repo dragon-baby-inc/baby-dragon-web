@@ -79,7 +79,7 @@ const AccountingBookSummaryPage = ({
         <AccountingBooksHeader group={group} title={'帳本列表'} color={themeColors.gray400}/>
         {
           loading ?
-            <Loading />
+            null
             :
             <div style={styles.books}>
               {objects}
