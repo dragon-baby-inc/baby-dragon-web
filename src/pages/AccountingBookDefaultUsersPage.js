@@ -20,6 +20,7 @@ import {
 } from '../generators/labelGenerator'
 
 const AccountingBookUsersPage = (props) => {
+  const [touched, setTouched] = useState(false)
   const history = useHistory();
   /* eslint-disable no-unused-vars */
   const { state: authState } = useContext(AuthContext)
@@ -121,11 +122,18 @@ const AccountingBookUsersPage = (props) => {
     selectAll: true,
     handleEdit: handleUserEdit,
     handleTrash: handleUserDelete,
-    labelsHeight: "calc(100% - 44px - 1px - 58px - 36px)"
+    labelsHeight: "calc(100% - 44px - 1px - 58px - 36px)",
+    callback: () => { setTouched(true) }
   })
 
   const updateCoverCostUsers = () => {
+    if (!touched) {
+      history.navigateTo("accountingBookSettingsPage", { group_id, accounting_book_id })
+      return
+    }
+
     setFullPageLoad(true)
+
     authState.api.updateCoverCostUsers(group_id, accounting_book_id, value)
       .then((res) => {
         setFullPageLoad(false)
