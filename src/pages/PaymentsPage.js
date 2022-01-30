@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useEffect, useState, useContext } from "react"
+import store from '../utilities/localStore'
 import { useRouteMatch  } from 'react-router-dom';
 import AccountingBookSummaryPage from '../pages/AccountingBookSummaryPage'
 import { useHistory } from "react-router-dom";
@@ -193,6 +194,9 @@ const PaymentsPage = (props) => {
 //       component:
 //         <AccountingBookSummaryPage users={users} accountingBookDetails={accountingBookDetails}/>
 
+  let load = props.index == 0 ? paymentLoading : loading
+  let paymentSizeCache = store.get(`accountingBookPaymentsSize-${accounting_book_id}`)
+
   return(
     <>
       <div style={styles.bg}>
@@ -208,13 +212,13 @@ const PaymentsPage = (props) => {
             discliamerClosedCallback={discliamerClosedCallback}
             index={index}
             loading={paymentLoading}
-            paymentSize={payments.length}
+            paymentSize={paymentSizeCache ? paymentSizeCache : payments.length}
             accountingBookDetails={accountingBookDetails}
           />
 
 
           {
-            (paymentLoading || loading) ? <div style={paymentStyle}><Loading /></div> :
+            load ? <div style={paymentStyle}><Loading /></div> :
               <ColumnSwappableView index={index} callback={handleIndexChanged} steps={steps} height={paymentsHeight}/>
           }
         </div>

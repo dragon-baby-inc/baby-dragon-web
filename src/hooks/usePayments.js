@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import store from '../utilities/localStore'
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
 
 const usePayments =  (authState, query) => {
   const { group_id, accounting_book_id } = useParams();
   const [err, setErr] = useState(null);
+  const accountingBookPaymentsCache = store.get(`accountingBookPayments-${accounting_book_id}`)
   const [loading, setLoading] = useState(true);
-  const [payments, setPayments] = useState([]);
+  const [payments, setPayments] = useState(accountingBookPaymentsCache ? accountingBookPaymentsCache : []);
 
   let stubPayments = [
     {
@@ -93,7 +95,10 @@ const usePayments =  (authState, query) => {
   const getPayments = async () => {
     await authState.api.getPayments(group_id, accounting_book_id, query)
       .then(function (response) {
-        setPayments(response.data.payments)
+        const payments = response.data.payments
+        setPayments(payments)
+        store.set(`accountingBookPayments-${accounting_book_id}`, payments.slice(0, 10))
+        store.set(`accountingBookPaymentsSize-${accounting_book_id}`, payments.length)
         setLoading(false)
       })
       .catch(function (error) {
@@ -109,6 +114,10 @@ const usePayments =  (authState, query) => {
     }
     /* eslint-disable react-hooks/exhaustive-deps */
     if (authState && authState.api) {
+      if (accountingBookPaymentsCache) {
+        setLoading(false)
+      }
+
       getPayments();
     }
   }, [authState])
