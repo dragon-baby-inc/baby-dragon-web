@@ -12,7 +12,7 @@ const useAccountingBook =  (authState) => {
   const accountingBookUsersCache = store.get(`accountingBookUsers-${accounting_book_id}`)
   const [accountingBook, setAccountingBook] = useState(accountingBookCache ? accountingBookCache : {});
   const [users, setUsers] = useState(accountingBookUsersCache ? accountingBookUsersCache : []);
-  const [loading, setLoading] = useState(accountingBookCache ? false : true);
+  const [loading, setLoading] = useState(true);
 
   const stubUsers = [
     {id: 'U4fb1cd3edb7c2552e2a25f286f5c102d', displayName: 'Yen-jung Chen', imageURL: null, fromLine: true, coverCost: true},
@@ -59,6 +59,10 @@ const useAccountingBook =  (authState) => {
     }
 
     if (authState && authState.api) {
+      if (accountingBookCache) {
+        setLoading(false)
+      }
+
       setTimeout(() => {
         authState.api.getAccountingBook(group_id, accounting_book_id)
           .then(function (response) {

@@ -10,9 +10,9 @@ const useAccountingBooks =  (authState) => {
   const groupAccountingBooksCache = store.get(`groupAccountingBooks-${group_id}`)
   const groupCurrentBookCache = store.get(`groupCurrentBook-${group_id}`)
   const [books, setBooks] = useState(groupAccountingBooksCache ? groupAccountingBooksCache : []);
-  const [loading, setLoading] = useState(groupAccountingBooksCache ? false : true);
-  const [group, setGroup] = useState([]);
   const [currentBook, setCurrentBook] = useState(groupCurrentBookCache ? groupCurrentBookCache : { uuid: null })
+  const [group, setGroup] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   const getAccountingBook = async () => {
@@ -42,6 +42,10 @@ const useAccountingBooks =  (authState) => {
   useEffect(() => {
     /* eslint-disable react-hooks/exhaustive-deps */
     if (authState && authState.api) {
+      if (groupAccountingBooksCache) {
+        setLoading(false)
+      }
+
       getAccountingBook();
     }
   }, [authState])
