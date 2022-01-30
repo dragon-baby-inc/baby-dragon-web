@@ -20,7 +20,6 @@ class LocalStore {
 
     const item = JSON.parse(data)
     const now = new Date()
-    console.log(item)
 
     if (now.getTime() > item.expiresAt) {
       localStorage.removeItem(key)
