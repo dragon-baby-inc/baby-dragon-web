@@ -434,6 +434,7 @@ const styles = {
     overflow: 'auto',
     backgroundColor: themeColors.gray100,
     borderRadius: "16px",
+    border: 'none',
   },
   footer: {
     height: '101px',
