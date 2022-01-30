@@ -100,7 +100,7 @@ const PaymentEditPage = () => {
       return {
         user: user,
         amount: ower ? ower.amount : '',
-        touched: false
+        touched: true
       }
     })
   }
