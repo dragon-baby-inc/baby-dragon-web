@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import store from '../utilities/localStore'
 import { normalizeGroupUser } from '../normalizers'
 import { dragonBabyApi } from '../api/dragonBabyApi'
 import { imageUrls } from '../constants'
@@ -7,8 +8,8 @@ import { useParams } from 'react-router-dom';
 const useAccountingBook =  (authState) => {
   const { group_id, accounting_book_id } = useParams();
   const [err, setErr] = useState(null);
-  const accountingBookCache = JSON.parse(localStorage.getItem(`accountingBook-${accounting_book_id}`))
-  const accountingBookUsersCache = JSON.parse(localStorage.getItem(`accountingBookUsers-${accounting_book_id}`))
+  const accountingBookCache = store.get(`accountingBook-${accounting_book_id}`)
+  const accountingBookUsersCache = store.get(`accountingBookUsers-${accounting_book_id}`)
   const [accountingBook, setAccountingBook] = useState(accountingBookCache ? accountingBookCache : {});
   const [users, setUsers] = useState(accountingBookUsersCache ? accountingBookUsersCache : []);
   const [loading, setLoading] = useState(accountingBookCache ? false : true);
@@ -71,10 +72,8 @@ const useAccountingBook =  (authState) => {
               }
 
             setAccountingBook(accountingBookDetails)
-            try {
-              localStorage.setItem(`accountingBook-${accounting_book_id}`, JSON.stringify(accountingBookDetails));
-              localStorage.setItem(`accountingBookUsers-${accounting_book_id}`, JSON.stringify(users));
-            } catch { }
+            store.set(`accountingBook-${accounting_book_id}`, accountingBookDetails)
+            store.set(`accountingBookUsers-${accounting_book_id}`, users)
             setLoading(false)
           })
           .catch(function (error) {

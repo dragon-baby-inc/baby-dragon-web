@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import store from '../utilities/localStore'
 import { imageUrls } from '../constants'
 import axios from '../api/dragonBabyApi'
 import { useParams } from 'react-router-dom';
@@ -6,8 +7,8 @@ import { useParams } from 'react-router-dom';
 const useAccountingBooks =  (authState) => {
   const { group_id } = useParams();
   const [err, setErr] = useState(null);
-  const groupAccountingBooksCache = JSON.parse(localStorage.getItem(`groupAccountingBooks-${group_id}`))
-  const groupCurrentBookCache = JSON.parse(localStorage.getItem(`groupCurrentBook-${group_id}`))
+  const groupAccountingBooksCache = store.get(`groupAccountingBooks-${group_id}`)
+  const groupCurrentBookCache = store.get(`groupCurrentBook-${group_id}`)
   const [books, setBooks] = useState(groupAccountingBooksCache ? groupAccountingBooksCache : []);
   const [loading, setLoading] = useState(groupAccountingBooksCache ? false : true);
   const [group, setGroup] = useState([]);
@@ -26,10 +27,8 @@ const useAccountingBooks =  (authState) => {
         setCurrentBook(currentBook)
         setGroup(response.data.group)
 
-        try {
-          localStorage.setItem(`groupAccountingBooks-${group_id}`, JSON.stringify(books));
-          localStorage.setItem(`groupCurrentBook-${group_id}`, JSON.stringify(currentBook));
-        } catch {}
+        store.set(`groupAccountingBooks-${group_id}`, books)
+        store.set(`groupCurrentBook-${group_id}`, currentBook)
 
         setLoading(false)
       })
