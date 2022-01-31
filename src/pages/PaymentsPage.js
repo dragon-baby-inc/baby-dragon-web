@@ -228,7 +228,7 @@ const PaymentsPage = (props) => {
         faColor={themeColors.white}
         clicked={handleAddPayment}
         iconInlineStyle={{background: 'none', background: 'linear-gradient(92.29deg, #103C2B 0%, #07694D 100%)'}}
-        containerInlineStyle={{ right: '30px', bottom: '24px'}}>
+        containerInlineStyle={{ right: '30px', bottom: '24px', cursor: 'pointer' }}>
         <Svg icon='add' size='24'className='white'/>
       </CircleFloatingIcon>
 

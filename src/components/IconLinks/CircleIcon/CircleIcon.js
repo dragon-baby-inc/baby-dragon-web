@@ -30,7 +30,8 @@ function CircleIcon({
 
   const _styles = {
     container: {
-      background: colors[color]
+      background: colors[color],
+      cursor: 'pointer'
     },
     icon: {
       height: size,
