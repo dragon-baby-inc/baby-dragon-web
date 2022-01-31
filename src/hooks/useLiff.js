@@ -36,7 +36,7 @@ const useLiff =  (callback) => {
         if (!liff.getAccessToken()) {
           liff.login({ redirectUri: `${process.env.REACT_APP_WEB_HOST}${window.location.pathname}` })
         } else {
-          api.exchangeToken(liff.getAccessToken(), liff.getDecodedIDToken())
+          api.exchangeToken(liff.getAccessToken())
             .then((res) => {
               if (!res.data.message) {
                 callback({ userLineId: res.data.user_line_id, accessToken: res.data.token })
