@@ -176,9 +176,9 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     }
   }
 
-  let summaryValid = false
+  let summaryValid = true
 
-  if (fixedAmount > 0) {
+  if (fixedAmount && fixedAmount > 0) {
     summaryValid = parseFloat(fixedAmount) === parseFloat(summaryAmount)
   } else {
     summaryValid = true

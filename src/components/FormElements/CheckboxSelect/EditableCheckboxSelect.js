@@ -278,8 +278,11 @@ const EditableCheckboxSelect = ({
   const containerStyles = [styles.container]
   const remainAmount =  fixedAmount - summaryAmount
   let valid = true
-  if (remainAmount > 0 || remainAmount < 0) {
-    valid = false
+
+  if (fixedAmount) {
+    if (remainAmount > 0 || remainAmount < 0) {
+      valid = false
+    }
   }
 
   if (mount) { containerStyles.push(styles.mount) }
