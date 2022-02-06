@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const useAccountingBookSummary =  (authState) => {
   const { group_id, accounting_book_id } = useParams();
   const [err, setErr] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState([]);
 
   const getAccountingBook = async () => {
