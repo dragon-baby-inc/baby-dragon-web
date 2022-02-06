@@ -9,6 +9,7 @@ import {
   Separater,
 } from '../index'
 
+import { round } from '../../../utilities/Calculator'
 import { sumOwers } from '../../../utilities/PaymentFormHelper'
 
 const EditableCheckboxSelect = ({
@@ -284,7 +285,7 @@ const EditableCheckboxSelect = ({
   }
 
   const containerStyles = [styles.container]
-  const remainAmount =  fixedAmount - summaryAmount
+  const remainAmount =  round(fixedAmount - summaryAmount, exponent)
   let valid = true
 
   if (fixedAmount) {
