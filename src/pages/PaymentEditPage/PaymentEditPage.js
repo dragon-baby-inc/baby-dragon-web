@@ -40,7 +40,6 @@ const PaymentEditPage = () => {
   const [payment, paymentLoading] = usePayment(authState)
   const history = useHistory();
   const [users, accountingBookDetails, loading] = useAccountingBook(authState)
-  const [index, setIndex] = useState(0);
   const [_manualOwers, _setManualOwers] = useState([])
   const [_owers, _setOwers] = useState([])
 
@@ -61,25 +60,26 @@ const PaymentEditPage = () => {
       let payer = users.filter(u => String(u.id) === payment.payer_id)[0]
       setPayer(payer)
 
-      // if (!payer) { alert('未授權') }
-      setAmount(parseFloat(payment.amount))
-      setName(payment.description)
-      setCreationDate(payment.paid_at)
-
       if (payment.allocation_type === 'evenly') {
         let ower_ids = payment.allocations.map(a => a.ower_id)
         setOwers(users.filter(u => ower_ids.includes(u.id)))
         _setOwers(users.filter(u => ower_ids.includes(u.id)))
-        setAllocationType(payment.allocation_type)
+        setAllocationType('amount')
+
+        let owers = payment.allocations.map(all => {
+          let user = users.filter(u => u.id == all.ower_id)[0]
+          return { user: user, amount: all.amount }
+        })
+
+        _setManualOwers(owers)
       } else if (payment.allocation_type === 'amount'){
         let owers = payment.allocations.map(all => {
           let user = users.filter(u => u.id == all.ower_id)[0]
           return { user: user, amount: all.amount }
         })
-        setManualOwers({ owers, valid: true })
+
         _setManualOwers(owers)
-        setAllocationType(payment.allocation_type)
-        setIndex(1)
+        setAllocationType('amount')
       }
 
       setAccountingBookDetails(accountingBookDetails)
@@ -91,6 +91,18 @@ const PaymentEditPage = () => {
   const handleBack = () => {
     resetForm()
     history.navigateTo("paymentIndexPage", { group_id, accounting_book_id })
+  }
+
+
+  const getOwers = () => {
+    return users.map(user => {
+      let ower = _manualOwers.filter(o => o.user.id === user.id)[0]
+      return {
+        user: user,
+        amount: ower ? ower.amount : '',
+        touched: payment ? payment.is_touched : true
+      }
+    })
   }
 
   return(
@@ -110,7 +122,12 @@ const PaymentEditPage = () => {
           <>
             {
               _manualOwers ?
-                <PaymentForm authState={authState} index={index} users={users} manualOwers={_manualOwers} owers={_owers} payment={payment}/> : null
+                <PaymentForm
+                  payment={payment}
+                  authState={authState}
+                  users={users.filter(u => u.coverCost === true)}
+                  manualOwers={getOwers()}
+                  owers={_manualOwers.filter(o => o.amount > 0).map(o => o.user)}/> : null
             }
           </>
       }

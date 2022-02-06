@@ -22,6 +22,7 @@ import {
   Money,
   Date,
   AccountingBook,
+  Texting,
 } from './../../assets/icons/index'
 
 const icons = {
@@ -46,6 +47,7 @@ const icons = {
   Money: Money,
   Date: Date,
   AccountingBook: AccountingBook,
+  texting: Texting
 }
 
 const Svg = (

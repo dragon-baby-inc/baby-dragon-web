@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  justify-content: space-between;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -17,5 +18,5 @@
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  color: $gold700;
+  color: $green500;
 }

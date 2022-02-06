@@ -14,6 +14,7 @@ import { ReactComponent as Payment } from './payment.svg';
 import { ReactComponent as Money } from './money.svg';
 import { ReactComponent as Date } from './date.svg';
 import { ReactComponent as AccountingBook } from './accounting_book.svg';
+import { ReactComponent as Texting } from './texting.svg';
 
 export {
   Add,
@@ -32,4 +33,5 @@ export {
   Money,
   Date,
   AccountingBook,
+  Texting,
 }

@@ -1,6 +1,7 @@
 import createDataContext from './CreateDataContext'
 import Validator from '../utilities/Validator'
 import { dragonBabyApi, createDragonBabyApi } from '../api/dragonBabyApi'
+import { sumOwers } from '../utilities/PaymentFormHelper'
 
 const paymentReducer = (state, action) => {
   let valid
@@ -217,9 +218,12 @@ const validateForm = dispatch => (state, formKeys, callback) => {
   })
 
   if (formKeys.includes('manualOwers')) {
-    let isKeyValid = state['manualOwers'].value.filter(o => o.amount > 0).length === state['manualOwers'].value.length
+    let summaryAmount = sumOwers(newState['manualOwers'].value, state.accounting_book_details.exponent)
+    let isKeyValid = parseFloat(summaryAmount) === parseFloat(newState.amount.value)
+
     newState['manualOwers'] = { value: state['manualOwers'].value, valid: isKeyValid }
-    if (isKeyValid === false) {
+
+    if (!isKeyValid) {
       formValid = false
     }
   }

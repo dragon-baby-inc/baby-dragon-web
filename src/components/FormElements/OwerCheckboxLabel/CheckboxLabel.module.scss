@@ -1,3 +1,4 @@
+@import '../../../styleSheets/globalColors.scss';
 
 .label {
   position: relative;
@@ -5,7 +6,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 12px 20px;
 
   font-size: 14px;
@@ -13,4 +14,59 @@
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0px;
+  padding-left: 0px;
+}
+
+.flexCenter {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.flexColumn {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+}
+
+.inputWrapper:focus-within {
+  border-bottom: 1px solid #A58341;
+}
+
+.inputWrapper {
+  width: 100%;
+  border-bottom: 1px solid #ECECEC;
+  display: flex;
+}
+.inputWrapper.inputInValid:focus-within {
+  border-bottom: 1px solid $invalid;
+}
+
+.inputInValid {
+  border-bottom: 1px solid $invalid;
+
+  input {
+    color: $invalid;
+  }
+}
+
+.input {
+  width: 100%;
+  text-align: right;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: right;
+  color: #2D2D2D;
+  padding-right: 12px;
+}
+
+.displayName {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 140%;
+  color: #2D2D2D;
 }

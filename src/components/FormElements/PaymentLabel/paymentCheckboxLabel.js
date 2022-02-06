@@ -143,9 +143,12 @@ const PaymentCheckboxLabel = (props) => {
             <div onClick={handleDeleteClick} className={[styles.btn].join(" ")}>
               刪除
             </div>
-            <div onClick={object.paid_back ? handlePaidBackEditClick : handleEditClick} className={[styles.btn, styles.edit].join(' ')}>
-              編輯
-            </div>
+            {
+              object.paid_back ? null :
+                <div onClick={handleEditClick} className={[styles.btn, styles.edit].join(' ')}>
+                  編輯
+                </div>
+            }
           </div>
         </div>
       </Collapse>
