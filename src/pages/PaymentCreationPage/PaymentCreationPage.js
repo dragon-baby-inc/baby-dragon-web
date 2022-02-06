@@ -53,7 +53,7 @@ const PaymentCreationPage = () => {
       let builder = users.filter(u => String(u.id) === authState.userLineIdToken)[0]
       let payer = builder
       if (!payer) { payer = users[0] }
-      if (!payer.coverCost) { payer = users[0] }
+      if (!payer.coverCost) { payer = users.filter(u => u.coverCost === true)[0] }
 
       setPayer(payer)
       setAccountingBookDetails(accountingBookDetails)
