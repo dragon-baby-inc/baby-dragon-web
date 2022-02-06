@@ -113,7 +113,8 @@ const PaymentForm = ({ users, manualOwers, index, owers, payment, authState }) =
     })
 
     if (!touched) {
-      _setManualOwers(getManualOwersAmount(users, _owers.value, _manualOwers.value.filter(o => !o.user.touched).map(o => o.user.id), v).state)
+      // _setManualOwers(getManualOwersAmount(users, _owers.value, _manualOwers.value.filter(o => !o.user.touched).map(o => o.user.id), v).state)
+      _setManualOwers(getManualOwersAmount(users, _owers.value, _manualOwers.value.map(o => o.user.id), v).state)
       setSummaryAmount(v)
     } else {
       let validManualOwersIds = _manualOwers.value.filter(o => o.amount > 0).map(o => o.user.id)

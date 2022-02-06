@@ -250,6 +250,7 @@ const EditableCheckboxSelect = ({
 
       let newOwers = manualOwers.value.map(o => {
         o.amount = ''
+        o.touched = false
         return o
       })
 
@@ -268,6 +269,13 @@ const EditableCheckboxSelect = ({
       closed()
       return
     }
+
+    let touchedAmount = sumOwers(_manualOwers.value, exponent)
+    if (touchedAmount == 0) {
+      closed()
+      return
+    }
+
     let validManualOwersIds = _manualOwers.value.filter(o => o.amount !== null && o.amount !== '' && o.amount > 0).map(o => o.user.id)
     let selected_objects = objects.filter(u => validManualOwersIds.includes(u.id))
     setSelectedObjects(selected_objects)
