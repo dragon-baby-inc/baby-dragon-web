@@ -239,13 +239,16 @@ const AccountingBookEditPage = (props) => {
   const createAccountingBook = () => {
     let formValid = validateForm(state, ['name', 'users', 'imageId', 'currency'])
     if (!formValid) { return }
+    setDisableForm(true)
 
     authState.api.createAccountingBook(group_id, buildParams())
       .then((res) => {
         history.navigateTo("paymentIndexPage", { group_id, accounting_book_id: res.data.accounting_book.id })
+        setDisableForm(false)
       })
       .catch(err => {
-        console.log(err)
+        alert(err.response.data.error_message)
+        setDisableForm(false)
       })
   }
 
@@ -336,7 +339,6 @@ const AccountingBookEditPage = (props) => {
 
   const handleSubmit = () => {
     createAccountingBook()
-    setDisableForm(true)
   }
 
   return(
