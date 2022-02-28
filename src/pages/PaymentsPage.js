@@ -94,7 +94,7 @@ const PaymentsPage = (props) => {
     marginTop: small ? '0px' : '1px',
     flexGrow: 1,
     height: paymentsHeight,
-    paddingBottom: '260px'
+    paddingBottom: payments.length > 0 ? '260px' : '200px',
   }
 
   let paymentContainerStyle = {
@@ -177,7 +177,7 @@ const PaymentsPage = (props) => {
           {
             payments.length > 0 ?
               paymentLabels
-              : <EmptyResult message='目前沒有任何款項喔'/> }
+              : <EmptyResult message='還沒有任何款項喔'/> }
         </div>
 
     },
@@ -186,7 +186,7 @@ const PaymentsPage = (props) => {
       component: <div style={paymentStyle} ref={summaryRef}>
         { summarObjects.length > 0 ?
             summarObjects
-            : <EmptyResult message='目前沒有任何款項喔'/> }
+            : <EmptyResult message='目前不需要分帳喔'/> }
       </div>
     }
   ]
