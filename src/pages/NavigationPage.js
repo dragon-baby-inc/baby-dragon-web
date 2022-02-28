@@ -12,6 +12,7 @@ import AccountingBookDefaultUsersPage from './AccountingBookDefaultUsersPage'
 import AccountingBooksPage from './AccountingBooksPage'
 import { useLiff } from '../hooks'
 import {
+  CurrentRedirect,
   PaymentEditPage,
   AccountingBookCurrencyPage,
   AccountingBookCreationPage,
@@ -32,6 +33,15 @@ const NavigationPage = (props) => {
           <AccountingBooksPage/>
         </Route>
         <AccountingBookProvider>
+          <Route exact path="/liff_entry/groups/:group_id/current_payments">
+            <CurrentRedirect page="current_payments"/>
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/current_summary">
+            <CurrentRedirect page="current_summary"/>
+          </Route>
+          <Route exact path="/liff_entry/groups/:group_id/current_new_payment">
+            <CurrentRedirect page="current_new_payment"/>
+          </Route>
           <Route exact path="/liff_entry/groups/:group_id/accounting_books/:accounting_book_id/payments/new">
             <PaymentCreationPage />
           </Route>

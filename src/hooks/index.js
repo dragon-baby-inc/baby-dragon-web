@@ -22,6 +22,7 @@ import useUserRadioSelectAmountLabel from './useUserRadioSelectAmountLabel'
 import useUsersFilterSelect from './useUsersFilterSelect'
 import useOwersFilterSelect from './useOwersFilterSelect'
 import useScrollRef from './useScrollRef'
+import useCurrentAccountingBook from './useCurrentAccountingBook'
 
 export {
   useAccountingBookSummary,
@@ -48,4 +49,5 @@ export {
   useOwersFilterSelect,
   useScrollRef,
   useDefaultUsersSelect,
+  useCurrentAccountingBook,
 }

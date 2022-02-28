@@ -3,11 +3,13 @@ import AccountingBookCurrencyPage from './AccountingBookCurrencyPage/AccountingB
 import PaymentCreationPage from './PaymentCreationPage/PaymentCreationPage';
 import PaymentEditPage from './PaymentEditPage/PaymentEditPage'
 import PaymentPaidBackPage from './PaymentPaidBackPage/PaymentPaidBackPage'
+import CurrentRedirect from './CurrentRedirect'
 
 export {
   AccountingBookCreationPage,
   AccountingBookCurrencyPage,
   PaymentCreationPage,
   PaymentEditPage,
-  PaymentPaidBackPage
+  PaymentPaidBackPage,
+  CurrentRedirect
 }

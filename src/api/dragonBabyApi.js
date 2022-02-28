@@ -57,6 +57,10 @@ class DragonBabyApi {
     return this.api.get(`api/v1/groups/${group_id}/users`)
   }
 
+  getCurrentAccountingBook(group_id) {
+    return this.api.get(`api/v1/groups/${group_id}/accounting_books/current`)
+  }
+
   getAccountingBookSummary(group_id, accounting_book_id) {
     return this.api.get(`api/v1/groups/${group_id}/accounting_books/${accounting_book_id}/summary`)
   }
