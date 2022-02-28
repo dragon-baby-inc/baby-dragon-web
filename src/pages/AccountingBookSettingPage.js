@@ -115,7 +115,7 @@ const AccountingBookSettingPage = (props) => {
     if (liff.isInClient()) {
       authState.api.exportPayments(group_id, accounting_book_id)
         .then((res) => {
-          let messages =  [{ type: 'text', text: `為了避免龍寶寶因為雲端空間餓死，檔案在30分鐘內會刪除喔！\n Andriod 手機可能會有亂碼，建議使用電腦下載：${res.data.url}` }]
+          let messages =  [{ type: 'text', text: `為了避免龍寶寶因為雲端空間餓死，檔案在30分鐘內會被刪除喔！\nAndriod 手機可能會有亂碼，建議使用電腦下載：${res.data.url}` }]
           liff.sendMessages(messages)
             .then(() => {
               liff.closeWindow()
