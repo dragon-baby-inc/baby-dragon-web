@@ -3,12 +3,12 @@
 .fixedHeader {
   width: 100%;
   z-index: 105;
-  transition: .4s;
+  transition: 0.4s;
   display: flex;
   justify-content: flex-start;
   flex-flow: row;
   align-items: center;
-  overflow: 'hidden';
+  overflow: "hidden";
   background-color: white;
 
   height: 58px;
@@ -31,18 +31,23 @@
 
 .header {
   width: 100%;
-  transition: .2s;
+  transition: 0.2s;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  overflow: 'hidden';
+  overflow: "hidden";
   background-color: transparent;
 }
 
 .header.small {
-  background: linear-gradient(to bottom,  rgba(255, 255, 255, 1) 0%,  rgba(233, 233, 233, 0) 90%, rgba(233, 233, 233, 0) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(233, 233, 233, 0) 90%,
+    rgba(233, 233, 233, 0) 100%
+  );
   height: 0px;
   position: absolute;
   opacity: 0;
@@ -62,7 +67,7 @@
     padding-left: 0px;
 
     .bookIcon {
-      transition: .3s;
+      transition: 0.3s;
       font-size: 20px;
       margin-right: 20px;
       padding-bottom: 0px;
@@ -76,7 +81,6 @@
       letter-spacing: 0em;
       text-align: left;
     }
-
   }
 }
 
@@ -93,7 +97,6 @@
   .searchIcon {
     font-size: 20px;
   }
-
 }
 
 .innerBlock {
@@ -146,14 +149,12 @@
       text-align: center;
     }
   }
-
 }
 
 .barsIcon {
-  transition: .3s;
+  transition: 0.3s;
   position: absolute;
   font-size: 20px;
   right: 10px;
-  top: 10px
+  top: 10px;
 }
-

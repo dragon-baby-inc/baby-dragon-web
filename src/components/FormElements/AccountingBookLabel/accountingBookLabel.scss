@@ -1,6 +1,6 @@
 @import "../../../styleSheets/globalColors.scss";
 
-label.group-menu-label.group-menu-accounting-book:focus-within  {
+label.group-menu-label.group-menu-accounting-book:focus-within {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -10,7 +10,7 @@ label.group-menu-label.group-menu-accounting-book:active {
 }
 
 label.group-menu-label.group-menu-accounting-book::before {
-  content: '';
+  content: "";
   width: 10px;
   height: 100%;
   position: absolute;
@@ -26,8 +26,8 @@ label.group-menu-label.group-menu-accounting-book {
   background-color: #fff;
   position: relative;
   overflow: hidden;
-  transition: .3s;
-  padding-left:  20px;
+  transition: 0.3s;
+  padding-left: 20px;
   padding-right: 20px;
   border-bottom: 1px solid #eee;
   padding-top: 10px;
@@ -52,7 +52,7 @@ label.group-menu-label.group-menu-accounting-book {
   }
 
   .group-menu-image-block {
-    transition: .3s;
+    transition: 0.3s;
     transform: translate(0px, 0px);
 
     img {
@@ -67,7 +67,7 @@ label.group-menu-label.group-menu-accounting-book {
 
   .group-menu-payment-block {
     height: 100%;
-    transition: .3s;
+    transition: 0.3s;
     width: 100%;
     display: flex;
     align-items: center;
@@ -96,7 +96,6 @@ label.group-menu-label.group-menu-accounting-book {
       font-weight: 700;
       line-height: 22px;
       letter-spacing: 0px;
-
     }
     .message {
       font-size: 12px;
@@ -130,7 +129,6 @@ label.group-menu-label.group-menu-accounting-book {
     display: none;
   }
 
-
   .group-menu-username.disabled {
     border-bottom: 1px solid transparent;
   }
@@ -155,7 +153,7 @@ label.group-menu-label.group-menu-accounting-book {
     width: 100px;
     height: 50px;
     line-height: 70px;
-    transition: .3s;
+    transition: 0.3s;
     transform: translate(100px, 0px);
     display: flex;
     justify-content: center;
@@ -184,7 +182,7 @@ label.group-menu-label.group-menu-accounting-book {
     outline: none;
     background: none;
     background-color: none;
-     -webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
   }
 
@@ -214,7 +212,7 @@ label.group-menu-label.group-menu-accounting-book {
       background: $gold900;
       background-color: transparent;
       color: $gold900;
-      transition: .3s;
+      transition: 0.3s;
     }
     .icon.delete {
       width: 80px;

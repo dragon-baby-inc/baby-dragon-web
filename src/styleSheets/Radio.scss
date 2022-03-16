@@ -21,7 +21,6 @@
   background-color: $green900;
 }
 
-
 /* Show the indicator (dot/circle) when checked */
 .group-menu-radio-label input:checked ~ .checkmark:after {
   display: block;
@@ -36,4 +35,3 @@
   border-radius: 50%;
   background: white;
 }
-

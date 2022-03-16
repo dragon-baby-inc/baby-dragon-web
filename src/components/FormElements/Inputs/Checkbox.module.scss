@@ -17,7 +17,7 @@
   left: 0;
   height: 18px;
   width: 18px;
-  border: 2px solid #CCCCCC;
+  border: 2px solid #cccccc;
   box-sizing: border-box;
   display: block;
   position: relative;
@@ -46,7 +46,7 @@
 .label input:disabled ~ .checkmark {
   background-color: $gold700;
   border: 2px solid $gold700;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .label input:checked ~ .checkmark:after {

@@ -1,9 +1,9 @@
-import NewPaymentForm from './NewPaymentForm';
-import PaidBackPaymentForm from './PaidBackPaymentForm';
-import FilterPaymentForm from './FilterForm/FilterPaymentForm';
-import UserForm from './UserForm/UserForm';
-import PaymentForm from './PaymentForm/PaymentForm'
-import PaidBackForm from './PaidBackForm/PaidBackForm'
+import NewPaymentForm from "./NewPaymentForm";
+import PaidBackPaymentForm from "./PaidBackPaymentForm";
+import FilterPaymentForm from "./FilterForm/FilterPaymentForm";
+import UserForm from "./UserForm/UserForm";
+import PaymentForm from "./PaymentForm/PaymentForm";
+import PaidBackForm from "./PaidBackForm/PaidBackForm";
 
 export {
   NewPaymentForm,
@@ -11,5 +11,5 @@ export {
   FilterPaymentForm,
   UserForm,
   PaymentForm,
-  PaidBackForm
+  PaidBackForm,
 };

@@ -1,14 +1,13 @@
-import React from 'react';
-import styles from './ActionLabel.module.scss';
+import React from "react";
+import styles from "./ActionLabel.module.scss";
 
-const actionLabel = ({
-  clicked,
-  description,
-  name,
-  style,
-}) => {
+const actionLabel = ({ clicked, description, name, style }) => {
   return (
-    <label className={styles.label} onClick={clicked} style={style ? style : {}}>
+    <label
+      className={styles.label}
+      onClick={clicked}
+      style={style ? style : {}}
+    >
       {description}
     </label>
   );

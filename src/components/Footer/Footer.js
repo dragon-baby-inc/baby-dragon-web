@@ -1,14 +1,9 @@
-import React from 'react';
-import styles from './Footer.module.scss';
+import React from "react";
+import styles from "./Footer.module.scss";
 
-const footer = ({
-  style,
-  children
-}) => {
+const footer = ({ style, children }) => {
   return (
-    <div
-      style={style ? style: {}}
-      className={styles.container}>
+    <div style={style ? style : {}} className={styles.container}>
       {children}
     </div>
   );

@@ -1,4 +1,2 @@
-import Loading from './Loading';
-export {
-  Loading
-};
+import Loading from "./Loading";
+export { Loading };

@@ -6,7 +6,7 @@
   width: 50%;
   height: 2px;
   background-color: $gold700;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .wiggle.active {
@@ -75,11 +75,9 @@ a.active {
 
 .icon.activeStyle {
   color: black;
-//   background-color: $green700;
+  //   background-color: $green700;
 }
 .fa.activeStyle {
   color: black;
-//   color: white;
+  //   color: white;
 }
-
-

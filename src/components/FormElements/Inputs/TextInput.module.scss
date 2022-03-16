@@ -8,7 +8,7 @@
   background-color: #fff;
 }
 
-.label:focus-within  {
+.label:focus-within {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -25,12 +25,12 @@
   border-radius: 16px;
   border: 1px solid transparent;
   font-size: 16px;
-  transition: .2s;
+  transition: 0.2s;
   background-color: $gray100;
 }
 
 .label.invalid {
-  border: 1px solid #D65C5C;
+  border: 1px solid #d65c5c;
   border-radius: 16px;
 }
 
@@ -62,7 +62,7 @@
   flex-grow: 1;
   flex-shrink: 1;
   width: 100%;
-  transition: .4s;
+  transition: 0.4s;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -78,7 +78,8 @@
   border-radius: none;
 }
 
-.input, .input:focus {
+.input,
+.input:focus {
   border: none;
   outline: none;
 }

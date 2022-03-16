@@ -1,6 +1,6 @@
 @import "../../../styleSheets/globalColors.scss";
 
-label.group-menu-label.group-menu-ower-label:focus-within  {
+label.group-menu-label.group-menu-ower-label:focus-within {
 }
 
 label.group-menu-label.group-menu-ower-label {
@@ -8,7 +8,7 @@ label.group-menu-label.group-menu-ower-label {
   background-color: #fff;
   position: relative;
   display: flex;
-  transition: .3s;
+  transition: 0.3s;
   width: 100%;
   padding: 0;
   flex-wrap: wrap;
@@ -71,7 +71,7 @@ label.group-menu-label.group-menu-ower-label {
     }
 
     .allocation::before {
-      content: '';
+      content: "";
       padding-right: 2px;
       background-color: #eee;
       display: inline-block;

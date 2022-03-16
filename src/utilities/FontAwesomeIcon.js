@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBookOpen,
   faTimes,
@@ -16,16 +16,16 @@ import {
   faLock,
   faLockOpen,
   faHome,
-} from '@fortawesome/fontawesome-free-solid'
+} from "@fortawesome/fontawesome-free-solid";
 import {
   faCheckDouble,
   faStar as fasFaStar,
   faDollarSign as fasDollarSign,
-} from '@fortawesome/free-solid-svg-icons'
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faClock as farFaClock,
   faStar as farFaStar,
-} from '@fortawesome/free-regular-svg-icons'
+} from "@fortawesome/free-regular-svg-icons";
 
 const icons = {
   faBookOpen: faBookOpen,
@@ -50,12 +50,10 @@ const icons = {
   fasFaStar: fasFaStar,
   farFaClock: farFaClock,
   faTrashCanSlash: faTrashCanSlash,
-}
+};
 
 const Icon = (props) => {
-  return(
-    <FontAwesomeIcon icon={icons[props.faicon]} {...props}/>
-  )
-}
+  return <FontAwesomeIcon icon={icons[props.faicon]} {...props} />;
+};
 
 export default Icon;

@@ -1,13 +1,12 @@
-import React from 'react';
-import styles from './Separater.module.scss';
+import React from "react";
+import styles from "./Separater.module.scss";
 
-const separater = ({
-  name,
-  style
-}) => {
+const separater = ({ name, style }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.separater} style={style ? style : {}}> </div>
+      <div className={styles.separater} style={style ? style : {}}>
+        {" "}
+      </div>
     </div>
   );
 };

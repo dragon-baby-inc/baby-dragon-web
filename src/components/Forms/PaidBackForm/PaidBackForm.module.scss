@@ -1,6 +1,6 @@
 .container {
   height: calc(100vh - 59px);
-//   height: calc(var(--vh, 1vh) * 100 - 59px);
+  //   height: calc(var(--vh, 1vh) * 100 - 59px);
   overflow: hidden;
 }
 .stepContainer {
@@ -11,7 +11,6 @@
 
 .AddOwerbutton {
   padding-bottom: 30px;
-
 }
 
 .footer {

@@ -1,15 +1,9 @@
-import React from 'react';
-import styles from './Checkbox.module.scss'
+import React from "react";
+import styles from "./Checkbox.module.scss";
 
-const Checkbox = ({
-  changed,
-  style,
-  checked,
-  value,
-  disabled
-}) => {
+const Checkbox = ({ changed, style, checked, value, disabled }) => {
   return (
-    <div style={ style ? style : {} } className={styles.label}>
+    <div style={style ? style : {}} className={styles.label}>
       <input
         disabled={disabled}
         checked={checked}
@@ -19,7 +13,7 @@ const Checkbox = ({
       />
       <span className={styles.checkmark}></span>
     </div>
-  )
+  );
 };
 
-export default Checkbox
+export default Checkbox;

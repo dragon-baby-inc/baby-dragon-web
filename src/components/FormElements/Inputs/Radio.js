@@ -1,15 +1,10 @@
-import React from 'react';
-import styles from './Radio.module.scss'
+import React from "react";
+import styles from "./Radio.module.scss";
 
-const Radio = ({
-  checked,
-  changed,
-  value
-}) => {
-
+const Radio = ({ checked, changed, value }) => {
   const handleChanged = (e) => {
-    changed(e)
-  }
+    changed(e);
+  };
 
   return (
     <label className={styles.label}>
@@ -24,8 +19,7 @@ const Radio = ({
         <span className={styles.checkmark}></span>
       </div>
     </label>
-
-  )
+  );
 };
 
 export default Radio;

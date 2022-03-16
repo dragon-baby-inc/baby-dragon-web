@@ -1,9 +1,9 @@
-import AccountingBookCreationPage from './AccountingBookCreationPage/AccountingBookCreationPage';
-import AccountingBookCurrencyPage from './AccountingBookCurrencyPage/AccountingBookCurrencyPage';
-import PaymentCreationPage from './PaymentCreationPage/PaymentCreationPage';
-import PaymentEditPage from './PaymentEditPage/PaymentEditPage'
-import PaymentPaidBackPage from './PaymentPaidBackPage/PaymentPaidBackPage'
-import CurrentRedirect from './CurrentRedirect'
+import AccountingBookCreationPage from "./AccountingBookCreationPage/AccountingBookCreationPage";
+import AccountingBookCurrencyPage from "./AccountingBookCurrencyPage/AccountingBookCurrencyPage";
+import PaymentCreationPage from "./PaymentCreationPage/PaymentCreationPage";
+import PaymentEditPage from "./PaymentEditPage/PaymentEditPage";
+import PaymentPaidBackPage from "./PaymentPaidBackPage/PaymentPaidBackPage";
+import CurrentRedirect from "./CurrentRedirect";
 
 export {
   AccountingBookCreationPage,
@@ -11,5 +11,5 @@ export {
   PaymentCreationPage,
   PaymentEditPage,
   PaymentPaidBackPage,
-  CurrentRedirect
-}
+  CurrentRedirect,
+};

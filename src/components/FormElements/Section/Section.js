@@ -1,17 +1,11 @@
-import React from 'react';
-import styles from './Section.module.scss';
+import React from "react";
+import styles from "./Section.module.scss";
 
-const section = ({
-  name,
-  children,
-  style
-}) => {
+const section = ({ name, children, style }) => {
   return (
-    <div style={style ? style: {}} className={styles.container}>
+    <div style={style ? style : {}} className={styles.container}>
       {name}
-      <div className={styles.lint}>
-        {children}
-      </div>
+      <div className={styles.lint}>{children}</div>
     </div>
   );
 };
