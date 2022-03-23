@@ -132,6 +132,11 @@ const AccountingBookUsersPage = (props) => {
       return
     }
 
+    if (value.length === 0) {
+      alert('至少要選一個人喔！')
+      return
+    }
+
     setFullPageLoad(true)
 
     authState.api.updateCoverCostUsers(group_id, accounting_book_id, value)
