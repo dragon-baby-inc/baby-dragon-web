@@ -1,10 +1,10 @@
-import TopLeftIcon from './TopLeftIcon'
-import TopRightIcon from './TopRightIcon'
-import ArrowLeft from './ArrowLeft/ArrowLeft'
-import CircleFloatingIcon from './CircleFloatingIcon/CircleFloatingIcon'
-import FloatIcon from './FloatingIcon/FloatingIcon'
-import FloatingIcon from './FloatingIcon/FloatingIcon'
-import CircleIcon from './CircleIcon/CircleIcon'
+import TopLeftIcon from "./TopLeftIcon";
+import TopRightIcon from "./TopRightIcon";
+import ArrowLeft from "./ArrowLeft/ArrowLeft";
+import CircleFloatingIcon from "./CircleFloatingIcon/CircleFloatingIcon";
+import FloatIcon from "./FloatingIcon/FloatingIcon";
+import FloatingIcon from "./FloatingIcon/FloatingIcon";
+import CircleIcon from "./CircleIcon/CircleIcon";
 
 export {
   TopLeftIcon,
@@ -13,5 +13,5 @@ export {
   CircleFloatingIcon,
   FloatIcon,
   FloatingIcon,
-  CircleIcon
+  CircleIcon,
 };

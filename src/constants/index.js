@@ -1,8 +1,4 @@
-import { themeColors } from './globalColors'
-import { imageUrls, userImageUrls } from './imageUrls'
+import { themeColors } from "./globalColors";
+import { imageUrls, userImageUrls } from "./imageUrls";
 
-export {
-  themeColors,
-  imageUrls,
-  userImageUrls,
-}
+export { themeColors, imageUrls, userImageUrls };

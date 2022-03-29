@@ -27,7 +27,11 @@
 }
 
 .btn {
-  background: linear-gradient(90deg, rgba(16,60,43,1) 0%, rgba(7,105,77,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(16, 60, 43, 1) 0%,
+    rgba(7, 105, 77, 1) 100%
+  );
   background: $green700;
   border-radius: 12px;
 }
@@ -44,5 +48,4 @@
 .input {
   padding-top: 6px;
   padding-bottom: 4px;
-
 }

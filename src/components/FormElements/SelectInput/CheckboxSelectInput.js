@@ -1,8 +1,8 @@
-import React from "react"
-import styles from './SelectInput.module.scss'
-import { themeColors } from '../../../constants/globalColors'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/fontawesome-free-solid'
+import React from "react";
+import styles from "./SelectInput.module.scss";
+import { themeColors } from "../../../constants/globalColors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/fontawesome-free-solid";
 
 const CheckboxSelectInput = ({
   name,
@@ -14,31 +14,32 @@ const CheckboxSelectInput = ({
   selectAll,
   valid,
 }) => {
-
   const handleClick = (e) => {
-    clicked()
+    clicked();
+  };
+
+  const labelStyles = [styles.label];
+  if (valid === false) {
+    labelStyles.push(styles.invalid);
+  }
+  let displayValue = value ? `共 ${value.length} 人分` : placeholder;
+  if (selectAll) {
+    displayValue = "所有人分";
   }
 
-  const labelStyles = [styles.label]
-  if (valid === false) { labelStyles.push(styles.invalid) }
-  let displayValue = value ? `共 ${value.length} 人分` : placeholder
-  if (selectAll) { displayValue = '所有人分' }
-
-  return(
+  return (
     <label
       onClick={handleClick}
-      className={labelStyles.join(' ')}
+      className={labelStyles.join(" ")}
       style={labelStyle}
     >
       <div className={styles.name}>{name}</div>
-      <div
-        className={styles.input}
-      >{displayValue}</div>
+      <div className={styles.input}>{displayValue}</div>
       <div className={styles.icon}>
-        <FontAwesomeIcon icon={faChevronDown} color={themeColors.gray600}/>
+        <FontAwesomeIcon icon={faChevronDown} color={themeColors.gray600} />
       </div>
     </label>
-  )
-}
+  );
+};
 
-export default CheckboxSelectInput
+export default CheckboxSelectInput;

@@ -21,7 +21,7 @@
   border-radius: 16px;
   border: 1px solid #eee;
   font-size: 14px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .name {
@@ -31,7 +31,6 @@
   color: $gold900;
   line-height: 42px;
 }
-
 
 .icon {
   position: absolute;
@@ -51,7 +50,8 @@
   color: $gray900;
 }
 
-input, input:focus {
+input,
+input:focus {
   border: none;
   outline: none;
 }

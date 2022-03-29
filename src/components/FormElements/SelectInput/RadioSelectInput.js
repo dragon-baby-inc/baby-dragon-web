@@ -1,8 +1,8 @@
-import React from "react"
-import styles from './SelectInput.module.scss'
-import { themeColors } from '../../../constants/globalColors'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/fontawesome-free-solid'
+import React from "react";
+import styles from "./SelectInput.module.scss";
+import { themeColors } from "../../../constants/globalColors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/fontawesome-free-solid";
 
 const TextInput = ({
   name,
@@ -13,33 +13,32 @@ const TextInput = ({
   placeholder,
   valid,
 }) => {
-
   const handleClick = (e) => {
-    clicked()
-  }
+    clicked();
+  };
 
-  const labelStyles = [styles.label]
-  if (valid === false) { labelStyles.push(styles.invalid) }
-  let displayValue = value ? value : placeholder
+  const labelStyles = [styles.label];
+  if (valid === false) {
+    labelStyles.push(styles.invalid);
+  }
+  let displayValue = value ? value : placeholder;
   if (displayValue.length > 14) {
-    displayValue = `${displayValue.slice(0, 14)}...`
+    displayValue = `${displayValue.slice(0, 14)}...`;
   }
 
-  return(
+  return (
     <label
       onClick={handleClick}
-      className={labelStyles.join(' ')}
+      className={labelStyles.join(" ")}
       style={labelStyle}
     >
       <div className={styles.name}>{name}</div>
-      <div
-        className={styles.input}
-      >{displayValue}</div>
+      <div className={styles.input}>{displayValue}</div>
       <div className={styles.icon}>
-        <FontAwesomeIcon icon={faChevronDown} color={themeColors.gray600}/>
+        <FontAwesomeIcon icon={faChevronDown} color={themeColors.gray600} />
       </div>
     </label>
-  )
-}
+  );
+};
 
-export default TextInput
+export default TextInput;

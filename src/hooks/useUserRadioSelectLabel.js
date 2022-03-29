@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import {
-  UserRadioSelectLabel
-} from '../components'
+import React, { useState, useEffect } from "react";
+import { UserRadioSelectLabel } from "../components";
 
 const useUserRadioSelectLabel = ({
   users,
@@ -9,30 +7,34 @@ const useUserRadioSelectLabel = ({
   callback,
   style,
   valid,
-  key
+  key,
 }) => {
-  const [user, setUser] = useState(initialValue)
+  const [user, setUser] = useState(initialValue);
 
   useEffect(() => {
-    setUser(initialValue)
-  }, initialValue)
+    setUser(initialValue);
+  }, initialValue);
 
   const handleUserSelect = (object) => {
-    setUser(object)
-    if (callback) { callback(object) }
-  }
+    setUser(object);
+    if (callback) {
+      callback(object);
+    }
+  };
 
-  const selectLabel = <UserRadioSelectLabel
-    style={style}
-    key={key}
-    users={users}
-    callback={handleUserSelect}
-    valid={valid}
-    user={user}
-    initialValue={user}
-  />
+  const selectLabel = (
+    <UserRadioSelectLabel
+      style={style}
+      key={key}
+      users={users}
+      callback={handleUserSelect}
+      valid={valid}
+      user={user}
+      initialValue={user}
+    />
+  );
 
-    return [user, selectLabel];
-}
+  return [user, selectLabel];
+};
 
 export default useUserRadioSelectLabel;

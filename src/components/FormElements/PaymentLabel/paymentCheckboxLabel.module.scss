@@ -1,4 +1,4 @@
-@import '../../../styleSheets/globalColors.scss';
+@import "../../../styleSheets/globalColors.scss";
 
 .container {
   border-top-left-radius: 16px;
@@ -39,7 +39,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-left:  16px;
+  padding-left: 16px;
   padding-right: 16px;
   height: 70px;
   border-top-left-radius: 16px;
@@ -51,7 +51,6 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
 
   position: relative;
   cursor: pointer;
@@ -87,7 +86,7 @@
     text-overflow: ellipsis;
     width: 100px;
     display: block;
-    overflow: hidden
+    overflow: hidden;
   }
 
   .message {
@@ -95,7 +94,7 @@
 }
 
 .image {
-  transition: .3s;
+  transition: 0.3s;
   transform: translate(0px, 0px);
 
   img {
@@ -115,7 +114,7 @@
   display: block;
   padding: 4px 16px;
 
-  background: #F1ECE4;
+  background: #f1ece4;
   border-radius: 100px;
 
   font-style: normal;
@@ -147,7 +146,7 @@
 }
 
 .paymentBlock {
-  transition: .3s;
+  transition: 0.3s;
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
@@ -156,10 +155,9 @@
   justify-content: space-between;
 }
 
-
 .label.paidBack {
   border-bottom: 1px solid white;
-  background: #E6EFED;
+  background: #e6efed;
 
   .name {
     .description {
@@ -174,17 +172,16 @@
 }
 
 .payment.collapse.paidBack {
-  background: #E6EFED;
+  background: #e6efed;
   .allocation.buttons {
     padding: 0;
-    border-top:  1px solid white;
+    border-top: 1px solid white;
   }
 }
 
-
 .paymentCollapse.paidBack {
-  background: #E6EFED;
-  background-color: #E6EFED;
+  background: #e6efed;
+  background-color: #e6efed;
 }
 
 .paymentCollapse {
@@ -212,17 +209,15 @@
       justify-content: space-between;
       flex-grow: 1;
     }
-
   }
 
   .allocation.title {
     padding: 3px 10px;
   }
-
 }
 
 .allocation::before {
-  content: '';
+  content: "";
   padding-right: 2px;
   display: inline-block;
   position: relative;
@@ -242,7 +237,6 @@
     justify-content: space-between;
     flex-grow: 1;
   }
-
 
   .alloName {
     font-size: 14px;
@@ -265,7 +259,7 @@
 
 .buttons {
   padding: 0;
-  border-top:  1px solid $gray400;
+  border-top: 1px solid $gray400;
 
   display: flex;
   justify-content: flex-end;
@@ -295,4 +289,3 @@
     margin-right: -8px;
   }
 }
-

@@ -1,69 +1,71 @@
-import React, { useState, useEffect } from 'react'
-import SwipeableViews from 'react-swipeable-views';
-import Views from './Views/Views'
+import React, { useState, useEffect } from "react";
+import SwipeableViews from "react-swipeable-views";
+import Views from "./Views/Views";
 
-const ColumnSwappableView = ({
-  styles,
-  index,
-  steps,
-  callback,
-  height,
-}) => {
-  const [_index, setIndex] = useState(index)
+const ColumnSwappableView = ({ styles, index, steps, callback, height }) => {
+  const [_index, setIndex] = useState(index);
 
   const handleIndexChanged = (value) => {
-    setIndex(value)
-    if (callback) { callback(value) }
-  }
+    setIndex(value);
+    if (callback) {
+      callback(value);
+    }
+  };
 
   useEffect(() => {
     if (index) {
-      setIndex(index)
+      setIndex(index);
     }
-  }, [index])
+  }, [index]);
 
   const defaultStyles = {
     root: {
       flexGrow: 1,
-      maxHeight: '-webkit-fill-available',
+      maxHeight: "-webkit-fill-available",
       margin: 0,
-      height: height ? `calc(${height} - 51px)` : 'calc(100%  - 51px)',
-      overflow: 'hidden',
+      height: height ? `calc(${height} - 51px)` : "calc(100%  - 51px)",
+      overflow: "hidden",
     },
     slideContainer: {
       height: `calc(100%)`,
       margin: 0,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     slide: {
-      overflow: 'hidden',
+      overflow: "hidden",
       height: `calc(100%)`,
-      backgroundColor: '#FFFFFF',
+      backgroundColor: "#FFFFFF",
     },
   };
 
-  const _styles = styles ? { ...defaultStyles, ...styles } : defaultStyles
-  const stepsComponents = []
+  const _styles = styles ? { ...defaultStyles, ...styles } : defaultStyles;
+  const stepsComponents = [];
 
-  steps.forEach(step => {
+  steps.forEach((step) => {
     stepsComponents.push(
       <div key={step.name} style={Object.assign({}, _styles.slide)}>
         {step.component}
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <>
-      <Views steps={steps} index={parseInt(_index)} setIndex={handleIndexChanged}/>
-      <SwipeableViews style={_styles.root}
+      <Views
+        steps={steps}
+        index={parseInt(_index)}
+        setIndex={handleIndexChanged}
+      />
+      <SwipeableViews
+        style={_styles.root}
         disabled={true}
         index={parseInt(_index)}
-        slideStyle={_styles.slideContainer}>
+        slideStyle={_styles.slideContainer}
+      >
         {stepsComponents}
       </SwipeableViews>
     </>
-  )
-}
+  );
+};
 
-export default ColumnSwappableView
+export default ColumnSwappableView;

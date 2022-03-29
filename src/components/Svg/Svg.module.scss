@@ -1,4 +1,4 @@
-@import '../../styleSheets/globalColors.scss';
+@import "../../styleSheets/globalColors.scss";
 
 .container {
   display: flex;
@@ -25,7 +25,6 @@
 }
 
 .accountingGold {
-
   path {
   }
 
@@ -38,7 +37,8 @@
     fill: transparent;
   }
 
-  rect, circle {
+  rect,
+  circle {
     stroke: $gold900;
   }
 }

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Svg, TextInput, ConfirmBox, IconSwappableView } from '../../index'
-import { userImageUrls } from '../../../constants'
+import React from "react";
+import { Svg, TextInput, ConfirmBox, IconSwappableView } from "../../index";
+import { userImageUrls } from "../../../constants";
 
 const UserConfirmBox = ({
   title,
@@ -9,48 +9,47 @@ const UserConfirmBox = ({
   userName,
   setUserName,
   imageUserId,
-  setUserImageId
+  setUserImageId,
 }) => {
-
   const _styles = {
     root: {
-      backgroundColor: 'white',
+      backgroundColor: "white",
       margin: 0,
-      padding: '0px 22vw',
-      overflow: 'hidden',
+      padding: "0px 22vw",
+      overflow: "hidden",
     },
   };
 
-  return(
-    <ConfirmBox
-      title={title}
-      confirmed={confirmed}
-      canceled={canceled}>
-      <div style={{ backgroundColor: 'white', width: '100%' }}>
+  return (
+    <ConfirmBox title={title} confirmed={confirmed} canceled={canceled}>
+      <div style={{ backgroundColor: "white", width: "100%" }}>
         <IconSwappableView
           imageSize="80px"
           styles={_styles}
           changed={setUserImageId}
           initial={imageUserId}
-          icons={userImageUrls}/>
-        <div style={{ padding: '24px 16px' }}>
+          icons={userImageUrls}
+        />
+        <div style={{ padding: "24px 16px" }}>
           <TextInput
-            key='name'
-            svg={ <Svg icon='person' size='24' className='gold900'/> }
+            key="name"
+            svg={<Svg icon="person" size="24" className="gold900" />}
             disabled={false}
-            placeholder={'輸入名稱'}
-            name={'名稱'}
-            style={{ width: '100%', margin: '0px' }}
-            changed={(value) => setUserName({ value: value, valid: value.length > 0 })}
-            value={userName.value === undefined ? '' : userName.value}
+            placeholder={"輸入名稱"}
+            name={"名稱"}
+            style={{ width: "100%", margin: "0px" }}
+            changed={(value) =>
+              setUserName({ value: value, valid: value.length > 0 })
+            }
+            value={userName.value === undefined ? "" : userName.value}
             valid={userName.valid}
             invalidFeedback="不可為空，不可同名，12字內"
-            type='text'
+            type="text"
           />
         </div>
       </div>
     </ConfirmBox>
-  )
-}
+  );
+};
 
 export default UserConfirmBox;

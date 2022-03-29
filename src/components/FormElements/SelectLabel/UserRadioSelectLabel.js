@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import styles from './SelectLabel.module.scss'
+import React, { useState } from "react";
+import styles from "./SelectLabel.module.scss";
 import {
   Svg,
   FontAwesomeIcon,
   Drawer,
   Image,
-  DrawerRadioSelect
-} from '../../../components'
-import {
-  createUserRadioLabel
-} from '../../../generators/labelGenerator'
-import {
-  userImageUrls
-} from '../../../constants'
+  DrawerRadioSelect,
+} from "../../../components";
+import { createUserRadioLabel } from "../../../generators/labelGenerator";
+import { userImageUrls } from "../../../constants";
 
 const UserRadioSelectLabel = ({
   users,
@@ -20,36 +16,42 @@ const UserRadioSelectLabel = ({
   initialValue,
   callback,
   valid,
-  style
+  style,
 }) => {
-  const [drawerActive, setDrawerActive] = useState(false)
+  const [drawerActive, setDrawerActive] = useState(false);
 
   const userSelectCallback = (object) => {
-    setDrawerActive(false)
-    if (callback) { callback(object) }
-  }
+    setDrawerActive(false);
+    if (callback) {
+      callback(object);
+    }
+  };
 
   const handleClicked = () => {
-    setDrawerActive(!drawerActive)
-  }
+    setDrawerActive(!drawerActive);
+  };
 
   const getUserName = () => {
-    if (!user) { return null }
-    return user.displayName
-  }
+    if (!user) {
+      return null;
+    }
+    return user.displayName;
+  };
 
   const getUserImage = () => {
-    if (!user) { return null }
-    if (!user.fromLine) {
-      return userImageUrls[user.imageId]
-    } else {
-      return user.imageURL
+    if (!user) {
+      return null;
     }
-  }
+    if (!user.fromLine) {
+      return userImageUrls[user.imageId];
+    } else {
+      return user.imageURL;
+    }
+  };
 
-  let labelClasses = [styles.label]
+  let labelClasses = [styles.label];
   if (!valid) {
-    labelClasses.push(styles.invalidLabel)
+    labelClasses.push(styles.invalidLabel);
   }
 
   return (
@@ -57,23 +59,22 @@ const UserRadioSelectLabel = ({
       <label
         style={style ? style : {}}
         className={styles.label}
-        onClick={handleClicked}>
+        onClick={handleClicked}
+      >
         <div className={styles.name}>
-          <Image style={{ paddingRight: '12px' }} size='56px' imageUrl={getUserImage()}/>
+          <Image
+            style={{ paddingRight: "12px" }}
+            size="56px"
+            imageUrl={getUserImage()}
+          />
           {getUserName()}
         </div>
         <div className={styles.icon}>
-          <Svg
-            className='black'
-            icon='downArrow'
-            size='24'
-          />
+          <Svg className="black" icon="downArrow" size="24" />
         </div>
       </label>
 
-      <Drawer
-        open={drawerActive}
-        closed={() => setDrawerActive(false)}>
+      <Drawer open={drawerActive} closed={() => setDrawerActive(false)}>
         <DrawerRadioSelect
           selectedObject={user}
           createLabel={createUserRadioLabel}
@@ -83,7 +84,7 @@ const UserRadioSelectLabel = ({
         />
       </Drawer>
     </>
-  )
+  );
 };
 
-export default UserRadioSelectLabel
+export default UserRadioSelectLabel;

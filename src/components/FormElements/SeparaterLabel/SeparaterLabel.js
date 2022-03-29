@@ -1,10 +1,7 @@
-import React from 'react';
-import styles from './SeparaterLabel.module.scss';
+import React from "react";
+import styles from "./SeparaterLabel.module.scss";
 
-const separaterLabel = ({
-  name,
-  style
-}) => {
+const separaterLabel = ({ name, style }) => {
   return (
     <div style={style ? style : {}} className={styles.container}>
       {name}

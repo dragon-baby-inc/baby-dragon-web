@@ -1,4 +1,4 @@
-import styles from './Svg.module.scss'
+import styles from "./Svg.module.scss";
 
 import {
   Delete,
@@ -23,7 +23,7 @@ import {
   Date,
   AccountingBook,
   Texting,
-} from './../../assets/icons/index'
+} from "./../../assets/icons/index";
 
 const icons = {
   add: Add,
@@ -47,28 +47,30 @@ const icons = {
   Money: Money,
   Date: Date,
   AccountingBook: AccountingBook,
-  texting: Texting
-}
+  texting: Texting,
+};
 
-const Svg = (
-  props
-) => {
-  let _size = props.size ? props.size : '16'
+const Svg = (props) => {
+  let _size = props.size ? props.size : "16";
 
-  let Component = icons[props.icon]
+  let Component = icons[props.icon];
 
-  const allowed = ['fill', 'stroke'];
+  const allowed = ["fill", "stroke"];
   const filteredProps = Object.keys(props)
-  .filter(key => allowed.includes(key))
-  .reduce((obj, key) => {
-    obj[key] = props[key];
-    return obj;
-  }, {});
+    .filter((key) => allowed.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = props[key];
+      return obj;
+    }, {});
 
-  let className = props.className ? props.className : null
+  let className = props.className ? props.className : null;
 
-  return(
-    <div className={styles.container} style={props.style ? props.style : {}} onClick={props.clicked ? props.clicked : () => {}}>
+  return (
+    <div
+      className={styles.container}
+      style={props.style ? props.style : {}}
+      onClick={props.clicked ? props.clicked : () => {}}
+    >
       <Component
         className={styles[className]}
         width={_size}
@@ -76,7 +78,7 @@ const Svg = (
         {...filteredProps}
       />
     </div>
-  )
-}
+  );
+};
 
 export default Svg;

@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   faBookOpen,
@@ -25,19 +25,19 @@ import {
   faList,
   faHistory,
   faBook,
-} from '@fortawesome/fontawesome-free-solid'
+} from "@fortawesome/fontawesome-free-solid";
 import {
   faCheckDouble,
   faStar as fasFaStar,
   faDollarSign as fasDollarSign,
   faCalendarAlt as fasCalendarAlt,
-} from '@fortawesome/free-solid-svg-icons'
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faClock as farFaClock,
   faStar as farFaStar,
   faCreditCard as farCreditCard,
-  faUser as farUser
-} from '@fortawesome/free-regular-svg-icons'
+  faUser as farUser,
+} from "@fortawesome/free-regular-svg-icons";
 
 const icons = {
   faBookOpen: faBookOpen,
@@ -72,12 +72,10 @@ const icons = {
   faTimesCircle: faTimesCircle,
   faUser: faUser,
   farUser: farUser,
-}
+};
 
 const Icon = (props) => {
-  return(
-    <FontAwesomeIcon icon={icons[props.faicon]} {...props}/>
-  )
-}
+  return <FontAwesomeIcon icon={icons[props.faicon]} {...props} />;
+};
 
 export default Icon;

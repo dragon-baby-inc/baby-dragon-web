@@ -49,14 +49,13 @@
   }
 
   a.icon:active {
-//     color: white;
-//     background-color: $green700;
+    //     color: white;
+    //     background-color: $green700;
 
     .fa {
       color: white;
     }
   }
-
 }
 
 a.hover,
@@ -66,11 +65,9 @@ a.active {
 
 .icon.activeStyle {
   color: black;
-//   background-color: $green700;
+  //   background-color: $green700;
 }
 .fa.activeStyle {
   color: black;
-//   color: white;
+  //   color: white;
 }
-
-

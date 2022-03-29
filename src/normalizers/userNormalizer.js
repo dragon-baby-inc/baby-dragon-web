@@ -7,10 +7,8 @@ const normalizeGroupUser = (user) => {
     fromLine: user.from_line,
     coverCost: user.cover_cost,
     restrictedDestroy: user.restricted_destroy,
-    restrictedCoverCost: user.restricted_cover_cost
-  }
-}
+    restrictedCoverCost: user.restricted_cover_cost,
+  };
+};
 
-export {
-  normalizeGroupUser
-}
+export { normalizeGroupUser };

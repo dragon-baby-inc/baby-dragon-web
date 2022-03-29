@@ -4,7 +4,7 @@
   height: 24px;
   min-height: 24px;
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
 .dot {
@@ -13,7 +13,7 @@
   height: 4px;
   background-color: $gold500;
   border-radius: 10px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .active {

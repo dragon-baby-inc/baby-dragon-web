@@ -1,6 +1,6 @@
 @import "../styleSheets/globalColors.scss";
 
-label.group-menu-label.group-menu-payment:focus-within  {
+label.group-menu-label.group-menu-payment:focus-within {
 }
 
 label.group-menu-label.group-menu-payment.active {
@@ -9,7 +9,7 @@ label.group-menu-label.group-menu-payment.active {
 }
 
 label.group-menu-label.group-menu-payment.paid-back {
-  background: #E6EFED;
+  background: #e6efed;
 
   .group-menu-username {
     .description {
@@ -20,13 +20,12 @@ label.group-menu-label.group-menu-payment.paid-back {
     }
   }
   .group-menu-amount {
-
     .description {
       color: $gold900;
     }
 
     .message {
-      color: #E6EFED;
+      color: #e6efed;
     }
   }
 }
@@ -38,7 +37,7 @@ label.group-menu-label.group-menu-payment {
   position: relative;
   overflow: hidden;
   margin: 12px 16px 0px;
-  padding-left:  16px;
+  padding-left: 16px;
   padding-right: 16px;
   height: 70px;
   border-top-left-radius: 16px;
@@ -68,7 +67,7 @@ label.group-menu-label.group-menu-payment {
   }
 
   .group-menu-image-block {
-    transition: .3s;
+    transition: 0.3s;
     transform: translate(0px, 0px);
 
     img {
@@ -82,7 +81,7 @@ label.group-menu-label.group-menu-payment {
   }
 
   .group-menu-payment-block {
-    transition: .3s;
+    transition: 0.3s;
     width: 100%;
     display: flex;
     align-items: center;
@@ -151,7 +150,6 @@ label.group-menu-label.group-menu-payment {
     display: none;
   }
 
-
   .group-menu-username.disabled {
     border-bottom: 1px solid transparent;
   }
@@ -176,7 +174,7 @@ label.group-menu-label.group-menu-payment {
     width: 80px;
     height: 50px;
     line-height: 40px;
-    transition: .3s;
+    transition: 0.3s;
     transform: translate(100px, 0px);
     display: flex;
     justify-content: center;
@@ -205,7 +203,7 @@ label.group-menu-label.group-menu-payment {
     outline: none;
     background: none;
     background-color: none;
-     -webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
   }
 
@@ -216,10 +214,10 @@ label.group-menu-label.group-menu-payment {
 }
 
 .payment.collapse.paid-back {
-  background: #E6EFED;
+  background: #e6efed;
   .allocation.buttons {
     padding: 0;
-    border-top:  1px solid white;
+    border-top: 1px solid white;
   }
 }
 
@@ -248,7 +246,7 @@ label.group-menu-label.group-menu-payment {
     }
 
     .allocation::before {
-      content: '';
+      content: "";
       padding-right: 2px;
       background-color: #eee;
       display: inline-block;
@@ -289,7 +287,7 @@ label.group-menu-label.group-menu-payment {
 
   .allocation.buttons {
     padding: 0;
-    border-top:  1px solid $gray400;
+    border-top: 1px solid $gray400;
 
     display: flex;
     justify-content: flex-end;

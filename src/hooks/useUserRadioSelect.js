@@ -1,45 +1,49 @@
-import React, { useState, useEffect } from "react"
-import { RadioSelect, Image, RadioLabel } from '../components'
-import { createUserRadioLabel } from '../generators/labelGenerator'
+import React, { useState, useEffect } from "react";
+import { RadioSelect, Image, RadioLabel } from "../components";
+import { createUserRadioLabel } from "../generators/labelGenerator";
 
 const useUserRadioSelect = ({
   users,
   initialValue,
   callback,
   searchInput,
-  key
+  key,
 }) => {
-  const [value, setValue] = useState((initialValue ? initialValue : ""));
+  const [value, setValue] = useState(initialValue ? initialValue : "");
 
   useEffect(() => {
     if (initialValue) {
-      setValue(initialValue)
+      setValue(initialValue);
     }
-  }, [initialValue])
+  }, [initialValue]);
 
   const handleSelectChange = (object) => {
-    setValue(object)
-    if (callback) { callback(object) }
-  }
+    setValue(object);
+    if (callback) {
+      callback(object);
+    }
+  };
 
-  const select = <RadioSelect
-    key={key}
-    searchInput={searchInput}
-    selectedObject={value}
-    createLabel={createUserRadioLabel}
-    objects={users}
-    changed={handleSelectChange}
-  />
+  const select = (
+    <RadioSelect
+      key={key}
+      searchInput={searchInput}
+      selectedObject={value}
+      createLabel={createUserRadioLabel}
+      objects={users}
+      changed={handleSelectChange}
+    />
+  );
 
-    return [value, select];
-}
+  return [value, select];
+};
 
 export default useUserRadioSelect;
 
 const styles = {
   label: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-}
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};

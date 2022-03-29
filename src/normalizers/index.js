@@ -1,1 +1,1 @@
-export * from './userNormalizer'
+export * from "./userNormalizer";

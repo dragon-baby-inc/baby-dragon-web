@@ -1,6 +1,6 @@
-import React from 'react'
-import Toggle from 'react-toggle'
-import './Toggle.css'
+import React from "react";
+import Toggle from "react-toggle";
+import "./Toggle.css";
 
 const CustomToggle = ({
   defaultChecked,
@@ -9,9 +9,9 @@ const CustomToggle = ({
   disabled,
   checked,
   className,
-  icons
+  icons,
 }) => {
-  return(
+  return (
     <Toggle
       checked={checked}
       defaultChecked={defaultChecked}
@@ -21,9 +21,7 @@ const CustomToggle = ({
       name={name}
       icons={{ checked: <></>, unchecked: <></> }}
     />
-  )
-}
+  );
+};
 
-export default CustomToggle
-
-
+export default CustomToggle;

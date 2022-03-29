@@ -24,9 +24,9 @@ label.group-menu-label.group-menu-summary {
   background-color: $gray100;
   position: relative;
   overflow: hidden;
-  transition: .3s;
+  transition: 0.3s;
   margin: 12px 16px 0px;
-  padding-left:  12px;
+  padding-left: 12px;
   padding-right: 12px;
   height: 70px;
   border-top-left-radius: 16px;
@@ -35,7 +35,7 @@ label.group-menu-label.group-menu-summary {
   border-bottom-right-radius: 16px;
 
   .group-menu-image-block {
-    transition: .3s;
+    transition: 0.3s;
     transform: translate(-10px, 0px);
 
     img {
@@ -46,7 +46,7 @@ label.group-menu-label.group-menu-summary {
 
   .group-menu-payment-block {
     transform: translate(-10px, 0px);
-    transition: .3s;
+    transition: 0.3s;
     width: 100%;
     display: flex;
     align-items: center;
@@ -108,7 +108,6 @@ label.group-menu-label.group-menu-summary {
     padding-top: 8px;
     padding-bottom: 8px;
 
-
     .allocationInner {
       padding: 0;
       display: flex;
@@ -117,7 +116,7 @@ label.group-menu-label.group-menu-summary {
     }
 
     .allocation::before {
-      content: '';
+      content: "";
       padding-right: 2px;
       background-color: #eee;
       display: inline-block;
@@ -145,7 +144,7 @@ label.group-menu-label.group-menu-summary {
       text-align: left;
     }
 
-    .name{
+    .name {
       text-align: left;
       flex-grow: 1;
       flex-shrink: 1;
@@ -153,7 +152,7 @@ label.group-menu-label.group-menu-summary {
       text-overflow: ellipsis;
       width: 60px;
       display: block;
-      overflow: hidden
+      overflow: hidden;
     }
 
     span.amount {
@@ -181,7 +180,7 @@ label.group-menu-label.group-menu-summary {
 
   .allocation.buttons {
     padding: 0;
-    border-top:  1px solid $gray400;
+    border-top: 1px solid $gray400;
 
     display: flex;
     justify-content: flex-end;
@@ -194,7 +193,7 @@ label.group-menu-label.group-menu-summary {
       line-height: 20px;
       letter-spacing: 0px;
       text-align: left;
-      padding-right: 16px
+      padding-right: 16px;
     }
     .btn.edit {
       color: $gold900;

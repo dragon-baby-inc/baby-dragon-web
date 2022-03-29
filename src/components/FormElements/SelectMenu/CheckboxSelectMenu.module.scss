@@ -10,15 +10,15 @@
   z-index: 100;
   overflow: hidden;
   transform: translateY(100%);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .container.mount {
-  transform: translateY(0%)
+  transform: translateY(0%);
 }
 
 .labels {
-  position:relative;
+  position: relative;
   width: 100%;
   height: calc(100vh - 79px);
   overflow: auto;
